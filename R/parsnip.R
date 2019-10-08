@@ -1,5 +1,6 @@
 # Things that should have been exported from parsnip :-O
 
+# nocov
 update_dot_check <- function(...) {
   dots <- rlang::enquos(...)
   if (length(dots) > 0) {
@@ -54,6 +55,6 @@ null_value <- function(x) {
   }
   res
 }
-
+# nocov end
 
 

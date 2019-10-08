@@ -169,3 +169,11 @@ mass_lda_wrapper <- function(x, y, ...) {
   rlang::eval_tidy(cl)
 }
 
+# ------------------------------------------------------------------------------
+
+# For earth models, you cannot pass na.action to predict()
+
+#' @export
+pred_wrapper <- function(object, new_data, ...) {
+  withr::with_options(list(na.action = "na.pass"), predict(object, new_data, ...))
+}

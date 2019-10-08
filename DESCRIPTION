@@ -12,14 +12,16 @@ Depends:
 Imports:
     purrr,
     rlang,
-    tibble
+    tibble,
+    withr
 Suggests: 
     testthat,
     MASS,
     mda,
     klaR,
     earth,
-    mlbench
+    mlbench,
+    covr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
