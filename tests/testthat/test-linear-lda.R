@@ -13,12 +13,6 @@ exp_f_fit     <- MASS::lda(Type ~ ., data = glass_tr)
 exp_xy_fit    <- MASS::lda(x = glass_tr[,-10], grouping = glass_tr$Type)
 exp_prior_fit <- MASS::lda(Type ~ ., data = glass_tr, prior = rep(1/6, 6))
 
-probs_to_tibble <- function(x) {
-  x <- tibble::as_tibble(x)
-  names(x) <- paste0(".pred_", names(x))
-  x
-}
-
 # ------------------------------------------------------------------------------
 
 test_that('model object', {
