@@ -12,8 +12,8 @@ discrim_regularized(mode = "classification", frac_common_cov = NULL,
   frac_identity = NULL, fresh = FALSE, ...)
 }
 \arguments{
-\item{mode}{A single character string for the type of model.
-The only possible value for this model is "classification".}
+\item{mode}{A single character string for the type of model. The only
+possible value for this model is "classification".}
 
 \item{frac_common_cov, frac_identity}{Numeric values between zero and one.}
 
@@ -25,9 +25,12 @@ modified in-place of or replaced wholesale.}
 \item{...}{Not used for \code{update()}.}
 }
 \description{
-\code{discrim_regularized()} is a way to generate a \emph{specification} of a model
-before fitting. The model is from Friedman (1989) and can create LDA models,
-QDA models, and regularized mixtures of the two. It does not conduct feature
+\code{discrim_regularized()} is a way to generate a \emph{specification} of a
+regularized discriminant analysis (RDA) model before fitting.
+}
+\details{
+The model is from Friedman (1989) and can create LDA models, QDA models,
+and regularized mixtures of the two. It does \emph{not} conduct feature
 selection. The main arguments for the model are:
 \itemize{
 \item \code{frac_common_cov}: The fraction of the regularized covariance
@@ -38,19 +41,19 @@ each class.
 \item \code{frac_identity}: The fraction of the final, class-specific
 covariance matrix that is the identity matrix.
 }
-}
-\details{
-These arguments are converted to their specific names at the
-time that the model is fit. Other options and argument can be
-set using \code{set_engine()}. If left to their defaults
-here (\code{NULL}), the values are taken from the underlying model
-functions. If parameters need to be modified, \code{update()} can be used
-in lieu of recreating the object from scratch.
+
+See \code{klaR::rda()} for the equations that define these parameters.
+
+These arguments are converted to their specific names at the time that the
+model is fit. Other options and argument can be set using \code{set_engine()}. If
+left to their defaults here (\code{NULL}), the values are taken from the
+underlying model functions. If parameters need to be modified, \code{update()}
+can be used in lieu of recreating the object from scratch.
 
 For \code{discrim_regularized()}, the mode will always be "classification".
 
-The model can be created using the \code{fit()} function using the
-following \emph{engines}:
+The model can be created using the \code{fit()} function using the following
+\emph{engines}:
 \itemize{
 \item \pkg{R}:  \code{"rda"}(the default)
 }
@@ -58,9 +61,8 @@ following \emph{engines}:
 \section{Engine Details}{
 
 
-Engines may have pre-set default arguments when executing the
-model fit call.  For this type of
-model, the template of the fit calls are:
+Engines may have pre-set default arguments when executing the model fit
+call. For this type of model, the template of the fit calls are:
 
 \pkg{rda}
 
@@ -71,11 +73,28 @@ klaR::rda(x = missing_arg(), grouping = missing_arg(), lambda = frac_common_cov,
 }
 
 \examples{
-discrim_regularized()
+parabolic_grid <-
+  expand.grid(X1 = seq(-5, 5, length = 100),
+              X2 = seq(-5, 5, length = 100))
+
+rda_mod <-
+  discrim_regularized(frac_common_cov = .5, frac_identity = .5) \%>\%
+  set_engine("rda") \%>\%
+  fit(class ~ ., data = parabolic)
+
+parabolic_grid$rda <-
+  predict(rda_mod, parabolic_grid, type = "prob")$.pred_Class1
+
+library(ggplot2)
+ggplot(parabolic, aes(x = X1, y = X2)) +
+  geom_point(aes(col = class), alpha = .5) +
+  geom_contour(data = parabolic_grid, aes(z = rda), col = "black", breaks = .5) +
+  theme_bw() +
+  theme(legend.position = "top") +
+  coord_equal()
 model <- discrim_regularized(frac_common_cov = 10)
 model
 update(model, frac_common_cov = 1)
-update(model, frac_common_cov = 1, fresh = TRUE)
 }
 \references{
 Friedman, J.H. (1989). Regularized Discriminant Analysis. \emph{Journal

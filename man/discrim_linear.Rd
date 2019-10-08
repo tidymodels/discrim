@@ -11,11 +11,11 @@ discrim_linear(mode = "classification", penalty = NULL)
   ...)
 }
 \arguments{
-\item{mode}{A single character string for the type of model.
-The only possible value for this model is "classification".}
+\item{mode}{A single character string for the type of model. The only
+possible value for this model is "classification".}
 
-\item{penalty}{An non-negative number representing the
-amount of regularization used by some of the engines.}
+\item{penalty}{An non-negative number representing the amount of
+regularization used by some of the engines.}
 
 \item{object}{A linear discriminant model specification.}
 
@@ -25,45 +25,45 @@ modified in-place of or replaced wholesale.}
 \item{...}{Not used for \code{update()}.}
 }
 \description{
-\code{discrim_linear()} is a way to generate a \emph{specification} of a model
-before fitting and allows the model to be created using
-different packages in R. The main
-arguments for the model are:
-\itemize{
-\item \code{penalty}: The total amount of regularization
-in the model. Note that this only used for the "FDA" engine where it is a
-pure L2 penalty (a.k.a ridge regression).
-}
-These arguments are converted to their specific names at the
-time that the model is fit. Other options and argument can be
-set using \code{set_engine()}. If left to their defaults
-here (\code{NULL}), the values are taken from the underlying model
-functions. If parameters need to be modified, \code{update()} can be used
-in lieu of recreating the object from scratch.
+\code{discrim_linear()} is a way to generate a \emph{specification} of a linear
+discriminant analysis (LDA) model before fitting and allows the model to be
+created using different packages in R.
 }
 \details{
 For \code{discrim_linear()}, the mode will always be "classification".
 
-The model can be created using the \code{fit()} function using the
-following \emph{engines}:
+The model can be created using the \code{fit()} function using the following
+\emph{engines}:
 \itemize{
-\item \pkg{R}:  \code{"MASS"}(the default) or \code{"FDA"}
+\item \pkg{R}:  \code{"MASS"}(the default) or \code{"mda"}
 }
+
+The main argument for the model is:
+\itemize{
+\item \code{penalty}: The total amount of regularization in the model. Note
+that this only used for the "mda" engine where it is a pure L2 penalty
+(a.k.a ridge regression).
+}
+
+This argument is converted to its specific names at the time that the model
+is fit. Other options and argument can be set using \code{set_engine()}. If left
+to their defaults here (\code{NULL}), the values are taken from the underlying
+model functions. If parameters need to be modified, \code{update()} can be used
+in lieu of recreating the object from scratch.
 }
 \section{Engine Details}{
 
 
-Engines may have pre-set default arguments when executing the
-model fit call.  For this type of
-model, the template of the fit calls are:
+Engines may have pre-set default arguments when executing the model fit
+call. For this type of model, the template of the fit calls are:
 
-\pkg{MASS}
+\pkg{MASS} engine:
 
 \preformatted{
 MASS::lda(x = missing_arg(), grouping = missing_arg())
 }
 
-\pkg{FDA}
+\pkg{mda} engine:
 
 \preformatted{
 mda::fda(formula = missing_arg(), data = missing_arg(), lambda = penalty,
@@ -72,9 +72,26 @@ mda::fda(formula = missing_arg(), data = missing_arg(), lambda = penalty,
 }
 
 \examples{
-discrim_linear()
+parabolic_grid <-
+  expand.grid(X1 = seq(-5, 5, length = 100),
+              X2 = seq(-5, 5, length = 100))
+
+lda_mod <-
+  discrim_linear(penalty = .1) \%>\%
+  set_engine("mda") \%>\%
+  fit(class ~ ., data = parabolic)
+
+parabolic_grid$lda <-
+  predict(lda_mod, parabolic_grid, type = "prob")$.pred_Class1
+
+library(ggplot2)
+ggplot(parabolic, aes(x = X1, y = X2)) +
+  geom_point(aes(col = class), alpha = .5) +
+  geom_contour(data = parabolic_grid, aes(z = lda), col = "black", breaks = .5) +
+  theme_bw() +
+  theme(legend.position = "top") +
+  coord_equal()
 model <- discrim_linear(penalty = 0.1)
 model
 update(model, penalty = 1)
-update(model, penalty = 1, fresh = TRUE)
 }

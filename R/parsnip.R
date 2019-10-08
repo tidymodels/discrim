@@ -55,6 +55,7 @@ null_value <- function(x) {
   }
   res
 }
+
 # nocov end
 
 

@@ -1,55 +1,57 @@
 #' General Interface for Naive Bayes Models
 #'
-#' `naive_Bayes()` is a way to generate a _specification_ of a model
-#'  before fitting and allows the model to be created using
-#'  different packages in R. The main
+#' `naive_Bayes()` is a way to generate a _specification_ of a model before
+#'  fitting and allows the model to be created using different packages in R.
+#'
+#' @param mode A single character string for the type of model. The only
+#'  possible value for this model is "classification".
+#' @param smoothness An non-negative number representing the the relative
+#'  smoothness of the class boundary. Smaller examples result in model flexible
+#'  boundaries and larger values generate class boundaries that are less
+#'  adaptable
+#' @param Laplace A non-negative value for the Laplace correction to smoothing
+#' low-frequency counts.
+#' @details
+#'
+#' The main
 #'  arguments for the model are:
 #' \itemize{
 #'   \item \code{smoothness}: The total amount of regularization
-#'   in the model. Note that this only used for the "FDA" engine where it is a
+#'   in the model. Note that this only used for the "klaR" engine where it is a
 #'   pure L2 smoothness (a.k.a ridge regression).
 #'   \item \code{Laplace}: Laplace correction for smoothing low-frequency counts.
 #' }
-#' These arguments are converted to their specific names at the
-#'  time that the model is fit. Other options and argument can be
-#'  set using `set_engine()`. If left to their defaults
-#'  here (`NULL`), the values are taken from the underlying model
-#'  functions. If parameters need to be modified, `update()` can be used
-#'  in lieu of recreating the object from scratch.
-#' @param mode A single character string for the type of model.
-#'  The only possible value for this model is "classification".
-#' @param smoothness An non-negative number representing the
-#'  amount of regularization used by some of the engines.
-#' @param A non-negative value for the Laplace correction to smoothing
-#' low-frequency counts.
-#' @details
+#' These arguments are converted to their specific names at the time that the
+#'  model is fit. Other options and argument can be set using `set_engine()`. If
+#'  left to their defaults here (`NULL`), the values are taken from the
+#'  underlying model functions. If parameters need to be modified, `update()`
+#'  can be used in lieu of recreating the object from scratch.
+#'
 #' For `naive_Bayes()`, the mode will always be "classification".
 #'
-#' The model can be created using the `fit()` function using the
-#'  following _engines_:
+#' The model can be created using the `fit()` function using the following _engines_:
 #' \itemize{
-#' \item \pkg{R}:  `"MASS"`(the default) or `"FDA"`
+#' \item \pkg{R}:  `"klaR"`(the default)
 #' }
 #'
 #' @section Engine Details:
 #'
-#' Engines may have pre-set default arguments when executing the
-#'  model fit call.  For this type of
-#'  model, the template of the fit calls are:
+#' Engines may have pre-set default arguments when executing the model fit call.
+#' For this type of model, the template of the fit calls are:
 #'
-#' \pkg{MASS}
-#'
-#' \preformatted{
-#' MASS::lda(x = missing_arg(), grouping = missing_arg())
-#' }
-#'
-#'
-#' \pkg{FDA}
+#' \pkg{klaR} engine
 #'
 #' \preformatted{
-#' mda::fda(formula = missing_arg(), data = missing_arg(), lambda = smoothness,
-#'          method = mda::gen.ridge, keep.fitted = FALSE)
+#' klaR::NaiveBayes(x = missing_arg(), grouping = missing_arg(),
+#'                  adjust = 0.8, usekernel = TRUE)
 #' }
+#'
+#' Note that `usekernel` is always set to `TRUE` here. This model does not
+#'  need to make dummy variables from factor predictors. However, if
+#'  `parsnip::fit()` is used to fit the model, dummy variables _would_ be
+#'  created while `parsnip::fit_xy()` will preserve the factor predictors in
+#'  their original encoding.
+#'
 #' @examples
 #' parabolic_grid <-
 #'   expand.grid(X1 = seq(-5, 5, length = 100),

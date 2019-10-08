@@ -4,6 +4,7 @@
 #' @importFrom parsnip set_new_model
 #' @importFrom withr with_options
 #' @importFrom stats predict
+#' @importFrom dials new_quant_param
 
 # ------------------------------------------------------------------------------
 
@@ -14,7 +15,7 @@
 .onLoad <- function(libname, pkgname) {
   # This defines discrim_linear in the model database
   make_discrim_linear_MASS()
-  make_discrim_linear_FDA()
+  make_discrim_linear_mda()
 
   # This defines discrim_regularized in the model database
   make_discrim_regularized()

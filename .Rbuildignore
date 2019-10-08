@@ -10,3 +10,6 @@ derby.log
 ^revdep$
 ^README\.md$
 ^README\.Rmd$
+^docs$
+^\.travis\.yml$
+^codecov\.yml$

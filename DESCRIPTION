@@ -5,15 +5,17 @@ Authors@R: c(
     person(given = "Max", family = "Kuhn", email = "max@rstudio.com", role = c("aut", "cre")),
     person("RStudio", role = "cph")
     )
-Description: Wrappers for discriminant analysis and naive Bayes models for use with the parsnip package.
+Description: Bindings for discriminant analysis and naive Bayes models for use with the parsnip package.
 License: GPL-2
 Depends:
-    parsnip
+    parsnip,
+    R (>= 2.10)
 Imports:
     purrr,
     rlang,
     tibble,
-    withr
+    withr,
+    dials
 Suggests: 
     testthat,
     MASS,
@@ -21,7 +23,8 @@ Suggests:
     klaR,
     earth,
     mlbench,
-    covr
+    covr,
+    ggplot2
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

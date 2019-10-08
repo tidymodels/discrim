@@ -6,8 +6,8 @@ source("helper-objects.R")
 
 # ------------------------------------------------------------------------------
 
-lda_spec   <- discrim_linear(penalty = 1) %>% set_engine("FDA")
-prior_spec <- discrim_linear() %>% set_engine("FDA", prior = rep(1/6, 6))
+lda_spec   <- discrim_linear(penalty = 1) %>% set_engine("mda")
+prior_spec <- discrim_linear() %>% set_engine("mda", prior = rep(1/6, 6))
 
 exp_f_fit     <- mda::fda(Type ~ ., data = glass_tr, method = mda::gen.ridge, lambda = 1)
 

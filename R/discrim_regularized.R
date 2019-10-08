@@ -1,8 +1,15 @@
 #' General Interface for Regularized Discriminant Models
 #'
-#' `discrim_regularized()` is a way to generate a _specification_ of a model
-#'  before fitting. The model is from Friedman (1989) and can create LDA models,
-#'  QDA models, and regularized mixtures of the two. It does not conduct feature
+#' `discrim_regularized()` is a way to generate a _specification_ of a
+#' regularized discriminant analysis (RDA) model before fitting.
+#'
+#' @param mode A single character string for the type of model. The only
+#'  possible value for this model is "classification".
+#' @param frac_common_cov,frac_identity Numeric values between zero and one.
+#' @details
+#'
+#' The model is from Friedman (1989) and can create LDA models, QDA models,
+#'  and regularized mixtures of the two. It does _not_ conduct feature
 #'  selection. The main arguments for the model are:
 #' \itemize{
 #'   \item \code{frac_common_cov}: The fraction of the regularized covariance
@@ -14,29 +21,28 @@
 #'   covariance matrix that is the identity matrix.
 #' }
 #'
-#' These arguments are converted to their specific names at the
-#'  time that the model is fit. Other options and argument can be
-#'  set using `set_engine()`. If left to their defaults
-#'  here (`NULL`), the values are taken from the underlying model
-#'  functions. If parameters need to be modified, `update()` can be used
-#'  in lieu of recreating the object from scratch.
-#' @param mode A single character string for the type of model.
-#'  The only possible value for this model is "classification".
-#' @param frac_common_cov,frac_identity Numeric values between zero and one.
-#' @details
+#' See `klaR::rda()` for the equations that define these parameters.
+#'
+#' These arguments are converted to their specific names at the time that the
+#'  model is fit. Other options and argument can be set using `set_engine()`. If
+#'  left to their defaults here (`NULL`), the values are taken from the
+#'  underlying model functions. If parameters need to be modified, `update()`
+#'  can be used in lieu of recreating the object from scratch.
+
+#'
 #' For `discrim_regularized()`, the mode will always be "classification".
 #'
-#' The model can be created using the `fit()` function using the
-#'  following _engines_:
+#' The model can be created using the `fit()` function using the following
+#'  _engines_:
+
 #' \itemize{
 #' \item \pkg{R}:  `"rda"`(the default)
 #' }
 #'
 #' @section Engine Details:
 #'
-#' Engines may have pre-set default arguments when executing the
-#'  model fit call.  For this type of
-#'  model, the template of the fit calls are:
+#' Engines may have pre-set default arguments when executing the model fit
+#'  call. For this type of model, the template of the fit calls are:
 #'
 #' \pkg{rda}
 #'
@@ -109,7 +115,6 @@ print.discrim_regularized <- function(x, ...) {
 #' model <- discrim_regularized(frac_common_cov = 10)
 #' model
 #' update(model, frac_common_cov = 1)
-#' update(model, frac_common_cov = 1, fresh = TRUE)
 #' @method update discrim_regularized
 #' @rdname discrim_regularized
 #' @export

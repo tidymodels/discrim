@@ -1,47 +1,49 @@
 #' General Interface for Linear Discriminant Models
 #'
-#' `discrim_linear()` is a way to generate a _specification_ of a model
-#'  before fitting and allows the model to be created using
-#'  different packages in R. The main
-#'  arguments for the model are:
-#' \itemize{
-#'   \item \code{penalty}: The total amount of regularization
-#'   in the model. Note that this only used for the "FDA" engine where it is a
-#'   pure L2 penalty (a.k.a ridge regression).
-#' }
-#' These arguments are converted to their specific names at the
-#'  time that the model is fit. Other options and argument can be
-#'  set using `set_engine()`. If left to their defaults
-#'  here (`NULL`), the values are taken from the underlying model
-#'  functions. If parameters need to be modified, `update()` can be used
-#'  in lieu of recreating the object from scratch.
-#' @param mode A single character string for the type of model.
-#'  The only possible value for this model is "classification".
-#' @param penalty An non-negative number representing the
-#'  amount of regularization used by some of the engines.
+#' `discrim_linear()` is a way to generate a _specification_ of a linear
+#'  discriminant analysis (LDA) model before fitting and allows the model to be
+#'  created using different packages in R.
+#'
+#' @param mode A single character string for the type of model. The only
+#'  possible value for this model is "classification".
+#' @param penalty An non-negative number representing the amount of
+#'  regularization used by some of the engines.
 #' @details
 #' For `discrim_linear()`, the mode will always be "classification".
 #'
-#' The model can be created using the `fit()` function using the
-#'  following _engines_:
+#' The model can be created using the `fit()` function using the following
+#'  _engines_:
+
 #' \itemize{
-#' \item \pkg{R}:  `"MASS"`(the default) or `"FDA"`
+#' \item \pkg{R}:  `"MASS"`(the default) or `"mda"`
 #' }
+#'
+#' The main argument for the model is:
+#' \itemize{
+#'   \item \code{penalty}: The total amount of regularization in the model. Note
+#'    that this only used for the "mda" engine where it is a pure L2 penalty
+#'   (a.k.a ridge regression).
+#' }
+#'
+#' This argument is converted to its specific names at the time that the model
+#'  is fit. Other options and argument can be set using `set_engine()`. If left
+#'  to their defaults here (`NULL`), the values are taken from the underlying
+#'  model functions. If parameters need to be modified, `update()` can be used
+#'  in lieu of recreating the object from scratch.
 #'
 #' @section Engine Details:
 #'
-#' Engines may have pre-set default arguments when executing the
-#'  model fit call.  For this type of
-#'  model, the template of the fit calls are:
+#' Engines may have pre-set default arguments when executing the model fit
+#'  call. For this type of model, the template of the fit calls are:
 #'
-#' \pkg{MASS}
+#' \pkg{MASS} engine:
 #'
 #' \preformatted{
 #' MASS::lda(x = missing_arg(), grouping = missing_arg())
 #' }
 #'
 #'
-#' \pkg{FDA}
+#' \pkg{mda} engine:
 #'
 #' \preformatted{
 #' mda::fda(formula = missing_arg(), data = missing_arg(), lambda = penalty,
@@ -54,7 +56,7 @@
 #'
 #' lda_mod <-
 #'   discrim_linear(penalty = .1) %>%
-#'   set_engine("FDA") %>%
+#'   set_engine("mda") %>%
 #'   fit(class ~ ., data = parabolic)
 #'
 #' parabolic_grid$lda <-
@@ -107,7 +109,6 @@ print.discrim_linear <- function(x, ...) {
 #' model <- discrim_linear(penalty = 0.1)
 #' model
 #' update(model, penalty = 1)
-#' update(model, penalty = 1, fresh = TRUE)
 #' @method update discrim_linear
 #' @rdname discrim_linear
 #' @export
@@ -151,49 +152,4 @@ check_args.discrim_linear <- function(object) {
   }
 
   invisible(object)
-}
-
-# ------------------------------------------------------------------------------
-# post-processing helpers
-
-post_to_tibble <- function(x, object) {
-  probs <- x$posterior
-  probs <- tibble::as_tibble(probs)
-}
-
-get_class <- function(x, object) {
-  x$class
-}
-
-prob_matrix_to_tibble <- function(x, object) {
-  tibble::as_tibble(x)
-}
-
-# ------------------------------------------------------------------------------
-
-# This is needed since parnsip is looking for a funciton like `foo(x, y)` but
-# we have `lda(x, grouping)`. It just maps x -> grouping
-#' Helper functions for using parsnip with the MASS package
-#' @export
-#' @keywords internal
-#' @rdname discrim_helpers
-mass_lda_wrapper <- function(x, y, ...) {
-  args <- list(x = rlang::enquo(x), grouping = rlang::enquo(y))
-  dots <- rlang::enquos(...)
-  if (length(dots) > 0) {
-    args <- c(args, dots)
-  }
-  cl <- rlang::call2("lda", .ns = "MASS", !!!args)
-  rlang::eval_tidy(cl)
-}
-
-# ------------------------------------------------------------------------------
-
-# For earth models, you cannot pass na.action to predict()
-
-#' @keywords internal
-#' @rdname discrim_helpers
-#' @export
-pred_wrapper <- function(object, new_data, ...) {
-  withr::with_options(list(na.action = "na.pass"), predict(object, new_data, ...))
 }

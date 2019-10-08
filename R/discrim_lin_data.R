@@ -86,14 +86,14 @@ make_discrim_linear_MASS <- function() {
 
 # ------------------------------------------------------------------------------
 
-make_discrim_linear_FDA <- function() {
+make_discrim_linear_mda <- function() {
 
-  parsnip::set_model_engine("discrim_linear", "classification", "FDA")
-  parsnip::set_dependency("discrim_linear", eng = "FDA", pkg = "mda")
+  parsnip::set_model_engine("discrim_linear", "classification", "mda")
+  parsnip::set_dependency("discrim_linear", eng = "mda", pkg = "mda")
 
   parsnip::set_model_arg(
     model = "discrim_linear",
-    eng = "FDA",
+    eng = "mda",
     parsnip = "penalty",
     original = "lambda",
     func = list(pkg = "dials", fun = "penalty"),
@@ -102,7 +102,7 @@ make_discrim_linear_FDA <- function() {
 
   parsnip::set_fit(
     model = "discrim_linear",
-    eng = "FDA",
+    eng = "mda",
     mode = "classification",
     value = list(
       interface = "formula",
@@ -114,7 +114,7 @@ make_discrim_linear_FDA <- function() {
 
   parsnip::set_pred(
     model = "discrim_linear",
-    eng = "FDA",
+    eng = "mda",
     mode = "classification",
     type = "class",
     value = list(
@@ -131,7 +131,7 @@ make_discrim_linear_FDA <- function() {
 
   parsnip::set_pred(
     model = "discrim_linear",
-    eng = "FDA",
+    eng = "mda",
     mode = "classification",
     type = "prob",
     value = list(
@@ -149,7 +149,7 @@ make_discrim_linear_FDA <- function() {
 
   parsnip::set_pred(
     model = "discrim_linear",
-    eng = "FDA",
+    eng = "mda",
     mode = "classification",
     type = "raw",
     value = list(

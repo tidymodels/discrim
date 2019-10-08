@@ -16,8 +16,9 @@ knitr::opts_chunk$set(
 # discrim
 
 <!-- badges: start -->
+[![Travis build status](https://travis-ci.org/tidymodels/discrim.svg?branch=master)](https://travis-ci.org/tidymodels/discrim)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/discrim)](https://CRAN.R-project.org/package=discrim)
+[![Codecov test coverage](https://codecov.io/gh/tidymodels/discrim/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/discrim?branch=master)
 <!-- badges: end -->
 
 The goal of discrim is to ...

@@ -20,7 +20,7 @@ make_discrim_regularized <- function() {
     eng = "rda",
     parsnip = "frac_common_cov",
     original = "lambda",
-    func = list(pkg = "dials", fun = "fraction"),
+    func = list(pkg = "discrim", fun = "frac_common_cov"),
     has_submodel = FALSE
   )
 
@@ -29,7 +29,7 @@ make_discrim_regularized <- function() {
     eng = "rda",
     parsnip = "frac_identity",
     original = "gamma",
-    func = list(pkg = "dials", fun = "fraction"),
+    func = list(pkg = "discrim", fun = "frac_identity"),
     has_submodel = FALSE
   )
 
