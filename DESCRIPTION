@@ -1,0 +1,22 @@
+Package: discrim
+Title: Model Wrappers for Discriminant Analysis
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given = "Max", family = "Kuhn", email = "max@rstudio.com", role = c("aut", "cre")),
+    person("RStudio", role = "cph")
+    )
+Description: Wrappers for discriminant analysis and naive Bayes models for use with the parsnip package.
+License: GPL-2
+Depends:
+    parsnip
+Imports:
+    purrr,
+    rlang
+Suggests: 
+    testthat,
+    MASS,
+    mda
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
