@@ -1,3 +1,6 @@
+# These functions define the discriminant analysis models. The are executed when
+# this package is loaded via `.onLoad()` and modify the parsnip package's
+# model environment.
 
 make_discrim_linear_MASS <- function() {
   set_new_model("discrim_linear")

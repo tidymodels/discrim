@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^_pkgdown\.yml$
+^pkgdown$
+^.travis.yml$
+^R/README\.md$
+derby.log
+^logs$
+^tests/testthat/logs$
+^revdep$
+^README\.md$

@@ -15,7 +15,8 @@ Imports:
 Suggests: 
     testthat,
     MASS,
-    mda
+    mda,
+    klaR
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

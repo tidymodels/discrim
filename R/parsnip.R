@@ -1,4 +1,4 @@
-# Things that should have been exported from parsnip
+# Things that should have been exported from parsnip :-O
 
 update_dot_check <- function(...) {
   dots <- rlang::enquos(...)
@@ -19,7 +19,7 @@ show_fit <- function(model, eng) {
 }
 
 new_model_spec <- function(cls, args, eng_args, mode, method, engine) {
-  spec_modes <- rlang::env_get(get_model_env(), paste0(cls, "_modes"))
+  spec_modes <- rlang::env_get(parsnip::get_model_env(), paste0(cls, "_modes"))
   if (!(mode %in% spec_modes))
     stop("`mode` should be one of: ",
          paste0("'", spec_modes, "'", collapse = ", "),
@@ -27,6 +27,6 @@ new_model_spec <- function(cls, args, eng_args, mode, method, engine) {
 
   out <- list(args = args, eng_args = eng_args,
               mode = mode, method = method, engine = engine)
-  class(out) <- make_classes(cls)
+  class(out) <- parsnip::make_classes(cls)
   out
 }
