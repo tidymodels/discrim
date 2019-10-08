@@ -18,6 +18,11 @@ The only possible value for this model is "classification".}
 \item{frac_common_cov, frac_identity}{Numeric values between zero and one.}
 
 \item{object}{A linear discriminant model specification.}
+
+\item{fresh}{A logical for whether the arguments should be
+modified in-place of or replaced wholesale.}
+
+\item{...}{Not used for \code{update()}.}
 }
 \description{
 \code{discrim_regularized()} is a way to generate a \emph{specification} of a model
