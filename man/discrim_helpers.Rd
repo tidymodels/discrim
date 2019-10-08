@@ -2,9 +2,12 @@
 % Please edit documentation in R/discrim_lin.R
 \name{mass_lda_wrapper}
 \alias{mass_lda_wrapper}
+\alias{pred_wrapper}
 \title{Helper functions for using parsnip with the MASS package}
 \usage{
 mass_lda_wrapper(x, y, ...)
+
+pred_wrapper(object, new_data, ...)
 }
 \description{
 Helper functions for using parsnip with the MASS package

@@ -144,20 +144,3 @@ check_args.discrim_regularized <- function(object) {
 }
 
 
-# ------------------------------------------------------------------------------
-
-# This is needed since parnsip is looking for a function like `foo(x, y)` but
-# we have `rda(x, grouping)`. It just maps x -> grouping
-#' Helper functions for using parsnip with the klaR package
-#' @export
-#' @keywords internal
-rda_wrapper <- function(x, y, ...) {
-  args <- list(x = rlang::enquo(x), grouping = rlang::enquo(y))
-  dots <- rlang::enquos(...)
-  if (length(dots) > 0) {
-    args <- c(args, dots)
-  }
-  cl <- rlang::call2("rda", .ns = "klaR", !!!args)
-  rlang::eval_tidy(cl)
-}
-

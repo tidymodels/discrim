@@ -3,6 +3,7 @@
 #' @importFrom tibble is_tibble as_tibble
 #' @importFrom parsnip set_new_model
 #' @importFrom withr with_options
+#' @importFrom stats predict
 
 # ------------------------------------------------------------------------------
 

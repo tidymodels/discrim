@@ -158,7 +158,7 @@ prob_matrix_to_tibble <- function(x, object) {
 #' Helper functions for using parsnip with the MASS package
 #' @export
 #' @keywords internal
-#' @rdname mass_helpers
+#' @rdname discrim_helpers
 mass_lda_wrapper <- function(x, y, ...) {
   args <- list(x = rlang::enquo(x), grouping = rlang::enquo(y))
   dots <- rlang::enquos(...)
@@ -173,6 +173,8 @@ mass_lda_wrapper <- function(x, y, ...) {
 
 # For earth models, you cannot pass na.action to predict()
 
+#' @keywords internal
+#' @rdname discrim_helpers
 #' @export
 pred_wrapper <- function(object, new_data, ...) {
   withr::with_options(list(na.action = "na.pass"), predict(object, new_data, ...))

@@ -1,4 +1,9 @@
+# These functions are tested indirectly when the models are used. Since this
+# function is executed on package startup, you can't execute them to test since
+# they are already in the parsnip model database. We'll exclude them from
+# coverage stats for this reason.
 
+# nocov
 make_discrim_regularized <- function() {
   parsnip::set_new_model("discrim_regularized")
 
@@ -33,9 +38,9 @@ make_discrim_regularized <- function() {
     eng = "rda",
     mode = "classification",
     value = list(
-      interface = "data.frame",
-      protect = c("x", "y"),
-      func = c(fun = "rda_wrapper"),
+      interface = "formula",
+      protect = c("formula", "data"),
+      func = c(pkg = "klaR", fun = "rda"),
       defaults = list()
     )
   )
@@ -92,3 +97,5 @@ make_discrim_regularized <- function() {
   )
 
 }
+
+# nocov end

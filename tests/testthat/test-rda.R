@@ -1,4 +1,4 @@
-context("flexible discrim - earth")
+context("regularized discrim")
 
 # ------------------------------------------------------------------------------
 
@@ -6,26 +6,30 @@ source("helper-objects.R")
 
 # ------------------------------------------------------------------------------
 
-fda_spec   <- discrim_flexible(num_terms = 7) %>% set_engine("earth")
+rda_spec <-
+  discrim_regularized(frac_common_cov = .1, frac_identity = 1) %>%
+  set_engine("rda")
 
-exp_f_fit <- mda::fda(Type ~ ., data = glass_tr, method = earth::earth, nprune = 7)
+prior_spec <- discrim_regularized() %>% set_engine("rda", prior = rep(1/6, 6))
+
+exp_f_fit <- klaR::rda(Type ~ ., data = glass_tr, lambda = .1, gamma = 1)
 
 # ------------------------------------------------------------------------------
 
 test_that('model object', {
 
   # formula method
-  expect_error(f_fit <- fit(fda_spec, Type ~ ., data = glass_tr), NA)
-  expect_equal(f_fit$fit$theta.mod, exp_f_fit$theta.mod)
-  expect_equal(f_fit$fit$fit$cuts, exp_f_fit$fit$cuts)
+  expect_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr), NA)
+  expect_equal(f_fit$fit$covpooled, exp_f_fit$covpooled)
+  expect_equal(f_fit$fit$means, exp_f_fit$means)
 
   # x/y method
   expect_error(
-    xy_fit <- fit_xy(fda_spec, x = glass_tr[,-10], y = glass_tr$Type),
+    xy_fit <- fit_xy(rda_spec, x = glass_tr[,-10], y = glass_tr$Type),
     NA
   )
-  expect_equal(xy_fit$fit$theta.mod, exp_f_fit$theta.mod)
-  expect_equal(xy_fit$fit$fit$cuts, exp_f_fit$fit$cuts)
+  expect_equal(xy_fit$fit$covpooled, exp_f_fit$covpooled)
+  expect_equal(xy_fit$fit$means, exp_f_fit$means)
 
 })
 
@@ -34,9 +38,9 @@ test_that('model object', {
 
 test_that('class predictions', {
   # formula method
-  expect_error(f_fit <- fit(fda_spec, Type ~ ., data = glass_tr), NA)
+  expect_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_te)
-  exp_f_pred <- predict(exp_f_fit, glass_te)
+  exp_f_pred <- predict(exp_f_fit, glass_te)$class
 
   expect_true(inherits(f_pred, "tbl_df"))
   expect_true(all(names(f_pred) == ".pred_class"))
@@ -44,7 +48,7 @@ test_that('class predictions', {
 
   # x/y method
   expect_error(
-    xy_fit <- fit_xy(fda_spec, x = glass_tr[,-10], y = glass_tr$Type),
+    xy_fit <- fit_xy(rda_spec, x = glass_tr[,-10], y = glass_tr$Type),
     NA
   )
   xy_pred <- predict(xy_fit, glass_te)
@@ -62,9 +66,9 @@ test_that('class predictions', {
 
 test_that('prob predictions', {
   # formula method
-  expect_error(f_fit <- fit(fda_spec, Type ~ ., data = glass_tr), NA)
+  expect_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_te, type = "prob")
-  exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_te, type = "posterior"))
+  exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_te, type = "posterior")$posterior)
 
   expect_true(inherits(f_pred, "tbl_df"))
   expect_equal(names(f_pred), prob_names)
@@ -72,7 +76,7 @@ test_that('prob predictions', {
 
   # x/y method
   expect_error(
-    xy_fit <- fit_xy(fda_spec, x = glass_tr[,-10], y = glass_tr$Type),
+    xy_fit <- fit_xy(rda_spec, x = glass_tr[,-10], y = glass_tr$Type),
     NA
   )
   xy_pred <- predict(xy_fit, glass_te, type = "prob")
@@ -86,13 +90,10 @@ test_that('prob predictions', {
 
 
 test_that('missing data', {
-  expect_error(f_fit <- fit(fda_spec, Type ~ ., data = glass_tr), NA)
+  expect_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_na, type = "prob")
 
-  opt <- getOption("na.action")
-  options(na.action = "na.pass")
-  exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_na, type = "posterior"))
-  options(na.action = opt)
+  exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_na, type = "posterior")$posterior)
 
   expect_true(inherits(f_pred, "tbl_df"))
   expect_true(nrow(f_pred) == nrow(glass_te))
@@ -104,19 +105,10 @@ test_that('missing data', {
 
 test_that('api errors', {
   expect_error(
-    discrim_flexible() %>% set_engine("monday"),
+    discrim_regularized() %>% set_engine("monday"),
     "engine 'monday' is not availble"
   )
 })
 
-# ------------------------------------------------------------------------------
-
-test_that('loaded model data', {
-  expect_error(
-    discrim:::make_discrim_flexible(),
-    "Model `discrim_flexible` already exists"
-  )
-  expect_true(nrow(parsnip:::get_from_env("discrim_flexible"))  == 1)
-})
 
 
