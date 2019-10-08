@@ -50,7 +50,25 @@
 #' of the American Statistical Association_ 84, 165-175.
 #'
 #' @examples
-#' discrim_regularized()
+#' parabolic_grid <-
+#'   expand.grid(X1 = seq(-5, 5, length = 100),
+#'               X2 = seq(-5, 5, length = 100))
+#'
+#' rda_mod <-
+#'   discrim_regularized(frac_common_cov = .5, frac_identity = .5) %>%
+#'   set_engine("rda") %>%
+#'   fit(class ~ ., data = parabolic)
+#'
+#' parabolic_grid$rda <-
+#'   predict(rda_mod, parabolic_grid, type = "prob")$.pred_Class1
+#'
+#' library(ggplot2)
+#' ggplot(parabolic, aes(x = X1, y = X2)) +
+#'   geom_point(aes(col = class), alpha = .5) +
+#'   geom_contour(data = parabolic_grid, aes(z = rda), col = "black", breaks = .5) +
+#'   theme_bw() +
+#'   theme(legend.position = "top") +
+#'   coord_equal()
 #' @export
 discrim_regularized <-
   function(mode = "classification", frac_common_cov = NULL, frac_identity = NULL) {

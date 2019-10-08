@@ -46,7 +46,25 @@
 #'
 #'
 #' @examples
-#' discrim_flexible()
+#' parabolic_grid <-
+#'   expand.grid(X1 = seq(-5, 5, length = 100),
+#'               X2 = seq(-5, 5, length = 100))
+#'
+#' fda_mod <-
+#'   discrim_flexible(num_terms = 8) %>%
+#'   set_engine("earth") %>%
+#'   fit(class ~ ., data = parabolic)
+#'
+#' parabolic_grid$fda <-
+#'   predict(fda_mod, parabolic_grid, type = "prob")$.pred_Class1
+#'
+#' library(ggplot2)
+#' ggplot(parabolic, aes(x = X1, y = X2)) +
+#'   geom_point(aes(col = class), alpha = .5) +
+#'   geom_contour(data = parabolic_grid, aes(z = fda), col = "black", breaks = .5) +
+#'   theme_bw() +
+#'   theme(legend.position = "top") +
+#'   coord_equal()
 #' @export
 discrim_flexible <-
   function(mode = "classification", num_terms = NULL, prod_degree = NULL,

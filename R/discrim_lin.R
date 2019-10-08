@@ -48,7 +48,25 @@
 #'          method = mda::gen.ridge, keep.fitted = FALSE)
 #' }
 #' @examples
-#' discrim_linear()
+#' parabolic_grid <-
+#'   expand.grid(X1 = seq(-5, 5, length = 100),
+#'               X2 = seq(-5, 5, length = 100))
+#'
+#' lda_mod <-
+#'   discrim_linear(penalty = .1) %>%
+#'   set_engine("FDA") %>%
+#'   fit(class ~ ., data = parabolic)
+#'
+#' parabolic_grid$lda <-
+#'   predict(lda_mod, parabolic_grid, type = "prob")$.pred_Class1
+#'
+#' library(ggplot2)
+#' ggplot(parabolic, aes(x = X1, y = X2)) +
+#'   geom_point(aes(col = class), alpha = .5) +
+#'   geom_contour(data = parabolic_grid, aes(z = lda), col = "black", breaks = .5) +
+#'   theme_bw() +
+#'   theme(legend.position = "top") +
+#'   coord_equal()
 #' @export
 discrim_linear <-
   function(mode = "classification",
