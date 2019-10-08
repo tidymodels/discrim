@@ -66,7 +66,49 @@
 <div id="discrim" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#discrim" class="anchor"></a>discrim</h1></div>
-<p>Wrappers for discriminant analysis and naive Bayes models for use with the parsnip package</p>
+<!-- badges: start -->
+
+<p><code>discrim</code> contains simple bindings to enable the <code>parsnip</code> package to fit various discriminant analysis models, such as</p>
+<ul>
+<li>Linear discriminant analysis (LDA, simple and L2 regularized)</li>
+<li>Regularized discriminant analysis (RDA, via <a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C7&amp;q=%22Regularized+Discriminant+Analysis%22&amp;btnG=">Friedman (1989)</a>)</li>
+<li>Flexible discriminant analysis (FDA) using MARS features</li>
+<li>Naive Bayes models</li>
+</ul>
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"tidymodels/discrim"</span>)</a></code></pre></div>
+</div>
+<div id="example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example" class="anchor"></a>Example</h2>
+<p>Here is a simple model using a simulated two-class data set contained in the package:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(discrim)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; Loading required package: parsnip</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">parabolic_grid &lt;-</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span>(<span class="dt">X1 =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dt">length =</span> <span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">              <span class="dt">X2 =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dt">length =</span> <span class="dv">100</span>))</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">fda_mod &lt;-</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="reference/discrim_flexible.html">discrim_flexible</a></span>(<span class="dt">num_terms =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">  </span><span class="co"># increase `num_terms` to find smoother boundaries</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="st">  </span><span class="kw">set_engine</span>(<span class="st">"earth"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="st">  </span><span class="kw">fit</span>(class <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> parabolic)</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">parabolic_grid<span class="op">$</span>fda &lt;-</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span>(fda_mod, parabolic_grid, <span class="dt">type =</span> <span class="st">"prob"</span>)<span class="op">$</span>.pred_Class1</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(parabolic, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> X1, <span class="dt">y =</span> X2)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">col =</span> class), <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_contour.html">geom_contour</a></span>(<span class="dt">data =</span> parabolic_grid, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">z =</span> fda), <span class="dt">col =</span> <span class="st">"black"</span>, <span class="dt">breaks =</span> <span class="fl">.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">legend.position =</span> <span class="st">"top"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span>()</a></code></pre></div>
+<p><img src="reference/figures/README-example-1.png" title="plot of chunk example" alt="plot of chunk example" width="100%"></p>
+</div>
 </div>
   </div>
 
@@ -85,7 +127,15 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.org/tidymodels/discrim"><img src="https://travis-ci.org/tidymodels/discrim.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://codecov.io/gh/tidymodels/discrim?branch=master"><img src="https://codecov.io/gh/tidymodels/discrim/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
