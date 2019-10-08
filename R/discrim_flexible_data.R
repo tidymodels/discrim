@@ -20,7 +20,7 @@ make_discrim_flexible <- function() {
     eng = "earth",
     parsnip = "num_terms",
     original = "nprune",
-    func = list(pkg = "dials", fun = "num_terms", range = c(2, 5)),
+    func = list(pkg = "dials", fun = "num_terms"),
     has_submodel = TRUE
   )
   parsnip::set_model_arg(
