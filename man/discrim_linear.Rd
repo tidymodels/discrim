@@ -18,6 +18,11 @@ The only possible value for this model is "classification".}
 amount of regularization used by some of the engines.}
 
 \item{object}{A linear discriminant model specification.}
+
+\item{fresh}{A logical for whether the arguments should be
+modified in-place of or replaced wholesale.}
+
+\item{...}{Not used for \code{update()}.}
 }
 \description{
 \code{discrim_linear()} is a way to generate a \emph{specification} of a model

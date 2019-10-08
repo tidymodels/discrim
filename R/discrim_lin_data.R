@@ -1,30 +1,30 @@
-# These functions define the discriminant analysis models. The are executed when
+# These functions define the discriminant analysis models. They are executed when
 # this package is loaded via `.onLoad()` and modify the parsnip package's
 # model environment.
 
 make_discrim_linear_MASS <- function() {
-  set_new_model("discrim_linear")
+  parsnip::set_new_model("discrim_linear")
 
-  set_model_mode("discrim_linear", "classification")
+  parsnip::set_model_mode("discrim_linear", "classification")
 
   # ------------------------------------------------------------------------------
 
-  set_model_engine("discrim_linear", "classification", "MASS")
-  set_dependency("discrim_linear", "MASS", "MASS")
+  parsnip::set_model_engine("discrim_linear", "classification", "MASS")
+  parsnip::set_dependency("discrim_linear", "MASS", "MASS")
 
-  set_fit(
+  parsnip::set_fit(
     model = "discrim_linear",
     eng = "MASS",
     mode = "classification",
     value = list(
-      interface = "data.frame",
-      protect = c("x", "y"),
-      func = c(fun = "mass_lda_wrapper"),
+      interface = "formula",
+      protect = c("formula", "data"),
+      func = c(pkg = "MASS", fun = "lda"),
       defaults = list()
     )
   )
 
-  set_pred(
+  parsnip::set_pred(
     model = "discrim_linear",
     eng = "MASS",
     mode = "classification",
@@ -41,7 +41,7 @@ make_discrim_linear_MASS <- function() {
     )
   )
 
-  set_pred(
+  parsnip::set_pred(
     model = "discrim_linear",
     eng = "MASS",
     mode = "classification",
@@ -58,7 +58,7 @@ make_discrim_linear_MASS <- function() {
     )
   )
 
-  set_pred(
+  parsnip::set_pred(
     model = "discrim_linear",
     eng = "MASS",
     mode = "classification",
@@ -81,10 +81,10 @@ make_discrim_linear_MASS <- function() {
 
 make_discrim_linear_FDA <- function() {
 
-  set_model_engine("discrim_linear", "classification", "FDA")
-  set_dependency("discrim_linear", eng = "FDA", pkg = "mda")
+  parsnip::set_model_engine("discrim_linear", "classification", "FDA")
+  parsnip::set_dependency("discrim_linear", eng = "FDA", pkg = "mda")
 
-  set_model_arg(
+  parsnip::set_model_arg(
     model = "discrim_linear",
     eng = "FDA",
     parsnip = "penalty",
@@ -93,7 +93,7 @@ make_discrim_linear_FDA <- function() {
     has_submodel = FALSE
   )
 
-  set_fit(
+  parsnip::set_fit(
     model = "discrim_linear",
     eng = "FDA",
     mode = "classification",
@@ -105,7 +105,7 @@ make_discrim_linear_FDA <- function() {
     )
   )
 
-  set_pred(
+  parsnip::set_pred(
     model = "discrim_linear",
     eng = "FDA",
     mode = "classification",
@@ -122,7 +122,7 @@ make_discrim_linear_FDA <- function() {
     )
   )
 
-  set_pred(
+  parsnip::set_pred(
     model = "discrim_linear",
     eng = "FDA",
     mode = "classification",
@@ -140,7 +140,7 @@ make_discrim_linear_FDA <- function() {
     )
   )
 
-  set_pred(
+  parsnip::set_pred(
     model = "discrim_linear",
     eng = "FDA",
     mode = "classification",

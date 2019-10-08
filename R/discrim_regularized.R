@@ -77,7 +77,7 @@ print.discrim_regularized <- function(x, ...) {
 
   if (!is.null(x$method$fit$args)) {
     cat("Model fit template:\n")
-    print(show_call(x))
+    print(parsnip::show_call(x))
   }
 
   invisible(x)
@@ -85,6 +85,7 @@ print.discrim_regularized <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
+#' @inheritParams update.discrim_flexible
 #' @param object A linear discriminant model specification.
 #' @examples
 #' model <- discrim_regularized(frac_common_cov = 10)

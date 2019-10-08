@@ -9,3 +9,4 @@ derby.log
 ^tests/testthat/logs$
 ^revdep$
 ^README\.md$
+^README\.Rmd$

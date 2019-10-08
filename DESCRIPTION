@@ -11,12 +11,15 @@ Depends:
     parsnip
 Imports:
     purrr,
-    rlang
+    rlang,
+    tibble
 Suggests: 
     testthat,
     MASS,
     mda,
-    klaR
+    klaR,
+    earth,
+    mlbench
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

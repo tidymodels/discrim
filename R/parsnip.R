@@ -30,3 +30,30 @@ new_model_spec <- function(cls, args, eng_args, mode, method, engine) {
   class(out) <- parsnip::make_classes(cls)
   out
 }
+
+is_varying <- function(x) {
+  if (is.null(x)) {
+    res <- FALSE
+  }
+  else {
+    res <- if (rlang::is_quosure(x)) {
+      isTRUE(all.equal(x[[-1]], quote(varying())))
+    } else {
+      isTRUE(all.equal(x, quote(varying())))
+    }
+  }
+  res
+}
+
+null_value <- function(x) {
+  if (rlang::is_quosure(x)) {
+    res <- isTRUE(all.equal(rlang::get_expr(x), rlang::expr(NULL)))
+  }
+  else {
+    res <- isTRUE(all.equal(x, NULL))
+  }
+  res
+}
+
+
+
