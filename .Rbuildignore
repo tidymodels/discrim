@@ -13,3 +13,4 @@ derby.log
 ^docs$
 ^\.travis\.yml$
 ^codecov\.yml$
+^azure-pipelines\.yml$
