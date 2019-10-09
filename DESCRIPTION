@@ -1,11 +1,11 @@
 Package: discrim
 Title: Model Wrappers for Discriminant Analysis
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
     person(given = "Max", family = "Kuhn", email = "max@rstudio.com", role = c("aut", "cre")),
     person("RStudio", role = "cph")
     )
-Description: Bindings for discriminant analysis and naive Bayes models for use with the parsnip package.
+Description: Bindings for additional classification models for use with the parsnip package. Models include flavors of discriminant analysis (linear, regularized, and flexible) as well as naive Bayes. 
 License: GPL-2
 Depends:
     parsnip,
