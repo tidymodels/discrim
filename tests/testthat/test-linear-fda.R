@@ -111,4 +111,28 @@ test_that('api errors', {
 })
 
 
+# ------------------------------------------------------------------------------
+
+test_that('printing', {
+  expect_output(
+    print(lda_spec),
+    "Linear Discriminant Model Specification"
+  )
+})
+
+
+# ------------------------------------------------------------------------------
+
+test_that('updating', {
+  lda_spec_2 <- discrim_linear(penalty = .1) %>% set_engine("mda")
+  lda_spec_3 <- update(lda_spec, penalty = .1)
+  expect_equal(lda_spec_2, lda_spec_3)
+
+  prior_spec_2 <- discrim_linear(penalty = .1) %>%
+    set_engine("mda", prior = rep(1/6, 6))
+  prior_spec_3 <- update(prior_spec, penalty = .1)
+  expect_equal(prior_spec_2, prior_spec_3)
+
+})
+
 

@@ -101,6 +101,7 @@ test_that('missing data', {
   expect_equal(f_pred, exp_f_pred)
 })
 
+
 # ------------------------------------------------------------------------------
 
 test_that('api errors', {
@@ -110,5 +111,27 @@ test_that('api errors', {
   )
 })
 
+# ------------------------------------------------------------------------------
 
+test_that('printing', {
+  expect_output(
+    print(rda_spec),
+    "Regularized Discriminant Model Specification"
+  )
+})
 
+# ------------------------------------------------------------------------------
+
+test_that('updating', {
+  rda_spec_2 <-
+    discrim_regularized(frac_common_cov = 1, frac_identity = 1) %>%
+    set_engine("rda")
+  rda_spec_3 <- update(rda_spec, frac_common_cov = 1, frac_identity = 1)
+  expect_equal(rda_spec_2, rda_spec_3)
+
+  prior_spec_2 <- discrim_regularized(frac_common_cov = 1) %>%
+    set_engine("rda", prior = rep(1/6, 6))
+  prior_spec_3 <- update(prior_spec, frac_common_cov = 1)
+  expect_equal(prior_spec_2, prior_spec_3)
+
+})
