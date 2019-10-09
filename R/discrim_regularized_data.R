@@ -14,7 +14,6 @@ make_discrim_regularized <- function() {
   parsnip::set_model_engine("discrim_regularized", "classification", "rda")
   parsnip::set_dependency("discrim_regularized", eng = "rda", pkg = "klaR")
 
-
   parsnip::set_model_arg(
     model = "discrim_regularized",
     eng = "rda",

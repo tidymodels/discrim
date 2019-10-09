@@ -16,9 +16,12 @@ knitr::opts_chunk$set(
 # discrim
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/tidymodels/discrim.svg?branch=master)](https://travis-ci.org/tidymodels/discrim)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Azure pipelines build status](https://img.shields.io/azure-devops/build/topepo/discrim/2)](https://dev.azure.com/topepo/discrim/_build/latest?definitionId=1&branchName=master)
+[![Azure pipelines test status](https://img.shields.io/azure-devops/tests/topepo/discrim/2?color=brightgreen&compact_message)](https://dev.azure.com/topepo/discrim/_build/latest?definitionId=1&branchName=master)
+[![Travis build status](https://travis-ci.org/tidymodels/discrim.svg?branch=master)](https://travis-ci.org/tidymodels/discrim)
 [![Codecov test coverage](https://codecov.io/gh/tidymodels/discrim/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/discrim?branch=master)
+[![Azure pipelines coverage status](https://img.shields.io/azure-devops/coverage/topepo/discrim/2)](https://dev.azure.com/topepo/discrim/_build/latest?definitionId=1&branchName=master)
 <!-- badges: end -->
 
 `discrim` contains simple bindings to enable the `parsnip` package to fit various discriminant analysis models, such as 
