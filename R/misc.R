@@ -18,22 +18,20 @@ prob_matrix_to_tibble <- function(x, object) {
 # ------------------------------------------------------------------------------
 
 # This is needed since parnsip is looking for a funciton like `foo(x, y)` but
-# we have `lda(x, grouping)`. It just maps x -> grouping
-#' Helper functions for using parsnip with the MASS package
+# we have `NaiveBayes(x, grouping)`. It just maps x -> grouping
+#' Internal wrapper functions
 #' @export
 #' @keywords internal
 #' @rdname discrim_helpers
-mass_lda_wrapper <- function(x, y, ...) {
+klar_bayes_wrapper <- function(x, y, ...) {
   args <- list(x = rlang::enquo(x), grouping = rlang::enquo(y))
   dots <- rlang::enquos(...)
   if (length(dots) > 0) {
     args <- c(args, dots)
   }
-  cl <- rlang::call2("lda", .ns = "MASS", !!!args)
+  cl <- rlang::call2("NaiveBayes", .ns = "klaR", !!!args)
   rlang::eval_tidy(cl)
 }
-
-# ------------------------------------------------------------------------------
 
 # For earth models, you cannot pass na.action to predict()
 
