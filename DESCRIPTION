@@ -7,7 +7,7 @@ Authors@R: c(
     )
 Description: Bindings for additional classification models for use with the 
     'parsnip' package. Models include flavors of discriminant analysis, such as 
-    linear (Fisher (1936) <doi:j.1469-1809.1936.tb02137.x>), regularized 
+    linear (Fisher (1936) <doi:10.1111/j.1469-1809.1936.tb02137.x>), regularized 
     (Friedman (1989) <doi:10.1080/01621459.1989.10478752>), and flexible 
     (Hastie, Tibshirani, and Buja (1994) <doi:10.1080/01621459.1994.10476866>), 
     as well as naive Bayes classifiers (Hand and Yu (2007) 
@@ -31,8 +31,10 @@ Suggests:
     mlbench,
     covr,
     ggplot2,
-    xml2
+    xml2,
+    spelling
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+Language: en-US
