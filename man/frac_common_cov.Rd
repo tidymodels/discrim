@@ -3,11 +3,14 @@
 \name{frac_common_cov}
 \alias{frac_common_cov}
 \alias{frac_identity}
+\alias{smoothness}
 \title{Parameter objects for Regularized Discriminant Models}
 \usage{
 frac_common_cov(range = c(0, 1), trans = NULL)
 
 frac_identity(range = c(0, 1), trans = NULL)
+
+smoothness(range = c(0.5, 1.5), trans = NULL)
 }
 \arguments{
 \item{range}{A two-element vector holding the \emph{defaults} for the smallest and
@@ -22,7 +25,9 @@ transformation, \code{NULL}.}
 A function with classes "quant_param" and "param"
 }
 \description{
-\code{discrim_regularized()} describes the effect of these two parameters.
+\code{discrim_regularized()} describes the effect of \code{frac_common_cov()} and
+\code{frac_identity()}. \code{smoothness()} is an alias for the \code{adjust} parameter in
+\code{stats::density()}.
 }
 \details{
 These parameters can modulate a RDA model to go between linear and quadratic

@@ -11,12 +11,12 @@ make_discrim_regularized <- function() {
 
   # ------------------------------------------------------------------------------
 
-  parsnip::set_model_engine("discrim_regularized", "classification", "rda")
-  parsnip::set_dependency("discrim_regularized", eng = "rda", pkg = "klaR")
+  parsnip::set_model_engine("discrim_regularized", "classification", "klaR")
+  parsnip::set_dependency("discrim_regularized", eng = "klaR", pkg = "klaR")
 
   parsnip::set_model_arg(
     model = "discrim_regularized",
-    eng = "rda",
+    eng = "klaR",
     parsnip = "frac_common_cov",
     original = "lambda",
     func = list(pkg = "discrim", fun = "frac_common_cov"),
@@ -25,7 +25,7 @@ make_discrim_regularized <- function() {
 
   parsnip::set_model_arg(
     model = "discrim_regularized",
-    eng = "rda",
+    eng = "klaR",
     parsnip = "frac_identity",
     original = "gamma",
     func = list(pkg = "discrim", fun = "frac_identity"),
@@ -34,7 +34,7 @@ make_discrim_regularized <- function() {
 
   parsnip::set_fit(
     model = "discrim_regularized",
-    eng = "rda",
+    eng = "klaR",
     mode = "classification",
     value = list(
       interface = "formula",
@@ -46,7 +46,7 @@ make_discrim_regularized <- function() {
 
   parsnip::set_pred(
     model = "discrim_regularized",
-    eng = "rda",
+    eng = "klaR",
     mode = "classification",
     type = "class",
     value = list(
@@ -63,7 +63,7 @@ make_discrim_regularized <- function() {
 
   parsnip::set_pred(
     model = "discrim_regularized",
-    eng = "rda",
+    eng = "klaR",
     mode = "classification",
     type = "prob",
     value = list(
@@ -80,7 +80,7 @@ make_discrim_regularized <- function() {
 
   parsnip::set_pred(
     model = "discrim_regularized",
-    eng = "rda",
+    eng = "klaR",
     mode = "classification",
     type = "raw",
     value = list(
