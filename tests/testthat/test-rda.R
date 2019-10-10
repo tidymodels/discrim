@@ -8,9 +8,9 @@ source("helper-objects.R")
 
 rda_spec <-
   discrim_regularized(frac_common_cov = .1, frac_identity = 1) %>%
-  set_engine("rda")
+  set_engine("klaR")
 
-prior_spec <- discrim_regularized() %>% set_engine("rda", prior = rep(1/6, 6))
+prior_spec <- discrim_regularized() %>% set_engine("klaR", prior = rep(1/6, 6))
 
 exp_f_fit <- klaR::rda(Type ~ ., data = glass_tr, lambda = .1, gamma = 1)
 
@@ -125,12 +125,12 @@ test_that('printing', {
 test_that('updating', {
   rda_spec_2 <-
     discrim_regularized(frac_common_cov = 1, frac_identity = 1) %>%
-    set_engine("rda")
+    set_engine("klaR")
   rda_spec_3 <- update(rda_spec, frac_common_cov = 1, frac_identity = 1)
   expect_equal(rda_spec_2, rda_spec_3)
 
   prior_spec_2 <- discrim_regularized(frac_common_cov = 1) %>%
-    set_engine("rda", prior = rep(1/6, 6))
+    set_engine("klaR", prior = rep(1/6, 6))
   prior_spec_3 <- update(prior_spec, frac_common_cov = 1)
   expect_equal(prior_spec_2, prior_spec_3)
 

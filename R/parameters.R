@@ -1,6 +1,8 @@
 #' Parameter objects for Regularized Discriminant Models
 #'
-#' `discrim_regularized()` describes the effect of these two parameters.
+#' `discrim_regularized()` describes the effect of `frac_common_cov()` and
+#' `frac_identity()`. `smoothness()` is an alias for the `adjust` parameter in
+#' `stats::density()`.
 #'
 #' @param range A two-element vector holding the _defaults_ for the smallest and
 #' largest possible values, respectively.
@@ -30,7 +32,6 @@ frac_common_cov <- function(range = c(0, 1), trans = NULL) {
   )
 }
 
-
 #' @export
 #' @rdname frac_common_cov
 frac_identity <- function(range = c(0, 1), trans = NULL) {
@@ -44,3 +45,17 @@ frac_identity <- function(range = c(0, 1), trans = NULL) {
     finalize = NULL
   )
 }
+
+#' @export
+#' @rdname frac_common_cov
+smoothness <- function(range = c(0.5, 1.5), trans = NULL) {
+  new_quant_param(
+    type = "double",
+    range = range,
+    inclusive = c(TRUE, TRUE),
+    trans = trans,
+    label = c(smoothness = "Kernel Smoothness"),
+    finalize = NULL
+  )
+}
+
