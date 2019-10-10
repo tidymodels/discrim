@@ -5,7 +5,13 @@ Authors@R: c(
     person(given = "Max", family = "Kuhn", email = "max@rstudio.com", role = c("aut", "cre")),
     person("RStudio", role = "cph")
     )
-Description: Bindings for additional classification models for use with the parsnip package. Models include flavors of discriminant analysis (linear, regularized, and flexible) as well as naive Bayes. 
+Description: Bindings for additional classification models for use with the 
+    'parsnip' package. Models include flavors of discriminant analysis, such as 
+    linear (Fisher (1936) <doi:j.1469-1809.1936.tb02137.x>), regularized 
+    (Friedman (1989) <doi:10.1080/01621459.1989.10478752>), and flexible 
+    (Hastie, Tibshirani, and Buja (1994) <doi:10.1080/01621459.1994.10476866>), 
+    as well as naive Bayes classifiers (Hand and Yu (2007) 
+    <doi:10.1111/j.1751-5823.2001.tb00465.x>). 
 License: GPL-2
 Depends:
     parsnip,
