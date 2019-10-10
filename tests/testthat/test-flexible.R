@@ -120,3 +120,21 @@ test_that('loaded model data', {
 })
 
 
+# ------------------------------------------------------------------------------
+
+test_that('printing', {
+  expect_output(
+    print(fda_spec),
+    "Flexible Discriminant Model Specification"
+  )
+})
+
+
+# ------------------------------------------------------------------------------
+
+test_that('updating', {
+  fda_spec_2 <- discrim_flexible(num_terms = 6) %>% set_engine("earth")
+  fda_spec_3 <- update(fda_spec, num_terms = 6)
+  expect_equal(fda_spec_2, fda_spec_3)
+})
+

@@ -147,17 +147,3 @@ update.naive_Bayes <-
     )
   }
 
-# ------------------------------------------------------------------------------
-
-#' @export
-#' @keywords internal
-#' @rdname discrim_helpers
-klar_bayes_wrapper <- function(x, y, ...) {
-  args <- list(x = rlang::enquo(x), grouping = rlang::enquo(y))
-  dots <- rlang::enquos(...)
-  if (length(dots) > 0) {
-    args <- c(args, dots)
-  }
-  cl <- rlang::call2("NaiveBayes", .ns = "klaR", !!!args)
-  rlang::eval_tidy(cl)
-}
