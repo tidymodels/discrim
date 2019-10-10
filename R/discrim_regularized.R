@@ -36,7 +36,7 @@
 #'  _engines_:
 
 #' \itemize{
-#' \item \pkg{R}:  `"rda"`(the default)
+#' \item \pkg{R}:  `"klaR"`(the default)
 #' }
 #'
 #' @section Engine Details:
@@ -44,7 +44,7 @@
 #' Engines may have pre-set default arguments when executing the model fit
 #'  call. For this type of model, the template of the fit calls are:
 #'
-#' \pkg{rda}
+#' \pkg{klaR} engine:
 #'
 #' \preformatted{
 #' klaR::rda(x = missing_arg(), grouping = missing_arg(), lambda = frac_common_cov,
@@ -62,7 +62,7 @@
 #'
 #' rda_mod <-
 #'   discrim_regularized(frac_common_cov = .5, frac_identity = .5) %>%
-#'   set_engine("rda") %>%
+#'   set_engine("klaR") %>%
 #'   fit(class ~ ., data = parabolic)
 #'
 #' parabolic_grid$rda <-

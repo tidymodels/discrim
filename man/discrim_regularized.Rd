@@ -55,7 +55,7 @@ For \code{discrim_regularized()}, the mode will always be "classification".
 The model can be created using the \code{fit()} function using the following
 \emph{engines}:
 \itemize{
-\item \pkg{R}:  \code{"rda"}(the default)
+\item \pkg{R}:  \code{"klaR"}(the default)
 }
 }
 \section{Engine Details}{
@@ -64,7 +64,7 @@ The model can be created using the \code{fit()} function using the following
 Engines may have pre-set default arguments when executing the model fit
 call. For this type of model, the template of the fit calls are:
 
-\pkg{rda}
+\pkg{klaR} engine:
 
 \preformatted{
 klaR::rda(x = missing_arg(), grouping = missing_arg(), lambda = frac_common_cov,
@@ -79,7 +79,7 @@ parabolic_grid <-
 
 rda_mod <-
   discrim_regularized(frac_common_cov = .5, frac_identity = .5) \%>\%
-  set_engine("rda") \%>\%
+  set_engine("klaR") \%>\%
   fit(class ~ ., data = parabolic)
 
 parabolic_grid$rda <-
