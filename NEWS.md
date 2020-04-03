@@ -1,4 +1,4 @@
-# # textrecipes (development version)
+# discrim (development version)
 
 * Added `naivebayes` engine for `naive_Bayes()` (#5).
 
