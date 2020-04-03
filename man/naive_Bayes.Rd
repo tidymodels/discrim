@@ -53,7 +53,7 @@ For \code{naive_Bayes()}, the mode will always be "classification".
 
 The model can be created using the \code{fit()} function using the following \emph{engines}:
 \itemize{
-\item \pkg{R}:  \code{"klaR"}(the default)
+\item \pkg{R}:  \code{"klaR"}(the default) or \code{"naivebayes"}
 }
 }
 \section{Engine Details}{
@@ -67,6 +67,13 @@ For this type of model, the template of the fit calls are:
 \preformatted{
 klaR::NaiveBayes(x = missing_arg(), grouping = missing_arg(),
                  adjust = 0.8, usekernel = TRUE)
+}
+
+\pkg{naivebayes} engine
+
+\preformatted{
+naivebayes::naive_bayes(x = missing_arg(), y = missing_arg(),
+                        adjust = 0.8, usekernel = TRUE)
 }
 
 Note that \code{usekernel} is always set to \code{TRUE} here. This model does not

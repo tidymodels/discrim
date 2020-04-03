@@ -32,7 +32,8 @@ Suggests:
     covr,
     ggplot2,
     xml2,
-    spelling
+    spelling,
+    naivebayes
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

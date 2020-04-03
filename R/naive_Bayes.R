@@ -31,7 +31,7 @@
 #'
 #' The model can be created using the `fit()` function using the following _engines_:
 #' \itemize{
-#' \item \pkg{R}:  `"klaR"`(the default)
+#' \item \pkg{R}:  `"klaR"`(the default) or `"naivebayes"`
 #' }
 #'
 #' @section Engine Details:
@@ -44,6 +44,13 @@
 #' \preformatted{
 #' klaR::NaiveBayes(x = missing_arg(), grouping = missing_arg(),
 #'                  adjust = 0.8, usekernel = TRUE)
+#' }
+#'
+#' \pkg{naivebayes} engine
+#'
+#' \preformatted{
+#' naivebayes::naive_bayes(x = missing_arg(), y = missing_arg(),
+#'                         adjust = 0.8, usekernel = TRUE)
 #' }
 #'
 #' Note that `usekernel` is always set to `TRUE` here. This model does not
