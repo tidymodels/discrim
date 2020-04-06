@@ -7,8 +7,7 @@
 \usage{
 discrim_linear(mode = "classification", penalty = NULL)
 
-\method{update}{discrim_linear}(object, penalty = NULL, fresh = FALSE,
-  ...)
+\method{update}{discrim_linear}(object, penalty = NULL, fresh = FALSE, ...)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
