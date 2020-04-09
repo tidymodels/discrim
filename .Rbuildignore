@@ -15,3 +15,4 @@ derby.log
 ^codecov\.yml$
 ^azure-pipelines\.yml$
 ^\.covrignore$
+^\.github$
