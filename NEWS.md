@@ -1,3 +1,5 @@
+# discrim (development version)
+
 # discrim 0.0.2
 
 * Added `naivebayes` engine for `naive_Bayes()` (#5).
