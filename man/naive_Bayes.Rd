@@ -55,30 +55,33 @@ The model can be created using the \code{fit()} function using the following \em
 }
 }
 \section{Engine Details}{
-
-
-Engines may have pre-set default arguments when executing the model fit call.
-For this type of model, the template of the fit calls are:
-
-\pkg{klaR} engine
-
-\preformatted{
-klaR::NaiveBayes(x = missing_arg(), grouping = missing_arg(),
-                 adjust = 0.8, usekernel = TRUE)
+Engines may have pre-set default arguments when executing the model fit
+call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
+  set_engine("MASS") \%>\% 
+  translate()
+}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
+## 
+## Computational engine: MASS 
+## 
+## Model fit template:
+## MASS::lda(formula = missing_arg(), data = missing_arg())
+}\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
+  set_engine("mda") \%>\% 
+  translate()
+}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
+## 
+## Computational engine: mda 
+## 
+## Model fit template:
+## mda::fda(formula = missing_arg(), data = missing_arg(), method = mda::gen.ridge, 
+##     keep.fitted = FALSE)
 }
 
-\pkg{naivebayes} engine
-
-\preformatted{
-naivebayes::naive_bayes(x = missing_arg(), y = missing_arg(),
-                        adjust = 0.8, usekernel = TRUE)
+The standardized parameter names in parsnip can be mapped to their
+original names in each engine that has main parameters:\tabular{ll}{
+   \strong{parsnip} \tab \strong{mda} \cr
+   penalty \tab lambda \cr
 }
-
-Note that \code{usekernel} is always set to \code{TRUE} here. This model does not
-need to make dummy variables from factor predictors. However, if
-\code{parsnip::fit()} is used to fit the model, dummy variables \emph{would} be
-created while \code{parsnip::fit_xy()} will preserve the factor predictors in
-their original encoding.
 }
 
 \examples{
@@ -101,6 +104,8 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
+
+
 model <- naive_Bayes(smoothness = 0.1)
 model
 update(model, smoothness = 1)

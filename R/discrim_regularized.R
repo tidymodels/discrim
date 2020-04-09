@@ -32,25 +32,7 @@
 #'
 #' For `discrim_regularized()`, the mode will always be "classification".
 #'
-#' The model can be created using the `fit()` function using the following
-#'  _engines_:
-
-#' \itemize{
-#' \item \pkg{R}:  `"klaR"`(the default)
-#' }
-#'
-#' @section Engine Details:
-#'
-#' Engines may have pre-set default arguments when executing the model fit
-#'  call. For this type of model, the template of the fit calls are:
-#'
-#' \pkg{klaR} engine:
-#'
-#' \preformatted{
-#' klaR::rda(x = missing_arg(), grouping = missing_arg(), lambda = frac_common_cov,
-#'           gamma = frac_identity, crossval = FALSE)
-#' }
-#'
+#' @includeRmd man/rmd/discrim-regularized-engine.Rmd
 #'
 #' @references Friedman, J.H. (1989). Regularized Discriminant Analysis. _Journal
 #' of the American Statistical Association_ 84, 165-175.
@@ -84,7 +66,7 @@ discrim_regularized <-
       frac_identity = rlang::enquo(frac_identity)
     )
 
-    new_model_spec(
+    parsnip::new_model_spec(
       "discrim_regularized",
       args = args,
       eng_args = NULL,
@@ -112,6 +94,8 @@ print.discrim_regularized <- function(x, ...) {
 #' @inheritParams update.discrim_flexible
 #' @param object A linear discriminant model specification.
 #' @examples
+#'
+#'
 #' model <- discrim_regularized(frac_common_cov = 10)
 #' model
 #' update(model, frac_common_cov = 1)
@@ -139,7 +123,7 @@ update.discrim_regularized <-
         object$args[names(args)] <- args
     }
 
-    new_model_spec(
+    parsnip::new_model_spec(
       "discrim_regularized",
       args = object$args,
       eng_args = object$eng_args,

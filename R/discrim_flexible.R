@@ -41,19 +41,7 @@
 #' \item \pkg{R}:  `"earth"`  (the default)
 #' }
 #'
-#' @section Engine Details:
-#'
-#' Engines may have pre-set default arguments when executing the model fit
-#'  call. For this type of model, the template of the fit calls are:
-#'
-#' \pkg{earth} engine:
-#'
-#' \preformatted{
-#' mda::fda(formula = missing_arg(), data = missing_arg(),
-#'          nprune = num_terms, degree = prod_degree, pmethod = prune_method,
-#'          method = earth::earth)
-#' }
-#'
+#' @includeRmd man/rmd/discrim-flexible-engine.Rmd
 #'
 #' @references
 #' Friedman (1991), Multivariate Adaptive Regression Splines (with discussion),
@@ -93,7 +81,7 @@ discrim_flexible <-
       prune_method = enquo(prune_method)
     )
 
-    new_model_spec(
+    parsnip::new_model_spec(
       "discrim_flexible",
       args = args,
       eng_args = NULL,
@@ -124,6 +112,7 @@ print.discrim_flexible <- function(x, ...) {
 #'  modified in-place of or replaced wholesale.
 #' @examples
 #'
+#'
 #' model <- discrim_flexible(num_terms = 10)
 #' model
 #' update(model, num_terms = 6)
@@ -153,7 +142,7 @@ update.discrim_flexible <-
         object$args[names(args)] <- args
     }
 
-    new_model_spec(
+    parsnip::new_model_spec(
       "discrim_flexible",
       args = object$args,
       eng_args = object$eng_args,

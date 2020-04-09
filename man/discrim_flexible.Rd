@@ -76,17 +76,24 @@ The model can be created using the \code{fit()} function using the following
 }
 }
 \section{Engine Details}{
-
-
 Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:
+call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_flexible() \%>\% 
+  set_engine("earth") \%>\% 
+  translate()
+}\if{html}{\out{</div>}}\preformatted{## Flexible Discriminant Model Specification (classification)
+## 
+## Computational engine: earth 
+## 
+## Model fit template:
+## mda::fda(formula = missing_arg(), data = missing_arg(), method = earth::earth)
+}
 
-\pkg{earth} engine:
-
-\preformatted{
-mda::fda(formula = missing_arg(), data = missing_arg(),
-         nprune = num_terms, degree = prod_degree, pmethod = prune_method,
-         method = earth::earth)
+The standardized parameter names in parsnip can be mapped to their
+original names in each engine that has main parameters:\tabular{ll}{
+   \strong{parsnip} \tab \strong{earth} \cr
+   num_terms \tab nprune \cr
+   prod_degree \tab degree \cr
+   prune_method \tab pmethod \cr
 }
 }
 
@@ -111,6 +118,7 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
+
 
 model <- discrim_flexible(num_terms = 10)
 model

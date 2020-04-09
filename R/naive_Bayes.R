@@ -34,31 +34,10 @@
 #' \item \pkg{R}:  `"klaR"`(the default) or `"naivebayes"`
 #' }
 #'
-#' @section Engine Details:
 #'
-#' Engines may have pre-set default arguments when executing the model fit call.
-#' For this type of model, the template of the fit calls are:
+#' @includeRmd man/rmd/discrim-lin-engine.Rmd
 #'
-#' \pkg{klaR} engine
-#'
-#' \preformatted{
-#' klaR::NaiveBayes(x = missing_arg(), grouping = missing_arg(),
-#'                  adjust = 0.8, usekernel = TRUE)
-#' }
-#'
-#' \pkg{naivebayes} engine
-#'
-#' \preformatted{
-#' naivebayes::naive_bayes(x = missing_arg(), y = missing_arg(),
-#'                         adjust = 0.8, usekernel = TRUE)
-#' }
-#'
-#' Note that `usekernel` is always set to `TRUE` here. This model does not
-#'  need to make dummy variables from factor predictors. However, if
-#'  `parsnip::fit()` is used to fit the model, dummy variables _would_ be
-#'  created while `parsnip::fit_xy()` will preserve the factor predictors in
-#'  their original encoding.
-#'
+
 #' @examples
 #' parabolic_grid <-
 #'   expand.grid(X1 = seq(-5, 5, length = 100),
@@ -88,7 +67,7 @@ naive_Bayes <-
         Laplace = rlang::enquo(Laplace)
       )
 
-    new_model_spec(
+    parsnip::new_model_spec(
       "naive_Bayes",
       args = args,
       eng_args = NULL,
@@ -116,6 +95,8 @@ print.naive_Bayes <- function(x, ...) {
 #' @inheritParams update.discrim_flexible
 #' @param object A linear discriminant model specification.
 #' @examples
+#'
+#'
 #' model <- naive_Bayes(smoothness = 0.1)
 #' model
 #' update(model, smoothness = 1)
@@ -144,7 +125,7 @@ update.naive_Bayes <-
         object$args[names(args)] <- args
     }
 
-    new_model_spec(
+    parsnip::new_model_spec(
       "naive_Bayes",
       args = object$args,
       eng_args = object$eng_args,

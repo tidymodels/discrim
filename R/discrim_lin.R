@@ -31,24 +31,8 @@
 #'  model functions. If parameters need to be modified, `update()` can be used
 #'  in lieu of recreating the object from scratch.
 #'
-#' @section Engine Details:
+#' @includeRmd man/rmd/discrim-lin-engine.Rmd
 #'
-#' Engines may have pre-set default arguments when executing the model fit
-#'  call. For this type of model, the template of the fit calls are:
-#'
-#' \pkg{MASS} engine:
-#'
-#' \preformatted{
-#' MASS::lda(x = missing_arg(), grouping = missing_arg())
-#' }
-#'
-#'
-#' \pkg{mda} engine:
-#'
-#' \preformatted{
-#' mda::fda(formula = missing_arg(), data = missing_arg(), lambda = penalty,
-#'          method = mda::gen.ridge, keep.fitted = FALSE)
-#' }
 #' @examples
 #' parabolic_grid <-
 #'   expand.grid(X1 = seq(-5, 5, length = 100),
@@ -78,7 +62,7 @@ discrim_linear <-
       penalty = rlang::enquo(penalty)
     )
 
-    new_model_spec(
+    parsnip::new_model_spec(
       "discrim_linear",
       args = args,
       eng_args = NULL,
@@ -106,6 +90,8 @@ print.discrim_linear <- function(x, ...) {
 #' @inheritParams update.discrim_flexible
 #' @param object A linear discriminant model specification.
 #' @examples
+#'
+#'
 #' model <- discrim_linear(penalty = 0.1)
 #' model
 #' update(model, penalty = 1)
@@ -131,7 +117,7 @@ update.discrim_linear <-
         object$args[names(args)] <- args
     }
 
-    new_model_spec(
+    parsnip::new_model_spec(
       "discrim_linear",
       args = object$args,
       eng_args = object$eng_args,
