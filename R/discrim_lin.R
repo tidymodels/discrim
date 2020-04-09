@@ -116,7 +116,7 @@ update.discrim_linear <-
   function(object,
            penalty = NULL,
            fresh = FALSE, ...) {
-    update_dot_check(...)
+    parsnip::update_dot_check(...)
     args <- list(
       penalty = rlang::enquo(penalty)
     )
@@ -124,7 +124,7 @@ update.discrim_linear <-
     if (fresh) {
       object$args <- args
     } else {
-      null_args <- map_lgl(args, null_value)
+      null_args <- map_lgl(args, parsnip::null_value)
       if (any(null_args))
         args <- args[!null_args]
       if (length(args) > 0)

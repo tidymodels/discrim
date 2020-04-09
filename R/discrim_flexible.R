@@ -136,7 +136,7 @@ update.discrim_flexible <-
            prod_degree = NULL,
            prune_method = NULL,
            fresh = FALSE, ...) {
-    update_dot_check(...)
+    parsnip::update_dot_check(...)
     args <- list(
       num_terms    = enquo(num_terms),
       prod_degree  = enquo(prod_degree),
@@ -146,7 +146,7 @@ update.discrim_flexible <-
     if (fresh) {
       object$args <- args
     } else {
-      null_args <- map_lgl(args, null_value)
+      null_args <- map_lgl(args, parsnip::null_value)
       if (any(null_args))
         args <- args[!null_args]
       if (length(args) > 0)
