@@ -56,7 +56,7 @@ regression splines (MARS)." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -73,7 +73,7 @@ regression splines (MARS)." />
         <a class="navbar-brand" href="../index.html">discrim</a>
         <div class="info">
           <span class="partof">part of <a href="https://github.com/tidymodels">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
         </div>
       </div>
     </div>
@@ -88,7 +88,15 @@ regression splines (MARS)." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-        
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
+        <li>
+  <a href="https://github.com/tidymodels/discrim/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -103,7 +111,7 @@ regression splines (MARS)." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>General Interface for Flexible Discriminant Models</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/discrim_flexible.R'><code>R/discrim_flexible.R</code></a></small>
     <div class="hidden name"><code>discrim_flexible.Rd</code></div>
     </div>
 
@@ -113,12 +121,22 @@ discriminant model using features created using multivariate adaptive
 regression splines (MARS).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>discrim_flexible</span>(<span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"classification"</span>, <span class='kw'>num_terms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>prod_degree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prune_method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>discrim_flexible</span>(
+  <span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"classification"</span>,
+  <span class='kw'>num_terms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>prod_degree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>prune_method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
 
 <span class='co'># S3 method for discrim_flexible</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>object</span>, <span class='kw'>num_terms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>prod_degree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prune_method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fresh</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(
+  <span class='no'>object</span>,
+  <span class='kw'>num_terms</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>prod_degree</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>prune_method</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>fresh</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,17 +204,25 @@ in lieu of recreating the object from scratch.</p>
 
     <h2 class="hasAnchor" id="engine-details"><a class="anchor" href="#engine-details"></a>Engine Details</h2>
 
-    
-
-
-<p>Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:</p>
-<p><span class="pkg">earth</span> engine:</p>
-<pre>
-mda::fda(formula = missing_arg(), data = missing_arg(),
-         nprune = num_terms, degree = prod_degree, pmethod = prune_method,
-         method = earth::earth)
+    <p>Engines may have pre-set default arguments when executing the model fit
+call. For this type of model, the template of the fit calls are:<div class="r"></p><pre><span class='fu'>discrim_flexible</span>() <span class='kw'>%&amp;gt;%</span>
+  <span class='fu'>set_engine</span>(<span class='st'>"earth"</span>) <span class='kw'>%&amp;gt;%</span>
+  <span class='fu'>translate</span>()</pre><p></div></p><pre>## Flexible Discriminant Model Specification (classification)
+## 
+## Computational engine: earth 
+## 
+## Model fit template:
+## mda::fda(formula = missing_arg(), data = missing_arg(), method = earth::earth)
 </pre>
+
+<p>The standardized parameter names in parsnip can be mapped to their
+original names in each engine that has main parameters:</p><table class='table'>
+<tr><td><strong>parsnip</strong></td><td><strong>earth</strong></td></tr>
+<tr><td>num_terms</td><td>nprune</td></tr>
+<tr><td>prod_degree</td><td>degree</td></tr>
+<tr><td>prune_method</td><td>pmethod</td></tr>
+</table>
+
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -226,6 +252,7 @@ Scoring, <em>Journal of the American Statistical Association</em>, 1255-1270.</p
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_equal</a></span>()</div><div class='img'><img src='discrim_flexible-1.png' alt='' width='768' height='552' /></div><div class='input'>
+
 <span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>discrim_flexible</span>(<span class='kw'>num_terms</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 <span class='no'>model</span></div><div class='output co'>#&gt; Flexible Discriminant Model Specification (classification)
 #&gt; 
@@ -237,16 +264,10 @@ Scoring, <em>Journal of the American Statistical Association</em>, 1255-1270.</p
 #&gt;   num_terms = 6
 #&gt; </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#engine-details">Engine Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
