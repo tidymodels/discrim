@@ -1,3 +1,5 @@
+url: https://discrim.tidymodels.org
+
 template:
   package: tidytemplate
   params:
