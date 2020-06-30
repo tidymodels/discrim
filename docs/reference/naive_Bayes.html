@@ -55,7 +55,7 @@ fitting and allows the model to be created using different packages in R." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -72,7 +72,7 @@ fitting and allows the model to be created using different packages in R." />
         <a class="navbar-brand" href="../index.html">discrim</a>
         <div class="info">
           <span class="partof">part of <a href="https://github.com/tidymodels">tidymodels</a></span>
-          <span class="version version-danger" data-toggle="tooltip" data-placement="bottom" title="Unreleased version">0.0.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
         </div>
       </div>
     </div>
@@ -87,7 +87,15 @@ fitting and allows the model to be created using different packages in R." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-        
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
+        <li>
+  <a href="https://github.com/tidymodels/discrim/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -102,7 +110,7 @@ fitting and allows the model to be created using different packages in R." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>General Interface for Naive Bayes Models</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/naive_Bayes.R'><code>R/naive_Bayes.R</code></a></small>
     <div class="hidden name"><code>naive_Bayes.Rd</code></div>
     </div>
 
@@ -111,12 +119,10 @@ fitting and allows the model to be created using different packages in R." />
 fitting and allows the model to be created using different packages in R.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>naive_Bayes</span>(<span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"classification"</span>, <span class='kw'>smoothness</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>Laplace</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>naive_Bayes</span>(<span class='kw'>mode</span> <span class='kw'>=</span> <span class='st'>"classification"</span>, <span class='kw'>smoothness</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Laplace</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for naive_Bayes</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>object</span>, <span class='kw'>smoothness</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Laplace</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>fresh</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='no'>object</span>, <span class='kw'>smoothness</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Laplace</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fresh</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -168,27 +174,38 @@ underlying model functions. If parameters need to be modified, <code><a href='ht
 can be used in lieu of recreating the object from scratch.</p>
 <p>For <code>naive_Bayes()</code>, the mode will always be "classification".</p>
 <p>The model can be created using the <code>fit()</code> function using the following <em>engines</em>:</p><ul>
-<li><p><span class="pkg">R</span>:  <code>"klaR"</code>(the default)</p></li>
+<li><p><span class="pkg">R</span>:  <code>"klaR"</code>(the default) or <code>"naivebayes"</code></p></li>
 </ul>
 
     <h2 class="hasAnchor" id="engine-details"><a class="anchor" href="#engine-details"></a>Engine Details</h2>
 
-    
-
-
-<p>Engines may have pre-set default arguments when executing the model fit call.
-For this type of model, the template of the fit calls are:</p>
-<p><span class="pkg">klaR</span> engine</p>
-<pre>
-klaR::NaiveBayes(x = missing_arg(), grouping = missing_arg(),
-                 adjust = 0.8, usekernel = TRUE)
+    <p>Engines may have pre-set default arguments when executing the model fit
+call. For this type of model, the template of the fit calls are:<div class="r"></p><pre><span class='fu'><a href='discrim_linear.html'>discrim_linear</a></span>() <span class='kw'>%&amp;gt;%</span>
+  <span class='fu'>set_engine</span>(<span class='st'>"MASS"</span>) <span class='kw'>%&amp;gt;%</span>
+  <span class='fu'>translate</span>()</pre><p></div></p><pre>## Linear Discriminant Model Specification (classification)
+## 
+## Computational engine: MASS 
+## 
+## Model fit template:
+## MASS::lda(formula = missing_arg(), data = missing_arg())
+</pre><p><div class="r"></p><pre><span class='fu'><a href='discrim_linear.html'>discrim_linear</a></span>() <span class='kw'>%&amp;gt;%</span>
+  <span class='fu'>set_engine</span>(<span class='st'>"mda"</span>) <span class='kw'>%&amp;gt;%</span>
+  <span class='fu'>translate</span>()</pre><p></div></p><pre>## Linear Discriminant Model Specification (classification)
+## 
+## Computational engine: mda 
+## 
+## Model fit template:
+## mda::fda(formula = missing_arg(), data = missing_arg(), method = mda::gen.ridge, 
+##     keep.fitted = FALSE)
 </pre>
 
-<p>Note that <code>usekernel</code> is always set to <code>TRUE</code> here. This model does not
-need to make dummy variables from factor predictors. However, if
-<code><a href='https://rdrr.io/pkg/parsnip/man/reexports.html'>parsnip::fit()</a></code> is used to fit the model, dummy variables <em>would</em> be
-created while <code><a href='https://rdrr.io/pkg/parsnip/man/reexports.html'>parsnip::fit_xy()</a></code> will preserve the factor predictors in
-their original encoding.</p>
+<p>The standardized parameter names in parsnip can be mapped to their
+original names in each engine that has main parameters:</p><table class='table'>
+<tr><td><strong>parsnip</strong></td><td><strong>mda</strong></td></tr>
+<tr><td>penalty</td><td>lambda</td></tr>
+</table>
+
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>parabolic_grid</span> <span class='kw'>&lt;-</span>
@@ -209,7 +226,9 @@ their original encoding.</p>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_contour.html'>geom_contour</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>parabolic_grid</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>z</span> <span class='kw'>=</span> <span class='no'>nb</span>), <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='fl'>.5</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>() +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>legend.position</span> <span class='kw'>=</span> <span class='st'>"top"</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_equal</a></span>()</div><div class='img'><img src='naive_Bayes-1.png' alt='' width='768' height='552' /></div><div class='input'><span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>naive_Bayes</span>(<span class='kw'>smoothness</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_equal</a></span>()</div><div class='img'><img src='naive_Bayes-1.png' alt='' width='768' height='552' /></div><div class='input'>
+
+<span class='no'>model</span> <span class='kw'>&lt;-</span> <span class='fu'>naive_Bayes</span>(<span class='kw'>smoothness</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)
 <span class='no'>model</span></div><div class='output co'>#&gt; Naive Bayes Model Specification (classification)
 #&gt; 
 #&gt; Main Arguments:
@@ -224,15 +243,10 @@ their original encoding.</p>
 #&gt;   smoothness = 1
 #&gt; </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#engine-details">Engine Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 

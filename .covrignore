@@ -1,0 +1,5 @@
+R/discrim_lin_data.R
+R/discrim_regularized_data.R
+R/naive_Bayes_data.R
+R/discrim_flexible_data.R
+R/0_imports.R
