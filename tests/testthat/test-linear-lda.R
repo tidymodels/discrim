@@ -131,7 +131,7 @@ test_that('missing data', {
 test_that('api errors', {
   expect_error(
     discrim_linear() %>% set_engine("lda"),
-    "engine 'lda' is not availble"
+    regexp = "Engine 'lda' is not available"
   )
 })
 

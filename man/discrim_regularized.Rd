@@ -5,11 +5,19 @@
 \alias{update.discrim_regularized}
 \title{General Interface for Regularized Discriminant Models}
 \usage{
-discrim_regularized(mode = "classification", frac_common_cov = NULL,
-  frac_identity = NULL)
+discrim_regularized(
+  mode = "classification",
+  frac_common_cov = NULL,
+  frac_identity = NULL
+)
 
-\method{update}{discrim_regularized}(object, frac_common_cov = NULL,
-  frac_identity = NULL, fresh = FALSE, ...)
+\method{update}{discrim_regularized}(
+  object,
+  frac_common_cov = NULL,
+  frac_identity = NULL,
+  fresh = FALSE,
+  ...
+)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
@@ -51,24 +59,25 @@ underlying model functions. If parameters need to be modified, \code{update()}
 can be used in lieu of recreating the object from scratch.
 
 For \code{discrim_regularized()}, the mode will always be "classification".
-
-The model can be created using the \code{fit()} function using the following
-\emph{engines}:
-\itemize{
-\item \pkg{R}:  \code{"klaR"}(the default)
-}
 }
 \section{Engine Details}{
-
-
 Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:
+call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_regularized() \%>\% 
+  set_engine("klaR") \%>\% 
+  translate()
+}\if{html}{\out{</div>}}\preformatted{## Regularized Discriminant Model Specification (classification)
+## 
+## Computational engine: klaR 
+## 
+## Model fit template:
+## klaR::rda(formula = missing_arg(), data = missing_arg())
+}
 
-\pkg{klaR} engine:
-
-\preformatted{
-klaR::rda(x = missing_arg(), grouping = missing_arg(), lambda = frac_common_cov,
-          gamma = frac_identity, crossval = FALSE)
+The standardized parameter names in parsnip can be mapped to their
+original names in each engine that has main parameters:\tabular{ll}{
+   \strong{parsnip} \tab \strong{klaR} \cr
+   frac_common_cov \tab lambda \cr
+   frac_identity \tab gamma \cr
 }
 }
 
@@ -92,6 +101,8 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
+
+
 model <- discrim_regularized(frac_common_cov = 10)
 model
 update(model, frac_common_cov = 1)
