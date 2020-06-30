@@ -1,5 +1,8 @@
 # Engine Details
 
+```{r, child = "setup.Rmd", include = FALSE}
+```
+
 Engines may have pre-set default arguments when executing the model fit call. For this type of model, the template of the fit calls are:
 
 \pkg{klaR}
@@ -19,10 +22,21 @@ naive_Bayes() %>%
   translate()
 ```
 
-The standardized parameter names in parsnip can be mapped to their original names in each engine that has main parameters:
+The standardized parameter names in parsnip can be mapped to their original 
+names in each engine that has main parameters. Each engine typically has a 
+different default value (shown in parentheses) for each parameter.
 
 ```{r echo = FALSE, results = "asis"}
-parsnip::convert_args("naive_Bayes")
+get_defaults_naive_Bayes <- function() {
+  tibble::tribble(
+    ~model,         ~engine,      ~parsnip,     ~original,  ~default,
+    "naive_Bayes",  "naivebayes", "smoothness", "adjust",   get_arg("stats", "density.default", "adjust"),
+    "naive_Bayes",  "naivebayes", "Laplace",    "laplace",  get_arg("naivebayes", "naive_bayes.default", "laplace"),
+    "naive_Bayes",  "klaR",       "smoothness", "adjust",   get_arg("stats", "density.default", "adjust"),
+    "naive_Bayes",  "klaR",       "Laplace",    "fL",       get_arg("klaR", "NaiveBayes.default", "fL")
+  )
+}
+convert_args("naive_Bayes")
 ```
 
-Note that `usekernel` is always set to `TRUE` for the `klaR` engine. This model does not need to make dummy variables from factor predictors. However, if `parsnip::fit()` is used to fit the model, dummy variables _would_ be created while `parsnip::fit_xy()` will preserve the factor predictors in their original encoding.
+Note that `usekernel` is always set to `TRUE` for the `klaR` engine.
