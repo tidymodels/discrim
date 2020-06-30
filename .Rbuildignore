@@ -14,5 +14,6 @@ derby.log
 ^\.travis\.yml$
 ^codecov\.yml$
 ^azure-pipelines\.yml$
+^CODE_OF_CONDUCT\.md$
 ^\.covrignore$
 ^\.github$
