@@ -114,7 +114,7 @@ test_that('class predictions', {
   f_pred <- predict(f_fit, glass_te)
   exp_f_pred <- predict(exp_f_fit, x_te)
 
-  expect_true(inherits(f_pred, "tbl_df"))
+  expect_s3_class(f_pred, "tbl_df")
   expect_true(all(names(f_pred) == ".pred_class"))
   expect_equivalent(f_pred$.pred_class, exp_f_pred$class)
 
@@ -126,7 +126,7 @@ test_that('class predictions', {
   xy_pred <- predict(xy_fit, glass_te)
   exp_xy_pred <- predict(exp_xy_fit, glass_te)
 
-  expect_true(inherits(xy_pred, "tbl_df"))
+  expect_s3_class(xy_pred, "tbl_df")
   expect_true(all(names(xy_pred) == ".pred_class"))
   expect_equivalent(xy_pred$.pred_class, exp_xy_pred$class)
 
@@ -135,7 +135,7 @@ test_that('class predictions', {
   prior_pred <- predict(prior_fit, glass_te)
   exp_prior_pred <- predict(exp_prior_fit, glass_te)
 
-  expect_true(inherits(f_pred, "tbl_df"))
+  expect_s3_class(f_pred, "tbl_df")
   expect_true(all(names(f_pred) == ".pred_class"))
   expect_equivalent(prior_pred$.pred_class, exp_prior_pred$class)
 })
@@ -149,7 +149,7 @@ test_that('prob predictions', {
   f_pred <- predict(f_fit, glass_te, type = "prob")
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit, x_te)$posterior)
 
-  expect_true(inherits(f_pred, "tbl_df"))
+  expect_s3_class(f_pred, "tbl_df")
   expect_equal(names(f_pred), prob_names)
   expect_equal(f_pred, exp_f_pred)
 
@@ -161,7 +161,7 @@ test_that('prob predictions', {
   xy_pred <- predict(xy_fit, glass_te, type = "prob")
   exp_xy_pred <- probs_to_tibble(predict(exp_xy_fit, glass_te)$posterior)
 
-  expect_true(inherits(xy_pred, "tbl_df"))
+  expect_s3_class(xy_pred, "tbl_df")
   expect_equal(names(xy_pred), prob_names)
   expect_equal(xy_pred, exp_xy_pred)
 
@@ -170,7 +170,7 @@ test_that('prob predictions', {
   prior_pred <- predict(prior_fit, glass_te, type = "prob")
   exp_prior_pred <- probs_to_tibble(predict(exp_prior_fit, glass_te)$posterior)
 
-  expect_true(inherits(prior_pred, "tbl_df"))
+  expect_s3_class(prior_pred, "tbl_df")
   expect_equal(names(prior_pred), prob_names)
   expect_equal(prior_pred, exp_prior_pred)
 })
@@ -183,7 +183,7 @@ test_that('missing data', {
   f_pred <- predict(f_fit, glass_na, type = "prob")
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit, x_na)$posterior)
 
-  expect_true(inherits(f_pred, "tbl_df"))
+  expect_s3_class(f_pred, "tbl_df")
   expect_true(nrow(f_pred) == nrow(glass_te))
   expect_equal(names(f_pred), prob_names)
   expect_equal(f_pred, exp_f_pred)
