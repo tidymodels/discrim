@@ -28,6 +28,8 @@ Imports:
     tibble,
     withr,
     dials
+Remotes:
+    tidymodels/parsnip
 Suggests: 
     testthat,
     MASS,
