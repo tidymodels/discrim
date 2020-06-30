@@ -1,18 +1,18 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-
 
 # discrim
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![CRAN status](https://www.r-pkg.org/badges/version/discrim)](https://cran.r-project.org/package=discrim)
-[![Codecov test coverage](https://codecov.io/gh/tidymodels/discrim/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/discrim?branch=master)
-[![R build status](https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/discrim/actions)
+
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/discrim)](https://cran.r-project.org/package=discrim)
+[![Codecov test
+coverage](https://codecov.io/gh/tidymodels/discrim/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/discrim?branch=master)
+[![R build
+status](https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/discrim/actions)
 <!-- badges: end -->
 
 `discrim` contains simple bindings to enable the `parsnip` package to
@@ -29,7 +29,7 @@ fit various discriminant analysis models, such as
 ``` r
 devtools::install_github("tidymodels/discrim")
 ```
-  
+
 ## Example
 
 Here is a simple model using a simulated two-class data set contained in
