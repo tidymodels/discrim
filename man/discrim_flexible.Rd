@@ -80,7 +80,7 @@ Engines may have pre-set default arguments when executing the model fit
 call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_flexible() \%>\% 
   set_engine("earth") \%>\% 
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Flexible Discriminant Model Specification (classification)
+}\if{html}{\out{</div>}}\preformatted{## Model Specification (classification)
 ## 
 ## Computational engine: earth 
 ## 
@@ -89,11 +89,13 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 }
 
 The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters:\tabular{ll}{
+original names in each engine that has main parameters. Each engine
+typically has a different default value (shown in parentheses) for each
+parameter.\tabular{ll}{
    \strong{parsnip} \tab \strong{earth} \cr
-   num_terms \tab nprune \cr
-   prod_degree \tab degree \cr
-   prune_method \tab pmethod \cr
+   num_terms \tab nprune (all created by forward pass) \cr
+   prod_degree \tab degree (1) \cr
+   prune_method \tab pmethod (backward) \cr
 }
 }
 

@@ -21,8 +21,9 @@ different default value (shown in parentheses) for each parameter.
 ```{r echo = FALSE, results = "asis"}
 get_defaults_discrim_regularized <- function() {
   tibble::tribble(
-    ~model,            ~engine, ~parsnip,   ~original,  ~default,
-    "discrim_linear",  "mda",   "penalty",  "lambda",   get_arg("mda", "gen.ridge", "lambda"),
+    ~model,                 ~engine,  ~parsnip,          ~original,  ~default,
+    "discrim_regularized",  "klaR",   "frac_common_cov", "lambda",   "varies",
+    "discrim_regularized",  "klaR",   "frac_identity",   "gamma",    "varies"
   )
 }
 convert_args("discrim_regularized")

@@ -55,7 +55,7 @@ Engines may have pre-set default arguments when executing the model fit
 call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
   set_engine("MASS") \%>\% 
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
+}\if{html}{\out{</div>}}\preformatted{## Model Specification (classification)
 ## 
 ## Computational engine: MASS 
 ## 
@@ -64,7 +64,7 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 }\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
   set_engine("mda") \%>\% 
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
+}\if{html}{\out{</div>}}\preformatted{## Model Specification (classification)
 ## 
 ## Computational engine: mda 
 ## 
@@ -74,9 +74,11 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 }
 
 The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters:\tabular{ll}{
+original names in each engine that has main parameters. Each engine
+typically has a different default value (shown in parentheses) for each
+parameter.\tabular{ll}{
    \strong{parsnip} \tab \strong{mda} \cr
-   penalty \tab lambda \cr
+   penalty \tab lambda (1) \cr
 }
 }
 
