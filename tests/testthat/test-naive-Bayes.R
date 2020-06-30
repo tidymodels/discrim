@@ -21,16 +21,6 @@ glass_na <- glass_te
 glass_na$RI[1] <- NA
 glass_na$Na[2] <- NA
 
-x_tr <- model.matrix(Type ~ ., data = glass_tr)[, -1]
-x_te <- model.matrix(Type ~ ., data = glass_te)[, -1]
-opt <- getOption("na.action")
-options(na.action = "na.pass")
-x_na <- model.matrix(Type ~ ., data = glass_na,)[, -1]
-options(na.action = opt)
-
-ind_data <- as.data.frame(x_tr)
-ind_data$Type <- glass_tr$Type
-
 glass_lvl <- levels(Glass$Type)
 prob_names <- paste0(".pred_", glass_lvl)
 
@@ -47,7 +37,7 @@ probs_to_tibble <- function(x) {
 nb_spec   <- naive_Bayes(smoothness = 1.2) %>% set_engine("klaR")
 prior_spec <- naive_Bayes() %>% set_engine("klaR", prior = rep(1/6, 6))
 
-exp_f_fit     <- klaR::NaiveBayes(Type ~ ., data = ind_data,
+exp_f_fit     <- klaR::NaiveBayes(Type ~ ., data = glass_tr,
                                   usekernel = TRUE, adjust = 1.2)
 exp_xy_fit    <- klaR::NaiveBayes(x = glass_tr[,-10], grouping = glass_tr$Type,
                                   usekernel = TRUE, adjust = 1.2)
@@ -61,7 +51,7 @@ test_that('model object', {
   # formula method
   expect_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr), NA)
   # The calls are embedded and different so check the numbers
-  for (x in names(f_fit$fit$tables)) {
+  for (x in setdiff(names(f_fit$fit$tables), "factor")) {
     x_dat <- f_fit$fit$tables[[x]]
     for (val in seq(along = x_dat)) {
       expect_equal(x_dat[[val]]$x, exp_f_fit$tables[[x]][[val]]$x)
@@ -69,13 +59,14 @@ test_that('model object', {
     }
   }
 
+  expect_equal(f_fit$fit$tables[["factor"]], exp_f_fit$tables[["factor"]])
 
   # x/y method
   expect_error(
     xy_fit <- fit_xy(nb_spec, x = glass_tr[,-10], y = glass_tr$Type),
     NA
   )
-  for (x in names(xy_fit$fit$tables)) {
+  for (x in setdiff(names(f_fit$fit$tables), "factor")) {
     x_dat <- xy_fit$fit$tables[[x]]
 
     if (!is.table(x_dat)) {
@@ -88,9 +79,11 @@ test_that('model object', {
     }
   }
 
+  expect_equal(xy_fit$fit$tables[["factor"]], exp_xy_fit$tables[["factor"]])
+
   # pass an extra argument
   expect_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[,-10], y = glass_tr$Type), NA)
-  for (x in names(prior_fit$fit$tables)) {
+  for (x in setdiff(names(f_fit$fit$tables), "factor")) {
     x_dat <- prior_fit$fit$tables[[x]]
 
     if (!is.table(x_dat)) {
@@ -103,6 +96,8 @@ test_that('model object', {
     }
   }
 
+  expect_equal(prior_fit$fit$tables[["factor"]], exp_prior_fit$tables[["factor"]])
+
 })
 
 # ------------------------------------------------------------------------------
@@ -112,7 +107,7 @@ test_that('class predictions', {
   # formula method
   expect_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_te)
-  exp_f_pred <- predict(exp_f_fit, x_te)
+  exp_f_pred <- predict(exp_f_fit, glass_te)
 
   expect_s3_class(f_pred, "tbl_df")
   expect_true(all(names(f_pred) == ".pred_class"))
@@ -147,7 +142,7 @@ test_that('prob predictions', {
   # formula method
   expect_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_te, type = "prob")
-  exp_f_pred <- probs_to_tibble(predict(exp_f_fit, x_te)$posterior)
+  exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_te)$posterior)
 
   expect_s3_class(f_pred, "tbl_df")
   expect_equal(names(f_pred), prob_names)
@@ -181,7 +176,7 @@ test_that('prob predictions', {
 test_that('missing data', {
   expect_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_na, type = "prob")
-  exp_f_pred <- probs_to_tibble(predict(exp_f_fit, x_na)$posterior)
+  exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_na)$posterior)
 
   expect_s3_class(f_pred, "tbl_df")
   expect_true(nrow(f_pred) == nrow(glass_te))
