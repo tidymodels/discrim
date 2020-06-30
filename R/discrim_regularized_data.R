@@ -44,6 +44,13 @@ make_discrim_regularized <- function() {
     )
   )
 
+  parsnip::set_encoding(
+    model = "discrim_regularized",
+    eng = "klaR",
+    mode = "classification",
+    options = list(predictor_indicators = "traditional")
+  )
+
   parsnip::set_pred(
     model = "discrim_regularized",
     eng = "klaR",

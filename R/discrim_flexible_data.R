@@ -52,6 +52,13 @@ make_discrim_flexible <- function() {
     )
   )
 
+  parsnip::set_encoding(
+    model = "discrim_flexible",
+    eng = "earth",
+    mode = "classification",
+    options = list(predictor_indicators = "traditional")
+  )
+
   parsnip::set_pred(
     model = "discrim_flexible",
     eng = "earth",
