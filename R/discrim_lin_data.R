@@ -35,7 +35,11 @@ make_discrim_linear_MASS <- function() {
     model = "discrim_linear",
     eng = "MASS",
     mode = "classification",
-    options = list(predictor_indicators = "traditional")
+    options = list(
+      predictor_indicators = "traditional",
+      compute_intercept = TRUE,
+      remove_intercept = TRUE
+    )
   )
 
   parsnip::set_pred(
@@ -123,7 +127,11 @@ make_discrim_linear_mda <- function() {
     model = "discrim_linear",
     eng = "mda",
     mode = "classification",
-    options = list(predictor_indicators = "traditional")
+    options = list(
+      predictor_indicators = "traditional",
+      compute_intercept = TRUE,
+      remove_intercept = TRUE
+    )
   )
 
   parsnip::set_pred(

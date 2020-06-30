@@ -47,7 +47,11 @@ make_naive_Bayes_naivebayes <- function() {
     model = "naive_Bayes",
     eng = "naivebayes",
     mode = "classification",
-    options = list(predictor_indicators = "none")
+    options = list(
+      predictor_indicators = "none",
+      compute_intercept = FALSE,
+      remove_intercept = FALSE
+    )
   )
 
   parsnip::set_pred(
@@ -130,7 +134,11 @@ make_naive_Bayes_klaR <- function() {
     model = "naive_Bayes",
     eng = "klaR",
     mode = "classification",
-    options = list(predictor_indicators = "none")
+    options = list(
+      predictor_indicators = "none",
+      compute_intercept = FALSE,
+      remove_intercept = FALSE
+    )
   )
 
   parsnip::set_pred(

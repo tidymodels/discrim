@@ -48,7 +48,11 @@ make_discrim_regularized <- function() {
     model = "discrim_regularized",
     eng = "klaR",
     mode = "classification",
-    options = list(predictor_indicators = "traditional")
+    options = list(
+      predictor_indicators = "traditional",
+      compute_intercept = TRUE,
+      remove_intercept = TRUE
+    )
   )
 
   parsnip::set_pred(
