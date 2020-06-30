@@ -1,6 +1,6 @@
 Package: discrim
 Title: Model Wrappers for Discriminant Analysis
-Version: 0.0.1.9000
+Version: 0.0.2.9000
 Authors@R: c(
     person(
       given = "Max", 
@@ -20,7 +20,7 @@ Description: Bindings for additional classification models for use with the
     <doi:10.1111/j.1751-5823.2001.tb00465.x>). 
 License: GPL-2
 Depends:
-    parsnip,
+    parsnip (>= 0.1.0),
     R (>= 2.10)
 Imports:
     purrr,
@@ -45,5 +45,5 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Language: en-US
-URL: https://github.com/tidymodels/discrim
+URL: https://discrim.tidymodels.org
 BugReports: https://github.com/tidymodels/discrim/issues

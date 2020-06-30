@@ -51,22 +51,32 @@ model functions. If parameters need to be modified, \code{update()} can be used
 in lieu of recreating the object from scratch.
 }
 \section{Engine Details}{
-
-
 Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:
-
-\pkg{MASS} engine:
-
-\preformatted{
-MASS::lda(x = missing_arg(), grouping = missing_arg())
+call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
+  set_engine("MASS") \%>\% 
+  translate()
+}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
+## 
+## Computational engine: MASS 
+## 
+## Model fit template:
+## MASS::lda(formula = missing_arg(), data = missing_arg())
+}\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
+  set_engine("mda") \%>\% 
+  translate()
+}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
+## 
+## Computational engine: mda 
+## 
+## Model fit template:
+## mda::fda(formula = missing_arg(), data = missing_arg(), method = mda::gen.ridge, 
+##     keep.fitted = FALSE)
 }
 
-\pkg{mda} engine:
-
-\preformatted{
-mda::fda(formula = missing_arg(), data = missing_arg(), lambda = penalty,
-         method = mda::gen.ridge, keep.fitted = FALSE)
+The standardized parameter names in parsnip can be mapped to their
+original names in each engine that has main parameters:\tabular{ll}{
+   \strong{parsnip} \tab \strong{mda} \cr
+   penalty \tab lambda \cr
 }
 }
 
@@ -90,6 +100,8 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
+
+
 model <- discrim_linear(penalty = 0.1)
 model
 update(model, penalty = 1)

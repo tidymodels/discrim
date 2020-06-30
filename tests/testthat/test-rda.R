@@ -107,7 +107,7 @@ test_that('missing data', {
 test_that('api errors', {
   expect_error(
     discrim_regularized() %>% set_engine("monday"),
-    "Engine 'monday' is not available"
+    regexp = "Engine 'monday' is not available"
   )
 })
 
