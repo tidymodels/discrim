@@ -5,11 +5,9 @@
 \alias{update.naive_Bayes}
 \title{General Interface for Naive Bayes Models}
 \usage{
-naive_Bayes(mode = "classification", smoothness = NULL,
-  Laplace = NULL)
+naive_Bayes(mode = "classification", smoothness = NULL, Laplace = NULL)
 
-\method{update}{naive_Bayes}(object, smoothness = NULL, Laplace = NULL,
-  fresh = FALSE, ...)
+\method{update}{naive_Bayes}(object, smoothness = NULL, Laplace = NULL, fresh = FALSE, ...)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only

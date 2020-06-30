@@ -5,11 +5,21 @@
 \alias{update.discrim_flexible}
 \title{General Interface for Flexible Discriminant Models}
 \usage{
-discrim_flexible(mode = "classification", num_terms = NULL,
-  prod_degree = NULL, prune_method = NULL)
+discrim_flexible(
+  mode = "classification",
+  num_terms = NULL,
+  prod_degree = NULL,
+  prune_method = NULL
+)
 
-\method{update}{discrim_flexible}(object, num_terms = NULL,
-  prod_degree = NULL, prune_method = NULL, fresh = FALSE, ...)
+\method{update}{discrim_flexible}(
+  object,
+  num_terms = NULL,
+  prod_degree = NULL,
+  prune_method = NULL,
+  fresh = FALSE,
+  ...
+)
 }
 \arguments{
 \item{mode}{A single character string for the type of model.

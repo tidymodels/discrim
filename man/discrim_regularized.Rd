@@ -5,11 +5,19 @@
 \alias{update.discrim_regularized}
 \title{General Interface for Regularized Discriminant Models}
 \usage{
-discrim_regularized(mode = "classification", frac_common_cov = NULL,
-  frac_identity = NULL)
+discrim_regularized(
+  mode = "classification",
+  frac_common_cov = NULL,
+  frac_identity = NULL
+)
 
-\method{update}{discrim_regularized}(object, frac_common_cov = NULL,
-  frac_identity = NULL, fresh = FALSE, ...)
+\method{update}{discrim_regularized}(
+  object,
+  frac_common_cov = NULL,
+  frac_identity = NULL,
+  fresh = FALSE,
+  ...
+)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
