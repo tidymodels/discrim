@@ -35,7 +35,7 @@
 #' }
 #'
 #'
-#' @includeRmd man/rmd/discrim-lin-engine.Rmd
+#' @includeRmd man/rmd/naive-Bayes-engine.Rmd
 #'
 
 #' @examples
