@@ -65,7 +65,7 @@ Engines may have pre-set default arguments when executing the model fit
 call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_regularized() \%>\% 
   set_engine("klaR") \%>\% 
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Model Specification (classification)
+}\if{html}{\out{</div>}}\preformatted{## Regularized Discriminant Model Specification (classification)
 ## 
 ## Computational engine: klaR 
 ## 
@@ -76,11 +76,10 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 The standardized parameter names in parsnip can be mapped to their
 original names in each engine that has main parameters. Each engine
 typically has a different default value (shown in parentheses) for each
-parameter.\tabular{lll}{
-   \strong{parsnip} \tab \strong{klaR} \tab \strong{mda} \cr
-   frac_common_cov \tab lambda \tab NA \cr
-   frac_identity \tab gamma \tab NA \cr
-   penalty \tab NA \tab lambda (1) \cr
+parameter.\tabular{ll}{
+   \strong{parsnip} \tab \strong{klaR} \cr
+   frac_common_cov \tab lambda (varies) \cr
+   frac_identity \tab gamma (varies) \cr
 }
 }
 

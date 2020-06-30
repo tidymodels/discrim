@@ -55,7 +55,7 @@ Engines may have pre-set default arguments when executing the model fit
 call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
   set_engine("MASS") \%>\% 
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Model Specification (classification)
+}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
 ## 
 ## Computational engine: MASS 
 ## 
@@ -64,7 +64,7 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 }\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
   set_engine("mda") \%>\% 
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Model Specification (classification)
+}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
 ## 
 ## Computational engine: mda 
 ## 

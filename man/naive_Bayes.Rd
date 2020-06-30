@@ -56,34 +56,39 @@ The model can be created using the \code{fit()} function using the following \em
 }
 \section{Engine Details}{
 Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
-  set_engine("MASS") \%>\% 
+call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{naive_Bayes() \%>\% 
+  set_engine("klaR") \%>\% 
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Model Specification (classification)
+}\if{html}{\out{</div>}}\preformatted{## Naive Bayes Model Specification (classification)
 ## 
-## Computational engine: MASS 
+## Computational engine: klaR 
 ## 
 ## Model fit template:
-## MASS::lda(formula = missing_arg(), data = missing_arg())
-}\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
-  set_engine("mda") \%>\% 
+## discrim::klar_bayes_wrapper(x = missing_arg(), y = missing_arg(), 
+##     usekernel = TRUE)
+}\if{html}{\out{<div class="r">}}\preformatted{naive_Bayes() \%>\% 
+  set_engine("naivebayes") \%>\% 
   translate()
-}\if{html}{\out{</div>}}\preformatted{## Model Specification (classification)
+}\if{html}{\out{</div>}}\preformatted{## Naive Bayes Model Specification (classification)
 ## 
-## Computational engine: mda 
+## Computational engine: naivebayes 
 ## 
 ## Model fit template:
-## mda::fda(formula = missing_arg(), data = missing_arg(), method = mda::gen.ridge, 
-##     keep.fitted = FALSE)
+## naivebayes::naive_bayes(x = missing_arg(), y = missing_arg(), 
+##     usekernel = TRUE)
 }
 
 The standardized parameter names in parsnip can be mapped to their
 original names in each engine that has main parameters. Each engine
 typically has a different default value (shown in parentheses) for each
-parameter.\tabular{ll}{
-   \strong{parsnip} \tab \strong{mda} \cr
-   penalty \tab lambda (1) \cr
+parameter.\tabular{lll}{
+   \strong{parsnip} \tab \strong{klaR} \tab \strong{naivebayes} \cr
+   smoothness \tab adjust (1) \tab adjust (1) \cr
+   Laplace \tab fL (0) \tab laplace (0) \cr
 }
+
+
+Note that \code{usekernel} is always set to \code{TRUE} for the \code{klaR} engine.
 }
 
 \examples{
