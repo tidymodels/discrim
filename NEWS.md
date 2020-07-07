@@ -1,4 +1,6 @@
-# discrim (development version)
+# discrim 0.1.0
+
+ * Small updates to work with new `parsnip` version.
 
 # discrim 0.0.2
 
