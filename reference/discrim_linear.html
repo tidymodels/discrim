@@ -89,7 +89,7 @@ created using different packages in R." />
         <a class="navbar-brand" href="../index.html">discrim</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://github.com/tidymodels">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
         </div>
       </div>
     </div>
@@ -132,12 +132,12 @@ created using different packages in R." />
     </div>
 
     <div class="ref-description">
-    <p><code><a href='https://rdrr.io/pkg/discrim/man/discrim_linear.html'>discrim_linear()</a></code> is a way to generate a <em>specification</em> of a linear
+    <p><code><a href='https://discrim.tidymodels.org/reference/discrim_linear.html'>discrim_linear()</a></code> is a way to generate a <em>specification</em> of a linear
 discriminant analysis (LDA) model before fitting and allows the model to be
 created using different packages in R.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/discrim/man/discrim_linear.html'>discrim_linear</a></span>(mode = <span class='st'>"classification"</span>, penalty = <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'><a href='https://discrim.tidymodels.org/reference/discrim_linear.html'>discrim_linear</a></span>(mode = <span class='st'>"classification"</span>, penalty = <span class='kw'>NULL</span>)
 
 <span class='co'># S3 method for discrim_linear</span>
 <span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='kw'>object</span>, penalty = <span class='kw'>NULL</span>, fresh = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
@@ -172,7 +172,7 @@ modified in-place of or replaced wholesale.</p></td>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For <code><a href='https://rdrr.io/pkg/discrim/man/discrim_linear.html'>discrim_linear()</a></code>, the mode will always be "classification".</p>
+    <p>For <code><a href='https://discrim.tidymodels.org/reference/discrim_linear.html'>discrim_linear()</a></code>, the mode will always be "classification".</p>
 <p>The model can be created using the <code>fit()</code> function using the following
 <em>engines</em>:</p><ul>
 <li><p><span class="pkg">R</span>:  <code>"MASS"</code>(the default) or <code>"mda"</code></p></li>
@@ -192,14 +192,14 @@ in lieu of recreating the object from scratch.</p>
     <h2 class="hasAnchor" id="engine-details"><a class="anchor" href="#engine-details"></a>Engine Details</h2>
 
     <p>Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:<div class="r"></p><pre><span class='fu'><a href='https://rdrr.io/pkg/discrim/man/discrim_linear.html'>discrim_linear</a></span>() <span class='op'>%&gt;%</span> 
+call. For this type of model, the template of the fit calls are:<div class="r"></p><pre><span class='fu'><a href='https://discrim.tidymodels.org/reference/discrim_linear.html'>discrim_linear</a></span>() <span class='op'>%&gt;%</span> 
   <span class='fu'>set_engine</span>(<span class='st'>"MASS"</span>) <span class='op'>%&gt;%</span> 
   <span class='fu'>translate</span>()</pre><p></div></p><pre><span class='co'>## Linear Discriminant Model Specification (classification)</span>
 <span class='co'>## </span>
 <span class='co'>## Computational engine: MASS </span>
 <span class='co'>## </span>
 <span class='co'>## Model fit template:</span>
-<span class='co'>## MASS::lda(formula = missing_arg(), data = missing_arg())</span></pre><p><div class="r"></p><pre><span class='fu'><a href='https://rdrr.io/pkg/discrim/man/discrim_linear.html'>discrim_linear</a></span>() <span class='op'>%&gt;%</span> 
+<span class='co'>## MASS::lda(formula = missing_arg(), data = missing_arg())</span></pre><p><div class="r"></p><pre><span class='fu'><a href='https://discrim.tidymodels.org/reference/discrim_linear.html'>discrim_linear</a></span>() <span class='op'>%&gt;%</span> 
   <span class='fu'>set_engine</span>(<span class='st'>"mda"</span>) <span class='op'>%&gt;%</span> 
   <span class='fu'>translate</span>()</pre><p></div></p><pre><span class='co'>## Linear Discriminant Model Specification (classification)</span>
 <span class='co'>## </span>
@@ -225,7 +225,7 @@ parameter.</p><table class='table'>
               X2 = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>5</span>, length = <span class='fl'>100</span>))
 
 <span class='kw'>lda_mod</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/discrim/man/discrim_linear.html'>discrim_linear</a></span>(penalty = <span class='fl'>.1</span>) <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://discrim.tidymodels.org/reference/discrim_linear.html'>discrim_linear</a></span>(penalty = <span class='fl'>.1</span>) <span class='op'>%&gt;%</span>
   <span class='fu'>set_engine</span>(<span class='st'>"mda"</span>) <span class='op'>%&gt;%</span>
   <span class='fu'>fit</span>(<span class='kw'>class</span> <span class='op'>~</span> <span class='kw'>.</span>, data = <span class='kw'>parabolic</span>)
 
@@ -240,7 +240,7 @@ parameter.</p><table class='table'>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(legend.position = <span class='st'>"top"</span>) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_equal</a></span>()</div><div class='img'><img src='discrim_linear-1.png' alt='' width='768' height='552' /></div><div class='input'>
 
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/discrim/man/discrim_linear.html'>discrim_linear</a></span>(penalty = <span class='fl'>0.1</span>)
+<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://discrim.tidymodels.org/reference/discrim_linear.html'>discrim_linear</a></span>(penalty = <span class='fl'>0.1</span>)
 <span class='kw'>model</span></div><div class='output co'>#&gt; Linear Discriminant Model Specification (classification)
 #&gt; 
 #&gt; Main Arguments:
@@ -261,7 +261,7 @@ parameter.</p><table class='table'>
 
       <footer>
       <div class="tidyverse">
-  <p><code>discrim</code> is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
+  <p>discrim is a part of the <strong>tidymodels</strong> ecosystem, a collection of modeling packages designed with common APIs and a shared philosophy.</p>
 </div>
 
 <div class="author">
