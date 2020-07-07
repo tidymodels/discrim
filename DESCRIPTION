@@ -20,7 +20,7 @@ Description: Bindings for additional classification models for use with the
     <doi:10.1111/j.1751-5823.2001.tb00465.x>). 
 License: GPL-2
 Depends:
-    parsnip (>= 0.1.0),
+    parsnip (>= 0.1.2),
     R (>= 2.10)
 Imports:
     purrr,
@@ -43,7 +43,7 @@ Suggests:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0.9000
+RoxygenNote: 7.1.1
 Language: en-US
-URL: https://github.com/tidymodels/discrim
+URL: https://discrim.tidymodels.org
 BugReports: https://github.com/tidymodels/discrim/issues

@@ -1,5 +1,8 @@
 # Engine Details
 
+```{r, child = "setup.Rmd", include = FALSE}
+```
+
 Engines may have pre-set default arguments when executing the model fit call. For this type of model, the template of the fit calls are:
 
 \pkg{MASS}
@@ -19,9 +22,17 @@ discrim_linear() %>%
   translate()
 ```
 
-The standardized parameter names in parsnip can be mapped to their original names in each engine that has main parameters:
+The standardized parameter names in parsnip can be mapped to their original 
+names in each engine that has main parameters. Each engine typically has a 
+different default value (shown in parentheses) for each parameter.
 
 ```{r echo = FALSE, results = "asis"}
-parsnip::convert_args("discrim_linear")
+get_defaults_discrim_linear <- function() {
+  tibble::tribble(
+    ~model,            ~engine, ~parsnip,   ~original,  ~default,
+    "discrim_linear",  "mda",   "penalty",  "lambda",   get_arg("mda", "gen.ridge", "lambda"),
+  )
+}
+convert_args("discrim_linear")
 ```
 

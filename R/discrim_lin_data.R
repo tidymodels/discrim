@@ -31,6 +31,17 @@ make_discrim_linear_MASS <- function() {
     )
   )
 
+  parsnip::set_encoding(
+    model = "discrim_linear",
+    eng = "MASS",
+    mode = "classification",
+    options = list(
+      predictor_indicators = "traditional",
+      compute_intercept = TRUE,
+      remove_intercept = TRUE
+    )
+  )
+
   parsnip::set_pred(
     model = "discrim_linear",
     eng = "MASS",
@@ -109,6 +120,17 @@ make_discrim_linear_mda <- function() {
       protect = c("formula", "data"),
       func = c(pkg = "mda", fun = "fda"),
       defaults = list(method = quote(mda::gen.ridge), keep.fitted = FALSE)
+    )
+  )
+
+  parsnip::set_encoding(
+    model = "discrim_linear",
+    eng = "mda",
+    mode = "classification",
+    options = list(
+      predictor_indicators = "traditional",
+      compute_intercept = TRUE,
+      remove_intercept = TRUE
     )
   )
 

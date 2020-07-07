@@ -43,6 +43,16 @@ make_naive_Bayes_naivebayes <- function() {
     )
   )
 
+  parsnip::set_encoding(
+    model = "naive_Bayes",
+    eng = "naivebayes",
+    mode = "classification",
+    options = list(
+      predictor_indicators = "none",
+      compute_intercept = FALSE,
+      remove_intercept = FALSE
+    )
+  )
 
   parsnip::set_pred(
     model = "naive_Bayes",
@@ -117,6 +127,17 @@ make_naive_Bayes_klaR <- function() {
       protect = c("x", "y"),
       func = c(pkg = "discrim", fun = "klar_bayes_wrapper"),
       defaults = list(usekernel = TRUE)
+    )
+  )
+
+  parsnip::set_encoding(
+    model = "naive_Bayes",
+    eng = "klaR",
+    mode = "classification",
+    options = list(
+      predictor_indicators = "none",
+      compute_intercept = FALSE,
+      remove_intercept = FALSE
     )
   )
 

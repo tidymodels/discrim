@@ -74,10 +74,12 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 }
 
 The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters:\tabular{ll}{
+original names in each engine that has main parameters. Each engine
+typically has a different default value (shown in parentheses) for each
+parameter.\tabular{ll}{
    \strong{parsnip} \tab \strong{klaR} \cr
-   frac_common_cov \tab lambda \cr
-   frac_identity \tab gamma \cr
+   frac_common_cov \tab lambda (varies) \cr
+   frac_identity \tab gamma (varies) \cr
 }
 }
 
