@@ -20,7 +20,7 @@ Description: Bindings for additional classification models for use with the
     <doi:10.1111/j.1751-5823.2001.tb00465.x>). 
 License: GPL-2
 Depends:
-    parsnip (>= 0.1.0),
+    parsnip (>= 0.1.2),
     R (>= 2.10)
 Imports:
     purrr,
@@ -28,8 +28,6 @@ Imports:
     tibble,
     withr,
     dials
-Remotes:
-    tidymodels/parsnip
 Suggests: 
     testthat,
     MASS,
