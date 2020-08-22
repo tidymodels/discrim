@@ -1,5 +1,7 @@
 # discrim (development version)
 
+ * Small updates so that `discrim` can be run in parallel using psock clusters (#13)
+
 # discrim 0.1.0
 
  * Small updates to work with new `parsnip` version.
