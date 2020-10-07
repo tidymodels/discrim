@@ -60,7 +60,8 @@ make_discrim_flexible <- function() {
     options = list(
       predictor_indicators = "traditional",
       compute_intercept = TRUE,
-      remove_intercept = TRUE
+      remove_intercept = TRUE,
+      allow_sparse_x = FALSE
     )
   )
 
