@@ -13,6 +13,7 @@ status](https://www.r-pkg.org/badges/version/discrim)](https://cran.r-project.or
 coverage](https://codecov.io/gh/tidymodels/discrim/branch/master/graph/badge.svg)](https://codecov.io/gh/tidymodels/discrim?branch=master)
 [![R build
 status](https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/discrim/actions)
+[![R-CMD-check](https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/discrim/actions)
 <!-- badges: end -->
 
 `discrim` contains simple bindings to enable the `parsnip` package to
