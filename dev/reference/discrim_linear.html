@@ -96,12 +96,6 @@ created using different packages in R." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -137,10 +131,10 @@ discriminant analysis (LDA) model before fitting and allows the model to be
 created using different packages in R.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>discrim_linear</span>(mode = <span class='st'>"classification"</span>, penalty = <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>discrim_linear</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"classification"</span>, penalty <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
 <span class='co'># S3 method for discrim_linear</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='kw'>object</span>, penalty = <span class='kw'>NULL</span>, fresh = <span class='fl'>FALSE</span>, <span class='kw'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>object</span>, penalty <span class='op'>=</span> <span class='cn'>NULL</span>, fresh <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,22 +186,26 @@ in lieu of recreating the object from scratch.</p>
     <h2 class="hasAnchor" id="engine-details"><a class="anchor" href="#engine-details"></a>Engine Details</h2>
 
     <p>Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:<div class="r"></p><pre><span class='fu'>discrim_linear</span>() <span class='op'>%&gt;%</span> 
-  <span class='fu'>set_engine</span>(<span class='st'>"MASS"</span>) <span class='op'>%&gt;%</span> 
-  <span class='fu'>translate</span>()</pre><p></div></p><pre><span class='co'>## Linear Discriminant Model Specification (classification)</span>
+call. For this type of model, the template of the fit calls are:<div class="r"></p><pre><span class='fu'>discrim_linear</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"MASS"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>translate</span><span class='op'>(</span><span class='op'>)</span>
+</pre><p></div></p><pre><span class='co'>## Linear Discriminant Model Specification (classification)</span>
 <span class='co'>## </span>
 <span class='co'>## Computational engine: MASS </span>
 <span class='co'>## </span>
 <span class='co'>## Model fit template:</span>
-<span class='co'>## MASS::lda(formula = missing_arg(), data = missing_arg())</span></pre><p><div class="r"></p><pre><span class='fu'>discrim_linear</span>() <span class='op'>%&gt;%</span> 
-  <span class='fu'>set_engine</span>(<span class='st'>"mda"</span>) <span class='op'>%&gt;%</span> 
-  <span class='fu'>translate</span>()</pre><p></div></p><pre><span class='co'>## Linear Discriminant Model Specification (classification)</span>
+<span class='co'>## MASS::lda(formula = missing_arg(), data = missing_arg())</span>
+</pre><p><div class="r"></p><pre><span class='fu'>discrim_linear</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"mda"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>translate</span><span class='op'>(</span><span class='op'>)</span>
+</pre><p></div></p><pre><span class='co'>## Linear Discriminant Model Specification (classification)</span>
 <span class='co'>## </span>
 <span class='co'>## Computational engine: mda </span>
 <span class='co'>## </span>
 <span class='co'>## Model fit template:</span>
 <span class='co'>## mda::fda(formula = missing_arg(), data = missing_arg(), method = mda::gen.ridge, </span>
-<span class='co'>##     keep.fitted = FALSE)</span></pre>
+<span class='co'>##     keep.fitted = FALSE)</span>
+</pre>
 
 <p>The standardized parameter names in parsnip can be mapped to their
 original names in each engine that has main parameters. Each engine
@@ -220,32 +218,35 @@ parameter.</p><table class='table'>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>parabolic_grid</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span>(X1 = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>5</span>, length = <span class='fl'>100</span>),
-              X2 = <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>5</span>, length = <span class='fl'>100</span>))
+    <pre class="examples"><div class='input'><span class='va'>parabolic_grid</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/expand.grid.html'>expand.grid</a></span><span class='op'>(</span>X1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>5</span>, length <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>,
+              X2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>5</span>, <span class='fl'>5</span>, length <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span><span class='op'>)</span>
 
-<span class='kw'>lda_mod</span> <span class='op'>&lt;-</span>
-  <span class='fu'>discrim_linear</span>(penalty = <span class='fl'>.1</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'>set_engine</span>(<span class='st'>"mda"</span>) <span class='op'>%&gt;%</span>
-  <span class='fu'>fit</span>(<span class='kw'>class</span> <span class='op'>~</span> <span class='kw'>.</span>, data = <span class='kw'>parabolic</span>)
+<span class='va'>lda_mod</span> <span class='op'>&lt;-</span>
+  <span class='fu'>discrim_linear</span><span class='op'>(</span>penalty <span class='op'>=</span> <span class='fl'>.1</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>set_engine</span><span class='op'>(</span><span class='st'>"mda"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>fit</span><span class='op'>(</span><span class='va'>class</span> <span class='op'>~</span> <span class='va'>.</span>, data <span class='op'>=</span> <span class='va'>parabolic</span><span class='op'>)</span>
 
-<span class='kw'>parabolic_grid</span><span class='op'>$</span><span class='kw'>lda</span> <span class='op'>&lt;-</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span>(<span class='kw'>lda_mod</span>, <span class='kw'>parabolic_grid</span>, type = <span class='st'>"prob"</span>)<span class='op'>$</span><span class='kw'>.pred_Class1</span>
+<span class='va'>parabolic_grid</span><span class='op'>$</span><span class='va'>lda</span> <span class='op'>&lt;-</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>lda_mod</span>, <span class='va'>parabolic_grid</span>, type <span class='op'>=</span> <span class='st'>"prob"</span><span class='op'>)</span><span class='op'>$</span><span class='va'>.pred_Class1</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>parabolic</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>X1</span>, y = <span class='kw'>X2</span>)) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(col = <span class='kw'>class</span>), alpha = <span class='fl'>.5</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_contour.html'>geom_contour</a></span>(data = <span class='kw'>parabolic_grid</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(z = <span class='kw'>lda</span>), col = <span class='st'>"black"</span>, breaks = <span class='fl'>.5</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span>() <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(legend.position = <span class='st'>"top"</span>) <span class='op'>+</span>
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_equal</a></span>()</div><div class='img'><img src='discrim_linear-1.png' alt='' width='768' height='552' /></div><div class='input'>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>parabolic</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>X1</span>, y <span class='op'>=</span> <span class='va'>X2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>col <span class='op'>=</span> <span class='va'>class</span><span class='op'>)</span>, alpha <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_contour.html'>geom_contour</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>parabolic_grid</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>z <span class='op'>=</span> <span class='va'>lda</span><span class='op'>)</span>, col <span class='op'>=</span> <span class='st'>"black"</span>, breaks <span class='op'>=</span> <span class='fl'>.5</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_bw</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"top"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_equal</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='discrim_linear-1.png' alt='' width='768' height='552' /></div><div class='input'>
 
-<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'>discrim_linear</span>(penalty = <span class='fl'>0.1</span>)
-<span class='kw'>model</span></div><div class='output co'>#&gt; Linear Discriminant Model Specification (classification)
+<span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>discrim_linear</span><span class='op'>(</span>penalty <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span>
+<span class='va'>model</span>
+</div><div class='output co'>#&gt; Linear Discriminant Model Specification (classification)
 #&gt; 
 #&gt; Main Arguments:
 #&gt;   penalty = 0.1
-#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span>(<span class='kw'>model</span>, penalty = <span class='fl'>1</span>)</div><div class='output co'>#&gt; Linear Discriminant Model Specification (classification)
+#&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>model</span>, penalty <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Linear Discriminant Model Specification (classification)
 #&gt; 
 #&gt; Main Arguments:
 #&gt;   penalty = 1
