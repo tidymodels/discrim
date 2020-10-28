@@ -1,4 +1,4 @@
-# discrim (development version)
+# discrim 0.1.1
 
  * Small updates so that `discrim` can be run in parallel using psock clusters (#13)
  
