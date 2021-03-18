@@ -17,3 +17,4 @@ derby.log
 ^CODE_OF_CONDUCT\.md$
 ^\.covrignore$
 ^\.github$
+^LICENSE\.md$
