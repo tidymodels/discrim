@@ -1,7 +1,14 @@
-# Engine Details
-
 ```{r, child = "setup.Rmd", include = FALSE}
 ```
+
+Some special cases for the RDA model: 
+
+* `frac_identity = 0` and `frac_common_cov = 1` is a linear discriminant analysis (LDA) model. 
+
+* `frac_identity = 0` and `frac_common_cov = 0` is a quadratic discriminant analysis (QDA) model. 
+
+
+# Engine Details
 
 Engines may have pre-set default arguments when executing the model fit call. For this type of model, the template of the fit calls are:
 
