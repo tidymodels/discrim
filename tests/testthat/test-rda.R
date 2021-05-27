@@ -2,7 +2,7 @@ context("regularized discrim")
 
 # ------------------------------------------------------------------------------
 
-source("helper-objects.R")
+source(test_path("helper-objects.R"))
 
 # ------------------------------------------------------------------------------
 
@@ -107,7 +107,7 @@ test_that('missing data', {
 test_that('api errors', {
   expect_error(
     discrim_regularized() %>% set_engine("monday"),
-    regexp = "Engine 'monday' is not available"
+    regexp = "Available engines are: 'klaR'"
   )
 })
 

@@ -189,7 +189,7 @@ test_that('missing data', {
 test_that('api errors', {
   expect_error(
     naive_Bayes() %>% set_engine("lda"),
-    regexp = "Engine 'lda' is not available"
+    regexp = "Available engines are: 'klaR', 'naivebayes'"
   )
 })
 

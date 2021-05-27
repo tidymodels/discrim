@@ -191,7 +191,7 @@ test_that('missing data', {
 test_that('api errors', {
   expect_error(
     naive_Bayes() %>% set_engine("lda"),
-    "Engine 'lda' is not available"
+    "Available engines are: 'klaR', 'naivebayes'"
   )
 })
 
