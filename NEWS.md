@@ -1,5 +1,7 @@
 # discrim (development version)
 
+ * added `discrim_quad()`
+ 
  * Re-licensed package from GPL-2 to MIT. See [consent from copyright holders here](https://github.com/tidymodels/discrim/issues/22).
 
 # discrim 0.1.1

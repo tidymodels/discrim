@@ -17,6 +17,9 @@
   make_discrim_linear_MASS()
   make_discrim_linear_mda()
 
+  # This defines discrim_quad in the model database
+  make_discrim_quad_MASS()
+
   # This defines discrim_regularized in the model database
   make_discrim_regularized()
 
