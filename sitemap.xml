@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://discrim.tidymodels.org/404.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/authors.html</loc>
+  </url>
+  <url>
     <loc>https://discrim.tidymodels.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/news/index.html</loc>
   </url>
   <url>
     <loc>https://discrim.tidymodels.org/reference/discrim_flexible.html</loc>
@@ -13,10 +31,16 @@
     <loc>https://discrim.tidymodels.org/reference/discrim_linear.html</loc>
   </url>
   <url>
+    <loc>https://discrim.tidymodels.org/reference/discrim_quad.html</loc>
+  </url>
+  <url>
     <loc>https://discrim.tidymodels.org/reference/discrim_regularized.html</loc>
   </url>
   <url>
     <loc>https://discrim.tidymodels.org/reference/frac_common_cov.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/index.html</loc>
   </url>
   <url>
     <loc>https://discrim.tidymodels.org/reference/naive_Bayes.html</loc>
