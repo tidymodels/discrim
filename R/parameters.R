@@ -27,7 +27,7 @@ frac_common_cov <- function(range = c(0, 1), trans = NULL) {
     inclusive = c(TRUE, TRUE),
     trans = trans,
     default = 0.5,
-    label = c(threshold = "Fraction of the Common Covariance Matrix"),
+    label = c(frac_common_cov = "Fraction of the Common Covariance Matrix"),
     finalize = NULL
   )
 }
@@ -41,7 +41,7 @@ frac_identity <- function(range = c(0, 1), trans = NULL) {
     inclusive = c(TRUE, TRUE),
     trans = trans,
     default = 0.5,
-    label = c(threshold = "Fraction of the Identity Matrix"),
+    label = c(frac_identity = "Fraction of the Identity Matrix"),
     finalize = NULL
   )
 }

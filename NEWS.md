@@ -2,6 +2,8 @@
 
  * added `discrim_quad()`
  
+ * Fixed a bug in the parameter definitions (#19)
+ 
  * Re-licensed package from GPL-2 to MIT. See [consent from copyright holders here](https://github.com/tidymodels/discrim/issues/22).
 
 # discrim 0.1.1

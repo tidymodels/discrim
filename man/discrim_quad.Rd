@@ -42,7 +42,7 @@ in lieu of recreating the object from scratch.
 }
 \section{Engine Details}{
 Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
+call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_linear() \%>\% 
   set_engine("MASS") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
