@@ -2,7 +2,7 @@ context("linear discrim - lda")
 
 # ------------------------------------------------------------------------------
 
-source("helper-objects.R")
+source(test_path("helper-objects.R"))
 
 # ------------------------------------------------------------------------------
 
@@ -131,7 +131,7 @@ test_that('missing data', {
 test_that('api errors', {
   expect_error(
     discrim_linear() %>% set_engine("lda"),
-    regexp = "Engine 'lda' is not available"
+    regexp = "Available engines are: 'MASS', 'mda'"
   )
 })
 

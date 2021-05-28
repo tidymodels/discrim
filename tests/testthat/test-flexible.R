@@ -2,7 +2,7 @@ context("flexible discrim - earth")
 
 # ------------------------------------------------------------------------------
 
-source("helper-objects.R")
+source(test_path("helper-objects.R"))
 
 # ------------------------------------------------------------------------------
 
@@ -105,7 +105,7 @@ test_that('missing data', {
 test_that('api errors', {
   expect_error(
     discrim_flexible() %>% set_engine("monday"),
-    regexp = "Engine 'monday' is not available"
+    regexp = "Available engines are: 'earth'"
   )
 })
 
