@@ -1,3 +1,5 @@
+# discrim (development version)
+
 # discrim 0.1.2
 
  * added `discrim_quad()`
