@@ -77,7 +77,7 @@ The model can be created using the \code{fit()} function using the following
 }
 \section{Engine Details}{
 Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_flexible() \%>\% 
+call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_flexible() \%>\% 
   set_engine("earth") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Flexible Discriminant Model Specification (classification)
