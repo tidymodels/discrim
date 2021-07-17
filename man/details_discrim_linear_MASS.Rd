@@ -35,6 +35,10 @@ Factor/categorical predictors need to be converted to numeric values
 formula method via
 \code{\link[=fit.model_spec]{fit.model_spec()}}, parsnip will
 convert factor columns to indicators.
+
+Variance calculations are used in these computations so no
+\emph{zero-variance} predictors (i.e., with a single unique value) should be
+eliminated before fitting the model.
 }
 
 \subsection{References}{

@@ -1,6 +1,6 @@
 #' Linear discriminant analysis via flexible discriminant analysis
 #'
-#' [mda::fda()] fits a linear discriminant analysis model that penalizes the
+#' [mda::fda()] can fit a linear discriminant analysis model that penalizes the
 #' predictor coefficients with a quadratic penalty (i.e., a ridge or weight
 #' decay approach).
 #'

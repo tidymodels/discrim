@@ -20,6 +20,9 @@ discrim_linear() %>%
 ```{r child = "template-makes-dummies.Rmd"}
 ```
 
+```{r child = "template-zv.Rmd"}
+```
+
 ## References
 
  - Kuhn, M, and K Johnson. 2013. _Applied Predictive Modeling_. Springer.

@@ -29,7 +29,7 @@ param <-
 
 This model has `r nrow(param)` tuning parameters:
 
-```{r glmnet-param-list, echo = FALSE, results = "asis"}
+```{r mda-param-list, echo = FALSE, results = "asis"}
 param$item
 ```
 
@@ -44,6 +44,9 @@ discrim_linear(penalty = numeric(0)) %>%
 ## Preprocessing requirements
 
 ```{r child = "template-makes-dummies.Rmd"}
+```
+
+```{r child = "template-zv.Rmd"}
 ```
 
 ## References
