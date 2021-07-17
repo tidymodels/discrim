@@ -21,6 +21,7 @@ utils::globalVariables(c("x", "y"))
   make_discrim_linear_MASS()
   make_discrim_linear_mda()
   make_discrim_linear_sda()
+  make_discrim_linear_sparsediscrim()
 
   # This defines discrim_quad in the model database
   make_discrim_quad_MASS()

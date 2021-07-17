@@ -281,6 +281,100 @@ make_discrim_linear_sda <- function() {
 
 }
 
+# ------------------------------------------------------------------------------
 
+make_discrim_linear_sparsediscrim <- function() {
+
+  parsnip::set_model_engine("discrim_linear", "classification", "sparsediscrim")
+  parsnip::set_dependency("discrim_linear", "sparsediscrim", "sparsediscrim")
+  parsnip::set_dependency("discrim_linear", "sparsediscrim", "discrim")
+
+  parsnip::set_fit(
+    model = "discrim_linear",
+    eng = "sparsediscrim",
+    mode = "classification",
+    value = list(
+      interface = "data.frame",
+      protect = c("x", "y"),
+      func = c(pkg = "discrim", fun = "fit_regularized_linear"),
+      defaults = list()
+    )
+  )
+
+  parsnip::set_encoding(
+    model = "discrim_linear",
+    eng = "sparsediscrim",
+    mode = "classification",
+    options = list(
+      predictor_indicators = "traditional",
+      compute_intercept = TRUE,
+      remove_intercept = TRUE,
+      allow_sparse_x = FALSE
+    )
+  )
+
+  parsnip::set_model_arg(
+    model = "discrim_linear",
+    eng = "sparsediscrim",
+    parsnip = "regularization_method",
+    original = "method",
+    func = list(pkg = "dials", fun = "regularization_method"),
+    has_submodel = FALSE
+  )
+
+  parsnip::set_pred(
+    model = "discrim_linear",
+    eng = "sparsediscrim",
+    mode = "classification",
+    type = "class",
+    value = list(
+      pre = NULL,
+      post = NULL,
+      func = c(fun = "predict"),
+      args =
+        list(
+          object = quote(object$fit),
+          newdata = quote(new_data),
+          type = "class"
+        )
+    )
+  )
+
+  parsnip::set_pred(
+    model = "discrim_linear",
+    eng = "sparsediscrim",
+    mode = "classification",
+    type = "prob",
+    value = list(
+      pre = NULL,
+      post = NULL,
+      func = c(fun = "predict"),
+      args =
+        list(
+          object = quote(object$fit),
+          newdata = quote(new_data),
+          type = "prob"
+        )
+    )
+  )
+
+  parsnip::set_pred(
+    model = "discrim_linear",
+    eng = "sparsediscrim",
+    mode = "classification",
+    type = "raw",
+    value = list(
+      pre = NULL,
+      post = NULL,
+      func = c(fun = "predict"),
+      args =
+        list(
+          object = quote(object$fit),
+          newdata = quote(as.matrix(new_data))
+        )
+    )
+  )
+
+}
 
 # nocov end

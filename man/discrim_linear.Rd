@@ -5,9 +5,19 @@
 \alias{update.discrim_linear}
 \title{General Interface for Linear Discriminant Models}
 \usage{
-discrim_linear(mode = "classification", penalty = NULL)
+discrim_linear(
+  mode = "classification",
+  penalty = NULL,
+  regularization_method = NULL
+)
 
-\method{update}{discrim_linear}(object, penalty = NULL, fresh = FALSE, ...)
+\method{update}{discrim_linear}(
+  object,
+  penalty = NULL,
+  regularization_method = NULL,
+  fresh = FALSE,
+  ...
+)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
@@ -15,6 +25,10 @@ possible value for this model is "classification".}
 
 \item{penalty}{An non-negative number representing the amount of
 regularization used by some of the engines.}
+
+\item{regularization_method}{A character string for the type of regularized
+estimation. Possible values are: "\code{diagonal}", "\code{min_distance}",
+"\code{shrink_cov}", and "\code{shrink_mean}" (\code{sparsediscrim} engine only).}
 
 \item{object}{A linear discriminant model specification.}
 
@@ -76,9 +90,10 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 The standardized parameter names in parsnip can be mapped to their
 original names in each engine that has main parameters. Each engine
 typically has a different default value (shown in parentheses) for each
-parameter.\tabular{ll}{
-   \strong{parsnip} \tab \strong{mda} \cr
-   penalty \tab lambda (1) \cr
+parameter.\tabular{lll}{
+   \strong{parsnip} \tab \strong{mda} \tab \strong{sparsediscrim} \cr
+   penalty \tab lambda (1) \tab NA \cr
+   regularization_method \tab NA \tab method \cr
 }
 }
 

@@ -42,6 +42,7 @@ Suggests:
     modeldata,
     naivebayes,
     sda,
+    sparsediscrim,
     spelling,
     testthat,
     xml2
