@@ -101,16 +101,6 @@ test_that('missing data', {
   expect_equal(f_pred, exp_f_pred)
 })
 
-
-# ------------------------------------------------------------------------------
-
-test_that('api errors', {
-  expect_error(
-    discrim_regularized() %>% set_engine("monday"),
-    regexp = "Available engines are: 'klaR'"
-  )
-})
-
 # ------------------------------------------------------------------------------
 
 test_that('printing', {

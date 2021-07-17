@@ -103,16 +103,6 @@ test_that('missing data', {
 
 # ------------------------------------------------------------------------------
 
-test_that('api errors', {
-  expect_error(
-    discrim_linear() %>% set_engine("monday"),
-    regexp = "Available engines are: 'MASS', 'mda'"
-  )
-})
-
-
-# ------------------------------------------------------------------------------
-
 test_that('printing', {
   expect_output(
     print(lda_spec),

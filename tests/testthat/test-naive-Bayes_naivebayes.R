@@ -188,16 +188,6 @@ test_that('missing data', {
 
 # ------------------------------------------------------------------------------
 
-test_that('api errors', {
-  expect_error(
-    naive_Bayes() %>% set_engine("lda"),
-    "Available engines are: 'klaR', 'naivebayes'"
-  )
-})
-
-
-# ------------------------------------------------------------------------------
-
 test_that('printing', {
   expect_output(
     print(nb_spec),
