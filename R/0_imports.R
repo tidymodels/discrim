@@ -25,6 +25,7 @@ utils::globalVariables(c("x", "y"))
 
   # This defines discrim_quad in the model database
   make_discrim_quad_MASS()
+  make_discrim_quad_sparsediscrim()
 
   # This defines discrim_regularized in the model database
   make_discrim_regularized()

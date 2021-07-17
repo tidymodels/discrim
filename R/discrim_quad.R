@@ -4,8 +4,10 @@
 #'  discriminant analysis (QDA) model before fitting and allows the model to be
 #'  created using different packages in R.
 #'
-#' @param mode A single character string for the type of model. The only
-#'  possible value for this model is "classification".
+#' @inheritParams discrim_linear
+#' @param regularization_method A character string for the type of regularized
+#'  estimation. Possible values are: "`diagonal`", "`shrink_cov`", and
+#'  "`shrink_mean`" (`sparsediscrim` engine only).
 #' @details
 #' For `discrim_quad()`, the mode will always be "classification".
 #'
@@ -47,9 +49,9 @@
 #'   coord_equal()
 #' @export
 discrim_quad <-
-  function(mode = "classification") {
+  function(mode = "classification", regularization_method = NULL) {
 
-    args <- list()
+    args <- list(regularization_method = rlang::enquo(regularization_method))
 
     parsnip::new_model_spec(
       "discrim_quad",
@@ -83,9 +85,10 @@ print.discrim_quad <- function(x, ...) {
 #' @export
 update.discrim_quad <-
   function(object,
+           regularization_method = NULL,
            fresh = FALSE, ...) {
     parsnip::update_dot_check(...)
-    args <- list()
+    args <- list(regularization_method = rlang::enquo(regularization_method))
 
     if (fresh) {
       object$args <- args

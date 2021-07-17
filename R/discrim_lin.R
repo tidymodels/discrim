@@ -209,7 +209,7 @@ fit_regularized_quad <- function(x, y, method = "diagonal", ...) {
   if (!(method %in% qda_regularization_method_vals)) {
     rlang::abort(
       paste0("'method' should be one of: ",
-             paste0("'", lda_regularization_method_vals, "'", collapse = ", "))
+             paste0("'", qda_regularization_method_vals, "'", collapse = ", "))
     )
   }
   cl <- discrim_regularized_call_quad(method, ...)
