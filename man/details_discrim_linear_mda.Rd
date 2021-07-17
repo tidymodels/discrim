@@ -12,7 +12,7 @@ quadratic penalty (i.e., a ridge or weight decay approach).
 For this engine, there is a single mode: classification
 \subsection{Tuning Parameters}{
 
-This model has 1 tuning parameters:
+This model has 1 tuning parameter:
 \itemize{
 \item \code{penalty}: Amount of Regularization (type: double, default: 1.0)
 }

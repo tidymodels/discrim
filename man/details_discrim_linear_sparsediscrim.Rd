@@ -12,6 +12,12 @@ covariance).
 For this engine, there is a single mode: classification
 \subsection{Tuning Parameters}{
 
+This model has 1 tuning parameter:
+\itemize{
+\item \code{regularization_method}: Regularization Method (type: character,
+default: diagonal)
+}
+
 The possible values of this parameter, and the functions that they
 execute, are:
 \itemize{

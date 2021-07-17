@@ -27,7 +27,7 @@ param <-
   )
 ```
 
-This model has `r nrow(param)` tuning parameters:
+This model has `r nrow(param)` tuning parameter:
 
 ```{r mda-param-list, echo = FALSE, results = "asis"}
 param$item
