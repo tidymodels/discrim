@@ -3,8 +3,7 @@
 #' `naive_Bayes()` is a way to generate a _specification_ of a model before
 #'  fitting and allows the model to be created using different packages in R.
 #'
-#' @param mode A single character string for the type of model. The only
-#'  possible value for this model is "classification".
+#' @inheritParams discrim_linear
 #' @param smoothness An non-negative number representing the the relative
 #'  smoothness of the class boundary. Smaller examples result in model flexible
 #'  boundaries and larger values generate class boundaries that are less
@@ -60,7 +59,7 @@
 #'   coord_equal()
 #' @export
 naive_Bayes <-
-  function(mode = "classification", smoothness = NULL, Laplace = NULL) {
+  function(mode = "classification", engine = "klaR", smoothness = NULL, Laplace = NULL) {
     args <-
       list(
         smoothness = rlang::enquo(smoothness),
@@ -73,7 +72,7 @@ naive_Bayes <-
       eng_args = NULL,
       mode = mode,
       method = NULL,
-      engine = NULL
+      engine = engine
     )
   }
 

@@ -4,8 +4,7 @@
 #'  discriminant model using features created using multivariate adaptive
 #'  regression splines (MARS).
 #'
-#' @param mode A single character string for the type of model.
-#'  The only possible value for this model is "classification".
+#' @inheritParams discrim_linear
 #' @param num_terms The number of features that will be retained in the
 #'    final model, including the intercept.
 #' @param prod_degree The highest possible interaction degree.
@@ -72,7 +71,7 @@
 #'   coord_equal()
 #' @export
 discrim_flexible <-
-  function(mode = "classification", num_terms = NULL, prod_degree = NULL,
+  function(mode = "classification", engine = "earth", num_terms = NULL, prod_degree = NULL,
            prune_method = NULL) {
 
     args <- list(
@@ -87,7 +86,7 @@ discrim_flexible <-
       eng_args = NULL,
       mode = mode,
       method = NULL,
-      engine = NULL
+      engine = engine
     )
   }
 

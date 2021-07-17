@@ -4,7 +4,7 @@
 \alias{details_discrim_linear_mda}
 \title{Linear discriminant analysis via flexible discriminant analysis}
 \description{
-\code{\link[mda:fda]{mda::fda()}} fits a linear discriminant analysis model that penalizes the
+\code{\link[mda:fda]{mda::fda()}} can fit a linear discriminant analysis model that penalizes the
 predictor coefficients with a quadratic penalty (i.e., a ridge or weight
 decay approach).
 }

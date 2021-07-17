@@ -17,6 +17,8 @@
 #'
 #' @param mode A single character string for the type of model. The only
 #'  possible value for this model is "classification".
+#' @param engine A single character string specifying what computational engine to use
+#'  for fitting.
 #' @param penalty An non-negative number representing the amount of
 #'  regularization used by some of the engines.
 #' @param regularization_method A character string for the type of regularized

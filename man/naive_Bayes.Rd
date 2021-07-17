@@ -5,13 +5,21 @@
 \alias{update.naive_Bayes}
 \title{General Interface for Naive Bayes Models}
 \usage{
-naive_Bayes(mode = "classification", smoothness = NULL, Laplace = NULL)
+naive_Bayes(
+  mode = "classification",
+  engine = "klaR",
+  smoothness = NULL,
+  Laplace = NULL
+)
 
 \method{update}{naive_Bayes}(object, smoothness = NULL, Laplace = NULL, fresh = FALSE, ...)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
 possible value for this model is "classification".}
+
+\item{engine}{A single character string specifying what computational engine to use
+for fitting.}
 
 \item{smoothness}{An non-negative number representing the the relative
 smoothness of the class boundary. Smaller examples result in model flexible

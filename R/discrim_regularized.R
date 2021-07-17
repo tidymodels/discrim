@@ -3,8 +3,7 @@
 #' `discrim_regularized()` is a way to generate a _specification_ of a
 #' regularized discriminant analysis (RDA) model before fitting.
 #'
-#' @param mode A single character string for the type of model. The only
-#'  possible value for this model is "classification".
+#' @inheritParams discrim_linear
 #' @param frac_common_cov,frac_identity Numeric values between zero and one.
 #' @details
 #'
@@ -59,7 +58,8 @@
 #'   coord_equal()
 #' @export
 discrim_regularized <-
-  function(mode = "classification", frac_common_cov = NULL, frac_identity = NULL) {
+  function(mode = "classification", engine = "klaR",
+           frac_common_cov = NULL, frac_identity = NULL) {
 
     args <- list(
       frac_common_cov = rlang::enquo(frac_common_cov),
@@ -72,7 +72,7 @@ discrim_regularized <-
       eng_args = NULL,
       mode = mode,
       method = NULL,
-      engine = NULL
+      engine = engine
     )
   }
 

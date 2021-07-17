@@ -5,13 +5,20 @@
 \alias{update.discrim_quad}
 \title{General Interface for Quadratic Discriminant Models}
 \usage{
-discrim_quad(mode = "classification", regularization_method = NULL)
+discrim_quad(
+  mode = "classification",
+  engine = "MASS",
+  regularization_method = NULL
+)
 
 \method{update}{discrim_quad}(object, regularization_method = NULL, fresh = FALSE, ...)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
 possible value for this model is "classification".}
+
+\item{engine}{A single character string specifying what computational engine to use
+for fitting.}
 
 \item{regularization_method}{A character string for the type of regularized
 estimation. Possible values are: "\code{diagonal}", "\code{shrink_cov}", and

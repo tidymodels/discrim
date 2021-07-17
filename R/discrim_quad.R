@@ -49,7 +49,7 @@
 #'   coord_equal()
 #' @export
 discrim_quad <-
-  function(mode = "classification", regularization_method = NULL) {
+  function(mode = "classification", engine = "MASS", regularization_method = NULL) {
 
     args <- list(regularization_method = rlang::enquo(regularization_method))
 
@@ -59,7 +59,7 @@ discrim_quad <-
       eng_args = NULL,
       mode = mode,
       method = NULL,
-      engine = NULL
+      engine = engine
     )
   }
 

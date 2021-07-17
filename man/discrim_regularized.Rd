@@ -7,6 +7,7 @@
 \usage{
 discrim_regularized(
   mode = "classification",
+  engine = "klaR",
   frac_common_cov = NULL,
   frac_identity = NULL
 )
@@ -22,6 +23,9 @@ discrim_regularized(
 \arguments{
 \item{mode}{A single character string for the type of model. The only
 possible value for this model is "classification".}
+
+\item{engine}{A single character string specifying what computational engine to use
+for fitting.}
 
 \item{frac_common_cov, frac_identity}{Numeric values between zero and one.}
 

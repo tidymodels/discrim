@@ -7,6 +7,7 @@
 \usage{
 discrim_flexible(
   mode = "classification",
+  engine = "earth",
   num_terms = NULL,
   prod_degree = NULL,
   prune_method = NULL
@@ -22,8 +23,11 @@ discrim_flexible(
 )
 }
 \arguments{
-\item{mode}{A single character string for the type of model.
-The only possible value for this model is "classification".}
+\item{mode}{A single character string for the type of model. The only
+possible value for this model is "classification".}
+
+\item{engine}{A single character string specifying what computational engine to use
+for fitting.}
 
 \item{num_terms}{The number of features that will be retained in the
 final model, including the intercept.}

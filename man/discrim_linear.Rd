@@ -24,6 +24,9 @@ discrim_linear(
 \item{mode}{A single character string for the type of model. The only
 possible value for this model is "classification".}
 
+\item{engine}{A single character string specifying what computational engine to use
+for fitting.}
+
 \item{penalty}{An non-negative number representing the amount of
 regularization used by some of the engines.}
 
