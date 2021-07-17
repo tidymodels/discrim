@@ -1,8 +1,19 @@
 #' General Interface for Linear Discriminant Models
 #'
-#' `discrim_linear()` is a way to generate a _specification_ of a linear
-#'  discriminant analysis (LDA) model before fitting and allows the model to be
-#'  created using different packages in R.
+#' @description
+#'
+#' discrim_linear()` defines a model that estimates a multivariate
+#'  distribution for the predictors separately for the data in each class
+#'  (usually Gaussian with a common covariance matrix). Bayes' theorem is used
+#'  to compute the probability of each class, given the predictor values.
+#'
+#' There are different ways to fit this model. See the engine-specific pages
+#' for more details:
+#'
+#' \Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_linear", "discrim")}
+#'
+#' More information on how \pkg{parsnip} is used for modeling is at
+#' \url{https://www.tidymodels.org/}.
 #'
 #' @param mode A single character string for the type of model. The only
 #'  possible value for this model is "classification".
@@ -11,30 +22,12 @@
 #' @param regularization_method A character string for the type of regularized
 #'  estimation. Possible values are: "`diagonal`", "`min_distance`",
 #'  "`shrink_cov`", and "`shrink_mean`" (`sparsediscrim` engine only).
-#' @details
-#' For `discrim_linear()`, the mode will always be "classification".
 #'
-#' The model can be created using the `fit()` function using the following
-#'  _engines_:
-
-#' \itemize{
-#' \item \pkg{R}:  `"MASS"`(the default) or `"mda"`
-#' }
+#' @template spec-details
 #'
-#' The main argument for the model is:
-#' \itemize{
-#'   \item \code{penalty}: The total amount of regularization in the model. Note
-#'    that this only used for the "mda" engine where it is a pure L2 penalty
-#'   (a.k.a ridge regression).
-#' }
+#' @template spec-references
 #'
-#' This argument is converted to its specific names at the time that the model
-#'  is fit. Other options and argument can be set using `set_engine()`. If left
-#'  to their defaults here (`NULL`), the values are taken from the underlying
-#'  model functions. If parameters need to be modified, `update()` can be used
-#'  in lieu of recreating the object from scratch.
-#'
-#' @includeRmd man/rmd/discrim-lin-engine.Rmd
+#' @seealso \Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_linear", "discrim")}
 #'
 #' @examples
 #' parabolic_grid <-
@@ -58,7 +51,7 @@
 #'   coord_equal()
 #' @export
 discrim_linear <-
-  function(mode = "classification",
+  function(mode = "classification", engine = "MASS",
            penalty = NULL, regularization_method = NULL) {
 
     args <- list(
@@ -72,7 +65,7 @@ discrim_linear <-
       eng_args = NULL,
       mode = mode,
       method = NULL,
-      engine = NULL
+      engine = engine
     )
   }
 
