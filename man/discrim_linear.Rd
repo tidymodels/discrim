@@ -3,7 +3,7 @@
 \name{discrim_linear}
 \alias{discrim_linear}
 \alias{update.discrim_linear}
-\title{General Interface for Linear Discriminant Models}
+\title{Linear discriminant analysis}
 \usage{
 discrim_linear(
   mode = "classification",
@@ -42,7 +42,7 @@ modified in-place of or replaced wholesale.}
 \item{...}{Not used for \code{update()}.}
 }
 \description{
-discrim_linear()` defines a model that estimates a multivariate
+\code{discrim_linear()} defines a model that estimates a multivariate
 distribution for the predictors separately for the data in each class
 (usually Gaussian with a common covariance matrix). Bayes' theorem is used
 to compute the probability of each class, given the predictor values.

@@ -5,36 +5,10 @@
 #'
 #' @inheritParams discrim_linear
 #' @param frac_common_cov,frac_identity Numeric values between zero and one.
-#' @details
 #'
-#' The model is from Friedman (1989) and can create LDA models, QDA models,
-#'  and regularized mixtures of the two. It does _not_ conduct feature
-#'  selection. The main arguments for the model are:
-#' \itemize{
-#'   \item \code{frac_common_cov}: The fraction of the regularized covariance
-#'   matrix that is based on the LDA model (i.e., computed from all classes). A
-#'   value of 1 is the linear discriminant analysis assumption while a value
-#'   near zero assumes that there should be separate covariance matrices for
-#'   each class.
-#'   \item \code{frac_identity}: The fraction of the final, class-specific
-#'   covariance matrix that is the identity matrix.
-#' }
+#' @template spec-details
 #'
-#' See `klaR::rda()` for the equations that define these parameters.
-#'
-#' These arguments are converted to their specific names at the time that the
-#'  model is fit. Other options and argument can be set using `set_engine()`. If
-#'  left to their defaults here (`NULL`), the values are taken from the
-#'  underlying model functions. If parameters need to be modified, `update()`
-#'  can be used in lieu of recreating the object from scratch.
-
-#'
-#' For `discrim_regularized()`, the mode will always be "classification".
-#'
-#' @includeRmd man/rmd/discrim-regularized-engine.Rmd
-#'
-#' @references Friedman, J.H. (1989). Regularized Discriminant Analysis. _Journal
-#' of the American Statistical Association_ 84, 165-175.
+#' @template spec-references
 #'
 #' @examples
 #' parabolic_grid <-

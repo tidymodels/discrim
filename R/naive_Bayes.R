@@ -1,4 +1,4 @@
-#' General Interface for Naive Bayes Models
+#' Naive Bayes models
 #'
 #' `naive_Bayes()` is a way to generate a _specification_ of a model before
 #'  fitting and allows the model to be created using different packages in R.
@@ -10,33 +10,11 @@
 #'  adaptable
 #' @param Laplace A non-negative value for the Laplace correction to smoothing
 #' low-frequency counts.
-#' @details
 #'
-#' The main
-#'  arguments for the model are:
-#' \itemize{
-#'   \item \code{smoothness}: The total amount of regularization
-#'   in the model. Note that this only used for the "klaR" engine where it is a
-#'   pure L2 smoothness (a.k.a ridge regression).
-#'   \item \code{Laplace}: Laplace correction for smoothing low-frequency counts.
-#' }
-#' These arguments are converted to their specific names at the time that the
-#'  model is fit. Other options and argument can be set using `set_engine()`. If
-#'  left to their defaults here (`NULL`), the values are taken from the
-#'  underlying model functions. If parameters need to be modified, `update()`
-#'  can be used in lieu of recreating the object from scratch.
+#' @template spec-details
 #'
-#' For `naive_Bayes()`, the mode will always be "classification".
+#' @template spec-references
 #'
-#' The model can be created using the `fit()` function using the following _engines_:
-#' \itemize{
-#' \item \pkg{R}:  `"klaR"`(the default) or `"naivebayes"`
-#' }
-#'
-#'
-#' @includeRmd man/rmd/naive-Bayes-engine.Rmd
-#'
-
 #' @examples
 #' parabolic_grid <-
 #'   expand.grid(X1 = seq(-5, 5, length = 100),

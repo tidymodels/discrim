@@ -3,7 +3,7 @@
 \name{discrim_flexible}
 \alias{discrim_flexible}
 \alias{update.discrim_flexible}
-\title{General Interface for Flexible Discriminant Models}
+\title{Flexible discriminant models}
 \usage{
 discrim_flexible(
   mode = "classification",
@@ -49,60 +49,12 @@ discriminant model using features created using multivariate adaptive
 regression splines (MARS).
 }
 \details{
-Flexible discriminant analysis (FDA) uses the work of Hastie et al (1994)
-to create a discriminant model using different feature expansions. For this
-function, MARS (Friedman, 1991) hinge functions are used to nonlinearly
-model the class boundaries (see example below). The \pkg{mda} and
-\pkg{earth} packages are needed to fit this model.
+This function only defines what \emph{type} of model is being fit. Once an engine
+is specified, the \emph{method} to fit the model is also defined.
 
-The main arguments for the model are:
-\itemize{
-\item \code{num_terms}: The number of features that will be retained in the
-final model.
-\item \code{prod_degree}: The highest possible degree of interaction between
-features. A value of 1 indicates and additive model while a value of 2
-allows, but does not guarantee, two-way interactions between features.
-\item \code{prune_method}: The type of pruning. Possible values are listed
-in \code{?earth}.
+The model is not trained or fit until the \code{\link[=fit.model_spec]{fit.model_spec()}} function is used
+with the data.
 }
-
-These arguments are converted to their specific names at the
-time that the model is fit. Other options and argument can be
-set using \code{set_engine()}. If left to their defaults
-here (\code{NULL}), the values are taken from the underlying model
-functions. If parameters need to be modified, \code{update()} can be used
-in lieu of recreating the object from scratch.
-
-The model can be created using the \code{fit()} function using the following
-\emph{engines}:
-\itemize{
-\item \pkg{R}:  \code{"earth"}  (the default)
-}
-}
-\section{Engine Details}{
-Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_flexible() \%>\% 
-  set_engine("earth") \%>\% 
-  translate()
-}\if{html}{\out{</div>}}\preformatted{## Flexible Discriminant Model Specification (classification)
-## 
-## Computational engine: earth 
-## 
-## Model fit template:
-## mda::fda(formula = missing_arg(), data = missing_arg(), method = earth::earth)
-}
-
-The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters. Each engine
-typically has a different default value (shown in parentheses) for each
-parameter.\tabular{ll}{
-   \strong{parsnip} \tab \strong{earth} \cr
-   num_terms \tab nprune (all created by forward pass) \cr
-   prod_degree \tab degree (1) \cr
-   prune_method \tab pmethod (backward) \cr
-}
-}
-
 \examples{
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
@@ -131,8 +83,5 @@ model
 update(model, num_terms = 6)
 }
 \references{
-Friedman (1991), Multivariate Adaptive Regression Splines (with discussion),
-\emph{Annals of Statistics} 19:1, 1–141.
-Hastie, Tibshirani and Buja (1994), Flexible Discriminant Analysis by Optimal
-Scoring, \emph{Journal of the American Statistical Association}, 1255-1270.
+\url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
 }

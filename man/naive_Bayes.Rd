@@ -3,7 +3,7 @@
 \name{naive_Bayes}
 \alias{naive_Bayes}
 \alias{update.naive_Bayes}
-\title{General Interface for Naive Bayes Models}
+\title{Naive Bayes models}
 \usage{
 naive_Bayes(
   mode = "classification",
@@ -41,64 +41,12 @@ modified in-place of or replaced wholesale.}
 fitting and allows the model to be created using different packages in R.
 }
 \details{
-The main
-arguments for the model are:
-\itemize{
-\item \code{smoothness}: The total amount of regularization
-in the model. Note that this only used for the "klaR" engine where it is a
-pure L2 smoothness (a.k.a ridge regression).
-\item \code{Laplace}: Laplace correction for smoothing low-frequency counts.
-}
-These arguments are converted to their specific names at the time that the
-model is fit. Other options and argument can be set using \code{set_engine()}. If
-left to their defaults here (\code{NULL}), the values are taken from the
-underlying model functions. If parameters need to be modified, \code{update()}
-can be used in lieu of recreating the object from scratch.
+This function only defines what \emph{type} of model is being fit. Once an engine
+is specified, the \emph{method} to fit the model is also defined.
 
-For \code{naive_Bayes()}, the mode will always be "classification".
-
-The model can be created using the \code{fit()} function using the following \emph{engines}:
-\itemize{
-\item \pkg{R}:  \code{"klaR"}(the default) or \code{"naivebayes"}
+The model is not trained or fit until the \code{\link[=fit.model_spec]{fit.model_spec()}} function is used
+with the data.
 }
-}
-\section{Engine Details}{
-Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{naive_Bayes() \%>\% 
-  set_engine("klaR") \%>\% 
-  translate()
-}\if{html}{\out{</div>}}\preformatted{## Naive Bayes Model Specification (classification)
-## 
-## Computational engine: klaR 
-## 
-## Model fit template:
-## discrim::klar_bayes_wrapper(x = missing_arg(), y = missing_arg(), 
-##     usekernel = TRUE)
-}\if{html}{\out{<div class="r">}}\preformatted{naive_Bayes() \%>\% 
-  set_engine("naivebayes") \%>\% 
-  translate()
-}\if{html}{\out{</div>}}\preformatted{## Naive Bayes Model Specification (classification)
-## 
-## Computational engine: naivebayes 
-## 
-## Model fit template:
-## naivebayes::naive_bayes(x = missing_arg(), y = missing_arg(), 
-##     usekernel = TRUE)
-}
-
-The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters. Each engine
-typically has a different default value (shown in parentheses) for each
-parameter.\tabular{lll}{
-   \strong{parsnip} \tab \strong{klaR} \tab \strong{naivebayes} \cr
-   smoothness \tab adjust (1) \tab adjust (1) \cr
-   Laplace \tab fL (0) \tab laplace (0) \cr
-}
-
-
-Note that \code{usekernel} is always set to \code{TRUE} for the \code{klaR} engine.
-}
-
 \examples{
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
@@ -125,4 +73,7 @@ model <- naive_Bayes(smoothness = 0.1)
 model
 update(model, smoothness = 1)
 update(model, smoothness = 1, fresh = TRUE)
+}
+\references{
+\url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
 }

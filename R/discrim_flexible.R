@@ -1,4 +1,4 @@
-#' General Interface for Flexible Discriminant Models
+#' Flexible discriminant models
 #'
 #' `discrim_flexible()` is a way to generate a _specification_ of a flexible
 #'  discriminant model using features created using multivariate adaptive
@@ -9,44 +9,10 @@
 #'    final model, including the intercept.
 #' @param prod_degree The highest possible interaction degree.
 #' @param prune_method The pruning method.
-#' @details
-#' Flexible discriminant analysis (FDA) uses the work of Hastie et al (1994)
-#'  to create a discriminant model using different feature expansions. For this
-#'  function, MARS (Friedman, 1991) hinge functions are used to nonlinearly
-#'  model the class boundaries (see example below). The \pkg{mda} and
-#'  \pkg{earth} packages are needed to fit this model.
 #'
-#' The main arguments for the model are:
-#' \itemize{
-#'   \item \code{num_terms}: The number of features that will be retained in the
-#'    final model.
-#'   \item \code{prod_degree}: The highest possible degree of interaction between
-#'    features. A value of 1 indicates and additive model while a value of 2
-#'    allows, but does not guarantee, two-way interactions between features.
-#'   \item \code{prune_method}: The type of pruning. Possible values are listed
-#'    in `?earth`.
-#' }
+#' @template spec-details
 #'
-#' These arguments are converted to their specific names at the
-#'  time that the model is fit. Other options and argument can be
-#'  set using `set_engine()`. If left to their defaults
-#'  here (`NULL`), the values are taken from the underlying model
-#'  functions. If parameters need to be modified, `update()` can be used
-#'  in lieu of recreating the object from scratch.
-#'
-#' The model can be created using the `fit()` function using the following
-#'  _engines_:
-#' \itemize{
-#' \item \pkg{R}:  `"earth"`  (the default)
-#' }
-#'
-#' @includeRmd man/rmd/discrim-flexible-engine.Rmd
-#'
-#' @references
-#' Friedman (1991), Multivariate Adaptive Regression Splines (with discussion),
-#' _Annals of Statistics_ 19:1, 1–141.
-#' Hastie, Tibshirani and Buja (1994), Flexible Discriminant Analysis by Optimal
-#' Scoring, _Journal of the American Statistical Association_, 1255-1270.
+#' @template spec-references
 #'
 #' @examples
 #' parabolic_grid <-

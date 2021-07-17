@@ -3,7 +3,7 @@
 \name{discrim_quad}
 \alias{discrim_quad}
 \alias{update.discrim_quad}
-\title{General Interface for Quadratic Discriminant Models}
+\title{Quadratic discriminant models}
 \usage{
 discrim_quad(
   mode = "classification",
@@ -37,34 +37,12 @@ discriminant analysis (QDA) model before fitting and allows the model to be
 created using different packages in R.
 }
 \details{
-For \code{discrim_quad()}, the mode will always be "classification".
+This function only defines what \emph{type} of model is being fit. Once an engine
+is specified, the \emph{method} to fit the model is also defined.
 
-The model can be created using the \code{fit()} function using the following
-\emph{engines}:
-\itemize{
-\item \pkg{R}:  \code{"MASS"}
+The model is not trained or fit until the \code{\link[=fit.model_spec]{fit.model_spec()}} function is used
+with the data.
 }
-
-This argument is converted to its specific names at the time that the model
-is fit. Other options and argument can be set using \code{set_engine()}. If left
-to their defaults here (\code{NULL}), the values are taken from the underlying
-model functions. If parameters need to be modified, \code{update()} can be used
-in lieu of recreating the object from scratch.
-}
-\section{Engine Details}{
-Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
-  set_engine("MASS") \%>\% 
-  translate()
-}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
-## 
-## Computational engine: MASS 
-## 
-## Model fit template:
-## MASS::lda(formula = missing_arg(), data = missing_arg())
-}
-}
-
 \examples{
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
@@ -85,4 +63,7 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
+}
+\references{
+\url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
 }

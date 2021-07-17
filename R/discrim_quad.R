@@ -1,4 +1,4 @@
-#' General Interface for Quadratic Discriminant Models
+#' Quadratic discriminant models
 #'
 #' `discrim_quad()` is a way to generate a _specification_ of a quadratic
 #'  discriminant analysis (QDA) model before fitting and allows the model to be
@@ -8,24 +8,10 @@
 #' @param regularization_method A character string for the type of regularized
 #'  estimation. Possible values are: "`diagonal`", "`shrink_cov`", and
 #'  "`shrink_mean`" (`sparsediscrim` engine only).
-#' @details
-#' For `discrim_quad()`, the mode will always be "classification".
 #'
-#' The model can be created using the `fit()` function using the following
-#'  _engines_:
-
-#' \itemize{
-#' \item \pkg{R}:  `"MASS"`
-#' }
+#' @template spec-details
 #'
-#'
-#' This argument is converted to its specific names at the time that the model
-#'  is fit. Other options and argument can be set using `set_engine()`. If left
-#'  to their defaults here (`NULL`), the values are taken from the underlying
-#'  model functions. If parameters need to be modified, `update()` can be used
-#'  in lieu of recreating the object from scratch.
-#'
-#' @includeRmd man/rmd/discrim-quad-engine.Rmd
+#' @template spec-references
 #'
 #' @examples
 #' parabolic_grid <-
