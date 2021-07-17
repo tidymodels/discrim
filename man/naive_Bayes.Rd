@@ -56,7 +56,7 @@ The model can be created using the \code{fit()} function using the following \em
 }
 \section{Engine Details}{
 Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="sourceCode r">}}\preformatted{naive_Bayes() \%>\% 
+call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="r">}}\preformatted{naive_Bayes() \%>\% 
   set_engine("klaR") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Naive Bayes Model Specification (classification)
@@ -66,7 +66,7 @@ call. For this type of model, the template of the fit calls are:\if{html}{\out{<
 ## Model fit template:
 ## discrim::klar_bayes_wrapper(x = missing_arg(), y = missing_arg(), 
 ##     usekernel = TRUE)
-}\if{html}{\out{<div class="sourceCode r">}}\preformatted{naive_Bayes() \%>\% 
+}\if{html}{\out{<div class="r">}}\preformatted{naive_Bayes() \%>\% 
   set_engine("naivebayes") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Naive Bayes Model Specification (classification)

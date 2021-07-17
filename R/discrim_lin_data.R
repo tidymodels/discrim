@@ -191,4 +191,96 @@ make_discrim_linear_mda <- function() {
   )
 }
 
+# ------------------------------------------------------------------------------
+
+make_discrim_linear_sda <- function() {
+
+  parsnip::set_model_engine("discrim_linear", "classification", "sda")
+  parsnip::set_dependency("discrim_linear", "sda", "sda")
+  parsnip::set_dependency("discrim_linear", "sda", "discrim")
+
+  parsnip::set_fit(
+    model = "discrim_linear",
+    eng = "sda",
+    mode = "classification",
+    value = list(
+      interface = "matrix",
+      data = c(x = "Xtrain", y = "L"),
+      protect = c("Xtrain", "L"),
+      func = c(pkg = "sda", fun = "sda"),
+      defaults = list(
+        verbose = FALSE
+      )
+    )
+  )
+
+  parsnip::set_encoding(
+    model = "discrim_linear",
+    eng = "sda",
+    mode = "classification",
+    options = list(
+      predictor_indicators = "traditional",
+      compute_intercept = TRUE,
+      remove_intercept = TRUE,
+      allow_sparse_x = FALSE
+    )
+  )
+
+  parsnip::set_pred(
+    model = "discrim_linear",
+    eng = "sda",
+    mode = "classification",
+    type = "class",
+    value = list(
+      pre = NULL,
+      post = get_class,
+      func = c(fun = "predict"),
+      args =
+        list(
+          object = quote(object$fit),
+          Xtest = quote(as.matrix(new_data)),
+          verbose = FALSE
+        )
+    )
+  )
+
+  parsnip::set_pred(
+    model = "discrim_linear",
+    eng = "sda",
+    mode = "classification",
+    type = "prob",
+    value = list(
+      pre = NULL,
+      post = post_to_tibble,
+      func = c(fun = "predict"),
+      args =
+        list(
+          object = quote(object$fit),
+          Xtest = quote(as.matrix(new_data)),
+          verbose = FALSE
+        )
+    )
+  )
+
+  parsnip::set_pred(
+    model = "discrim_linear",
+    eng = "sda",
+    mode = "classification",
+    type = "raw",
+    value = list(
+      pre = NULL,
+      post = NULL,
+      func = c(fun = "predict"),
+      args =
+        list(
+          object = quote(object$fit),
+          Xtest = quote(as.matrix(new_data))
+        )
+    )
+  )
+
+}
+
+
+
 # nocov end
