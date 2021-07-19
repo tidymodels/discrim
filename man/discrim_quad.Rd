@@ -2,7 +2,6 @@
 % Please edit documentation in R/discrim_quad.R
 \name{discrim_quad}
 \alias{discrim_quad}
-\alias{update.discrim_quad}
 \title{Quadratic discriminant analysis}
 \usage{
 discrim_quad(
@@ -10,8 +9,6 @@ discrim_quad(
   engine = "MASS",
   regularization_method = NULL
 )
-
-\method{update}{discrim_quad}(object, regularization_method = NULL, fresh = FALSE, ...)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
@@ -23,13 +20,6 @@ for fitting.}
 \item{regularization_method}{A character string for the type of regularized
 estimation. Possible values are: "\code{diagonal}", "\code{shrink_cov}", and
 "\code{shrink_mean}" (\code{sparsediscrim} engine only).}
-
-\item{object}{A quadratic discriminant model specification.}
-
-\item{fresh}{A logical for whether the arguments should be
-modified in-place of or replaced wholesale.}
-
-\item{...}{Not used for \code{update()}.}
 }
 \description{
 \code{discrim_quad()} defines a model that estimates a multivariate

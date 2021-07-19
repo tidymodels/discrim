@@ -101,16 +101,9 @@ print.discrim_regularized <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' @inheritParams update.discrim_flexible
-#' @param object A linear discriminant model specification.
-#' @examples
-#'
-#'
-#' model <- discrim_regularized(frac_common_cov = 10)
-#' model
-#' update(model, frac_common_cov = 1)
 #' @method update discrim_regularized
-#' @rdname discrim_regularized
+#' @rdname discrim_update
+#' @inheritParams discrim_regularized
 #' @export
 update.discrim_regularized <-
   function(object,

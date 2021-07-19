@@ -83,18 +83,14 @@ print.discrim_flexible <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' @param object A flexible discriminant model specification.
+#' Update a model specification
+#' @param object A model specification.
 #' @param ... Not used for `update()`.
 #' @param fresh A logical for whether the arguments should be
 #'  modified in-place of or replaced wholesale.
-#' @examples
-#'
-#'
-#' model <- discrim_flexible(num_terms = 10)
-#' model
-#' update(model, num_terms = 6)
 #' @method update discrim_flexible
-#' @rdname discrim_flexible
+#' @rdname discrim_update
+#' @inheritParams discrim_flexible
 #' @export
 update.discrim_flexible <-
   function(object,

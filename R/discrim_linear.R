@@ -86,16 +86,9 @@ print.discrim_linear <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' @inheritParams update.discrim_flexible
-#' @param object A linear discriminant model specification.
-#' @examples
-#'
-#'
-#' model <- discrim_linear(penalty = 0.1)
-#' model
-#' update(model, penalty = 1)
 #' @method update discrim_linear
-#' @rdname discrim_linear
+#' @rdname discrim_update
+#' @inheritParams discrim_linear
 #' @export
 update.discrim_linear <-
   function(object,

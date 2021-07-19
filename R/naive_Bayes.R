@@ -81,17 +81,9 @@ print.naive_Bayes <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' @inheritParams update.discrim_flexible
-#' @param object A linear discriminant model specification.
-#' @examples
-#'
-#'
-#' model <- naive_Bayes(smoothness = 0.1)
-#' model
-#' update(model, smoothness = 1)
-#' update(model, smoothness = 1, fresh = TRUE)
 #' @method update naive_Bayes
-#' @rdname naive_Bayes
+#' @rdname discrim_update
+#' @inheritParams naive_Bayes
 #' @export
 update.naive_Bayes <-
   function(object,

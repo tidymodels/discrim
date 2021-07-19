@@ -2,7 +2,6 @@
 % Please edit documentation in R/discrim_flexible.R
 \name{discrim_flexible}
 \alias{discrim_flexible}
-\alias{update.discrim_flexible}
 \title{Flexible discriminant analysis}
 \usage{
 discrim_flexible(
@@ -11,15 +10,6 @@ discrim_flexible(
   num_terms = NULL,
   prod_degree = NULL,
   prune_method = NULL
-)
-
-\method{update}{discrim_flexible}(
-  object,
-  num_terms = NULL,
-  prod_degree = NULL,
-  prune_method = NULL,
-  fresh = FALSE,
-  ...
 )
 }
 \arguments{
@@ -35,13 +25,6 @@ final model, including the intercept.}
 \item{prod_degree}{The highest possible interaction degree.}
 
 \item{prune_method}{The pruning method.}
-
-\item{object}{A flexible discriminant model specification.}
-
-\item{fresh}{A logical for whether the arguments should be
-modified in-place of or replaced wholesale.}
-
-\item{...}{Not used for \code{update()}.}
 }
 \description{
 \code{discrim_flexible()} defines a model that fits a discriminant analysis model
@@ -84,11 +67,6 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
-
-
-model <- discrim_flexible(num_terms = 10)
-model
-update(model, num_terms = 6)
 }
 \references{
 \url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}

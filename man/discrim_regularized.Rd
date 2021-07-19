@@ -2,7 +2,6 @@
 % Please edit documentation in R/discrim_regularized.R
 \name{discrim_regularized}
 \alias{discrim_regularized}
-\alias{update.discrim_regularized}
 \title{Regularized discriminant analysis}
 \usage{
 discrim_regularized(
@@ -10,14 +9,6 @@ discrim_regularized(
   engine = "klaR",
   frac_common_cov = NULL,
   frac_identity = NULL
-)
-
-\method{update}{discrim_regularized}(
-  object,
-  frac_common_cov = NULL,
-  frac_identity = NULL,
-  fresh = FALSE,
-  ...
 )
 }
 \arguments{
@@ -28,13 +19,6 @@ possible value for this model is "classification".}
 for fitting.}
 
 \item{frac_common_cov, frac_identity}{Numeric values between zero and one.}
-
-\item{object}{A linear discriminant model specification.}
-
-\item{fresh}{A logical for whether the arguments should be
-modified in-place of or replaced wholesale.}
-
-\item{...}{Not used for \code{update()}.}
 }
 \description{
 \code{discrim_regularized()} defines a model that estimates a multivariate
@@ -93,11 +77,6 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
-
-
-model <- discrim_regularized(frac_common_cov = 10)
-model
-update(model, frac_common_cov = 1)
 }
 \references{
 \url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}

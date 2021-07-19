@@ -80,10 +80,9 @@ print.discrim_quad <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' @inheritParams update.discrim_flexible
-#' @param object A quadratic discriminant model specification.
 #' @method update discrim_quad
-#' @rdname discrim_quad
+#' @rdname discrim_update
+#' @inheritParams discrim_quad
 #' @export
 update.discrim_quad <-
   function(object,

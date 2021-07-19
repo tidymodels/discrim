@@ -2,7 +2,6 @@
 % Please edit documentation in R/naive_Bayes.R
 \name{naive_Bayes}
 \alias{naive_Bayes}
-\alias{update.naive_Bayes}
 \title{Naive Bayes models}
 \usage{
 naive_Bayes(
@@ -11,8 +10,6 @@ naive_Bayes(
   smoothness = NULL,
   Laplace = NULL
 )
-
-\method{update}{naive_Bayes}(object, smoothness = NULL, Laplace = NULL, fresh = FALSE, ...)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
@@ -28,13 +25,6 @@ adaptable}
 
 \item{Laplace}{A non-negative value for the Laplace correction to smoothing
 low-frequency counts.}
-
-\item{object}{A linear discriminant model specification.}
-
-\item{fresh}{A logical for whether the arguments should be
-modified in-place of or replaced wholesale.}
-
-\item{...}{Not used for \code{update()}.}
 }
 \description{
 \code{naive_Bayes()} defines a model uses Bayes' theorem to compute the
@@ -75,12 +65,6 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
-
-
-model <- naive_Bayes(smoothness = 0.1)
-model
-update(model, smoothness = 1)
-update(model, smoothness = 1, fresh = TRUE)
 }
 \references{
 \url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/discrim_linear.R
 \name{discrim_linear}
 \alias{discrim_linear}
-\alias{update.discrim_linear}
 \title{Linear discriminant analysis}
 \usage{
 discrim_linear(
@@ -10,14 +9,6 @@ discrim_linear(
   engine = "MASS",
   penalty = NULL,
   regularization_method = NULL
-)
-
-\method{update}{discrim_linear}(
-  object,
-  penalty = NULL,
-  regularization_method = NULL,
-  fresh = FALSE,
-  ...
 )
 }
 \arguments{
@@ -33,13 +24,6 @@ regularization used by some of the engines.}
 \item{regularization_method}{A character string for the type of regularized
 estimation. Possible values are: "\code{diagonal}", "\code{min_distance}",
 "\code{shrink_cov}", and "\code{shrink_mean}" (\code{sparsediscrim} engine only).}
-
-\item{object}{A linear discriminant model specification.}
-
-\item{fresh}{A logical for whether the arguments should be
-modified in-place of or replaced wholesale.}
-
-\item{...}{Not used for \code{update()}.}
 }
 \description{
 \code{discrim_linear()} defines a model that estimates a multivariate
@@ -82,11 +66,6 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
-
-
-model <- discrim_linear(penalty = 0.1)
-model
-update(model, penalty = 1)
 }
 \references{
 \url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
