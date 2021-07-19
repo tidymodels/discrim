@@ -1,8 +1,18 @@
-#' Flexible discriminant models
+#' Flexible discriminant analysis
 #'
-#' `discrim_flexible()` is a way to generate a _specification_ of a flexible
-#'  discriminant model using features created using multivariate adaptive
+#' @description
+#'
+#' `discrim_flexible()` defines a model that fits a discriminant analysis model
+#' that can use nonlinear features created using multivariate adaptive
 #'  regression splines (MARS).
+#'
+#' There are different ways to fit this model. See the engine-specific pages
+#' for more details:
+#'
+#' \Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_flexible", "discrim")}
+#'
+#' More information on how \pkg{parsnip} is used for modeling is at
+#' \url{https://www.tidymodels.org/}.
 #'
 #' @inheritParams discrim_linear
 #' @param num_terms The number of features that will be retained in the
@@ -13,6 +23,8 @@
 #' @template spec-details
 #'
 #' @template spec-references
+#'
+#' @seealso \Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_flexible", "discrim")}
 #'
 #' @examples
 #' parabolic_grid <-

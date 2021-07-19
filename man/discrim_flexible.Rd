@@ -3,7 +3,7 @@
 \name{discrim_flexible}
 \alias{discrim_flexible}
 \alias{update.discrim_flexible}
-\title{Flexible discriminant models}
+\title{Flexible discriminant analysis}
 \usage{
 discrim_flexible(
   mode = "classification",
@@ -44,9 +44,17 @@ modified in-place of or replaced wholesale.}
 \item{...}{Not used for \code{update()}.}
 }
 \description{
-\code{discrim_flexible()} is a way to generate a \emph{specification} of a flexible
-discriminant model using features created using multivariate adaptive
+\code{discrim_flexible()} defines a model that fits a discriminant analysis model
+that can use nonlinear features created using multivariate adaptive
 regression splines (MARS).
+
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+\Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_flexible", "discrim")}
+
+More information on how \pkg{parsnip} is used for modeling is at
+\url{https://www.tidymodels.org/}.
 }
 \details{
 This function only defines what \emph{type} of model is being fit. Once an engine
@@ -84,4 +92,7 @@ update(model, num_terms = 6)
 }
 \references{
 \url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
+}
+\seealso{
+\Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_flexible", "discrim")}
 }
