@@ -1,14 +1,50 @@
-#' General Interface for Regularized Discriminant Models
+#' Regularized discriminant analysis
 #'
-#' `discrim_regularized()` is a way to generate a _specification_ of a
-#' regularized discriminant analysis (RDA) model before fitting.
+#' @description
+#'
+#' `discrim_regularized()` defines a model that estimates a multivariate
+#'  distribution for the predictors separately for the data in each class. The
+#'  structure of the model can be LDA, QDA, or some amalgam of the two. Bayes'
+#'  theorem is used to compute the probability of each class, given the
+#'  predictor values.
+#'
+#' There are different ways to fit this model. See the engine-specific pages
+#' for more details:
+#'
+#' \Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_regularized", "discrim")}
+#'
+#' More information on how \pkg{parsnip} is used for modeling is at
+#' \url{https://www.tidymodels.org/}.
+#'
 #'
 #' @inheritParams discrim_linear
 #' @param frac_common_cov,frac_identity Numeric values between zero and one.
 #'
+#' @details
+#' There are many ways of regularizing models. For example, one form of
+#'  regularization is to penalize model parameters. Similarly, the classic
+#'  James–Stein regularization approach shrinks the model structure to a less
+#'  complex form.
+#'
+#' The model fits a very specific type of regularized model by Friedman (1989)
+#'  that uses two types of regularization. One modulates how class-specific the
+#'  covariance matrix should be. This allows the model to balance between LDA
+#'  and QDA. The second regularization component shrinks the covariance matrix
+#'  towards the identity matrix.
+#'
+#' For the penalization approach, [discrim_linear()] with a `mda` engine can be
+#'  used. Other regularization methods can be used with [discrim_linear()] and
+#'  [discrim_quad()] can used via the `sparsediscrim` engine for those functions.
+#'
 #' @template spec-details
 #'
 #' @template spec-references
+#'
+#' @references
+#' Friedman, J (1989). Regularized Discriminant Analysis. _Journal of the
+#' American Statistical Association_, 84, 165-175.
+#'
+#' @seealso \Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_regularized", "discrim")}
 #'
 #' @examples
 #' parabolic_grid <-

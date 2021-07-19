@@ -3,7 +3,7 @@
 \name{discrim_regularized}
 \alias{discrim_regularized}
 \alias{update.discrim_regularized}
-\title{General Interface for Regularized Discriminant Models}
+\title{Regularized discriminant analysis}
 \usage{
 discrim_regularized(
   mode = "classification",
@@ -37,10 +37,36 @@ modified in-place of or replaced wholesale.}
 \item{...}{Not used for \code{update()}.}
 }
 \description{
-\code{discrim_regularized()} is a way to generate a \emph{specification} of a
-regularized discriminant analysis (RDA) model before fitting.
+\code{discrim_regularized()} defines a model that estimates a multivariate
+distribution for the predictors separately for the data in each class. The
+structure of the model can be LDA, QDA, or some amalgam of the two. Bayes'
+theorem is used to compute the probability of each class, given the
+predictor values.
+
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+\Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_regularized", "discrim")}
+
+More information on how \pkg{parsnip} is used for modeling is at
+\url{https://www.tidymodels.org/}.
 }
 \details{
+There are many ways of regularizing models. For example, one form of
+regularization is to penalize model parameters. Similarly, the classic
+James–Stein regularization approach shrinks the model structure to a less
+complex form.
+
+The model fits a very specific type of regularized model by Friedman (1989)
+that uses two types of regularization. One modulates how class-specific the
+covariance matrix should be. This allows the model to balance between LDA
+and QDA. The second regularization component shrinks the covariance matrix
+towards the identity matrix.
+
+For the penalization approach, \code{\link[=discrim_linear]{discrim_linear()}} with a \code{mda} engine can be
+used. Other regularization methods can be used with \code{\link[=discrim_linear]{discrim_linear()}} and
+\code{\link[=discrim_quad]{discrim_quad()}} can used via the \code{sparsediscrim} engine for those functions.
+
 This function only defines what \emph{type} of model is being fit. Once an engine
 is specified, the \emph{method} to fit the model is also defined.
 
@@ -75,4 +101,10 @@ update(model, frac_common_cov = 1)
 }
 \references{
 \url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
+
+Friedman, J (1989). Regularized Discriminant Analysis. \emph{Journal of the
+American Statistical Association}, 84, 165-175.
+}
+\seealso{
+\Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_regularized", "discrim")}
 }
