@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • discrim</title>
+<title>Naive Bayes models via klaR — details_naive_Bayes_klaR • discrim</title>
 
 
 <!-- jquery -->
@@ -42,7 +42,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Naive Bayes models via klaR — details_naive_Bayes_klaR" />
+<meta property="og:description" content="klaR::NaiveBayes() fits a model that uses Bayes' theorem to compute the
+probability of each class, given the predictor values." />
+<meta name="twitter:card" content="summary" />
 
 
 <meta name="robots" content="noindex">
@@ -75,7 +78,7 @@
   <body data-spy="scroll" data-target="#toc">
     
 
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -120,84 +123,71 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Naive Bayes models via klaR</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/naive_Bayes_klaR.R'><code>R/naive_Bayes_klaR.R</code></a></small>
+    <div class="hidden name"><code>details_naive_Bayes_klaR.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p><code><a href='https://rdrr.io/pkg/klaR/man/NaiveBayes.html'>klaR::NaiveBayes()</a></code> fits a model that uses Bayes' theorem to compute the
+probability of each class, given the predictor values.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="discrim_flexible.html">discrim_flexible()</a></code> </p>
-        </td>
-        <td><p>Flexible discriminant analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="discrim_linear.html">discrim_linear()</a></code> </p>
-        </td>
-        <td><p>Linear discriminant analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="discrim_quad.html">discrim_quad()</a></code> </p>
-        </td>
-        <td><p>Quadratic discriminant analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="discrim_regularized.html">discrim_regularized()</a></code> </p>
-        </td>
-        <td><p>Regularized discriminant analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="discrim_update.html">update(<i>&lt;discrim_flexible&gt;</i>)</a></code> <code><a href="discrim_update.html">update(<i>&lt;discrim_linear&gt;</i>)</a></code> <code><a href="discrim_update.html">update(<i>&lt;discrim_quad&gt;</i>)</a></code> <code><a href="discrim_update.html">update(<i>&lt;discrim_regularized&gt;</i>)</a></code> <code><a href="discrim_update.html">update(<i>&lt;naive_Bayes&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Update a model specification</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="frac_common_cov.html">frac_common_cov()</a></code> <code><a href="frac_common_cov.html">frac_identity()</a></code> <code><a href="frac_common_cov.html">smoothness()</a></code> </p>
-        </td>
-        <td><p>Parameter objects for Regularized Discriminant Models</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="naive_Bayes.html">naive_Bayes()</a></code> </p>
-        </td>
-        <td><p>Naive Bayes models</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="parabolic.html">parabolic</a></code> </p>
-        </td>
-        <td><p>Parabolic class boundary data</p></td>
-      </tr>
-    </tbody>
-    </table>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>For this engine, there is a single mode: classification</p><h3 class='hasAnchor' id='tuning-parameters'><a class='anchor' aria-hidden='true' href='#tuning-parameters'></a>Tuning Parameters</h3>
+
+
+<p>This model has 2 tuning parameter:</p><ul>
+<li><p><code>smoothness</code>: Kernel Smoothness (type: double, default: 1.0)</p></li>
+<li><p><code>Laplace</code>: Laplace Correction (type: double, default: 0.0)</p></li>
+</ul>
+
+<p>Note that <code>usekernel</code> is always set to <code>TRUE</code> for the <code>klaR</code> engine.</p>
+
+<h3 class='hasAnchor' id='translation-from-parsnip-to-the-original-package'><a class='anchor' aria-hidden='true' href='#translation-from-parsnip-to-the-original-package'></a>Translation from parsnip to the original package</h3>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='fu'><a href='naive_Bayes.html'>naive_Bayes</a></span><span class='op'>(</span>smoothness <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span>, Laplace <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"klaR"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/translate.html'>translate</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre><p></div></p><pre class='sourceCode r'><code><span class='co'>## Naive Bayes Model Specification (classification)</span>
+<span class='co'>## </span>
+<span class='co'>## Main Arguments:</span>
+<span class='co'>##   smoothness = numeric(0)</span>
+<span class='co'>##   Laplace = numeric(0)</span>
+<span class='co'>## </span>
+<span class='co'>## Computational engine: klaR </span>
+<span class='co'>## </span>
+<span class='co'>## Model fit template:</span>
+<span class='co'>## discrim::klar_bayes_wrapper(x = missing_arg(), y = missing_arg(), </span>
+<span class='co'>##     adjust = numeric(0), fL = numeric(0), usekernel = TRUE)</span>
+</code></pre>
+
+
+<h3 class='hasAnchor' id='preprocessing-requirements'><a class='anchor' aria-hidden='true' href='#preprocessing-requirements'></a>Preprocessing requirements</h3>
+
+
+<p>The columns for qualitative predictors should always be represented as
+factors (as opposed to dummy/indicator variables). When the predictors
+are factors, the underlying code treats them as multinomial data and
+appropriately computes their conditional distributions.</p>
+<p>Variance calculations are used in these computations so no
+<em>zero-variance</em> predictors (i.e., with a single unique value) should be
+eliminated before fitting the model.</p>
+
+<h3 class='hasAnchor' id='references'><a class='anchor' aria-hidden='true' href='#references'></a>References</h3>
+
+<ul>
+<li><p>Kuhn, M, and K Johnson. 2013. <em>Applied Predictive Modeling</em>.
+Springer.</p></li>
+</ul>
+
+
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

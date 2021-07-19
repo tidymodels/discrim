@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>General Interface for Flexible Discriminant Models — discrim_flexible • discrim</title>
+<title>Flexible discriminant analysis — discrim_flexible • discrim</title>
 
 
 <!-- jquery -->
@@ -42,10 +42,17 @@
 
 
 
-<meta property="og:title" content="General Interface for Flexible Discriminant Models — discrim_flexible" />
-<meta property="og:description" content="discrim_flexible() is a way to generate a specification of a flexible
-discriminant model using features created using multivariate adaptive
-regression splines (MARS)." />
+<meta property="og:title" content="Flexible discriminant analysis — discrim_flexible" />
+<meta property="og:description" content="discrim_flexible() defines a model that fits a discriminant analysis model
+that can use nonlinear features created using multivariate adaptive
+regression splines (MARS).
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+earth  (default) 
+
+More information on how parsnip is used for modeling is at
+https://www.tidymodels.org/." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,32 +133,30 @@ regression splines (MARS)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>General Interface for Flexible Discriminant Models</h1>
+    <h1>Flexible discriminant analysis</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/discrim_flexible.R'><code>R/discrim_flexible.R</code></a></small>
     <div class="hidden name"><code>discrim_flexible.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>discrim_flexible()</code> is a way to generate a <em>specification</em> of a flexible
-discriminant model using features created using multivariate adaptive
+    <p><code>discrim_flexible()</code> defines a model that fits a discriminant analysis model
+that can use nonlinear features created using multivariate adaptive
 regression splines (MARS).</p>
+<p>There are different ways to fit this model. See the engine-specific pages
+for more details:</p>
+<p><ul>
+<li><p><code><a href='details_discrim_flexible_earth.html'>earth</a>  (default) </code></p></li>
+</ul></p>
+<p>More information on how <span class="pkg">parsnip</span> is used for modeling is at
+<a href='https://www.tidymodels.org/'>https://www.tidymodels.org/</a>.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>discrim_flexible</span><span class='op'>(</span>
   mode <span class='op'>=</span> <span class='st'>"classification"</span>,
+  engine <span class='op'>=</span> <span class='st'>"earth"</span>,
   num_terms <span class='op'>=</span> <span class='cn'>NULL</span>,
   prod_degree <span class='op'>=</span> <span class='cn'>NULL</span>,
   prune_method <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span>
-
-<span class='co'># S3 method for discrim_flexible</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span>
-  <span class='va'>object</span>,
-  num_terms <span class='op'>=</span> <span class='cn'>NULL</span>,
-  prod_degree <span class='op'>=</span> <span class='cn'>NULL</span>,
-  prune_method <span class='op'>=</span> <span class='cn'>NULL</span>,
-  fresh <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  <span class='va'>...</span>
 <span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -159,8 +164,13 @@ regression splines (MARS).</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>mode</th>
-      <td><p>A single character string for the type of model.
-The only possible value for this model is "classification".</p></td>
+      <td><p>A single character string for the type of model. The only
+possible value for this model is "classification".</p></td>
+    </tr>
+    <tr>
+      <th>engine</th>
+      <td><p>A single character string specifying what computational engine to use
+for fitting.</p></td>
     </tr>
     <tr>
       <th>num_terms</th>
@@ -175,80 +185,20 @@ final model, including the intercept.</p></td>
       <th>prune_method</th>
       <td><p>The pruning method.</p></td>
     </tr>
-    <tr>
-      <th>object</th>
-      <td><p>A flexible discriminant model specification.</p></td>
-    </tr>
-    <tr>
-      <th>fresh</th>
-      <td><p>A logical for whether the arguments should be
-modified in-place of or replaced wholesale.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Not used for <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code>.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Flexible discriminant analysis (FDA) uses the work of Hastie et al (1994)
-to create a discriminant model using different feature expansions. For this
-function, MARS (Friedman, 1991) hinge functions are used to nonlinearly
-model the class boundaries (see example below). The <span class="pkg">mda</span> and
-<span class="pkg">earth</span> packages are needed to fit this model.</p>
-<p>The main arguments for the model are:</p><ul>
-<li><p><code>num_terms</code>: The number of features that will be retained in the
-final model.</p></li>
-<li><p><code>prod_degree</code>: The highest possible degree of interaction between
-features. A value of 1 indicates and additive model while a value of 2
-allows, but does not guarantee, two-way interactions between features.</p></li>
-<li><p><code>prune_method</code>: The type of pruning. Possible values are listed
-in <code>?earth</code>.</p></li>
-</ul>
-
-<p>These arguments are converted to their specific names at the
-time that the model is fit. Other options and argument can be
-set using <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine()</a></code>. If left to their defaults
-here (<code>NULL</code>), the values are taken from the underlying model
-functions. If parameters need to be modified, <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code> can be used
-in lieu of recreating the object from scratch.</p>
-<p>The model can be created using the <code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></code> function using the following
-<em>engines</em>:</p><ul>
-<li><p><span class="pkg">R</span>:  <code>"earth"</code>  (the default)</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="engine-details"><a class="anchor" href="#engine-details"></a>Engine Details</h2>
-
-    <p>Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:<div class="sourceCode r"></p><pre class='sourceCode r'><code><span class='fu'>discrim_flexible</span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
-  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"earth"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
-  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/translate.html'>translate</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre><p></div></p><pre class='sourceCode r'><code><span class='co'>## Flexible Discriminant Model Specification (classification)</span>
-<span class='co'>## </span>
-<span class='co'>## Computational engine: earth </span>
-<span class='co'>## </span>
-<span class='co'>## Model fit template:</span>
-<span class='co'>## mda::fda(formula = missing_arg(), data = missing_arg(), method = earth::earth)</span>
-</code></pre>
-
-<p>The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters. Each engine
-typically has a different default value (shown in parentheses) for each
-parameter.</p><table class='table'>
-<tr><td><strong>parsnip</strong></td><td><strong>earth</strong></td></tr>
-<tr><td>num_terms</td><td>nprune (all created by forward pass)</td></tr>
-<tr><td>prod_degree</td><td>degree (1)</td></tr>
-<tr><td>prune_method</td><td>pmethod (backward)</td></tr>
-</table>
-
-
+    <p>This function only defines what <em>type</em> of model is being fit. Once an engine
+is specified, the <em>method</em> to fit the model is also defined.</p>
+<p>The model is not trained or fit until the <code><a href='https://parsnip.tidymodels.org/reference/fit.html'>fit.model_spec()</a></code> function is used
+with the data.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Friedman (1991), Multivariate Adaptive Regression Splines (with discussion),
-<em>Annals of Statistics</em> 19:1, 1–141.
-Hastie, Tibshirani and Buja (1994), Flexible Discriminant Analysis by Optimal
-Scoring, <em>Journal of the American Statistical Association</em>, 1255-1270.</p>
+    <p><a href='https://www.tidymodels.org'>https://www.tidymodels.org</a>, <a href='https://tmwr.org'><em>Tidy Models with R</em></a></p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='details_discrim_flexible_earth.html'>earth engine details</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>parabolic_grid</span> <span class='op'>&lt;-</span></span>
@@ -272,21 +222,6 @@ Scoring, <em>Journal of the American Statistical Association</em>, 1255-1270.</p
 <span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"top"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_equal</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-plt'><img src='discrim_flexible-1.png' alt='' width='768' height='552' /></span>
-<span class='r-in'></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>discrim_flexible</span><span class='op'>(</span>num_terms <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>model</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Flexible Discriminant Model Specification (classification)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Main Arguments:</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   num_terms = 10</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>model</span>, num_terms <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Flexible Discriminant Model Specification (classification)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Main Arguments:</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   num_terms = 6</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 </code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

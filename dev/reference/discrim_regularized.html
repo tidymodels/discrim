@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>General Interface for Regularized Discriminant Models — discrim_regularized • discrim</title>
+<title>Regularized discriminant analysis — discrim_regularized • discrim</title>
 
 
 <!-- jquery -->
@@ -42,9 +42,19 @@
 
 
 
-<meta property="og:title" content="General Interface for Regularized Discriminant Models — discrim_regularized" />
-<meta property="og:description" content="discrim_regularized() is a way to generate a specification of a
-regularized discriminant analysis (RDA) model before fitting." />
+<meta property="og:title" content="Regularized discriminant analysis — discrim_regularized" />
+<meta property="og:description" content="discrim_regularized() defines a model that estimates a multivariate
+distribution for the predictors separately for the data in each class. The
+structure of the model can be LDA, QDA, or some amalgam of the two. Bayes'
+theorem is used to compute the probability of each class, given the
+predictor values.
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+klaR  (default) 
+
+More information on how parsnip is used for modeling is at
+https://www.tidymodels.org/." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -125,29 +135,31 @@ regularized discriminant analysis (RDA) model before fitting." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>General Interface for Regularized Discriminant Models</h1>
+    <h1>Regularized discriminant analysis</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/discrim_regularized.R'><code>R/discrim_regularized.R</code></a></small>
     <div class="hidden name"><code>discrim_regularized.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>discrim_regularized()</code> is a way to generate a <em>specification</em> of a
-regularized discriminant analysis (RDA) model before fitting.</p>
+    <p><code>discrim_regularized()</code> defines a model that estimates a multivariate
+distribution for the predictors separately for the data in each class. The
+structure of the model can be LDA, QDA, or some amalgam of the two. Bayes'
+theorem is used to compute the probability of each class, given the
+predictor values.</p>
+<p>There are different ways to fit this model. See the engine-specific pages
+for more details:</p>
+<p><ul>
+<li><p><code><a href='details_discrim_regularized_klaR.html'>klaR</a>  (default) </code></p></li>
+</ul></p>
+<p>More information on how <span class="pkg">parsnip</span> is used for modeling is at
+<a href='https://www.tidymodels.org/'>https://www.tidymodels.org/</a>.</p>
     </div>
 
     <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>discrim_regularized</span><span class='op'>(</span>
   mode <span class='op'>=</span> <span class='st'>"classification"</span>,
+  engine <span class='op'>=</span> <span class='st'>"klaR"</span>,
   frac_common_cov <span class='op'>=</span> <span class='cn'>NULL</span>,
   frac_identity <span class='op'>=</span> <span class='cn'>NULL</span>
-<span class='op'>)</span>
-
-<span class='co'># S3 method for discrim_regularized</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span>
-  <span class='va'>object</span>,
-  frac_common_cov <span class='op'>=</span> <span class='cn'>NULL</span>,
-  frac_identity <span class='op'>=</span> <span class='cn'>NULL</span>,
-  fresh <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  <span class='va'>...</span>
 <span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -159,80 +171,42 @@ regularized discriminant analysis (RDA) model before fitting.</p>
 possible value for this model is "classification".</p></td>
     </tr>
     <tr>
+      <th>engine</th>
+      <td><p>A single character string specifying what computational engine to use
+for fitting.</p></td>
+    </tr>
+    <tr>
       <th>frac_common_cov, frac_identity</th>
       <td><p>Numeric values between zero and one.</p></td>
-    </tr>
-    <tr>
-      <th>object</th>
-      <td><p>A linear discriminant model specification.</p></td>
-    </tr>
-    <tr>
-      <th>fresh</th>
-      <td><p>A logical for whether the arguments should be
-modified in-place of or replaced wholesale.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Not used for <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The model is from Friedman (1989) and can create LDA models, QDA models,
-and regularized mixtures of the two. It does <em>not</em> conduct feature
-selection. The main arguments for the model are:</p><ul>
-<li><p><code>frac_common_cov</code>: The fraction of the regularized covariance
-matrix that is based on the LDA model (i.e., computed from all classes). A
-value of 1 is the linear discriminant analysis assumption while a value
-near zero assumes that there should be separate covariance matrices for
-each class.</p></li>
-<li><p><code>frac_identity</code>: The fraction of the final, class-specific
-covariance matrix that is the identity matrix.</p></li>
-</ul>
-
-<p>See <code><a href='https://rdrr.io/pkg/klaR/man/rda.html'>klaR::rda()</a></code> for the equations that define these parameters.</p>
-<p>These arguments are converted to their specific names at the time that the
-model is fit. Other options and argument can be set using <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine()</a></code>. If
-left to their defaults here (<code>NULL</code>), the values are taken from the
-underlying model functions. If parameters need to be modified, <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code>
-can be used in lieu of recreating the object from scratch.</p>
-<p>For <code>discrim_regularized()</code>, the mode will always be "classification".</p>
-<p>Some special cases for the RDA model:</p><ul>
-<li><p><code>frac_identity = 0</code> and <code>frac_common_cov = 1</code> is a linear
-discriminant analysis (LDA) model.</p></li>
-<li><p><code>frac_identity = 0</code> and <code>frac_common_cov = 0</code> is a quadratic
-discriminant analysis (QDA) model.</p></li>
-</ul>
-
-    <h2 class="hasAnchor" id="engine-details"><a class="anchor" href="#engine-details"></a>Engine Details</h2>
-
-    <p>Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:<div class="sourceCode r"></p><pre class='sourceCode r'><code><span class='fu'>discrim_regularized</span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
-  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"klaR"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
-  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/translate.html'>translate</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre><p></div></p><pre class='sourceCode r'><code><span class='co'>## Regularized Discriminant Model Specification (classification)</span>
-<span class='co'>## </span>
-<span class='co'>## Computational engine: klaR </span>
-<span class='co'>## </span>
-<span class='co'>## Model fit template:</span>
-<span class='co'>## klaR::rda(formula = missing_arg(), data = missing_arg())</span>
-</code></pre>
-
-<p>The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters. Each engine
-typically has a different default value (shown in parentheses) for each
-parameter.</p><table class='table'>
-<tr><td><strong>parsnip</strong></td><td><strong>klaR</strong></td></tr>
-<tr><td>frac_common_cov</td><td>lambda (varies)</td></tr>
-<tr><td>frac_identity</td><td>gamma (varies)</td></tr>
-</table>
-
-
+    <p>There are many ways of regularizing models. For example, one form of
+regularization is to penalize model parameters. Similarly, the classic
+James–Stein regularization approach shrinks the model structure to a less
+complex form.</p>
+<p>The model fits a very specific type of regularized model by Friedman (1989)
+that uses two types of regularization. One modulates how class-specific the
+covariance matrix should be. This allows the model to balance between LDA
+and QDA. The second regularization component shrinks the covariance matrix
+towards the identity matrix.</p>
+<p>For the penalization approach, <code><a href='discrim_linear.html'>discrim_linear()</a></code> with a <code>mda</code> engine can be
+used. Other regularization methods can be used with <code><a href='discrim_linear.html'>discrim_linear()</a></code> and
+<code><a href='discrim_quad.html'>discrim_quad()</a></code> can used via the <code>sparsediscrim</code> engine for those functions.</p>
+<p>This function only defines what <em>type</em> of model is being fit. Once an engine
+is specified, the <em>method</em> to fit the model is also defined.</p>
+<p>The model is not trained or fit until the <code><a href='https://parsnip.tidymodels.org/reference/fit.html'>fit.model_spec()</a></code> function is used
+with the data.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Friedman, J.H. (1989). Regularized Discriminant Analysis. <em>Journal
-of the American Statistical Association</em> 84, 165-175.</p>
+    <p><a href='https://www.tidymodels.org'>https://www.tidymodels.org</a>, <a href='https://tmwr.org'><em>Tidy Models with R</em></a></p>
+<p>Friedman, J (1989). Regularized Discriminant Analysis. <em>Journal of the
+American Statistical Association</em>, 84, 165-175.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='details_discrim_regularized_klaR.html'>klaR engine details</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>parabolic_grid</span> <span class='op'>&lt;-</span></span>
@@ -255,21 +229,6 @@ of the American Statistical Association</em> 84, 165-175.</p>
 <span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"top"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_equal</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-plt'><img src='discrim_regularized-1.png' alt='' width='768' height='552' /></span>
-<span class='r-in'></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>discrim_regularized</span><span class='op'>(</span>frac_common_cov <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>model</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Regularized Discriminant Model Specification (classification)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Main Arguments:</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   frac_common_cov = 10</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>model</span>, frac_common_cov <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Regularized Discriminant Model Specification (classification)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Main Arguments:</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   frac_common_cov = 1</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 </code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
