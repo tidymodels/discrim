@@ -2,28 +2,22 @@
 % Please edit documentation in R/discrim_flexible.R
 \name{discrim_flexible}
 \alias{discrim_flexible}
-\alias{update.discrim_flexible}
-\title{General Interface for Flexible Discriminant Models}
+\title{Flexible discriminant analysis}
 \usage{
 discrim_flexible(
   mode = "classification",
+  engine = "earth",
   num_terms = NULL,
   prod_degree = NULL,
   prune_method = NULL
 )
-
-\method{update}{discrim_flexible}(
-  object,
-  num_terms = NULL,
-  prod_degree = NULL,
-  prune_method = NULL,
-  fresh = FALSE,
-  ...
-)
 }
 \arguments{
-\item{mode}{A single character string for the type of model.
-The only possible value for this model is "classification".}
+\item{mode}{A single character string for the type of model. The only
+possible value for this model is "classification".}
+
+\item{engine}{A single character string specifying what computational engine to use
+for fitting.}
 
 \item{num_terms}{The number of features that will be retained in the
 final model, including the intercept.}
@@ -31,74 +25,27 @@ final model, including the intercept.}
 \item{prod_degree}{The highest possible interaction degree.}
 
 \item{prune_method}{The pruning method.}
-
-\item{object}{A flexible discriminant model specification.}
-
-\item{fresh}{A logical for whether the arguments should be
-modified in-place of or replaced wholesale.}
-
-\item{...}{Not used for \code{update()}.}
 }
 \description{
-\code{discrim_flexible()} is a way to generate a \emph{specification} of a flexible
-discriminant model using features created using multivariate adaptive
+\code{discrim_flexible()} defines a model that fits a discriminant analysis model
+that can use nonlinear features created using multivariate adaptive
 regression splines (MARS).
+
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+\Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_flexible", "discrim")}
+
+More information on how \pkg{parsnip} is used for modeling is at
+\url{https://www.tidymodels.org/}.
 }
 \details{
-Flexible discriminant analysis (FDA) uses the work of Hastie et al (1994)
-to create a discriminant model using different feature expansions. For this
-function, MARS (Friedman, 1991) hinge functions are used to nonlinearly
-model the class boundaries (see example below). The \pkg{mda} and
-\pkg{earth} packages are needed to fit this model.
+This function only defines what \emph{type} of model is being fit. Once an engine
+is specified, the \emph{method} to fit the model is also defined.
 
-The main arguments for the model are:
-\itemize{
-\item \code{num_terms}: The number of features that will be retained in the
-final model.
-\item \code{prod_degree}: The highest possible degree of interaction between
-features. A value of 1 indicates and additive model while a value of 2
-allows, but does not guarantee, two-way interactions between features.
-\item \code{prune_method}: The type of pruning. Possible values are listed
-in \code{?earth}.
+The model is not trained or fit until the \code{\link[=fit.model_spec]{fit.model_spec()}} function is used
+with the data.
 }
-
-These arguments are converted to their specific names at the
-time that the model is fit. Other options and argument can be
-set using \code{set_engine()}. If left to their defaults
-here (\code{NULL}), the values are taken from the underlying model
-functions. If parameters need to be modified, \code{update()} can be used
-in lieu of recreating the object from scratch.
-
-The model can be created using the \code{fit()} function using the following
-\emph{engines}:
-\itemize{
-\item \pkg{R}:  \code{"earth"}  (the default)
-}
-}
-\section{Engine Details}{
-Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_flexible() \%>\% 
-  set_engine("earth") \%>\% 
-  translate()
-}\if{html}{\out{</div>}}\preformatted{## Flexible Discriminant Model Specification (classification)
-## 
-## Computational engine: earth 
-## 
-## Model fit template:
-## mda::fda(formula = missing_arg(), data = missing_arg(), method = earth::earth)
-}
-
-The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters. Each engine
-typically has a different default value (shown in parentheses) for each
-parameter.\tabular{ll}{
-   \strong{parsnip} \tab \strong{earth} \cr
-   num_terms \tab nprune (all created by forward pass) \cr
-   prod_degree \tab degree (1) \cr
-   prune_method \tab pmethod (backward) \cr
-}
-}
-
 \examples{
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
@@ -120,15 +67,10 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
-
-
-model <- discrim_flexible(num_terms = 10)
-model
-update(model, num_terms = 6)
 }
 \references{
-Friedman (1991), Multivariate Adaptive Regression Splines (with discussion),
-\emph{Annals of Statistics} 19:1, 1–141.
-Hastie, Tibshirani and Buja (1994), Flexible Discriminant Analysis by Optimal
-Scoring, \emph{Journal of the American Statistical Association}, 1255-1270.
+\url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
+}
+\seealso{
+\Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_flexible", "discrim")}
 }

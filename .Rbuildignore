@@ -18,3 +18,4 @@ derby.log
 ^\.covrignore$
 ^\.github$
 ^LICENSE\.md$
+^man-roxygen$

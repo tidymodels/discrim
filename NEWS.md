@@ -1,8 +1,12 @@
 # discrim (development version)
 
+* An LDA engine was added for the shrunken discriminant analysis method of Ahdesmaki and Strimmer (2010) with `engine = "sda"`. 
+
+* LDA and QDA models now have an engine that fits several regularized discriminant models from the `sparsediscrim` package. 
+
 # discrim 0.1.2
 
- * added `discrim_quad()`
+ * Added `discrim_quad()`
  
  * Fixed a bug in the parameter definitions (#19)
  

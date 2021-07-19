@@ -18,7 +18,7 @@ prob_matrix_to_tibble <- function(x, object) {
 # ------------------------------------------------------------------------------
 
 # This is needed since parnsip is looking for a funciton like `foo(x, y)` but
-# we have `NaiveBayes(x, grouping)`. It just maps x -> grouping
+# we have `NaiveBayes(x, grouping)`. It just maps y -> grouping
 #' Internal wrapper functions
 #' @export
 #' @keywords internal

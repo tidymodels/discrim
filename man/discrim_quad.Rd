@@ -2,58 +2,46 @@
 % Please edit documentation in R/discrim_quad.R
 \name{discrim_quad}
 \alias{discrim_quad}
-\alias{update.discrim_quad}
-\title{General Interface for Quadratic Discriminant Models}
+\title{Quadratic discriminant analysis}
 \usage{
-discrim_quad(mode = "classification")
-
-\method{update}{discrim_quad}(object, fresh = FALSE, ...)
+discrim_quad(
+  mode = "classification",
+  engine = "MASS",
+  regularization_method = NULL
+)
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
 possible value for this model is "classification".}
 
-\item{object}{A quadratic discriminant model specification.}
+\item{engine}{A single character string specifying what computational engine to use
+for fitting.}
 
-\item{fresh}{A logical for whether the arguments should be
-modified in-place of or replaced wholesale.}
-
-\item{...}{Not used for \code{update()}.}
+\item{regularization_method}{A character string for the type of regularized
+estimation. Possible values are: "\code{diagonal}", "\code{shrink_cov}", and
+"\code{shrink_mean}" (\code{sparsediscrim} engine only).}
 }
 \description{
-\code{discrim_quad()} is a way to generate a \emph{specification} of a quadratic
-discriminant analysis (QDA) model before fitting and allows the model to be
-created using different packages in R.
+\code{discrim_quad()} defines a model that estimates a multivariate
+distribution for the predictors separately for the data in each class
+(usually Gaussian with separate covariance matrices). Bayes' theorem is used
+to compute the probability of each class, given the predictor values.
+
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+\Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_quad", "discrim")}
+
+More information on how \pkg{parsnip} is used for modeling is at
+\url{https://www.tidymodels.org/}.
 }
 \details{
-For \code{discrim_quad()}, the mode will always be "classification".
+This function only defines what \emph{type} of model is being fit. Once an engine
+is specified, the \emph{method} to fit the model is also defined.
 
-The model can be created using the \code{fit()} function using the following
-\emph{engines}:
-\itemize{
-\item \pkg{R}:  \code{"MASS"}
+The model is not trained or fit until the \code{\link[=fit.model_spec]{fit.model_spec()}} function is used
+with the data.
 }
-
-This argument is converted to its specific names at the time that the model
-is fit. Other options and argument can be set using \code{set_engine()}. If left
-to their defaults here (\code{NULL}), the values are taken from the underlying
-model functions. If parameters need to be modified, \code{update()} can be used
-in lieu of recreating the object from scratch.
-}
-\section{Engine Details}{
-Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_linear() \%>\% 
-  set_engine("MASS") \%>\% 
-  translate()
-}\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
-## 
-## Computational engine: MASS 
-## 
-## Model fit template:
-## MASS::lda(formula = missing_arg(), data = missing_arg())
-}
-}
-
 \examples{
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
@@ -74,4 +62,10 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
+}
+\references{
+\url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
+}
+\seealso{
+\Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_quad", "discrim")}
 }

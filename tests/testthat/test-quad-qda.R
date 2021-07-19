@@ -137,14 +137,3 @@ test_that('missing data', {
   expect_equal(f_pred, exp_f_pred)
 })
 
-# ------------------------------------------------------------------------------
-
-test_that('api errors', {
-  expect_error(
-    discrim_quad() %>% set_engine("qda"),
-    regexp = "Available engines are: 'MASS'"
-  )
-})
-
-
-

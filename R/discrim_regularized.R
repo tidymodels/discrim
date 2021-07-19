@@ -1,41 +1,50 @@
-#' General Interface for Regularized Discriminant Models
+#' Regularized discriminant analysis
 #'
-#' `discrim_regularized()` is a way to generate a _specification_ of a
-#' regularized discriminant analysis (RDA) model before fitting.
+#' @description
 #'
-#' @param mode A single character string for the type of model. The only
-#'  possible value for this model is "classification".
+#' `discrim_regularized()` defines a model that estimates a multivariate
+#'  distribution for the predictors separately for the data in each class. The
+#'  structure of the model can be LDA, QDA, or some amalgam of the two. Bayes'
+#'  theorem is used to compute the probability of each class, given the
+#'  predictor values.
+#'
+#' There are different ways to fit this model. See the engine-specific pages
+#' for more details:
+#'
+#' \Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_regularized", "discrim")}
+#'
+#' More information on how \pkg{parsnip} is used for modeling is at
+#' \url{https://www.tidymodels.org/}.
+#'
+#'
+#' @inheritParams discrim_linear
 #' @param frac_common_cov,frac_identity Numeric values between zero and one.
+#'
 #' @details
+#' There are many ways of regularizing models. For example, one form of
+#'  regularization is to penalize model parameters. Similarly, the classic
+#'  James–Stein regularization approach shrinks the model structure to a less
+#'  complex form.
 #'
-#' The model is from Friedman (1989) and can create LDA models, QDA models,
-#'  and regularized mixtures of the two. It does _not_ conduct feature
-#'  selection. The main arguments for the model are:
-#' \itemize{
-#'   \item \code{frac_common_cov}: The fraction of the regularized covariance
-#'   matrix that is based on the LDA model (i.e., computed from all classes). A
-#'   value of 1 is the linear discriminant analysis assumption while a value
-#'   near zero assumes that there should be separate covariance matrices for
-#'   each class.
-#'   \item \code{frac_identity}: The fraction of the final, class-specific
-#'   covariance matrix that is the identity matrix.
-#' }
+#' The model fits a very specific type of regularized model by Friedman (1989)
+#'  that uses two types of regularization. One modulates how class-specific the
+#'  covariance matrix should be. This allows the model to balance between LDA
+#'  and QDA. The second regularization component shrinks the covariance matrix
+#'  towards the identity matrix.
 #'
-#' See `klaR::rda()` for the equations that define these parameters.
+#' For the penalization approach, [discrim_linear()] with a `mda` engine can be
+#'  used. Other regularization methods can be used with [discrim_linear()] and
+#'  [discrim_quad()] can used via the `sparsediscrim` engine for those functions.
 #'
-#' These arguments are converted to their specific names at the time that the
-#'  model is fit. Other options and argument can be set using `set_engine()`. If
-#'  left to their defaults here (`NULL`), the values are taken from the
-#'  underlying model functions. If parameters need to be modified, `update()`
-#'  can be used in lieu of recreating the object from scratch.
-
+#' @template spec-details
 #'
-#' For `discrim_regularized()`, the mode will always be "classification".
+#' @template spec-references
 #'
-#' @includeRmd man/rmd/discrim-regularized-engine.Rmd
+#' @references
+#' Friedman, J (1989). Regularized Discriminant Analysis. _Journal of the
+#' American Statistical Association_, 84, 165-175.
 #'
-#' @references Friedman, J.H. (1989). Regularized Discriminant Analysis. _Journal
-#' of the American Statistical Association_ 84, 165-175.
+#' @seealso \Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_regularized", "discrim")}
 #'
 #' @examples
 #' parabolic_grid <-
@@ -59,7 +68,8 @@
 #'   coord_equal()
 #' @export
 discrim_regularized <-
-  function(mode = "classification", frac_common_cov = NULL, frac_identity = NULL) {
+  function(mode = "classification", engine = "klaR",
+           frac_common_cov = NULL, frac_identity = NULL) {
 
     args <- list(
       frac_common_cov = rlang::enquo(frac_common_cov),
@@ -72,7 +82,7 @@ discrim_regularized <-
       eng_args = NULL,
       mode = mode,
       method = NULL,
-      engine = NULL
+      engine = engine
     )
   }
 
@@ -91,16 +101,9 @@ print.discrim_regularized <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' @inheritParams update.discrim_flexible
-#' @param object A linear discriminant model specification.
-#' @examples
-#'
-#'
-#' model <- discrim_regularized(frac_common_cov = 10)
-#' model
-#' update(model, frac_common_cov = 1)
 #' @method update discrim_regularized
-#' @rdname discrim_regularized
+#' @rdname discrim_update
+#' @inheritParams discrim_regularized
 #' @export
 update.discrim_regularized <-
   function(object,

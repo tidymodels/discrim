@@ -1,53 +1,30 @@
-#' General Interface for Flexible Discriminant Models
+#' Flexible discriminant analysis
 #'
-#' `discrim_flexible()` is a way to generate a _specification_ of a flexible
-#'  discriminant model using features created using multivariate adaptive
+#' @description
+#'
+#' `discrim_flexible()` defines a model that fits a discriminant analysis model
+#' that can use nonlinear features created using multivariate adaptive
 #'  regression splines (MARS).
 #'
-#' @param mode A single character string for the type of model.
-#'  The only possible value for this model is "classification".
+#' There are different ways to fit this model. See the engine-specific pages
+#' for more details:
+#'
+#' \Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_flexible", "discrim")}
+#'
+#' More information on how \pkg{parsnip} is used for modeling is at
+#' \url{https://www.tidymodels.org/}.
+#'
+#' @inheritParams discrim_linear
 #' @param num_terms The number of features that will be retained in the
 #'    final model, including the intercept.
 #' @param prod_degree The highest possible interaction degree.
 #' @param prune_method The pruning method.
-#' @details
-#' Flexible discriminant analysis (FDA) uses the work of Hastie et al (1994)
-#'  to create a discriminant model using different feature expansions. For this
-#'  function, MARS (Friedman, 1991) hinge functions are used to nonlinearly
-#'  model the class boundaries (see example below). The \pkg{mda} and
-#'  \pkg{earth} packages are needed to fit this model.
 #'
-#' The main arguments for the model are:
-#' \itemize{
-#'   \item \code{num_terms}: The number of features that will be retained in the
-#'    final model.
-#'   \item \code{prod_degree}: The highest possible degree of interaction between
-#'    features. A value of 1 indicates and additive model while a value of 2
-#'    allows, but does not guarantee, two-way interactions between features.
-#'   \item \code{prune_method}: The type of pruning. Possible values are listed
-#'    in `?earth`.
-#' }
+#' @template spec-details
 #'
-#' These arguments are converted to their specific names at the
-#'  time that the model is fit. Other options and argument can be
-#'  set using `set_engine()`. If left to their defaults
-#'  here (`NULL`), the values are taken from the underlying model
-#'  functions. If parameters need to be modified, `update()` can be used
-#'  in lieu of recreating the object from scratch.
+#' @template spec-references
 #'
-#' The model can be created using the `fit()` function using the following
-#'  _engines_:
-#' \itemize{
-#' \item \pkg{R}:  `"earth"`  (the default)
-#' }
-#'
-#' @includeRmd man/rmd/discrim-flexible-engine.Rmd
-#'
-#' @references
-#' Friedman (1991), Multivariate Adaptive Regression Splines (with discussion),
-#' _Annals of Statistics_ 19:1, 1–141.
-#' Hastie, Tibshirani and Buja (1994), Flexible Discriminant Analysis by Optimal
-#' Scoring, _Journal of the American Statistical Association_, 1255-1270.
+#' @seealso \Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_flexible", "discrim")}
 #'
 #' @examples
 #' parabolic_grid <-
@@ -72,7 +49,7 @@
 #'   coord_equal()
 #' @export
 discrim_flexible <-
-  function(mode = "classification", num_terms = NULL, prod_degree = NULL,
+  function(mode = "classification", engine = "earth", num_terms = NULL, prod_degree = NULL,
            prune_method = NULL) {
 
     args <- list(
@@ -87,7 +64,7 @@ discrim_flexible <-
       eng_args = NULL,
       mode = mode,
       method = NULL,
-      engine = NULL
+      engine = engine
     )
   }
 
@@ -106,18 +83,14 @@ print.discrim_flexible <- function(x, ...) {
 
 # ------------------------------------------------------------------------------
 
-#' @param object A flexible discriminant model specification.
+#' Update a model specification
+#' @param object A model specification.
 #' @param ... Not used for `update()`.
 #' @param fresh A logical for whether the arguments should be
 #'  modified in-place of or replaced wholesale.
-#' @examples
-#'
-#'
-#' model <- discrim_flexible(num_terms = 10)
-#' model
-#' update(model, num_terms = 6)
 #' @method update discrim_flexible
-#' @rdname discrim_flexible
+#' @rdname discrim_update
+#' @inheritParams discrim_flexible
 #' @export
 update.discrim_flexible <-
   function(object,

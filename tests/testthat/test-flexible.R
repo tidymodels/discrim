@@ -102,15 +102,6 @@ test_that('missing data', {
 
 # ------------------------------------------------------------------------------
 
-test_that('api errors', {
-  expect_error(
-    discrim_flexible() %>% set_engine("monday"),
-    regexp = "Available engines are: 'earth'"
-  )
-})
-
-# ------------------------------------------------------------------------------
-
 test_that('loaded model data', {
   expect_error(
     discrim:::make_discrim_flexible(),

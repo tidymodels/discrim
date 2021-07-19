@@ -2,95 +2,61 @@
 % Please edit documentation in R/discrim_regularized.R
 \name{discrim_regularized}
 \alias{discrim_regularized}
-\alias{update.discrim_regularized}
-\title{General Interface for Regularized Discriminant Models}
+\title{Regularized discriminant analysis}
 \usage{
 discrim_regularized(
   mode = "classification",
+  engine = "klaR",
   frac_common_cov = NULL,
   frac_identity = NULL
-)
-
-\method{update}{discrim_regularized}(
-  object,
-  frac_common_cov = NULL,
-  frac_identity = NULL,
-  fresh = FALSE,
-  ...
 )
 }
 \arguments{
 \item{mode}{A single character string for the type of model. The only
 possible value for this model is "classification".}
 
+\item{engine}{A single character string specifying what computational engine to use
+for fitting.}
+
 \item{frac_common_cov, frac_identity}{Numeric values between zero and one.}
-
-\item{object}{A linear discriminant model specification.}
-
-\item{fresh}{A logical for whether the arguments should be
-modified in-place of or replaced wholesale.}
-
-\item{...}{Not used for \code{update()}.}
 }
 \description{
-\code{discrim_regularized()} is a way to generate a \emph{specification} of a
-regularized discriminant analysis (RDA) model before fitting.
+\code{discrim_regularized()} defines a model that estimates a multivariate
+distribution for the predictors separately for the data in each class. The
+structure of the model can be LDA, QDA, or some amalgam of the two. Bayes'
+theorem is used to compute the probability of each class, given the
+predictor values.
+
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+\Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_regularized", "discrim")}
+
+More information on how \pkg{parsnip} is used for modeling is at
+\url{https://www.tidymodels.org/}.
 }
 \details{
-The model is from Friedman (1989) and can create LDA models, QDA models,
-and regularized mixtures of the two. It does \emph{not} conduct feature
-selection. The main arguments for the model are:
-\itemize{
-\item \code{frac_common_cov}: The fraction of the regularized covariance
-matrix that is based on the LDA model (i.e., computed from all classes). A
-value of 1 is the linear discriminant analysis assumption while a value
-near zero assumes that there should be separate covariance matrices for
-each class.
-\item \code{frac_identity}: The fraction of the final, class-specific
-covariance matrix that is the identity matrix.
-}
+There are many ways of regularizing models. For example, one form of
+regularization is to penalize model parameters. Similarly, the classic
+James–Stein regularization approach shrinks the model structure to a less
+complex form.
 
-See \code{klaR::rda()} for the equations that define these parameters.
+The model fits a very specific type of regularized model by Friedman (1989)
+that uses two types of regularization. One modulates how class-specific the
+covariance matrix should be. This allows the model to balance between LDA
+and QDA. The second regularization component shrinks the covariance matrix
+towards the identity matrix.
 
-These arguments are converted to their specific names at the time that the
-model is fit. Other options and argument can be set using \code{set_engine()}. If
-left to their defaults here (\code{NULL}), the values are taken from the
-underlying model functions. If parameters need to be modified, \code{update()}
-can be used in lieu of recreating the object from scratch.
+For the penalization approach, \code{\link[=discrim_linear]{discrim_linear()}} with a \code{mda} engine can be
+used. Other regularization methods can be used with \code{\link[=discrim_linear]{discrim_linear()}} and
+\code{\link[=discrim_quad]{discrim_quad()}} can used via the \code{sparsediscrim} engine for those functions.
 
-For \code{discrim_regularized()}, the mode will always be "classification".
+This function only defines what \emph{type} of model is being fit. Once an engine
+is specified, the \emph{method} to fit the model is also defined.
 
-Some special cases for the RDA model:
-\itemize{
-\item \code{frac_identity = 0} and \code{frac_common_cov = 1} is a linear
-discriminant analysis (LDA) model.
-\item \code{frac_identity = 0} and \code{frac_common_cov = 0} is a quadratic
-discriminant analysis (QDA) model.
+The model is not trained or fit until the \code{\link[=fit.model_spec]{fit.model_spec()}} function is used
+with the data.
 }
-}
-\section{Engine Details}{
-Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_regularized() \%>\% 
-  set_engine("klaR") \%>\% 
-  translate()
-}\if{html}{\out{</div>}}\preformatted{## Regularized Discriminant Model Specification (classification)
-## 
-## Computational engine: klaR 
-## 
-## Model fit template:
-## klaR::rda(formula = missing_arg(), data = missing_arg())
-}
-
-The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters. Each engine
-typically has a different default value (shown in parentheses) for each
-parameter.\tabular{ll}{
-   \strong{parsnip} \tab \strong{klaR} \cr
-   frac_common_cov \tab lambda (varies) \cr
-   frac_identity \tab gamma (varies) \cr
-}
-}
-
 \examples{
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
@@ -111,13 +77,13 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   theme_bw() +
   theme(legend.position = "top") +
   coord_equal()
-
-
-model <- discrim_regularized(frac_common_cov = 10)
-model
-update(model, frac_common_cov = 1)
 }
 \references{
-Friedman, J.H. (1989). Regularized Discriminant Analysis. \emph{Journal
-of the American Statistical Association} 84, 165-175.
+\url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
+
+Friedman, J (1989). Regularized Discriminant Analysis. \emph{Journal of the
+American Statistical Association}, 84, 165-175.
+}
+\seealso{
+\Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_regularized", "discrim")}
 }
