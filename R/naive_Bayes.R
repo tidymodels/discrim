@@ -1,7 +1,17 @@
 #' Naive Bayes models
 #'
-#' `naive_Bayes()` is a way to generate a _specification_ of a model before
-#'  fitting and allows the model to be created using different packages in R.
+#' @description
+#'
+#' `naive_Bayes()` defines a model uses Bayes' theorem to compute the
+#' probability of each class, given the predictor values.
+#'
+#' There are different ways to fit this model. See the engine-specific pages
+#' for more details:
+#'
+#' \Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("naive_Bayes", "discrim")}
+#'
+#' More information on how \pkg{parsnip} is used for modeling is at
+#' \url{https://www.tidymodels.org/}.
 #'
 #' @inheritParams discrim_linear
 #' @param smoothness An non-negative number representing the the relative
@@ -14,6 +24,8 @@
 #' @template spec-details
 #'
 #' @template spec-references
+#'
+#' @seealso \Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("naive_Bayes", "discrim")}
 #'
 #' @examples
 #' parabolic_grid <-

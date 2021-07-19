@@ -37,8 +37,16 @@ modified in-place of or replaced wholesale.}
 \item{...}{Not used for \code{update()}.}
 }
 \description{
-\code{naive_Bayes()} is a way to generate a \emph{specification} of a model before
-fitting and allows the model to be created using different packages in R.
+\code{naive_Bayes()} defines a model uses Bayes' theorem to compute the
+probability of each class, given the predictor values.
+
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+\Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("naive_Bayes", "discrim")}
+
+More information on how \pkg{parsnip} is used for modeling is at
+\url{https://www.tidymodels.org/}.
 }
 \details{
 This function only defines what \emph{type} of model is being fit. Once an engine
@@ -76,4 +84,7 @@ update(model, smoothness = 1, fresh = TRUE)
 }
 \references{
 \url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
+}
+\seealso{
+\Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("naive_Bayes", "discrim")}
 }
