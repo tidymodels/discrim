@@ -1,10 +1,24 @@
-#' Quadratic discriminant models
+#' Quadratic discriminant analysis
 #'
-#' `discrim_quad()` is a way to generate a _specification_ of a quadratic
-#'  discriminant analysis (QDA) model before fitting and allows the model to be
-#'  created using different packages in R.
+#' @description
 #'
-#' @inheritParams discrim_linear
+#' `discrim_quad()` defines a model that estimates a multivariate
+#'  distribution for the predictors separately for the data in each class
+#'  (usually Gaussian with separate covariance matrices). Bayes' theorem is used
+#'  to compute the probability of each class, given the predictor values.
+#'
+#' There are different ways to fit this model. See the engine-specific pages
+#' for more details:
+#'
+#' \Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_quad", "discrim")}
+#'
+#' More information on how \pkg{parsnip} is used for modeling is at
+#' \url{https://www.tidymodels.org/}.
+#'
+#' @param mode A single character string for the type of model. The only
+#'  possible value for this model is "classification".
+#' @param engine A single character string specifying what computational engine to use
+#'  for fitting.
 #' @param regularization_method A character string for the type of regularized
 #'  estimation. Possible values are: "`diagonal`", "`shrink_cov`", and
 #'  "`shrink_mean`" (`sparsediscrim` engine only).
@@ -12,6 +26,8 @@
 #' @template spec-details
 #'
 #' @template spec-references
+#'
+#' @seealso \Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_quad", "discrim")}
 #'
 #' @examples
 #' parabolic_grid <-

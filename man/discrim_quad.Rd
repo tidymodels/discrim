@@ -3,7 +3,7 @@
 \name{discrim_quad}
 \alias{discrim_quad}
 \alias{update.discrim_quad}
-\title{Quadratic discriminant models}
+\title{Quadratic discriminant analysis}
 \usage{
 discrim_quad(
   mode = "classification",
@@ -32,9 +32,18 @@ modified in-place of or replaced wholesale.}
 \item{...}{Not used for \code{update()}.}
 }
 \description{
-\code{discrim_quad()} is a way to generate a \emph{specification} of a quadratic
-discriminant analysis (QDA) model before fitting and allows the model to be
-created using different packages in R.
+\code{discrim_quad()} defines a model that estimates a multivariate
+distribution for the predictors separately for the data in each class
+(usually Gaussian with separate covariance matrices). Bayes' theorem is used
+to compute the probability of each class, given the predictor values.
+
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+\Sexpr[stage=render,results=rd]{parsnip:::make_engine_list("discrim_quad", "discrim")}
+
+More information on how \pkg{parsnip} is used for modeling is at
+\url{https://www.tidymodels.org/}.
 }
 \details{
 This function only defines what \emph{type} of model is being fit. Once an engine
@@ -66,4 +75,7 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
 }
 \references{
 \url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
+}
+\seealso{
+\Sexpr[stage=render,results=rd]{parsnip:::make_seealso_list("discrim_quad", "discrim")}
 }

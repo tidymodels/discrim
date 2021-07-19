@@ -15,7 +15,7 @@ For this engine, there is a single mode: classification
 This model has 1 tuning parameter:
 \itemize{
 \item \code{regularization_method}: Regularization Method (type: character,
-default: diagonal)
+default: ‘diagonal’)
 }
 
 The possible values of this parameter, and the functions that they
