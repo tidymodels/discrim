@@ -47,7 +47,7 @@ Suggests:
     testthat,
     xml2
 Remotes:
-    tidymodels/parsnip@more-doc-tools
+    tidymodels/parsnip
 Encoding: UTF-8
 Language: en-US
 LazyData: true
