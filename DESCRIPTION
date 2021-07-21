@@ -1,6 +1,6 @@
 Package: discrim
 Title: Model Wrappers for Discriminant Analysis
-Version: 0.1.2.9000
+Version: 0.1.3
 Authors@R: 
     c(person(given = "Max",
              family = "Kuhn",
@@ -42,12 +42,10 @@ Suggests:
     modeldata,
     naivebayes,
     sda,
-    sparsediscrim,
+    sparsediscrim (>= 0.3.0),
     spelling,
     testthat,
     xml2
-Remotes:
-    tidymodels/parsnip
 Encoding: UTF-8
 Language: en-US
 LazyData: true

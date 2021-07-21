@@ -79,7 +79,7 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   coord_equal()
 }
 \references{
-\url{https://www.tidymodels.org}, \href{https://tmwr.org}{\emph{Tidy Models with R}}
+\url{https://www.tidymodels.org}, \href{https://www.tmwr.org}{\emph{Tidy Models with R}}
 
 Friedman, J (1989). Regularized Discriminant Analysis. \emph{Journal of the
 American Statistical Association}, 84, 165-175.
