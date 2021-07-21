@@ -22,6 +22,33 @@
     <loc>https://discrim.tidymodels.org/news/index.html</loc>
   </url>
   <url>
+    <loc>https://discrim.tidymodels.org/reference/details_discrim_flexible_earth.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/details_discrim_linear_MASS.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/details_discrim_linear_mda.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/details_discrim_linear_sparsediscrim.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/details_discrim_quad_MASS.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/details_discrim_quad_sparsediscrim.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/details_discrim_regularized_klaR.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/details_naive_Bayes_klaR.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/details_naive_Bayes_naivebayes.html</loc>
+  </url>
+  <url>
     <loc>https://discrim.tidymodels.org/reference/discrim_flexible.html</loc>
   </url>
   <url>
@@ -35,6 +62,12 @@
   </url>
   <url>
     <loc>https://discrim.tidymodels.org/reference/discrim_regularized.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/discrim_update.html</loc>
+  </url>
+  <url>
+    <loc>https://discrim.tidymodels.org/reference/fit_regularized_linear.html</loc>
   </url>
   <url>
     <loc>https://discrim.tidymodels.org/reference/frac_common_cov.html</loc>

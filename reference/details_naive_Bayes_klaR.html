@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parameter objects for Regularized Discriminant Models — frac_common_cov • discrim</title>
+<title>Naive Bayes models via klaR — details_naive_Bayes_klaR • discrim</title>
 
 
 <!-- jquery -->
@@ -42,10 +42,9 @@
 
 
 
-<meta property="og:title" content="Parameter objects for Regularized Discriminant Models — frac_common_cov" />
-<meta property="og:description" content="discrim_regularized() describes the effect of frac_common_cov() and
-frac_identity(). smoothness() is an alias for the adjust parameter in
-stats::density()." />
+<meta property="og:title" content="Naive Bayes models via klaR — details_naive_Bayes_klaR" />
+<meta property="og:description" content="klaR::NaiveBayes() fits a model that uses Bayes' theorem to compute the
+probability of each class, given the predictor values." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,53 +125,68 @@ stats::density()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parameter objects for Regularized Discriminant Models</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/parameters.R'><code>R/parameters.R</code></a></small>
-    <div class="hidden name"><code>frac_common_cov.Rd</code></div>
+    <h1>Naive Bayes models via klaR</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/naive_Bayes_klaR.R'><code>R/naive_Bayes_klaR.R</code></a></small>
+    <div class="hidden name"><code>details_naive_Bayes_klaR.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='discrim_regularized.html'>discrim_regularized()</a></code> describes the effect of <code>frac_common_cov()</code> and
-<code>frac_identity()</code>. <code>smoothness()</code> is an alias for the <code>adjust</code> parameter in
-<code><a href='https://rdrr.io/r/stats/density.html'>stats::density()</a></code>.</p>
+    <p><code><a href='https://rdrr.io/pkg/klaR/man/NaiveBayes.html'>klaR::NaiveBayes()</a></code> fits a model that uses Bayes' theorem to compute the
+probability of each class, given the predictor values.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>frac_common_cov</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>frac_identity</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
 
-<span class='fu'>smoothness</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>1.5</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>range</th>
-      <td><p>A two-element vector holding the <em>defaults</em> for the smallest and
-largest possible values, respectively.</p></td>
-    </tr>
-    <tr>
-      <th>trans</th>
-      <td><p>A <code>trans</code> object from the <code>scales</code> package, such as
-<code><a href='https://scales.r-lib.org/reference/log_trans.html'>scales::log10_trans()</a></code> or <code><a href='https://scales.r-lib.org/reference/reciprocal_trans.html'>scales::reciprocal_trans()</a></code>. If not provided,
-the default is used which matches the units used in <code>range</code>. If no
-transformation, <code>NULL</code>.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A function with classes "quant_param" and "param"</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>These parameters can modulate a RDA model to go between linear and quadratic
-class boundaries.</p>
+    <p>For this engine, there is a single mode: classification</p><h3 class='hasAnchor' id='tuning-parameters'><a class='anchor' aria-hidden='true' href='#tuning-parameters'></a>Tuning Parameters</h3>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>frac_common_cov</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Fraction of the Common Covariance Matrix (quantitative)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Range: [0, 1]</span>
-</code></pre></div>
+
+<p>This model has 2 tuning parameter:</p><ul>
+<li><p><code>smoothness</code>: Kernel Smoothness (type: double, default: 1.0)</p></li>
+<li><p><code>Laplace</code>: Laplace Correction (type: double, default: 0.0)</p></li>
+</ul>
+
+<p>Note that <code>usekernel</code> is always set to <code>TRUE</code> for the <code>klaR</code> engine.</p>
+
+<h3 class='hasAnchor' id='translation-from-parsnip-to-the-original-package'><a class='anchor' aria-hidden='true' href='#translation-from-parsnip-to-the-original-package'></a>Translation from parsnip to the original package</h3>
+<p><div class="r"></p><pre class='sourceCode r'><code><span class='fu'><a href='naive_Bayes.html'>naive_Bayes</a></span><span class='op'>(</span>smoothness <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span>, Laplace <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>numeric</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"klaR"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
+  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/translate.html'>translate</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre><p></div></p><pre class='sourceCode r'><code><span class='co'>## Naive Bayes Model Specification (classification)</span>
+<span class='co'>## </span>
+<span class='co'>## Main Arguments:</span>
+<span class='co'>##   smoothness = numeric(0)</span>
+<span class='co'>##   Laplace = numeric(0)</span>
+<span class='co'>## </span>
+<span class='co'>## Computational engine: klaR </span>
+<span class='co'>## </span>
+<span class='co'>## Model fit template:</span>
+<span class='co'>## discrim::klar_bayes_wrapper(x = missing_arg(), y = missing_arg(), </span>
+<span class='co'>##     adjust = numeric(0), fL = numeric(0), usekernel = TRUE)</span>
+</code></pre>
+
+
+<h3 class='hasAnchor' id='preprocessing-requirements'><a class='anchor' aria-hidden='true' href='#preprocessing-requirements'></a>Preprocessing requirements</h3>
+
+
+<p>The columns for qualitative predictors should always be represented as
+factors (as opposed to dummy/indicator variables). When the predictors
+are factors, the underlying code treats them as multinomial data and
+appropriately computes their conditional distributions.</p>
+<p>Variance calculations are used in these computations so no
+<em>zero-variance</em> predictors (i.e., with a single unique value) should be
+eliminated before fitting the model.</p>
+
+<h3 class='hasAnchor' id='references'><a class='anchor' aria-hidden='true' href='#references'></a>References</h3>
+
+<ul>
+<li><p>Kuhn, M, and K Johnson. 2013. <em>Applied Predictive Modeling</em>.
+Springer.</p></li>
+</ul>
+
+
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Parameter objects for Regularized Discriminant Models — frac_common_cov • discrim</title>
+<title>Update a model specification — update.discrim_flexible • discrim</title>
 
 
 <!-- jquery -->
@@ -42,10 +42,8 @@
 
 
 
-<meta property="og:title" content="Parameter objects for Regularized Discriminant Models — frac_common_cov" />
-<meta property="og:description" content="discrim_regularized() describes the effect of frac_common_cov() and
-frac_identity(). smoothness() is an alias for the adjust parameter in
-stats::density()." />
+<meta property="og:title" content="Update a model specification — update.discrim_flexible" />
+<meta property="og:description" content="Update a model specification" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,53 +124,112 @@ stats::density()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Parameter objects for Regularized Discriminant Models</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/parameters.R'><code>R/parameters.R</code></a></small>
-    <div class="hidden name"><code>frac_common_cov.Rd</code></div>
+    <h1>Update a model specification</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/discrim_flexible.R'><code>R/discrim_flexible.R</code></a>, <a href='https://github.com/tidymodels/discrim/blob/master/R/discrim_linear.R'><code>R/discrim_linear.R</code></a>, <a href='https://github.com/tidymodels/discrim/blob/master/R/discrim_quad.R'><code>R/discrim_quad.R</code></a>, and 2 more</small>
+    <div class="hidden name"><code>discrim_update.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code><a href='discrim_regularized.html'>discrim_regularized()</a></code> describes the effect of <code>frac_common_cov()</code> and
-<code>frac_identity()</code>. <code>smoothness()</code> is an alias for the <code>adjust</code> parameter in
-<code><a href='https://rdrr.io/r/stats/density.html'>stats::density()</a></code>.</p>
+    <p>Update a model specification</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>frac_common_cov</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='co'># S3 method for discrim_flexible</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  num_terms <span class='op'>=</span> <span class='cn'>NULL</span>,
+  prod_degree <span class='op'>=</span> <span class='cn'>NULL</span>,
+  prune_method <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fresh <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>frac_identity</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
+<span class='co'># S3 method for discrim_linear</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  penalty <span class='op'>=</span> <span class='cn'>NULL</span>,
+  regularization_method <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fresh <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>smoothness</span><span class='op'>(</span>range <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>1.5</span><span class='op'>)</span>, trans <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></code></pre></div>
+<span class='co'># S3 method for discrim_quad</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>object</span>, regularization_method <span class='op'>=</span> <span class='cn'>NULL</span>, fresh <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for discrim_regularized</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span>
+  <span class='va'>object</span>,
+  frac_common_cov <span class='op'>=</span> <span class='cn'>NULL</span>,
+  frac_identity <span class='op'>=</span> <span class='cn'>NULL</span>,
+  fresh <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S3 method for naive_Bayes</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>object</span>, smoothness <span class='op'>=</span> <span class='cn'>NULL</span>, Laplace <span class='op'>=</span> <span class='cn'>NULL</span>, fresh <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>range</th>
-      <td><p>A two-element vector holding the <em>defaults</em> for the smallest and
-largest possible values, respectively.</p></td>
+      <th>object</th>
+      <td><p>A model specification.</p></td>
     </tr>
     <tr>
-      <th>trans</th>
-      <td><p>A <code>trans</code> object from the <code>scales</code> package, such as
-<code><a href='https://scales.r-lib.org/reference/log_trans.html'>scales::log10_trans()</a></code> or <code><a href='https://scales.r-lib.org/reference/reciprocal_trans.html'>scales::reciprocal_trans()</a></code>. If not provided,
-the default is used which matches the units used in <code>range</code>. If no
-transformation, <code>NULL</code>.</p></td>
+      <th>num_terms</th>
+      <td><p>The number of features that will be retained in the
+final model, including the intercept.</p></td>
+    </tr>
+    <tr>
+      <th>prod_degree</th>
+      <td><p>The highest possible interaction degree.</p></td>
+    </tr>
+    <tr>
+      <th>prune_method</th>
+      <td><p>The pruning method.</p></td>
+    </tr>
+    <tr>
+      <th>fresh</th>
+      <td><p>A logical for whether the arguments should be
+modified in-place of or replaced wholesale.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Not used for <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>penalty</th>
+      <td><p>An non-negative number representing the amount of
+regularization used by some of the engines.</p></td>
+    </tr>
+    <tr>
+      <th>regularization_method</th>
+      <td><p>A character string for the type of regularized
+estimation. Possible values are: "<code>diagonal</code>", "<code>min_distance</code>",
+"<code>shrink_cov</code>", and "<code>shrink_mean</code>" (<code>sparsediscrim</code> engine only).</p></td>
+    </tr>
+    <tr>
+      <th>frac_common_cov</th>
+      <td><p>Numeric values between zero and one.</p></td>
+    </tr>
+    <tr>
+      <th>frac_identity</th>
+      <td><p>Numeric values between zero and one.</p></td>
+    </tr>
+    <tr>
+      <th>smoothness</th>
+      <td><p>An non-negative number representing the the relative
+smoothness of the class boundary. Smaller examples result in model flexible
+boundaries and larger values generate class boundaries that are less
+adaptable</p></td>
+    </tr>
+    <tr>
+      <th>Laplace</th>
+      <td><p>A non-negative value for the Laplace correction to smoothing
+low-frequency counts.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A function with classes "quant_param" and "param"</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>These parameters can modulate a RDA model to go between linear and quadratic
-class boundaries.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='fu'>frac_common_cov</span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Fraction of the Common Covariance Matrix (quantitative)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Range: [0, 1]</span>
-</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

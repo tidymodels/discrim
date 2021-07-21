@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>General Interface for Linear Discriminant Models — discrim_linear • discrim</title>
+<title>Linear discriminant analysis — discrim_linear • discrim</title>
 
 
 <!-- jquery -->
@@ -42,10 +42,20 @@
 
 
 
-<meta property="og:title" content="General Interface for Linear Discriminant Models — discrim_linear" />
-<meta property="og:description" content="discrim_linear() is a way to generate a specification of a linear
-discriminant analysis (LDA) model before fitting and allows the model to be
-created using different packages in R." />
+<meta property="og:title" content="Linear discriminant analysis — discrim_linear" />
+<meta property="og:description" content="discrim_linear() defines a model that estimates a multivariate
+distribution for the predictors separately for the data in each class
+(usually Gaussian with a common covariance matrix). Bayes' theorem is used
+to compute the probability of each class, given the predictor values.
+There are different ways to fit this model. See the engine-specific pages
+for more details:
+
+MASS  (default) 
+mda  
+sparsediscrim  
+
+More information on how parsnip is used for modeling is at
+https://www.tidymodels.org/." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -95,7 +105,7 @@ created using different packages in R." />
         <a class="navbar-brand" href="../index.html">discrim</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of <a href="https://github.com/tidymodels">tidymodels</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.3</span>
         </div>
       </div>
     </div>
@@ -126,21 +136,33 @@ created using different packages in R." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>General Interface for Linear Discriminant Models</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/discrim_lin.R'><code>R/discrim_lin.R</code></a></small>
+    <h1>Linear discriminant analysis</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidymodels/discrim/blob/master/R/discrim_linear.R'><code>R/discrim_linear.R</code></a></small>
     <div class="hidden name"><code>discrim_linear.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>discrim_linear()</code> is a way to generate a <em>specification</em> of a linear
-discriminant analysis (LDA) model before fitting and allows the model to be
-created using different packages in R.</p>
+    <p><code>discrim_linear()</code> defines a model that estimates a multivariate
+distribution for the predictors separately for the data in each class
+(usually Gaussian with a common covariance matrix). Bayes' theorem is used
+to compute the probability of each class, given the predictor values.</p>
+<p>There are different ways to fit this model. See the engine-specific pages
+for more details:</p>
+<p><ul>
+<li><p><code><a href='details_discrim_linear_MASS.html'>MASS</a>  (default) </code></p></li>
+<li><p><code><a href='details_discrim_linear_mda.html'>mda</a>  </code></p></li>
+<li><p><code><a href='details_discrim_linear_sparsediscrim.html'>sparsediscrim</a>  </code></p></li>
+</ul></p>
+<p>More information on how <span class="pkg">parsnip</span> is used for modeling is at
+<a href='https://www.tidymodels.org/'>https://www.tidymodels.org/</a>.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>discrim_linear</span><span class='op'>(</span>mode <span class='op'>=</span> <span class='st'>"classification"</span>, penalty <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span>
-
-<span class='co'># S3 method for discrim_linear</span>
-<span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>object</span>, penalty <span class='op'>=</span> <span class='cn'>NULL</span>, fresh <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></code></pre></div>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>discrim_linear</span><span class='op'>(</span>
+  mode <span class='op'>=</span> <span class='st'>"classification"</span>,
+  engine <span class='op'>=</span> <span class='st'>"MASS"</span>,
+  penalty <span class='op'>=</span> <span class='cn'>NULL</span>,
+  regularization_method <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,77 +173,35 @@ created using different packages in R.</p>
 possible value for this model is "classification".</p></td>
     </tr>
     <tr>
+      <th>engine</th>
+      <td><p>A single character string specifying what computational engine to use
+for fitting.</p></td>
+    </tr>
+    <tr>
       <th>penalty</th>
       <td><p>An non-negative number representing the amount of
 regularization used by some of the engines.</p></td>
     </tr>
     <tr>
-      <th>object</th>
-      <td><p>A linear discriminant model specification.</p></td>
-    </tr>
-    <tr>
-      <th>fresh</th>
-      <td><p>A logical for whether the arguments should be
-modified in-place of or replaced wholesale.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Not used for <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code>.</p></td>
+      <th>regularization_method</th>
+      <td><p>A character string for the type of regularized
+estimation. Possible values are: "<code>diagonal</code>", "<code>min_distance</code>",
+"<code>shrink_cov</code>", and "<code>shrink_mean</code>" (<code>sparsediscrim</code> engine only).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>For <code>discrim_linear()</code>, the mode will always be "classification".</p>
-<p>The model can be created using the <code><a href='https://generics.r-lib.org/reference/fit.html'>fit()</a></code> function using the following
-<em>engines</em>:</p><ul>
-<li><p><span class="pkg">R</span>:  <code>"MASS"</code>(the default) or <code>"mda"</code></p></li>
-</ul>
+    <p>This function only defines what <em>type</em> of model is being fit. Once an engine
+is specified, the <em>method</em> to fit the model is also defined.</p>
+<p>The model is not trained or fit until the <code><a href='https://parsnip.tidymodels.org/reference/fit.html'>fit.model_spec()</a></code> function is used
+with the data.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-<p>The main argument for the model is:</p><ul>
-<li><p><code>penalty</code>: The total amount of regularization in the model. Note
-that this only used for the "mda" engine where it is a pure L2 penalty
-(a.k.a ridge regression).</p></li>
-</ul>
+    <p><a href='https://www.tidymodels.org'>https://www.tidymodels.org</a>, <a href='https://www.tmwr.org'><em>Tidy Models with R</em></a></p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-<p>This argument is converted to its specific names at the time that the model
-is fit. Other options and argument can be set using <code><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine()</a></code>. If left
-to their defaults here (<code>NULL</code>), the values are taken from the underlying
-model functions. If parameters need to be modified, <code><a href='https://rdrr.io/r/stats/update.html'>update()</a></code> can be used
-in lieu of recreating the object from scratch.</p>
-    <h2 class="hasAnchor" id="engine-details"><a class="anchor" href="#engine-details"></a>Engine Details</h2>
-
-    <p>Engines may have pre-set default arguments when executing the model fit
-call. For this type of model, the template of the fit calls are:<div class="sourceCode r"></p><pre class='sourceCode r'><code><span class='fu'>discrim_linear</span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
-  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"MASS"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
-  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/translate.html'>translate</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre><p></div></p><pre class='sourceCode r'><code><span class='co'>## Linear Discriminant Model Specification (classification)</span>
-<span class='co'>## </span>
-<span class='co'>## Computational engine: MASS </span>
-<span class='co'>## </span>
-<span class='co'>## Model fit template:</span>
-<span class='co'>## MASS::lda(formula = missing_arg(), data = missing_arg())</span>
-</code></pre><p><div class="sourceCode r"></p><pre class='sourceCode r'><code><span class='fu'>discrim_linear</span><span class='op'>(</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
-  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/set_engine.html'>set_engine</a></span><span class='op'>(</span><span class='st'>"mda"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span> 
-  <span class='fu'><a href='https://parsnip.tidymodels.org/reference/translate.html'>translate</a></span><span class='op'>(</span><span class='op'>)</span>
-</code></pre><p></div></p><pre class='sourceCode r'><code><span class='co'>## Linear Discriminant Model Specification (classification)</span>
-<span class='co'>## </span>
-<span class='co'>## Computational engine: mda </span>
-<span class='co'>## </span>
-<span class='co'>## Model fit template:</span>
-<span class='co'>## mda::fda(formula = missing_arg(), data = missing_arg(), method = mda::gen.ridge, </span>
-<span class='co'>##     keep.fitted = FALSE)</span>
-</code></pre>
-
-<p>The standardized parameter names in parsnip can be mapped to their
-original names in each engine that has main parameters. Each engine
-typically has a different default value (shown in parentheses) for each
-parameter.</p><table class='table'>
-<tr><td><strong>parsnip</strong></td><td><strong>mda</strong></td></tr>
-<tr><td>penalty</td><td>lambda (1)</td></tr>
-</table>
-
-
+    <div class='dont-index'><p><code><a href='details_discrim_linear_MASS.html'>MASS engine details</a></code>, <code><a href='details_discrim_linear_mda.html'>mda engine details</a></code>, <code><a href='details_discrim_linear_sparsediscrim.html'>sparsediscrim engine details</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='va'>parabolic_grid</span> <span class='op'>&lt;-</span></span>
@@ -244,21 +224,6 @@ parameter.</p><table class='table'>
 <span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"top"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span class='r-in'>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_fixed.html'>coord_equal</a></span><span class='op'>(</span><span class='op'>)</span></span>
 <span class='r-plt'><img src='discrim_linear-1.png' alt='' width='768' height='552' /></span>
-<span class='r-in'></span>
-<span class='r-in'></span>
-<span class='r-in'><span class='va'>model</span> <span class='op'>&lt;-</span> <span class='fu'>discrim_linear</span><span class='op'>(</span>penalty <span class='op'>=</span> <span class='fl'>0.1</span><span class='op'>)</span></span>
-<span class='r-in'><span class='va'>model</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Linear Discriminant Model Specification (classification)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Main Arguments:</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   penalty = 0.1</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/stats/update.html'>update</a></span><span class='op'>(</span><span class='va'>model</span>, penalty <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Linear Discriminant Model Specification (classification)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> Main Arguments:</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   penalty = 1</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
 </code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
