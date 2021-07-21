@@ -1,3 +1,5 @@
+# discrim (development version)
+
 # discrim 0.1.3
 
 * An LDA engine was added for the shrunken discriminant analysis method of Ahdesmaki and Strimmer (2010) with `engine = "sda"`. 
