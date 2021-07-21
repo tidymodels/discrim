@@ -19,7 +19,8 @@ status](https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg)](
 `discrim` contains simple bindings to enable the `parsnip` package to
 fit various discriminant analysis models, such as
 
--   Linear discriminant analysis (LDA, simple and L2 regularized)
+-   Linear discriminant analysis (LDA, simple and regularized)
+-   Quadratic discriminant analysis (QDA, simple and regularized)
 -   Regularized discriminant analysis (RDA, via
     [Friedman (1989)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&q=%22Regularized+Discriminant+Analysis%22&btnG=))
 -   Flexible discriminant analysis (FDA) using MARS features
