@@ -16,7 +16,7 @@ For this engine, there is a single mode: classification
 This engine has no tuning parameters.
 }
 
-\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="r">}}\preformatted{discrim_quad() \%>\% 
+\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_quad() \%>\% 
   set_engine("MASS") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Quadratic Discriminant Model Specification (classification)

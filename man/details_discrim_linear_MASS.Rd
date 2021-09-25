@@ -16,7 +16,7 @@ For this engine, there is a single mode: classification
 This engine has no tuning parameters.
 }
 
-\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="r">}}\preformatted{discrim_linear() \%>\% 
+\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_linear() \%>\% 
   set_engine("MASS") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)

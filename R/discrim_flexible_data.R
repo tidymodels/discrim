@@ -5,12 +5,6 @@
 
 # nocov
 make_discrim_flexible <- function() {
-  parsnip::set_new_model("discrim_flexible")
-
-  parsnip::set_model_mode("discrim_flexible", "classification")
-
-  # ------------------------------------------------------------------------------
-
   parsnip::set_model_engine("discrim_flexible", "classification", "earth")
   parsnip::set_dependency("discrim_flexible", eng = "earth", pkg = "mda")
   parsnip::set_dependency("discrim_flexible", eng = "earth", pkg = "earth")

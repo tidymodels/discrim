@@ -10,12 +10,6 @@
 # nocov
 
 make_discrim_quad_MASS <- function() {
-  parsnip::set_new_model("discrim_quad")
-
-  parsnip::set_model_mode("discrim_quad", "classification")
-
-  # ------------------------------------------------------------------------------
-
   parsnip::set_model_engine("discrim_quad", "classification", "MASS")
   parsnip::set_dependency("discrim_quad", "MASS", "MASS")
   parsnip::set_dependency("discrim_quad", "MASS", "discrim")

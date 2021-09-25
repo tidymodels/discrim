@@ -5,12 +5,6 @@
 
 # nocov
 make_discrim_regularized <- function() {
-  parsnip::set_new_model("discrim_regularized")
-
-  parsnip::set_model_mode("discrim_regularized", "classification")
-
-  # ------------------------------------------------------------------------------
-
   parsnip::set_model_engine("discrim_regularized", "classification", "klaR")
   parsnip::set_dependency("discrim_regularized", eng = "klaR", pkg = "klaR")
   parsnip::set_dependency("discrim_regularized", eng = "klaR", pkg = "discrim")

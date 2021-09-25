@@ -18,7 +18,7 @@ This model has 2 tuning parameter:
 }
 }
 
-\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="r">}}\preformatted{naive_Bayes(smoothness = numeric(0), Laplace = numeric(0)) \%>\% 
+\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{naive_Bayes(smoothness = numeric(0), Laplace = numeric(0)) \%>\% 
   set_engine("naivebayes") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Naive Bayes Model Specification (classification)

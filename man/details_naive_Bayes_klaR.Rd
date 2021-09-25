@@ -20,7 +20,7 @@ This model has 2 tuning parameter:
 Note that \code{usekernel} is always set to \code{TRUE} for the \code{klaR} engine.
 }
 
-\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="r">}}\preformatted{naive_Bayes(smoothness = numeric(0), Laplace = numeric(0)) \%>\% 
+\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{naive_Bayes(smoothness = numeric(0), Laplace = numeric(0)) \%>\% 
   set_engine("klaR") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Naive Bayes Model Specification (classification)

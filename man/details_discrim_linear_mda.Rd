@@ -18,7 +18,7 @@ This model has 1 tuning parameter:
 }
 }
 
-\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="r">}}\preformatted{discrim_linear(penalty = numeric(0)) \%>\% 
+\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_linear(penalty = numeric(0)) \%>\% 
   set_engine("mda") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
