@@ -47,8 +47,8 @@ with the data.
 }
 \examples{
 parabolic_grid <-
-  expand.grid(X1 = seq(-5, 5, length = 100),
-              X2 = seq(-5, 5, length = 100))
+  expand.grid(X1 = seq(-5, 5, length = 80),
+              X2 = seq(-5, 5, length = 80))
 
 nb_mod <-
   naive_Bayes(smoothness = .8) \%>\%
