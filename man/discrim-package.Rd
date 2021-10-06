@@ -57,7 +57,8 @@ fda_mod
 ## Training Misclassification Error: 0.136 ( N = 500 )
 }
 
-Now let’s plot the class boundary by predicting on the\if{html}{\out{<div class="sourceCode r">}}\preformatted{parabolic_grid <-
+Now let’s plot the class boundary by predicting on a grid of points then
+creating a contour plot for the 50\% probability cutoff.\if{html}{\out{<div class="sourceCode r">}}\preformatted{parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
               X2 = seq(-5, 5, length = 100))
 

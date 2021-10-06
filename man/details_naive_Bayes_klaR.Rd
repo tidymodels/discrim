@@ -44,9 +44,9 @@ factors (as opposed to dummy/indicator variables). When the predictors
 are factors, the underlying code treats them as multinomial data and
 appropriately computes their conditional distributions.
 
-Variance calculations are used in these computations so no
-\emph{zero-variance} predictors (i.e., with a single unique value) should be
-eliminated before fitting the model.
+Variance calculations are used in these computations so \emph{zero-variance}
+predictors (i.e., with a single unique value) should be eliminated
+before fitting the model.
 }
 
 \subsection{References}{

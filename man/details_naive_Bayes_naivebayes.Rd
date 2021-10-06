@@ -45,9 +45,9 @@ appropriately computes their conditional distributions.
 For count data, integers can be estimated using a Poisson distribution
 if the augment \code{usepoisson = TRUE} is passed as an engine argument.
 
-Variance calculations are used in these computations so no
-\emph{zero-variance} predictors (i.e., with a single unique value) should be
-eliminated before fitting the model.
+Variance calculations are used in these computations so \emph{zero-variance}
+predictors (i.e., with a single unique value) should be eliminated
+before fitting the model.
 }
 
 \subsection{References}{

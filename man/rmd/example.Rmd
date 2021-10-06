@@ -27,7 +27,7 @@ fda_mod <-
 fda_mod
 ```
 
-Now let's plot the class boundary by predicting on the 
+Now let's plot the class boundary by predicting on a grid of points then creating a contour plot for the 50% probability cutoff. 
 
 ```{r boundary, eval = FALSE}
 parabolic_grid <-

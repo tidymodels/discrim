@@ -37,9 +37,9 @@ formula method via
 convert factor columns to indicators.
 
 Variance calculations are used in these computations within each outcome
-class. For this reason, no \emph{zero-variance} predictors (i.e., with a
-single unique value) within each class should be eliminated before
-fitting the model.
+class. For this reason, \emph{zero-variance} predictors (i.e., with a single
+unique value) within each class should be eliminated before fitting the
+model.
 }
 
 \subsection{References}{
