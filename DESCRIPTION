@@ -47,7 +47,7 @@ Suggests:
     testthat,
     xml2
 Remotes:
-    tidymodels/parsnip@model-migration
+    tidymodels/parsnip
 Config/Needs/website: tidyverse/tidytemplate
 Encoding: UTF-8
 Language: en-US
