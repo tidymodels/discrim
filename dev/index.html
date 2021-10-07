@@ -36,8 +36,6 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
-
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -59,6 +57,12 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="index.html">
+    <span class="fas fa-home fa-lg"></span>
+     
+  </a>
+</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -85,62 +89,62 @@
   <div class="contents col-md-9">
 <div id="discrim" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#discrim" class="anchor" aria-hidden="true"></a>discrim</h1></div>
+<a href="#discrim" class="anchor"></a>discrim</h1></div>
 <!-- badges: start -->
 
 <p><code>discrim</code> contains simple bindings to enable the <code>parsnip</code> package to fit various discriminant analysis models, such as</p>
 <ul>
 <li>Linear discriminant analysis (LDA, simple and regularized)</li>
 <li>Quadratic discriminant analysis (QDA, simple and regularized)</li>
-<li>Regularized discriminant analysis (RDA, via <a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C7&amp;q=%22Regularized+Discriminant+Analysis%22&amp;btnG=" class="external-link">Friedman (1989)</a>)</li>
+<li>Regularized discriminant analysis (RDA, via <a href="https://scholar.google.com/scholar?hl=en&amp;as_sdt=0%2C7&amp;q=%22Regularized+Discriminant+Analysis%22&amp;btnG=">Friedman (1989)</a>)</li>
 <li>Flexible discriminant analysis (FDA) using MARS features</li>
 <li>Naive Bayes models</li>
 </ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"tidymodels/discrim"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example" class="anchor" aria-hidden="true"></a>Example</h2>
+<a href="#example" class="anchor"></a>Example</h2>
 <p>Here is a simple model using a simulated two-class data set contained in the package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://discrim.tidymodels.org">discrim</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://discrim.tidymodels.org">discrim</a></span><span class="op">)</span>
 <span class="co">#&gt; Loading required package: parsnip</span>
 
 <span class="va">parabolic_grid</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>X1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,
-              X2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html">expand.grid</a></span><span class="op">(</span>X1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,
+              X2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">fda_mod</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="reference/discrim_flexible.html">discrim_flexible</a></span><span class="op">(</span>num_terms <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu">discrim_flexible</span><span class="op">(</span>num_terms <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="co"># increase `num_terms` to find smoother boundaries</span>
-  <span class="fu"><a href="https://parsnip.tidymodels.org/reference/set_engine.html" class="external-link">set_engine</a></span><span class="op">(</span><span class="st">"earth"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">class</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">parabolic</span><span class="op">)</span>
+  <span class="fu">set_engine</span><span class="op">(</span><span class="st">"earth"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">fit</span><span class="op">(</span><span class="va">class</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="va">parabolic</span><span class="op">)</span>
 
 <span class="va">parabolic_grid</span><span class="op">$</span><span class="va">fda</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">fda_mod</span>, <span class="va">parabolic_grid</span>, type <span class="op">=</span> <span class="st">"prob"</span><span class="op">)</span><span class="op">$</span><span class="va">.pred_Class1</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">fda_mod</span>, <span class="va">parabolic_grid</span>, type <span class="op">=</span> <span class="st">"prob"</span><span class="op">)</span><span class="op">$</span><span class="va">.pred_Class1</span>
 
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">parabolic</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X1</span>, y <span class="op">=</span> <span class="va">X2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">class</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_contour.html" class="external-link">geom_contour</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">parabolic_grid</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>z <span class="op">=</span> <span class="va">fda</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"black"</span>, breaks <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html" class="external-link">coord_equal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">parabolic</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">X1</span>, y <span class="op">=</span> <span class="va">X2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>col <span class="op">=</span> <span class="va">class</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_contour.html">geom_contour</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">parabolic_grid</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>z <span class="op">=</span> <span class="va">fda</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"black"</span>, breaks <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"top"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_fixed.html">coord_equal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="100%"></p>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#contributing" class="anchor" aria-hidden="true"></a>Contributing</h2>
-<p>This project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<a href="#contributing" class="anchor"></a>Contributing</h2>
+<p>This project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 <ul>
-<li><p>For questions and discussions about tidymodels packages, modeling, and machine learning, please <a href="https://community.rstudio.com/new-topic?category_id=15&amp;tags=tidymodels,question" class="external-link">post on RStudio Community</a>.</p></li>
-<li><p>If you think you have encountered a bug, please <a href="https://github.com/tidymodels/discrim/issues" class="external-link">submit an issue</a>.</p></li>
-<li><p>Either way, learn how to create and share a <a href="https://reprex.tidyverse.org/articles/articles/learn-reprex.html" class="external-link">reprex</a> (a minimal, reproducible example), to clearly communicate about your code.</p></li>
-<li><p>Check out further details on <a href="https://www.tidymodels.org/contribute/" class="external-link">contributing guidelines for tidymodels packages</a> and <a href="https://www.tidymodels.org/help/" class="external-link">how to get help</a>.</p></li>
+<li><p>For questions and discussions about tidymodels packages, modeling, and machine learning, please <a href="https://community.rstudio.com/new-topic?category_id=15&amp;tags=tidymodels,question">post on RStudio Community</a>.</p></li>
+<li><p>If you think you have encountered a bug, please <a href="https://github.com/tidymodels/discrim/issues">submit an issue</a>.</p></li>
+<li><p>Either way, learn how to create and share a <a href="https://reprex.tidyverse.org/articles/articles/learn-reprex.html">reprex</a> (a minimal, reproducible example), to clearly communicate about your code.</p></li>
+<li><p>Check out further details on <a href="https://www.tidymodels.org/contribute/">contributing guidelines for tidymodels packages</a> and <a href="https://www.tidymodels.org/help/">how to get help</a>.</p></li>
 </ul>
 </div>
 </div>
@@ -148,7 +152,7 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2 data-toc-skip>Links</h2>
+<h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=discrim">https://​cloud.r-project.org/​package=discrim</a>
 </li>
@@ -158,42 +162,38 @@
 </li>
 </ul>
 </div>
-
 <div class="license">
-<h2 data-toc-skip>License</h2>
+<h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
-
 <div class="community">
-<h2 data-toc-skip>Community</h2>
+<h2>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-
 <div class="developers">
-<h2 data-toc-skip>Developers</h2>
+<h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Max Kuhn <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-2402-136X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More on authors...</a></li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
+  <div class="dev-status">
+<h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://cran.r-project.org/package=discrim" class="external-link"><img src="https://www.r-pkg.org/badges/version/discrim" alt="CRAN status"></a></li>
-<li><a href="https://codecov.io/gh/tidymodels/discrim?branch=master" class="external-link"><img src="https://codecov.io/gh/tidymodels/discrim/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/tidymodels/discrim/actions" class="external-link"><img src="https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://github.com/tidymodels/discrim/actions" class="external-link"><img src="https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://cran.r-project.org/package=discrim"><img src="https://www.r-pkg.org/badges/version/discrim" alt="CRAN status"></a></li>
+<li><a href="https://codecov.io/gh/tidymodels/discrim?branch=master"><img src="https://codecov.io/gh/tidymodels/discrim/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/tidymodels/discrim/actions"><img src="https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/tidymodels/discrim/actions"><img src="https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
-
-  </div>
+</div>
 </div>
 
 
@@ -213,8 +213,6 @@
 
   
 
-
-  
 
   </body>
 </html>
