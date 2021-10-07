@@ -32,7 +32,7 @@ execute, are:
 }
 }
 
-\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="r">}}\preformatted{discrim_linear(regularization_method = character(0)) \%>\% 
+\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_linear(regularization_method = character(0)) \%>\% 
   set_engine("sparsediscrim") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Linear Discriminant Model Specification (classification)
@@ -56,9 +56,9 @@ formula method via
 \code{\link[=fit.model_spec]{fit.model_spec()}}, parsnip will
 convert factor columns to indicators.
 
-Variance calculations are used in these computations so no
-\emph{zero-variance} predictors (i.e., with a single unique value) should be
-eliminated before fitting the model.
+Variance calculations are used in these computations so \emph{zero-variance}
+predictors (i.e., with a single unique value) should be eliminated
+before fitting the model.
 }
 
 \subsection{References}{

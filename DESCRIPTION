@@ -21,7 +21,7 @@ License: MIT + file LICENSE
 URL: https://discrim.tidymodels.org
 BugReports: https://github.com/tidymodels/discrim/issues
 Depends:
-    parsnip (>= 0.1.6.9000),
+    parsnip (>= 0.1.7.9000),
     R (>= 2.10)
 Imports:
     dials,
@@ -46,8 +46,11 @@ Suggests:
     spelling,
     testthat,
     xml2
+Remotes:
+    tidymodels/parsnip
+Config/Needs/website: tidyverse/tidytemplate
 Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1.9001
+RoxygenNote: 7.1.2

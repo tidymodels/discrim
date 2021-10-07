@@ -20,7 +20,7 @@ This model has 2 tuning parameter:
 Note that \code{usekernel} is always set to \code{TRUE} for the \code{klaR} engine.
 }
 
-\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="r">}}\preformatted{naive_Bayes(smoothness = numeric(0), Laplace = numeric(0)) \%>\% 
+\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{naive_Bayes(smoothness = numeric(0), Laplace = numeric(0)) \%>\% 
   set_engine("klaR") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Naive Bayes Model Specification (classification)
@@ -44,9 +44,9 @@ factors (as opposed to dummy/indicator variables). When the predictors
 are factors, the underlying code treats them as multinomial data and
 appropriately computes their conditional distributions.
 
-Variance calculations are used in these computations so no
-\emph{zero-variance} predictors (i.e., with a single unique value) should be
-eliminated before fitting the model.
+Variance calculations are used in these computations so \emph{zero-variance}
+predictors (i.e., with a single unique value) should be eliminated
+before fitting the model.
 }
 
 \subsection{References}{

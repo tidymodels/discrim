@@ -102,17 +102,6 @@ test_that('missing data', {
 
 # ------------------------------------------------------------------------------
 
-test_that('loaded model data', {
-  expect_error(
-    discrim:::make_discrim_flexible(),
-    "Model `discrim_flexible` already exists"
-  )
-  expect_true(nrow(parsnip:::get_from_env("discrim_flexible"))  == 1)
-})
-
-
-# ------------------------------------------------------------------------------
-
 test_that('printing', {
   expect_output(
     print(fda_spec),

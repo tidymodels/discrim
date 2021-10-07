@@ -1,5 +1,7 @@
 # discrim (development version)
 
+* Model definition functions (e.g. `discrim_linear()`) were moved to the parsnip package.
+
 # discrim 0.1.3
 
 * An LDA engine was added for the shrunken discriminant analysis method of Ahdesmaki and Strimmer (2010) with `engine = "sda"`. 

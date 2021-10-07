@@ -30,7 +30,7 @@ execute, are:
 }
 }
 
-\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="r">}}\preformatted{discrim_quad(regularization_method = character(0)) \%>\% 
+\subsection{Translation from parsnip to the original package}{\if{html}{\out{<div class="sourceCode r">}}\preformatted{discrim_quad(regularization_method = character(0)) \%>\% 
   set_engine("sparsediscrim") \%>\% 
   translate()
 }\if{html}{\out{</div>}}\preformatted{## Quadratic Discriminant Model Specification (classification)
@@ -55,9 +55,9 @@ formula method via
 convert factor columns to indicators.
 
 Variance calculations are used in these computations within each outcome
-class. For this reason, no \emph{zero-variance} predictors (i.e., with a
-single unique value) within each class should be eliminated before
-fitting the model.
+class. For this reason, \emph{zero-variance} predictors (i.e., with a single
+unique value) within each class should be eliminated before fitting the
+model.
 }
 
 \subsection{References}{

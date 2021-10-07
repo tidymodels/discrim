@@ -10,12 +10,6 @@
 # nocov
 
 make_discrim_linear_MASS <- function() {
-  parsnip::set_new_model("discrim_linear")
-
-  parsnip::set_model_mode("discrim_linear", "classification")
-
-  # ------------------------------------------------------------------------------
-
   parsnip::set_model_engine("discrim_linear", "classification", "MASS")
   parsnip::set_dependency("discrim_linear", "MASS", "MASS")
   parsnip::set_dependency("discrim_linear", "MASS", "discrim")
