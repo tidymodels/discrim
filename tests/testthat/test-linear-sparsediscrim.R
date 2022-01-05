@@ -192,4 +192,18 @@ test_that('lda_emp_bayes_eigen fit and prediction', {
 
 })
 
+test_that('mode specific package dependencies', {
+  expect_identical(
+    get_from_env(paste0("discrim_linear", "_pkgs")) %>%
+      dplyr::filter(engine == "sparsediscrim", mode == "classification") %>%
+      dplyr::pull(pkg),
+    list(c("sparsediscrim", "discrim"))
+  )
 
+  expect_identical(
+    get_from_env(paste0("discrim_linear", "_pkgs")) %>%
+      dplyr::filter(engine == "sparsediscrim", mode == "regression") %>%
+      dplyr::pull(pkg),
+    list()
+  )
+})

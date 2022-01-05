@@ -125,3 +125,19 @@ test_that('updating', {
   expect_equal(prior_spec_2, prior_spec_3)
 
 })
+
+test_that('mode specific package dependencies', {
+  expect_identical(
+    get_from_env(paste0("discrim_regularized", "_pkgs")) %>%
+      dplyr::filter(engine == "klaR", mode == "classification") %>%
+      dplyr::pull(pkg),
+    list(c("klaR", "discrim"))
+  )
+
+  expect_identical(
+    get_from_env(paste0("discrim_regularized", "_pkgs")) %>%
+      dplyr::filter(engine == "earth", mode == "regression") %>%
+      dplyr::pull(pkg),
+    list()
+  )
+})

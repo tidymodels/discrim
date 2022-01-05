@@ -118,3 +118,18 @@ test_that('updating', {
   expect_equal(fda_spec_2, fda_spec_3)
 })
 
+test_that('mode specific package dependencies', {
+  expect_identical(
+    get_from_env(paste0("discrim_flexible", "_pkgs")) %>%
+      dplyr::filter(engine == "earth", mode == "classification") %>%
+      dplyr::pull(pkg),
+    list(c("mda", "earth", "discrim"))
+  )
+
+  expect_identical(
+    get_from_env(paste0("discrim_flexible", "_pkgs")) %>%
+      dplyr::filter(engine == "earth", mode == "regression") %>%
+      dplyr::pull(pkg),
+    list()
+  )
+})

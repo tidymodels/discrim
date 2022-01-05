@@ -137,3 +137,18 @@ test_that('missing data', {
   expect_equal(f_pred, exp_f_pred)
 })
 
+test_that('mode specific package dependencies', {
+  expect_identical(
+    get_from_env(paste0("discrim_quad", "_pkgs")) %>%
+      dplyr::filter(engine == "MASS", mode == "classification") %>%
+      dplyr::pull(pkg),
+    list(c("MASS", "discrim"))
+  )
+
+  expect_identical(
+    get_from_env(paste0("discrim_quad", "_pkgs")) %>%
+      dplyr::filter(engine == "MASS", mode == "regression") %>%
+      dplyr::pull(pkg),
+    list()
+  )
+})

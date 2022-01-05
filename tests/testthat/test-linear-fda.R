@@ -125,4 +125,18 @@ test_that('updating', {
 
 })
 
+test_that('mode specific package dependencies', {
+  expect_identical(
+    get_from_env(paste0("discrim_linear", "_pkgs")) %>%
+      dplyr::filter(engine == "mda", mode == "classification") %>%
+      dplyr::pull(pkg),
+    list(c("mda", "discrim"))
+  )
 
+  expect_identical(
+    get_from_env(paste0("discrim_linear", "_pkgs")) %>%
+      dplyr::filter(engine == "mda", mode == "regression") %>%
+      dplyr::pull(pkg),
+    list()
+  )
+})

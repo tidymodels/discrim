@@ -195,3 +195,18 @@ test_that('printing', {
   )
 })
 
+test_that('mode specific package dependencies', {
+  expect_identical(
+    get_from_env(paste0("naive_Bayes", "_pkgs")) %>%
+      dplyr::filter(engine == "naivebayes", mode == "classification") %>%
+      dplyr::pull(pkg),
+    list(c("naivebayes", "discrim"))
+  )
+
+  expect_identical(
+    get_from_env(paste0("naive_Bayes", "_pkgs")) %>%
+      dplyr::filter(engine == "naivebayes", mode == "regression") %>%
+      dplyr::pull(pkg),
+    list()
+  )
+})

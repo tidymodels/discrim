@@ -43,7 +43,6 @@ does not wish to use the formula method.\if{html}{\out{<div class="sourceCode r"
 fda_mod
 }\if{html}{\out{</div>}}\preformatted{## parsnip model object
 ## 
-## Fit time:  20ms 
 ## Call:
 ## mda::fda(formula = class ~ ., data = data, method = earth::earth, 
 ##     nprune = ~3)
