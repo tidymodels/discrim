@@ -21,8 +21,8 @@ fit various discriminant analysis models, such as
 
 -   Linear discriminant analysis (LDA, simple and regularized)
 -   Quadratic discriminant analysis (QDA, simple and regularized)
--   Regularized discriminant analysis (RDA, via
-    [Friedman (1989)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&q=%22Regularized+Discriminant+Analysis%22&btnG=))
+-   Regularized discriminant analysis (RDA, via [Friedman
+    (1989)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&q=%22Regularized+Discriminant+Analysis%22&btnG=))
 -   Flexible discriminant analysis (FDA) using MARS features
 -   Naive Bayes models
 
@@ -32,6 +32,24 @@ fit various discriminant analysis models, such as
 devtools::install_github("tidymodels/discrim")
 ```
 
+## Avaliable Engines
+
+The discrim package provides engines for the models in the following
+table.
+
+| model               | engine        | mode           |
+|:--------------------|:--------------|:---------------|
+| discrim_flexible    | earth         | classification |
+| discrim_linear      | MASS          | classification |
+| discrim_linear      | mda           | classification |
+| discrim_linear      | sda           | classification |
+| discrim_linear      | sparsediscrim | classification |
+| discrim_quad        | MASS          | classification |
+| discrim_quad        | sparsediscrim | classification |
+| discrim_regularized | klaR          | classification |
+| naive_Bayes         | klaR          | classification |
+| naive_Bayes         | naivebayes    | classification |
+
 ## Example
 
 Here is a simple model using a simulated two-class data set contained in
@@ -39,7 +57,6 @@ the package:
 
 ``` r
 library(discrim)
-#> Loading required package: parsnip
 
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),

@@ -38,6 +38,30 @@ knitr::opts_chunk$set(
 devtools::install_github("tidymodels/discrim")
 ```
   
+## Avaliable Engines
+
+The discrim package provides engines for the models in the following table.
+
+```{r, echo=FALSE, message=FALSE}
+library(parsnip)
+
+parsnip_models <- get_from_env("models") %>%
+  setNames(., .) %>%
+  purrr::map_dfr(get_from_env, .id = "model")
+
+library(discrim)
+
+discrim_models <- get_from_env("models") %>%
+  setNames(., .) %>%
+  purrr::map_dfr(get_from_env, .id = "model")
+
+dplyr::anti_join(
+  discrim_models, parsnip_models, 
+  by = c("model", "engine", "mode")
+) %>%
+  knitr::kable()
+```
+
 ## Example
 
 Here is a simple model using a simulated two-class data set contained in the package:
