@@ -96,12 +96,75 @@
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"tidymodels/discrim"</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="avaliable-engines">Avaliable Engines<a class="anchor" aria-label="anchor" href="#avaliable-engines"></a>
+</h2>
+<p>The discrim package provides engines for the models in the following table.</p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">model</th>
+<th align="left">engine</th>
+<th align="left">mode</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">discrim_flexible</td>
+<td align="left">earth</td>
+<td align="left">classification</td>
+</tr>
+<tr class="even">
+<td align="left">discrim_linear</td>
+<td align="left">MASS</td>
+<td align="left">classification</td>
+</tr>
+<tr class="odd">
+<td align="left">discrim_linear</td>
+<td align="left">mda</td>
+<td align="left">classification</td>
+</tr>
+<tr class="even">
+<td align="left">discrim_linear</td>
+<td align="left">sda</td>
+<td align="left">classification</td>
+</tr>
+<tr class="odd">
+<td align="left">discrim_linear</td>
+<td align="left">sparsediscrim</td>
+<td align="left">classification</td>
+</tr>
+<tr class="even">
+<td align="left">discrim_quad</td>
+<td align="left">MASS</td>
+<td align="left">classification</td>
+</tr>
+<tr class="odd">
+<td align="left">discrim_quad</td>
+<td align="left">sparsediscrim</td>
+<td align="left">classification</td>
+</tr>
+<tr class="even">
+<td align="left">discrim_regularized</td>
+<td align="left">klaR</td>
+<td align="left">classification</td>
+</tr>
+<tr class="odd">
+<td align="left">naive_Bayes</td>
+<td align="left">klaR</td>
+<td align="left">classification</td>
+</tr>
+<tr class="even">
+<td align="left">naive_Bayes</td>
+<td align="left">naivebayes</td>
+<td align="left">classification</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>Here is a simple model using a simulated two-class data set contained in the package:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://discrim.tidymodels.org">discrim</a></span><span class="op">)</span>
-<span class="co">#&gt; Loading required package: parsnip</span>
 
 <span class="va">parabolic_grid</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="https://rdrr.io/r/base/expand.grid.html" class="external-link">expand.grid</a></span><span class="op">(</span>X1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, length <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,
