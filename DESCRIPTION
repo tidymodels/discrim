@@ -49,7 +49,9 @@ VignetteBuilder:
     knitr
 Remotes:
     tidymodels/parsnip
-Config/Needs/website: tidyverse/tidytemplate
+Config/Needs/website: 
+  tidymodels/tidymodels,
+  tidyverse/tidytemplate
 Encoding: UTF-8
 Language: en-US
 LazyData: true
