@@ -10,7 +10,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/discrim)](https://cran.r-project.org/package=discrim)
 [![Codecov test
-coverage](https://codecov.io/gh/tidymodels/discrim/branch/main/graph/badge.svg)](https://codecov.io/gh/tidymodels/discrim?branch=main)
+coverage](https://codecov.io/gh/tidymodels/discrim/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidymodels/discrim?branch=main)
 [![R build
 status](https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/discrim/actions)
 [![R-CMD-check](https://github.com/tidymodels/discrim/workflows/R-CMD-check/badge.svg)](https://github.com/tidymodels/discrim/actions)
