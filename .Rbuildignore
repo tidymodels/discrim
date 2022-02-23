@@ -19,3 +19,4 @@ derby.log
 ^\.github$
 ^LICENSE\.md$
 ^man-roxygen$
+^vignettes/articles$
