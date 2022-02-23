@@ -18,11 +18,10 @@ Description: Bindings for additional classification models for use with
     well as naive Bayes classifiers (Hand and Yu (2007)
     <doi:10.1111/j.1751-5823.2001.tb00465.x>).
 License: MIT + file LICENSE
-URL: https://discrim.tidymodels.org,
-    https://discrim.tidymodels.org/
+URL: https://discrim.tidymodels.org/
 BugReports: https://github.com/tidymodels/discrim/issues
 Depends:
-    parsnip (>= 0.1.7.9000),
+    parsnip (>= 0.2.0),
     R (>= 2.10)
 Imports:
     dials,
@@ -46,8 +45,6 @@ Suggests:
     spelling,
     testthat,
     xml2
-Remotes:
-    tidymodels/parsnip
 Config/Needs/website: tidyverse/tidytemplate
 Encoding: UTF-8
 Language: en-US
