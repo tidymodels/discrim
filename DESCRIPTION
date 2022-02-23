@@ -29,7 +29,6 @@ Imports:
     purrr,
     rlang,
     tibble,
-    utils,
     withr
 Suggests: 
     covr,
