@@ -32,7 +32,7 @@ fit various discriminant analysis models, such as
 devtools::install_github("tidymodels/discrim")
 ```
 
-## Avaliable Engines
+## Available Engines
 
 The discrim package provides engines for the models in the following
 table.
