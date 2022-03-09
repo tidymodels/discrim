@@ -77,7 +77,7 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://discrim.tidymodels.org}
+  \item \url{https://discrim.tidymodels.org/}
   \item Report bugs at \url{https://github.com/tidymodels/discrim/issues}
 }
 
