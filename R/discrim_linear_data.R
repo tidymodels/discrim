@@ -22,7 +22,9 @@ make_discrim_linear_MASS <- function() {
       interface = "formula",
       protect = c("formula", "data"),
       func = c(pkg = "MASS", fun = "lda"),
-      defaults = list()
+      defaults = list(
+        prior = NULL
+      )
     )
   )
 
@@ -291,7 +293,9 @@ make_discrim_linear_sparsediscrim <- function() {
       interface = "data.frame",
       protect = c("x", "y"),
       func = c(pkg = "discrim", fun = "fit_regularized_linear"),
-      defaults = list()
+      defaults = list(
+        prior = NULL
+      )
     )
   )
 
