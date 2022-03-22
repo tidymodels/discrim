@@ -110,7 +110,6 @@ make_discrim_flexible <- function() {
         )
     )
   )
-
 }
 
 # nocov end

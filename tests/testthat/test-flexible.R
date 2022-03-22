@@ -1,18 +1,10 @@
-context("flexible discrim - earth")
-
-# ------------------------------------------------------------------------------
-
-source(test_path("helper-objects.R"))
-
-# ------------------------------------------------------------------------------
-
-fda_spec   <- discrim_flexible(num_terms = 7) %>% set_engine("earth")
+fda_spec <- discrim_flexible(num_terms = 7) %>% set_engine("earth")
 
 exp_f_fit <- mda::fda(Type ~ ., data = glass_tr, method = earth::earth, nprune = 7)
 
 # ------------------------------------------------------------------------------
 
-test_that('model object', {
+test_that("model object", {
 
   # formula method
   expect_error(f_fit <- fit(fda_spec, Type ~ ., data = glass_tr), NA)
@@ -21,18 +13,17 @@ test_that('model object', {
 
   # x/y method
   expect_error(
-    xy_fit <- fit_xy(fda_spec, x = glass_tr[,-10], y = glass_tr$Type),
+    xy_fit <- fit_xy(fda_spec, x = glass_tr[, -10], y = glass_tr$Type),
     NA
   )
   expect_equal(xy_fit$fit$theta.mod, exp_f_fit$theta.mod)
   expect_equal(xy_fit$fit$fit$cuts, exp_f_fit$fit$cuts)
-
 })
 
 # ------------------------------------------------------------------------------
 
 
-test_that('class predictions', {
+test_that("class predictions", {
   # formula method
   expect_error(f_fit <- fit(fda_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_te)
@@ -44,7 +35,7 @@ test_that('class predictions', {
 
   # x/y method
   expect_error(
-    xy_fit <- fit_xy(fda_spec, x = glass_tr[,-10], y = glass_tr$Type),
+    xy_fit <- fit_xy(fda_spec, x = glass_tr[, -10], y = glass_tr$Type),
     NA
   )
   xy_pred <- predict(xy_fit, glass_te)
@@ -54,13 +45,12 @@ test_that('class predictions', {
   expect_true(inherits(xy_pred, "tbl_df"))
   expect_true(all(names(xy_pred) == ".pred_class"))
   expect_equal(xy_pred$.pred_class, exp_f_pred)
-
 })
 
 # ------------------------------------------------------------------------------
 
 
-test_that('prob predictions', {
+test_that("prob predictions", {
   # formula method
   expect_error(f_fit <- fit(fda_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_te, type = "prob")
@@ -72,20 +62,19 @@ test_that('prob predictions', {
 
   # x/y method
   expect_error(
-    xy_fit <- fit_xy(fda_spec, x = glass_tr[,-10], y = glass_tr$Type),
+    xy_fit <- fit_xy(fda_spec, x = glass_tr[, -10], y = glass_tr$Type),
     NA
   )
   xy_pred <- predict(xy_fit, glass_te, type = "prob")
   expect_true(inherits(xy_pred, "tbl_df"))
   expect_equal(names(xy_pred), prob_names)
   expect_equal(xy_pred, exp_f_pred)
-
 })
 
 # ------------------------------------------------------------------------------
 
 
-test_that('missing data', {
+test_that("missing data", {
   expect_error(f_fit <- fit(fda_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_na, type = "prob")
 
@@ -102,7 +91,7 @@ test_that('missing data', {
 
 # ------------------------------------------------------------------------------
 
-test_that('printing', {
+test_that("printing", {
   expect_output(
     print(fda_spec),
     "Flexible Discriminant Model Specification"
@@ -112,9 +101,8 @@ test_that('printing', {
 
 # ------------------------------------------------------------------------------
 
-test_that('updating', {
+test_that("updating", {
   fda_spec_2 <- discrim_flexible(num_terms = 6) %>% set_engine("earth")
   fda_spec_3 <- update(fda_spec, num_terms = 6)
   expect_equal(fda_spec_2, fda_spec_3)
 })
-
