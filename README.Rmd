@@ -32,7 +32,7 @@ knitr::opts_chunk$set(
  
 ## Installation
 
-You can install the released version of vetiver from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of discrim from [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("discrim")
@@ -45,7 +45,7 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidymodels/discrim")
 ```
   
-## Avaliable Engines
+## Available Engines
 
 The discrim package provides engines for the models in the following table.
 

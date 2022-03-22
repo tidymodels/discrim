@@ -26,7 +26,7 @@ fit various discriminant analysis models, such as
 
 ## Installation
 
-You can install the released version of vetiver from
+You can install the released version of discrim from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
@@ -40,7 +40,7 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidymodels/discrim")
 ```
 
-## Avaliable Engines
+## Available Engines
 
 The discrim package provides engines for the models in the following
 table.
