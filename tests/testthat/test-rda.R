@@ -1,11 +1,3 @@
-context("regularized discrim")
-
-# ------------------------------------------------------------------------------
-
-source(test_path("helper-objects.R"))
-
-# ------------------------------------------------------------------------------
-
 rda_spec <-
   discrim_regularized(frac_common_cov = .1, frac_identity = 1) %>%
   set_engine("klaR")
@@ -42,7 +34,7 @@ test_that('class predictions', {
   f_pred <- predict(f_fit, glass_te)
   exp_f_pred <- predict(exp_f_fit, glass_te)$class
 
-  expect_true(inherits(f_pred, "tbl_df"))
+  expect_s3_class(f_pred, "tbl_df")
   expect_true(all(names(f_pred) == ".pred_class"))
   expect_equal(f_pred$.pred_class, exp_f_pred)
 
@@ -55,7 +47,7 @@ test_that('class predictions', {
   # See bug note above
   # exp_xy_pred <- predict(exp_xy_fit, glass_te)
 
-  expect_true(inherits(xy_pred, "tbl_df"))
+  expect_s3_class(xy_pred, "tbl_df")
   expect_true(all(names(xy_pred) == ".pred_class"))
   expect_equal(xy_pred$.pred_class, exp_f_pred)
 
@@ -70,7 +62,7 @@ test_that('prob predictions', {
   f_pred <- predict(f_fit, glass_te, type = "prob")
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_te, type = "posterior")$posterior)
 
-  expect_true(inherits(f_pred, "tbl_df"))
+  expect_s3_class(f_pred, "tbl_df")
   expect_equal(names(f_pred), prob_names)
   expect_equal(f_pred, exp_f_pred)
 
@@ -80,7 +72,7 @@ test_that('prob predictions', {
     NA
   )
   xy_pred <- predict(xy_fit, glass_te, type = "prob")
-  expect_true(inherits(xy_pred, "tbl_df"))
+  expect_s3_class(xy_pred, "tbl_df")
   expect_equal(names(xy_pred), prob_names)
   expect_equal(xy_pred, exp_f_pred)
 
@@ -95,7 +87,7 @@ test_that('missing data', {
 
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_na, type = "posterior")$posterior)
 
-  expect_true(inherits(f_pred, "tbl_df"))
+  expect_s3_class(f_pred, "tbl_df")
   expect_true(nrow(f_pred) == nrow(glass_te))
   expect_equal(names(f_pred), prob_names)
   expect_equal(f_pred, exp_f_pred)
@@ -104,10 +96,7 @@ test_that('missing data', {
 # ------------------------------------------------------------------------------
 
 test_that('printing', {
-  expect_output(
-    print(rda_spec),
-    "Regularized Discriminant Model Specification"
-  )
+  expect_snapshot(print(rda_spec))
 })
 
 # ------------------------------------------------------------------------------
@@ -122,6 +111,8 @@ test_that('updating', {
   prior_spec_2 <- discrim_regularized(frac_common_cov = 1) %>%
     set_engine("klaR", prior = rep(1/6, 6))
   prior_spec_3 <- update(prior_spec, frac_common_cov = 1)
-  expect_equal(prior_spec_2, prior_spec_3)
+  expect_equal(prior_spec_2, prior_spec_3,
+               ignore_function_env = TRUE,
+               ignore_formula_env = TRUE)
 
 })

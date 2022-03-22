@@ -1,11 +1,3 @@
-context("linear discrim - fda")
-
-# ------------------------------------------------------------------------------
-
-source(test_path("helper-objects.R"))
-
-# ------------------------------------------------------------------------------
-
 lda_spec   <- discrim_linear(penalty = 1) %>% set_engine("mda")
 prior_spec <- discrim_linear() %>% set_engine("mda", prior = rep(1/6, 6))
 
@@ -121,7 +113,9 @@ test_that('updating', {
   prior_spec_2 <- discrim_linear(penalty = .1) %>%
     set_engine("mda", prior = rep(1/6, 6))
   prior_spec_3 <- update(prior_spec, penalty = .1)
-  expect_equal(prior_spec_2, prior_spec_3)
+  expect_equal(prior_spec_2, prior_spec_3,
+               ignore_function_env = TRUE,
+               ignore_formula_env = TRUE)
 
 })
 

@@ -1,11 +1,3 @@
-context("linear discrim - sda")
-
-# ------------------------------------------------------------------------------
-
-source(test_path("helper-objects.R"))
-
-# ------------------------------------------------------------------------------
-
 test_that('sda fit and prediction', {
 
   sda_fit <- sda::sda(
@@ -39,9 +31,10 @@ test_that('sda fit and prediction', {
     d_pred$.pred_class
   )
 
-  expect_equivalent(
+  expect_equal(
     sda_pred$posterior %>% tibble::as_tibble(),
-    d_prob
+    d_prob,
+    ignore_attr = TRUE
   )
 })
 

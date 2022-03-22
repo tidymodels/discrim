@@ -1,7 +1,3 @@
-context("naive Bayes - naivebayes")
-
-# ------------------------------------------------------------------------------
-
 library(mlbench)
 
 data(Glass)
@@ -113,7 +109,7 @@ test_that('class predictions', {
 
   expect_s3_class(f_pred, "tbl_df")
   expect_true(all(names(f_pred) == ".pred_class"))
-  expect_equivalent(f_pred$.pred_class, exp_f_pred)
+  expect_equal(f_pred$.pred_class, exp_f_pred, ignore_attr = TRUE)
 
   # x/y method
   expect_error(
@@ -125,7 +121,7 @@ test_that('class predictions', {
 
   expect_s3_class(xy_pred, "tbl_df")
   expect_true(all(names(xy_pred) == ".pred_class"))
-  expect_equivalent(xy_pred$.pred_class, exp_xy_pred)
+  expect_equal(xy_pred$.pred_class, exp_xy_pred, ignore_attr = TRUE)
 
   # added argument
   expect_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[,-7], y = glass_tr$Type), NA)
@@ -134,7 +130,7 @@ test_that('class predictions', {
 
   expect_s3_class(f_pred, "tbl_df")
   expect_true(all(names(f_pred) == ".pred_class"))
-  expect_equivalent(prior_pred$.pred_class, exp_prior_pred)
+  expect_equal(prior_pred$.pred_class, exp_prior_pred, ignore_attr = TRUE)
 })
 
 # ------------------------------------------------------------------------------
@@ -189,9 +185,6 @@ test_that('missing data', {
 # ------------------------------------------------------------------------------
 
 test_that('printing', {
-  expect_output(
-    print(nb_spec),
-    "Naive Bayes Model Specification"
-  )
+  expect_snapshot(print(nb_spec))
 })
 

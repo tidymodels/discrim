@@ -1,11 +1,3 @@
-context("quadratic discrim - sparsediscrim")
-
-# ------------------------------------------------------------------------------
-
-source(test_path("helper-objects.R"))
-
-# ------------------------------------------------------------------------------
-
 test_that('qda_diag fit and prediction', {
 
   spd_fit <- sparsediscrim::qda_diag(
@@ -42,9 +34,10 @@ test_that('qda_diag fit and prediction', {
     d_pred$.pred_class
   )
 
-  expect_equivalent(
+  expect_equal(
     spd_prob %>% tibble::as_tibble(),
-    d_prob
+    d_prob,
+    ignore_attr = TRUE
   )
 })
 
@@ -87,9 +80,10 @@ test_that('qda_shrink_mean fit and prediction', {
     d_pred$.pred_class
   )
 
-  expect_equivalent(
+  expect_equal(
     spd_prob %>% tibble::as_tibble(),
-    d_prob
+    d_prob,
+    ignore_attr = TRUE
   )
 })
 
@@ -131,9 +125,10 @@ test_that('qda_shrink_cov fit and prediction', {
     d_pred$.pred_class
   )
 
-  expect_equivalent(
+  expect_equal(
     spd_prob %>% tibble::as_tibble(),
-    d_prob
+    d_prob,
+    ignore_attr = TRUE
   )
 })
 

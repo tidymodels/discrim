@@ -1,11 +1,3 @@
-context("linear discrim - lda")
-
-# ------------------------------------------------------------------------------
-
-source(test_path("helper-objects.R"))
-
-# ------------------------------------------------------------------------------
-
 lda_spec   <- discrim_linear() %>% set_engine("MASS")
 prior_spec <- discrim_linear() %>% set_engine("MASS", prior = rep(1/6, 6))
 
@@ -98,7 +90,7 @@ test_that('prob predictions', {
   # See bug note above
   # exp_xy_pred <- predict(exp_xy_fit, glass_te)
 
-  expect_true(inherits(xy_pred, "tbl_df"))
+  expect_s3_class(xy_pred, "tbl_df")
   expect_equal(names(xy_pred), prob_names)
   expect_equal(xy_pred, exp_f_pred)
 
@@ -117,10 +109,10 @@ test_that('prob predictions', {
 
 test_that('missing data', {
   expect_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr), NA)
-  expect_warning(f_pred <- predict(f_fit, glass_na, type = "prob"))
-  expect_warning(exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_na)$posterior))
+  expect_snapshot(f_pred <- predict(f_fit, glass_na, type = "prob"))
+  expect_snapshot(exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_na)$posterior))
 
-  expect_true(inherits(f_pred, "tbl_df"))
+  expect_s3_class(f_pred, "tbl_df")
   expect_true(nrow(f_pred) == nrow(glass_te))
   expect_equal(names(f_pred), prob_names)
   expect_equal(f_pred, exp_f_pred)
@@ -161,9 +153,10 @@ test_that('sda fit and prediction', {
     d_pred$.pred_class
   )
 
-  expect_equivalent(
+  expect_equal(
     sda_pred$posterior %>% tibble::as_tibble(),
-    d_prob
+    d_prob,
+    ignore_attr = TRUE
   )
 })
 

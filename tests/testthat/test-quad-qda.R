@@ -1,11 +1,3 @@
-context("quadratic discrim - qda")
-
-# ------------------------------------------------------------------------------
-
-source(test_path("helper-objects.R"))
-
-# ------------------------------------------------------------------------------
-
 data(penguins, package = "modeldata")
 penguins$island <- NULL
 penguins_miss <- penguins
@@ -128,10 +120,10 @@ test_that('prob predictions', {
 test_that('missing data', {
   exp_f_fit     <- MASS::qda(species ~ ., data = penguins_miss)
   expect_error(f_fit <- fit(qda_spec, species ~ ., data = penguins_miss), NA)
-  expect_warning(f_pred <- predict(f_fit, penguins_miss, type = "prob"))
-  expect_warning(exp_f_pred <- probs_to_tibble(predict(exp_f_fit, penguins_miss)$posterior))
+  expect_snapshot(f_pred <- predict(f_fit, penguins_miss, type = "prob"))
+  expect_snapshot(exp_f_pred <- probs_to_tibble(predict(exp_f_fit, penguins_miss)$posterior))
 
-  expect_true(inherits(f_pred, "tbl_df"))
+  expect_s3_class(f_pred, "tbl_df")
   expect_true(nrow(f_pred) == nrow(penguins_miss))
   expect_equal(names(f_pred), prob_names)
   expect_equal(f_pred, exp_f_pred)

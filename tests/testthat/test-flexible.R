@@ -1,11 +1,3 @@
-context("flexible discrim - earth")
-
-# ------------------------------------------------------------------------------
-
-source(test_path("helper-objects.R"))
-
-# ------------------------------------------------------------------------------
-
 fda_spec   <- discrim_flexible(num_terms = 7) %>% set_engine("earth")
 
 exp_f_fit <- mda::fda(Type ~ ., data = glass_tr, method = earth::earth, nprune = 7)

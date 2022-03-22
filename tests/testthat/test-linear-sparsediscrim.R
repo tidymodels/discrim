@@ -1,11 +1,3 @@
-context("linear discrim - sparsediscrim")
-
-# ------------------------------------------------------------------------------
-
-source(test_path("helper-objects.R"))
-
-# ------------------------------------------------------------------------------
-
 test_that('lda_diag fit and prediction', {
 
   spd_fit <- sparsediscrim::lda_diag(
@@ -42,9 +34,10 @@ test_that('lda_diag fit and prediction', {
     d_pred$.pred_class
   )
 
-  expect_equivalent(
+  expect_equal(
     spd_prob %>% tibble::as_tibble(),
-    d_prob
+    d_prob,
+    ignore_attr = TRUE
   )
 })
 
@@ -87,9 +80,10 @@ test_that('lda_shrink_mean fit and prediction', {
     d_pred$.pred_class
   )
 
-  expect_equivalent(
+  expect_equal(
     spd_prob %>% tibble::as_tibble(),
-    d_prob
+    d_prob,
+    ignore_attr = TRUE
   )
 })
 
@@ -131,9 +125,10 @@ test_that('lda_shrink_cov fit and prediction', {
     d_pred$.pred_class
   )
 
-  expect_equivalent(
+  expect_equal(
     spd_prob %>% tibble::as_tibble(),
-    d_prob
+    d_prob,
+    ignore_attr = TRUE
   )
 })
 
@@ -177,17 +172,17 @@ test_that('lda_emp_bayes_eigen fit and prediction', {
     d_pred$.pred_class
   )
 
-  expect_equivalent(
+  expect_equal(
     spd_prob %>% tibble::as_tibble(),
-    d_prob
+    d_prob,
+    ignore_attr = TRUE
   )
 
-  expect_error(
+  expect_snapshot_error(
     d_fit <-
       discrim_linear(regularization_method = "min_dist") %>%
       set_engine("sparsediscrim") %>%
-      fit(class ~ ., data = cell_tr),
-    "'method' should be one of"
+      fit(class ~ ., data = cell_tr)
   )
 
 })
