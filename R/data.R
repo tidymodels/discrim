@@ -14,10 +14,7 @@
 #'
 #' library(ggplot2)
 #' ggplot(parabolic, aes(x = X1, y = X2, col = class)) +
-#'  geom_point(alpha = .5) +
-#'  theme_bw()
+#'   geom_point(alpha = .5) +
+#'   theme_bw()
 #'
 NULL
-
-
-

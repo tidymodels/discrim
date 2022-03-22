@@ -3,21 +3,21 @@ penguins$island <- NULL
 penguins_miss <- penguins
 penguins <- na.omit(penguins)
 in_train <- seq(1, nrow(penguins), by = 2)
-penguin_tr <- penguins[ in_train, ]
+penguin_tr <- penguins[in_train, ]
 penguin_te <- penguins[-in_train, ]
 
-qda_spec   <- discrim_quad() %>% set_engine("MASS")
-prior_spec <- discrim_quad() %>% set_engine("MASS", prior = rep(1/3, 3))
+qda_spec <- discrim_quad() %>% set_engine("MASS")
+prior_spec <- discrim_quad() %>% set_engine("MASS", prior = rep(1 / 3, 3))
 
-exp_f_fit     <- MASS::qda(species ~ ., data = penguin_tr)
-exp_xy_fit    <- MASS::qda(x = penguin_tr[,-1], grouping = penguin_tr$species)
-exp_prior_fit <- MASS::qda(species ~ ., data = penguin_tr, prior = rep(1/3, 3))
+exp_f_fit <- MASS::qda(species ~ ., data = penguin_tr)
+exp_xy_fit <- MASS::qda(x = penguin_tr[, -1], grouping = penguin_tr$species)
+exp_prior_fit <- MASS::qda(species ~ ., data = penguin_tr, prior = rep(1 / 3, 3))
 
 prob_names <- c(".pred_Adelie", ".pred_Chinstrap", ".pred_Gentoo")
 
 # ------------------------------------------------------------------------------
 
-test_that('model object', {
+test_that("model object", {
 
   # formula method
   expect_error(f_fit <- fit(qda_spec, species ~ ., data = penguin_tr), NA)
@@ -26,7 +26,7 @@ test_that('model object', {
 
   # x/y method
   expect_error(
-    xy_fit <- fit_xy(qda_spec, x = penguin_tr[,-1], y = penguin_tr$species),
+    xy_fit <- fit_xy(qda_spec, x = penguin_tr[, -1], y = penguin_tr$species),
     NA
   )
   # `MASS::qda()` doesn't throw an error despite a factor predictor. It converts
@@ -45,7 +45,7 @@ test_that('model object', {
 # ------------------------------------------------------------------------------
 
 
-test_that('class predictions', {
+test_that("class predictions", {
   # formula method
   expect_error(f_fit <- fit(qda_spec, species ~ ., data = penguin_tr), NA)
   f_pred <- predict(f_fit, penguin_te)
@@ -57,7 +57,7 @@ test_that('class predictions', {
 
   # x/y method
   expect_error(
-    xy_fit <- fit_xy(qda_spec, x = penguin_tr[,-1], y = penguin_tr$species),
+    xy_fit <- fit_xy(qda_spec, x = penguin_tr[, -1], y = penguin_tr$species),
     NA
   )
   xy_pred <- predict(xy_fit, penguin_te)
@@ -81,7 +81,7 @@ test_that('class predictions', {
 # ------------------------------------------------------------------------------
 
 
-test_that('prob predictions', {
+test_that("prob predictions", {
   # formula method
   expect_error(f_fit <- fit(qda_spec, species ~ ., data = penguin_tr), NA)
   f_pred <- predict(f_fit, penguin_te, type = "prob")
@@ -93,7 +93,7 @@ test_that('prob predictions', {
 
   # x/y method
   expect_error(
-    xy_fit <- fit_xy(qda_spec, x = penguin_tr[,-1], y = penguin_tr$species),
+    xy_fit <- fit_xy(qda_spec, x = penguin_tr[, -1], y = penguin_tr$species),
     NA
   )
   xy_pred <- predict(xy_fit, penguin_te, type = "prob")
@@ -117,8 +117,8 @@ test_that('prob predictions', {
 # ------------------------------------------------------------------------------
 
 
-test_that('missing data', {
-  exp_f_fit     <- MASS::qda(species ~ ., data = penguins_miss)
+test_that("missing data", {
+  exp_f_fit <- MASS::qda(species ~ ., data = penguins_miss)
   expect_error(f_fit <- fit(qda_spec, species ~ ., data = penguins_miss), NA)
   expect_snapshot(f_pred <- predict(f_fit, penguins_miss, type = "prob"))
   expect_snapshot(exp_f_pred <- probs_to_tibble(predict(exp_f_fit, penguins_miss)$posterior))
@@ -128,4 +128,3 @@ test_that('missing data', {
   expect_equal(names(f_pred), prob_names)
   expect_equal(f_pred, exp_f_pred)
 })
-

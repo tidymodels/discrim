@@ -101,7 +101,6 @@ make_discrim_regularized <- function() {
         )
     )
   )
-
 }
 
 # nocov end
