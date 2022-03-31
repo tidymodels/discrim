@@ -112,7 +112,7 @@ make_discrim_linear_mda <- function() {
     mode = "classification",
     value = list(
       interface = "formula",
-      protect = c("formula", "data"),
+      protect = c("formula", "data", "weights"),
       func = c(pkg = "mda", fun = "fda"),
       defaults = list(method = quote(mda::gen.ridge), keep.fitted = FALSE)
     )
