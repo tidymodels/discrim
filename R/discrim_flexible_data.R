@@ -41,7 +41,7 @@ make_discrim_flexible <- function() {
     mode = "classification",
     value = list(
       interface = "formula",
-      protect = c("formula", "data"),
+      protect = c("formula", "data", "weights"),
       func = c(pkg = "mda", fun = "fda"),
       defaults = list(method = quote(earth::earth))
     )
