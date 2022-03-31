@@ -33,17 +33,25 @@ Suggests:
     earth,
     ggplot2,
     klaR,
+    knitr,
     MASS,
     mda,
     mlbench,
     modeldata,
     naivebayes,
+    rmarkdown,
     sda,
     sparsediscrim (>= 0.3.0),
     spelling,
     testthat (>= 3.0.0),
     xml2
-Config/Needs/website: tidyverse/tidytemplate
+VignetteBuilder: 
+    knitr
+Remotes:
+    tidymodels/parsnip
+Config/Needs/website: 
+  tidymodels/tidymodels,
+  tidyverse/tidytemplate
 Encoding: UTF-8
 Language: en-US
 LazyData: true
