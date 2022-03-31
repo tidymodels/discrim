@@ -88,13 +88,11 @@ make_discrim_linear_MASS <- function() {
         )
     )
   )
-
 }
 
 # ------------------------------------------------------------------------------
 
 make_discrim_linear_mda <- function() {
-
   parsnip::set_model_engine("discrim_linear", "classification", "mda")
   parsnip::set_dependency("discrim_linear", eng = "mda", pkg = "mda")
   parsnip::set_dependency("discrim_linear", eng = "mda", pkg = "discrim")
@@ -114,7 +112,7 @@ make_discrim_linear_mda <- function() {
     mode = "classification",
     value = list(
       interface = "formula",
-      protect = c("formula", "data"),
+      protect = c("formula", "data", "weights"),
       func = c(pkg = "mda", fun = "fda"),
       defaults = list(method = quote(mda::gen.ridge), keep.fitted = FALSE)
     )
@@ -188,7 +186,6 @@ make_discrim_linear_mda <- function() {
 # ------------------------------------------------------------------------------
 
 make_discrim_linear_sda <- function() {
-
   parsnip::set_model_engine("discrim_linear", "classification", "sda")
   parsnip::set_dependency("discrim_linear", "sda", "sda")
   parsnip::set_dependency("discrim_linear", "sda", "discrim")
@@ -272,13 +269,11 @@ make_discrim_linear_sda <- function() {
         )
     )
   )
-
 }
 
 # ------------------------------------------------------------------------------
 
 make_discrim_linear_sparsediscrim <- function() {
-
   parsnip::set_model_engine("discrim_linear", "classification", "sparsediscrim")
   parsnip::set_dependency("discrim_linear", "sparsediscrim", "sparsediscrim")
   parsnip::set_dependency("discrim_linear", "sparsediscrim", "discrim")
@@ -368,7 +363,6 @@ make_discrim_linear_sparsediscrim <- function() {
         )
     )
   )
-
 }
 
 # nocov end

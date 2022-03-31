@@ -189,7 +189,6 @@ make_naive_Bayes_klaR <- function() {
         )
     )
   )
-
 }
 
 # nocov end

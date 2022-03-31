@@ -78,6 +78,7 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
 Useful links:
 \itemize{
   \item \url{https://discrim.tidymodels.org/}
+  \item \url{https://github.com/tidymodels/discrim/}
   \item Report bugs at \url{https://github.com/tidymodels/discrim/issues}
 }
 
@@ -87,7 +88,7 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder]
+  \item RStudio [copyright holder, funder]
 }
 
 }
