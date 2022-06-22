@@ -20,3 +20,4 @@ derby.log
 ^LICENSE\.md$
 ^man-roxygen$
 ^vignettes/articles$
+^cran-comments\.md$
