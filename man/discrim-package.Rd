@@ -21,7 +21,9 @@ model of Friedman (1991). It is able to create class boundaries that are
 polygons and has built-in feature selection.
 
 The \code{parabolic} data from the modeldata package will be used to
-illustrate:\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(tidymodels)
+illustrate:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(tidymodels)
 library(discrim)
 tidymodels_prefer()
 theme_set(theme_bw())
@@ -35,13 +37,17 @@ methods to use the MARS model). We’ll set the number of MARS terms to
 use but this can be tuned via the methods in the tune package.
 
 The \code{fit()} function estimates the model. \code{fit_xy()} can be used if one
-does not wish to use the formula method.\if{html}{\out{<div class="sourceCode r">}}\preformatted{fda_mod <-
+does not wish to use the formula method.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{fda_mod <-
   discrim_flexible(num_terms = 3) \%>\%
   # increase `num_terms` to find smoother boundaries
   set_engine("earth") \%>\%
   fit(class ~ ., data = parabolic)
 fda_mod
-}\if{html}{\out{</div>}}\preformatted{## parsnip model object
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## parsnip model object
 ## 
 ## Call:
 ## mda::fda(formula = class ~ ., data = data, method = earth::earth, 
@@ -54,10 +60,12 @@ fda_mod
 ## 100 
 ## 
 ## Training Misclassification Error: 0.136 ( N = 500 )
-}
+}\if{html}{\out{</div>}}
 
 Now let’s plot the class boundary by predicting on a grid of points then
-creating a contour plot for the 50\% probability cutoff.\if{html}{\out{<div class="sourceCode r">}}\preformatted{parabolic_grid <-
+creating a contour plot for the 50\% probability cutoff.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
               X2 = seq(-5, 5, length = 100))
 
@@ -84,7 +92,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Max Kuhn \email{max@rstudio.com} (\href{https://orcid.org/0000-0003-2402-136X}{ORCID})
+\strong{Maintainer}: Emil Hvitfeldt \email{emilhhvitfeldt@gmail.com} (\href{https://orcid.org/0000-0002-0679-1945}{ORCID})
+
+Authors:
+\itemize{
+  \item Max Kuhn \email{max@rstudio.com} (\href{https://orcid.org/0000-0003-2402-136X}{ORCID})
+}
 
 Other contributors:
 \itemize{

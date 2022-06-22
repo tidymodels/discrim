@@ -3,6 +3,12 @@ prior_spec <- discrim_linear() %>% set_engine("mda", prior = rep(1/6, 6))
 
 exp_f_fit     <- mda::fda(Type ~ ., data = glass_tr, method = mda::gen.ridge, lambda = 1)
 
+wts <- ifelse(runif(nrow(glass_tr)) < .1, 0, 1)
+wts <- importance_weights(wts)
+
+exp_f_wts_fit <- mda::fda(Type ~ ., data = glass_tr, weights = as.double(wts),
+                          method = mda::gen.ridge, lambda = 1)
+
 # ------------------------------------------------------------------------------
 
 test_that('model object', {
@@ -12,6 +18,13 @@ test_that('model object', {
   expect_equal(f_fit$fit$theta.mod, exp_f_fit$theta.mod)
   expect_equal(f_fit$fit$fit$coefficients, exp_f_fit$fit$coefficients)
 
+  expect_error(
+    f_wts_fit <- fit(lda_spec, Type ~ ., data = glass_tr, case_weights = wts),
+    NA
+  )
+  expect_equal(f_wts_fit$fit$theta.mod, exp_f_wts_fit$theta.mod)
+  expect_equal(f_wts_fit$fit$fit$coefficients, exp_f_wts_fit$fit$coefficients)
+
   # x/y method
   expect_error(
     xy_fit <- fit_xy(lda_spec, x = glass_tr[,-10], y = glass_tr$Type),
@@ -19,6 +32,14 @@ test_that('model object', {
   )
   expect_equal(xy_fit$fit$theta.mod, exp_f_fit$theta.mod)
   expect_equal(xy_fit$fit$fit$coefficients, exp_f_fit$fit$coefficients)
+
+  expect_error(
+    xy_wts_fit <- fit_xy(lda_spec, x = glass_tr[,-10], y = glass_tr$Type,
+                         case_weights = wts),
+    NA
+  )
+  expect_equal(xy_wts_fit$fit$theta.mod, exp_f_wts_fit$theta.mod)
+  expect_equal(xy_wts_fit$fit$fit$coefficients, exp_f_wts_fit$fit$coefficients)
 
 })
 
