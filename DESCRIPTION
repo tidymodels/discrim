@@ -49,8 +49,6 @@ Suggests:
     xml2
 VignetteBuilder: 
     knitr
-Remotes:
-    tidymodels/parsnip
 Config/Needs/website: 
   tidymodels/tidymodels,
   tidyverse/tidytemplate
