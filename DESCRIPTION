@@ -47,8 +47,6 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     xml2
-VignetteBuilder: 
-    knitr
 Config/Needs/website: 
   tidymodels/tidymodels,
   tidyverse/tidytemplate
