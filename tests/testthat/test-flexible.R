@@ -2,6 +2,12 @@ fda_spec <- discrim_flexible(num_terms = 7) %>% set_engine("earth")
 
 exp_f_fit <- mda::fda(Type ~ ., data = glass_tr, method = earth::earth, nprune = 7)
 
+wts <- ifelse(runif(nrow(glass_tr)) < .1, 0, 1)
+wts <- importance_weights(wts)
+
+exp_f_wts_fit <- mda::fda(Type ~ ., data = glass_tr, weights = as.double(wts),
+                          method = earth::earth, nprune = 7)
+
 # ------------------------------------------------------------------------------
 
 test_that("model object", {
@@ -11,6 +17,14 @@ test_that("model object", {
   expect_equal(f_fit$fit$theta.mod, exp_f_fit$theta.mod)
   expect_equal(f_fit$fit$fit$cuts, exp_f_fit$fit$cuts)
 
+  expect_error(
+    f_wts_fit <- fit(fda_spec, Type ~ ., case_weights = wts,
+                     data = glass_tr),
+    NA
+  )
+  expect_equal(f_wts_fit$fit$theta.mod, exp_f_wts_fit$theta.mod)
+  expect_equal(f_wts_fit$fit$fit$cuts, exp_f_wts_fit$fit$cuts)
+
   # x/y method
   expect_error(
     xy_fit <- fit_xy(fda_spec, x = glass_tr[, -10], y = glass_tr$Type),
@@ -18,6 +32,14 @@ test_that("model object", {
   )
   expect_equal(xy_fit$fit$theta.mod, exp_f_fit$theta.mod)
   expect_equal(xy_fit$fit$fit$cuts, exp_f_fit$fit$cuts)
+
+  expect_error(
+    xy_wts_fit <- fit_xy(fda_spec, x = glass_tr[, -10], y = glass_tr$Type,
+                     case_weights = wts),
+    NA
+  )
+  expect_equal(xy_wts_fit$fit$theta.mod, exp_f_wts_fit$theta.mod)
+  expect_equal(xy_wts_fit$fit$fit$cuts, exp_f_wts_fit$fit$cuts)
 })
 
 # ------------------------------------------------------------------------------
