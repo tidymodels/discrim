@@ -8,7 +8,6 @@ derby.log
 ^logs$
 ^tests/testthat/logs$
 ^revdep$
-^README\.md$
 ^README\.Rmd$
 ^docs$
 ^\.travis\.yml$
