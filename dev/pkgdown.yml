@@ -1,9 +1,9 @@
 pandoc: 2.14.2
-pkgdown: 2.0.4
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   discrim: discrim.html
-last_built: 2022-06-23T22:38Z
+last_built: 2022-10-03T22:44Z
 urls:
   reference: https://discrim.tidymodels.org/reference
   article: https://discrim.tidymodels.org/articles
