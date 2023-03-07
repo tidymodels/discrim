@@ -17,12 +17,12 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 `discrim` contains simple bindings to enable the `parsnip` package to
 fit various discriminant analysis models, such as
 
--   Linear discriminant analysis (LDA, simple and regularized)
--   Quadratic discriminant analysis (QDA, simple and regularized)
--   Regularized discriminant analysis (RDA, via [Friedman
-    (1989)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&q=%22Regularized+Discriminant+Analysis%22&btnG=))
--   Flexible discriminant analysis (FDA) using MARS features
--   Naive Bayes models
+- Linear discriminant analysis (LDA, simple and regularized)
+- Quadratic discriminant analysis (QDA, simple and regularized)
+- Regularized discriminant analysis (RDA, via [Friedman
+  (1989)](https://scholar.google.com/scholar?hl=en&as_sdt=0%2C7&q=%22Regularized+Discriminant+Analysis%22&btnG=))
+- Flexible discriminant analysis (FDA) using MARS features
+- Naive Bayes models
 
 ## Installation
 
@@ -36,8 +36,8 @@ install.packages("discrim")
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("tidymodels/discrim")
+# install.packages("pak")
+pak::pak("tidymodels/discrim")
 ```
 
 ## Available Engines
@@ -96,18 +96,18 @@ This project is released with a [Contributor Code of
 Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.
 
--   For questions and discussions about tidymodels packages, modeling,
-    and machine learning, please [post on RStudio
-    Community](https://community.rstudio.com/new-topic?category_id=15&tags=tidymodels,question).
+- For questions and discussions about tidymodels packages, modeling, and
+  machine learning, please [post on RStudio
+  Community](https://community.rstudio.com/new-topic?category_id=15&tags=tidymodels,question).
 
--   If you think you have encountered a bug, please [submit an
-    issue](https://github.com/tidymodels/discrim/issues).
+- If you think you have encountered a bug, please [submit an
+  issue](https://github.com/tidymodels/discrim/issues).
 
--   Either way, learn how to create and share a
-    [reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html)
-    (a minimal, reproducible example), to clearly communicate about your
-    code.
+- Either way, learn how to create and share a
+  [reprex](https://reprex.tidyverse.org/articles/articles/learn-reprex.html)
+  (a minimal, reproducible example), to clearly communicate about your
+  code.
 
--   Check out further details on [contributing guidelines for tidymodels
-    packages](https://www.tidymodels.org/contribute/) and [how to get
-    help](https://www.tidymodels.org/help/).
+- Check out further details on [contributing guidelines for tidymodels
+  packages](https://www.tidymodels.org/contribute/) and [how to get
+  help](https://www.tidymodels.org/help/).

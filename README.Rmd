@@ -41,8 +41,8 @@ install.packages("discrim")
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("tidymodels/discrim")
+# install.packages("pak")
+pak::pak("tidymodels/discrim")
 ```
   
 ## Available Engines
