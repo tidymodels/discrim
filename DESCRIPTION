@@ -17,8 +17,8 @@ Description: Bindings for additional classification models for use with
     well as naive Bayes classifiers (Hand and Yu (2007)
     <doi:10.1111/j.1751-5823.2001.tb00465.x>).
 License: MIT + file LICENSE
-URL: https://discrim.tidymodels.org/,
-    https://github.com/tidymodels/discrim/
+URL: https://github.com/tidymodels/discrim,
+    https://discrim.tidymodels.org/
 BugReports: https://github.com/tidymodels/discrim/issues
 Depends:
     parsnip (>= 0.2.0),
