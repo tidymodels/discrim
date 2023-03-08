@@ -1,5 +1,7 @@
 # discrim (development version)
 
+* Updated Authors@R.
+
 # discrim 1.0.0
 
 * Case weights were enabled for [discrim_flexible()] and [discrim_linear()] (`"mda"` engine).
