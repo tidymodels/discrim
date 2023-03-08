@@ -47,7 +47,7 @@ frac_identity <- function(range = c(0, 1), trans = NULL) {
 #' @export
 #' @rdname frac_common_cov
 smoothness <- function(range = c(0.5, 1.5), trans = NULL) {
-  new_quant_param(
+  dials::new_quant_param(
     type = "double",
     range = range,
     inclusive = c(TRUE, TRUE),

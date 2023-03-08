@@ -1,16 +1,14 @@
-#' @importFrom rlang enquo
-#' @importFrom purrr map_lgl
-#' @importFrom tibble is_tibble as_tibble
+## To avoid dependency issues
 #' @importFrom parsnip set_new_model
-#' @importFrom withr with_options
-#' @importFrom stats predict
-#' @importFrom dials new_quant_param
+NULL
 
-# ------------------------------------------------------------------------------
+# nocov start
+
+# Global vars ------------------------------------------------------------------
 
 utils::globalVariables(c("x", "y"))
 
-# ------------------------------------------------------------------------------
+# .onload ----------------------------------------------------------------------
 
 # The functions below define the model information. These access the model
 # environment inside of parsnip so they have to be executed once parsnip has
@@ -37,3 +35,5 @@ utils::globalVariables(c("x", "y"))
   make_naive_Bayes_klaR()
   make_naive_Bayes_naivebayes()
 }
+
+# nocov end
