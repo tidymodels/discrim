@@ -32,6 +32,7 @@ fda_mod
 Now let's plot the class boundary by predicting on a grid of points then creating a contour plot for the 50% probability cutoff. 
 
 ```{r boundary}
+#| fig-alt: "Scatter chart. X1 along the x-axis, X2 along the y-axis. points are scattered, with a trend between X1 and X2. Most of the middle points are colored and labeled Class2, with the remaining points labeled Class1. Two connected straight lines, doing its best to separate the two classes."
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
               X2 = seq(-5, 5, length = 100))

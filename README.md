@@ -88,7 +88,7 @@ ggplot(parabolic, aes(x = X1, y = X2)) +
   coord_equal()
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" alt="Scatter chart. X1 along the x-axis, X2 along the y-axis. points are scattered, with a trend between X1 and X2. Most of the middle points are colored and labeled Class2, with the remaining points labeled Class1. Two connected straight lines, doing its best to separate the two classes." width="100%" />
 
 ## Contributing
 
