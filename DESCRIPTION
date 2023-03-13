@@ -1,6 +1,6 @@
 Package: discrim
 Title: Model Wrappers for Discriminant Analysis
-Version: 1.0.0.9000
+Version: 1.0.1.9000
 Authors@R: c(
     person("Emil", "Hvitfeldt", , "emil.hvitfeldt@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0679-1945")),
@@ -17,8 +17,8 @@ Description: Bindings for additional classification models for use with
     well as naive Bayes classifiers (Hand and Yu (2007)
     <doi:10.1111/j.1751-5823.2001.tb00465.x>).
 License: MIT + file LICENSE
-URL: https://discrim.tidymodels.org/,
-    https://github.com/tidymodels/discrim/
+URL: https://github.com/tidymodels/discrim,
+    https://discrim.tidymodels.org/
 BugReports: https://github.com/tidymodels/discrim/issues
 Depends:
     parsnip (>= 0.2.0),
