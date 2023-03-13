@@ -1,3 +1,5 @@
+# discrim (development version)
+
 # discrim 1.0.1
 
 * Updated Authors@R.
