@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   discrim: discrim.html
-last_built: 2024-04-10T00:40Z
+last_built: 2024-04-10T19:31Z
 urls:
   reference: https://discrim.tidymodels.org/reference
   article: https://discrim.tidymodels.org/articles
