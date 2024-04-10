@@ -128,3 +128,36 @@ test_that("updating", {
   fda_spec_3 <- update(fda_spec, num_terms = 6)
   expect_equal(fda_spec_2, fda_spec_3)
 })
+
+test_that('check_args() works', {
+  skip_if_not_installed("earth")
+
+  expect_snapshot(
+    error = TRUE,
+    {
+      spec <- discrim_flexible(prod_degree = 0) %>% 
+        set_engine("earth") %>%
+        set_mode("classification")
+      fit(spec, factor ~ ., glass_tr)
+    }
+  )
+  expect_snapshot(
+    error = TRUE,
+    {
+      spec <- discrim_flexible(num_terms = 0) %>% 
+        set_engine("earth") %>%
+        set_mode("classification")
+      fit(spec, factor ~ ., glass_tr)
+    }
+  )
+
+  expect_snapshot(
+    error = TRUE,
+    {
+      spec <- discrim_flexible(prune_method = 2) %>% 
+        set_engine("earth") %>%
+        set_mode("classification")
+      fit(spec, factor ~ ., glass_tr)
+    }
+  )
+})

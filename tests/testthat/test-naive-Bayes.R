@@ -201,3 +201,8 @@ test_that("updating", {
     ignore_formula_env = TRUE
   )
 })
+
+test_that("check_args() works", {
+  # Here for completeness, no checking is done
+  expect_true(TRUE)
+})
