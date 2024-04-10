@@ -131,6 +131,7 @@ test_that("updating", {
 
 test_that('check_args() works', {
   skip_if_not_installed("earth")
+  skip_if_not_installed("parsnip", "1.2.1.9001")
 
   expect_snapshot(
     error = TRUE,
