@@ -10,11 +10,13 @@
 #'
 #' @keywords datasets
 #' @examples
-#' data(parabolic)
+#' if (rlang::is_installed("ggplot2")) {
+#'   data(parabolic)
 #'
-#' library(ggplot2)
-#' ggplot(parabolic, aes(x = X1, y = X2, col = class)) +
-#'   geom_point(alpha = .5) +
-#'   theme_bw()
+#'   library(ggplot2)
+#'   ggplot(parabolic, aes(x = X1, y = X2, col = class)) +
+#'     geom_point(alpha = .5) +
+#'     theme_bw()
+#' }
 #'
 NULL

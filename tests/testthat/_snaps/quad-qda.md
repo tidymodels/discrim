@@ -1,4 +1,4 @@
-# missing data
+# MASS::qda missing data
 
     Code
       f_pred <- predict(f_fit, penguins_miss, type = "prob")
@@ -28,29 +28,5 @@
 
 ---
 
-    Code
-      exp_f_pred <- probs_to_tibble(predict(exp_f_fit, penguins_miss)$posterior)
-    Condition
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
-      Warning in `FUN()`:
-      no non-missing arguments to min; returning Inf
+    no non-missing arguments to min; returning Inf
 

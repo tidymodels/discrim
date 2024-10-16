@@ -1,4 +1,4 @@
-# printing
+# klaR::rda printing
 
     Code
       print(rda_spec)
