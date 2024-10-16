@@ -121,6 +121,10 @@ test_that("mda::fda/earth missing data", {
 # ------------------------------------------------------------------------------
 
 test_that("mda::fda/earth updating", {
+  skip_if_not_installed("earth")
+  skip_if_not_installed("mda")
+  skip_if_not_installed("mlbench")
+
   fda_spec_2 <- discrim_flexible(num_terms = 6) %>% set_engine("earth")
   fda_spec_3 <- update(fda_spec, num_terms = 6)
   expect_equal(fda_spec_2, fda_spec_3)
