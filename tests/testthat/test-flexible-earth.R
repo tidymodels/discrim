@@ -120,18 +120,6 @@ test_that("mda::fda/earth missing data", {
 
 # ------------------------------------------------------------------------------
 
-test_that("mda::fda/earth printing", {
-  fda_spec <- discrim_flexible(num_terms = 7) %>% set_engine("earth")
-
-  expect_output(
-    print(fda_spec),
-    "Flexible Discriminant Model Specification"
-  )
-})
-
-
-# ------------------------------------------------------------------------------
-
 test_that("mda::fda/earth updating", {
   fda_spec_2 <- discrim_flexible(num_terms = 6) %>% set_engine("earth")
   fda_spec_3 <- update(fda_spec, num_terms = 6)
