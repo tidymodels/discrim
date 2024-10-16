@@ -1,4 +1,8 @@
 test_that("sda fit and prediction", {
+  skip_if_not_installed("sda")
+  skip_if_not_installed("mlbench")
+  # exp_* objects in helper-object.R
+
   sda_fit <- sda::sda(
     glass_tr %>% dplyr::select(-factor, -Type) %>% as.matrix(),
     glass_tr$Type,

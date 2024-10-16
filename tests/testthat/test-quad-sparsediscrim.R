@@ -1,4 +1,7 @@
-test_that("qda_diag fit and prediction", {
+test_that("sparsediscrim::qda_diag fit and prediction", {
+  skip_if_not_installed("sparsediscrim")
+  skip_if_not_installed("mlbench")
+
   spd_fit <- sparsediscrim::qda_diag(
     glass_tr %>% dplyr::select(RI, Na, Mg),
     glass_tr$Type
@@ -51,7 +54,10 @@ test_that("qda_diag fit and prediction", {
 
 # ------------------------------------------------------------------------------
 
-test_that("qda_shrink_mean fit and prediction", {
+test_that("sparsediscrim::qda_shrink_mean fit and prediction", {
+  skip_if_not_installed("sparsediscrim")
+  skip_if_not_installed("mlbench")
+
   spd_fit <- sparsediscrim::qda_shrink_mean(
     glass_tr %>% dplyr::select(RI, Na, Mg),
     glass_tr$Type
@@ -103,7 +109,10 @@ test_that("qda_shrink_mean fit and prediction", {
 
 # ------------------------------------------------------------------------------
 
-test_that("qda_shrink_cov fit and prediction", {
+test_that("sparsediscrim::qda_shrink_cov fit and prediction", {
+  skip_if_not_installed("sparsediscrim")
+  skip_if_not_installed("mlbench")
+
   spd_fit <- sparsediscrim::qda_shrink_cov(
     glass_tr %>% dplyr::select(RI, Na, Mg),
     glass_tr$Type

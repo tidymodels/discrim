@@ -1,4 +1,7 @@
-test_that("lda_diag fit and prediction", {
+test_that("sparsediscrim::lda_diag fit and prediction", {
+  skip_if_not_installed("sparsediscrim")
+  skip_if_not_installed("mlbench")
+
   spd_fit <- sparsediscrim::lda_diag(
     glass_tr %>% dplyr::select(RI, Na, Mg),
     glass_tr$Type
@@ -51,7 +54,10 @@ test_that("lda_diag fit and prediction", {
 
 # ------------------------------------------------------------------------------
 
-test_that("lda_shrink_mean fit and prediction", {
+test_that("sparsediscrim::lda_shrink_mean fit and prediction", {
+  skip_if_not_installed("sparsediscrim")
+  skip_if_not_installed("mlbench")
+
   spd_fit <- sparsediscrim::lda_shrink_mean(
     glass_tr %>% dplyr::select(RI, Na, Mg),
     glass_tr$Type
@@ -103,7 +109,10 @@ test_that("lda_shrink_mean fit and prediction", {
 
 # ------------------------------------------------------------------------------
 
-test_that("lda_shrink_cov fit and prediction", {
+test_that("sparsediscrim::lda_shrink_cov fit and prediction", {
+  skip_if_not_installed("sparsediscrim")
+  skip_if_not_installed("mlbench")
+
   spd_fit <- sparsediscrim::lda_shrink_cov(
     glass_tr %>% dplyr::select(RI, Na, Mg),
     glass_tr$Type
@@ -155,7 +164,10 @@ test_that("lda_shrink_cov fit and prediction", {
 
 # ------------------------------------------------------------------------------
 
-test_that('lda_emp_bayes_eigen fit and prediction', {
+test_that('sparsediscrim lda_emp_bayes_eigen fit and prediction', {
+  skip_if_not_installed("sparsediscrim")
+  skip_if_not_installed("mlbench")
+
   data(cells, package = "modeldata")
   cell_tr <- cells %>% dplyr::filter(case == "Train") %>% dplyr::select(-case)
   cell_te <- cells %>% dplyr::filter(case == "Test")  %>% dplyr::select(-case, -class)
