@@ -90,8 +90,9 @@ if (rlang::is_installed(c("mlbench", "mda", "earth"))) {
 
   exp_f_wts_fit_fda <- mda::fda(Type ~ ., data = glass_tr, weights = as.double(wts),
                                 method = earth::earth, nprune = 7)
+}
 
-  ###
+if (rlang::is_installed(c("mlbench", "mda"))) {
 
   lda_fda_spec <- discrim_linear(penalty = 1) %>% set_engine("mda")
   prior_lda_fda_spec <- discrim_linear() %>% set_engine("mda", prior = rep(1/6, 6))

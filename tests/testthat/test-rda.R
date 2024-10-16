@@ -108,6 +108,10 @@ test_that("klaR::rda printing", {
 # ------------------------------------------------------------------------------
 
 test_that("klaR::rda updating", {
+  skip_if_not_installed("klaR")
+  skip_if_not_installed("mlbench")
+  # exp_* objects in helper-object.R
+
   rda_spec_2 <-
     discrim_regularized(frac_common_cov = 1, frac_identity = 1) %>%
     set_engine("klaR")

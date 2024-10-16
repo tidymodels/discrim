@@ -1,4 +1,7 @@
 test_that('mda::fda/gen.ridge model object', {
+  skip_if_not_installed("mda")
+  skip_if_not_installed("mlbench")
+  # exp_* objects in helper-object.R
 
   # formula method
   expect_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr), NA)
@@ -34,6 +37,10 @@ test_that('mda::fda/gen.ridge model object', {
 
 
 test_that('mda::fda/gen.ridge class predictions', {
+  skip_if_not_installed("mda")
+  skip_if_not_installed("mlbench")
+  # exp_* objects in helper-object.R
+
   # formula method
   expect_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_te)
@@ -61,6 +68,10 @@ test_that('mda::fda/gen.ridge class predictions', {
 
 
 test_that("mda::fda/gen.ridge prob predictions", {
+  skip_if_not_installed("mda")
+  skip_if_not_installed("mlbench")
+  # exp_* objects in helper-object.R
+
   # formula method
   expect_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_te, type = "prob")
@@ -85,6 +96,10 @@ test_that("mda::fda/gen.ridge prob predictions", {
 
 
 test_that("mda::fda/gen.ridge missing data", {
+  skip_if_not_installed("mda")
+  skip_if_not_installed("mlbench")
+  # exp_* objects in helper-object.R
+
   expect_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr), NA)
   f_pred <- predict(f_fit, glass_na, type = "prob")
 
@@ -102,6 +117,10 @@ test_that("mda::fda/gen.ridge missing data", {
 # ------------------------------------------------------------------------------
 
 test_that("mda::fda/gen.ridge updating", {
+  skip_if_not_installed("mda")
+  skip_if_not_installed("mlbench")
+  # exp_* objects in helper-object.R
+
   lda_spec_2 <- discrim_linear(penalty = .1) %>% set_engine("mda")
   lda_spec_3 <- update(lda_fda_spec, penalty = .1)
   expect_equal(lda_spec_2, lda_spec_3)
