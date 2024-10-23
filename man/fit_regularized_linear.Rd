@@ -13,7 +13,13 @@ fit_regularized_linear(
   call = rlang::caller_env()
 )
 
-fit_regularized_quad(x, y, regularization_method = "diagonal", ...)
+fit_regularized_quad(
+  x,
+  y,
+  regularization_method = "diagonal",
+  ...,
+  call = rlang::caller_env()
+)
 }
 \arguments{
 \item{x}{A matrix or data frame.}

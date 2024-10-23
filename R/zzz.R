@@ -1,13 +1,4 @@
-## To avoid dependency issues
-#' @importFrom parsnip set_new_model
-NULL
-
 # nocov start
-
-# Global vars ------------------------------------------------------------------
-
-utils::globalVariables(c("x", "y"))
-
 # .onload ----------------------------------------------------------------------
 
 # The functions below define the model information. These access the model
