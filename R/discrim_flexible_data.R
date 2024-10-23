@@ -3,7 +3,7 @@
 # they are already in the parsnip model database. We'll exclude them from
 # coverage stats for this reason.
 
-# nocov
+# nocov start
 make_discrim_flexible <- function() {
   parsnip::set_model_engine("discrim_flexible", "classification", "earth")
   parsnip::set_dependency("discrim_flexible", eng = "earth", pkg = "mda")

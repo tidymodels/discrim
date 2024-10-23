@@ -3,7 +3,7 @@
 # they are already in the parsnip model database. We'll exclude them from
 # coverage stats for this reason.
 
-# nocov
+# nocov start
 make_discrim_regularized <- function() {
   parsnip::set_model_engine("discrim_regularized", "classification", "klaR")
   parsnip::set_dependency("discrim_regularized", eng = "klaR", pkg = "klaR")
