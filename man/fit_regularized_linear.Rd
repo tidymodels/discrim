@@ -5,16 +5,22 @@
 \alias{fit_regularized_quad}
 \title{Wrapper for sparsediscrim models}
 \usage{
-fit_regularized_linear(x, y, method = "diagonal", ...)
+fit_regularized_linear(
+  x,
+  y,
+  regularization_method = "diagonal",
+  ...,
+  call = rlang::caller_env()
+)
 
-fit_regularized_quad(x, y, method = "diagonal", ...)
+fit_regularized_quad(x, y, regularization_method = "diagonal", ...)
 }
 \arguments{
 \item{x}{A matrix or data frame.}
 
 \item{y}{A factor column.}
 
-\item{method}{A character string.}
+\item{regularization_method}{A character string.}
 
 \item{...}{Not currently used.}
 }
