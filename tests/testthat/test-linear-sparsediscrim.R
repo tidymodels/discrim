@@ -18,26 +18,23 @@ test_that("sparsediscrim::lda_diag fit and prediction", {
       glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
     )
-  expect_error(
+  expect_no_error(
     d_fit <-
       discrim_linear(regularization_method = "diagonal") %>%
       set_engine("sparsediscrim") %>%
-      fit(Type ~ ., data = glass_tr %>% dplyr::select(RI, Na, Mg, Type)),
-    NA
+      fit(Type ~ ., data = glass_tr %>% dplyr::select(RI, Na, Mg, Type))
   )
-  expect_error(
+  expect_no_error(
     d_pred <- predict(
       d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
       type = "class"
-    ),
-    NA
+    )
   )
-  expect_error(
+  expect_no_error(
     d_prob <- predict(
       d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
-    ),
-    NA
+    )
   )
   expect_equal(
     spd_pred,
@@ -74,26 +71,23 @@ test_that("sparsediscrim::lda_shrink_mean fit and prediction", {
       glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
     )
-  expect_error(
+  expect_no_error(
     d_fit <-
       discrim_linear(regularization_method = "shrink_mean") %>%
       set_engine("sparsediscrim") %>%
-      fit(Type ~ ., data = glass_tr %>% dplyr::select(RI, Na, Mg, Type)),
-    NA
+      fit(Type ~ ., data = glass_tr %>% dplyr::select(RI, Na, Mg, Type))
   )
-  expect_error(
+  expect_no_error(
     d_pred <- predict(
       d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
       type = "class"
-    ),
-    NA
+    )
   )
-  expect_error(
+  expect_no_error(
     d_prob <- predict(
       d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
-    ),
-    NA
+    )
   )
   expect_equal(
     spd_pred,
@@ -129,26 +123,23 @@ test_that("sparsediscrim::lda_shrink_cov fit and prediction", {
       glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
     )
-  expect_error(
+  expect_no_error(
     d_fit <-
       discrim_linear(regularization_method = "shrink_cov") %>%
       set_engine("sparsediscrim") %>%
-      fit(Type ~ ., data = glass_tr %>% dplyr::select(RI, Na, Mg, Type)),
-    NA
+      fit(Type ~ ., data = glass_tr %>% dplyr::select(RI, Na, Mg, Type))
   )
-  expect_error(
+  expect_no_error(
     d_pred <- predict(
       d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
       type = "class"
-    ),
-    NA
+    )
   )
-  expect_error(
+  expect_no_error(
     d_prob <- predict(
       d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
-    ),
-    NA
+    )
   )
   expect_equal(
     spd_pred,
@@ -182,20 +173,17 @@ test_that('sparsediscrim lda_emp_bayes_eigen fit and prediction', {
             cell_te,
             type = "class")
   spd_prob <- predict(spd_fit, cell_te, type = "prob")
-  expect_error(
+  expect_no_error(
     d_fit <-
       discrim_linear(regularization_method = "min_distance") %>%
       set_engine("sparsediscrim") %>%
-      fit(class ~ ., data = cell_tr),
-    NA
+      fit(class ~ ., data = cell_tr)
   )
-  expect_error(
-    d_pred <- predict(d_fit, cell_te, type = "class"),
-    NA
+  expect_no_error(
+    d_pred <- predict(d_fit, cell_te, type = "class")
   )
-  expect_error(
-    d_prob <- predict(d_fit, cell_te, type = "prob"),
-    NA
+  expect_no_error(
+    d_prob <- predict(d_fit, cell_te, type = "prob")
   )
   expect_equal(
     spd_pred,

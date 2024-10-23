@@ -4,14 +4,13 @@ test_that("klaR::rda model object", {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr))
   expect_equal(f_fit$fit$covpooled, exp_f_fit_rda$covpooled)
   expect_equal(f_fit$fit$means, exp_f_fit_rda$means)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(rda_spec, x = glass_tr[, -10], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(rda_spec, x = glass_tr[, -10], y = glass_tr$Type)
   )
   expect_equal(xy_fit$fit$covpooled, exp_f_fit_rda$covpooled)
   expect_equal(xy_fit$fit$means, exp_f_fit_rda$means)
@@ -26,7 +25,7 @@ test_that("klaR::rda class predictions", {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te)
   exp_f_pred <- predict(exp_f_fit_rda, glass_te)$class
 
@@ -35,9 +34,8 @@ test_that("klaR::rda class predictions", {
   expect_equal(f_pred$.pred_class, exp_f_pred)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(rda_spec, x = glass_tr[, -10], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(rda_spec, x = glass_tr[, -10], y = glass_tr$Type)
   )
   xy_pred <- predict(xy_fit, glass_te)
   # See bug note above
@@ -57,7 +55,7 @@ test_that("klaR::rda prob predictions", {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te, type = "prob")
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit_rda, glass_te, type = "posterior")$posterior)
 
@@ -66,9 +64,8 @@ test_that("klaR::rda prob predictions", {
   expect_equal(f_pred, exp_f_pred)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(rda_spec, x = glass_tr[, -10], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(rda_spec, x = glass_tr[, -10], y = glass_tr$Type)
   )
   xy_pred <- predict(xy_fit, glass_te, type = "prob")
   expect_s3_class(xy_pred, "tbl_df")
@@ -84,7 +81,7 @@ test_that("klaR::rda missing data", {
   skip_if_not_installed("mlbench")
   # exp_* objects in helper-object.R
 
-  expect_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_na, type = "prob")
 
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit_rda, glass_na, type = "posterior")$posterior)

@@ -4,24 +4,18 @@ test_that("MASS::qda model object", {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(qda_spec, species ~ ., data = penguin_tr), NA)
+  expect_no_error(f_fit <- fit(qda_spec, species ~ ., data = penguin_tr))
   expect_equal(f_fit$fit$scaling, exp_f_fit_qda$scaling)
   expect_equal(f_fit$fit$means, exp_f_fit_qda$means)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(qda_spec, x = penguin_tr[, -1], y = penguin_tr$species),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(qda_spec, x = penguin_tr[, -1], y = penguin_tr$species)
   )
-  # `MASS::qda()` doesn't throw an error despite a factor predictor. It converts
-  # the factor to integers. Reported to MASS@stats.ox.ac.uk on 2019-10-08. We
-  # now use the formula method in the parsnip model to avoid the bug.
-  # expect_error(xy_fit$fit$scaling, exp_xy_fit$scaling)
-  # expect_error(xy_fit$fit$means, exp_xy_fit$means)
 
   # pass an extra argument
 
-  expect_error(prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr), NA)
+  expect_no_error(prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr))
   expect_equal(prior_fit$fit$scaling, exp_prior_fit_qda$scaling)
   expect_equal(prior_fit$fit$means, exp_prior_fit_qda$means)
 })
@@ -35,7 +29,7 @@ test_that("MASS::qda class predictions", {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(qda_spec, species ~ ., data = penguin_tr), NA)
+  expect_no_error(f_fit <- fit(qda_spec, species ~ ., data = penguin_tr))
   f_pred <- predict(f_fit, penguin_te)
   exp_f_pred <- predict(exp_f_fit_qda, penguin_te)
 
@@ -44,9 +38,8 @@ test_that("MASS::qda class predictions", {
   expect_equal(f_pred$.pred_class, exp_f_pred$class)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(qda_spec, x = penguin_tr[, -1], y = penguin_tr$species),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(qda_spec, x = penguin_tr[, -1], y = penguin_tr$species)
   )
   xy_pred <- predict(xy_fit, penguin_te)
   # See bug note above
@@ -57,7 +50,7 @@ test_that("MASS::qda class predictions", {
   expect_equal(xy_pred$.pred_class, exp_f_pred$class)
 
   # added argument
-  expect_error(prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr), NA)
+  expect_no_error(prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr))
   prior_pred <- predict(prior_fit, penguin_te)
   exp_prior_pred <- predict(exp_prior_fit_qda, penguin_te)
 
@@ -75,7 +68,7 @@ test_that("MASS::qda prob predictions", {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(qda_spec, species ~ ., data = penguin_tr), NA)
+  expect_no_error(f_fit <- fit(qda_spec, species ~ ., data = penguin_tr))
   f_pred <- predict(f_fit, penguin_te, type = "prob")
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit_qda, penguin_te)$posterior)
 
@@ -84,9 +77,8 @@ test_that("MASS::qda prob predictions", {
   expect_equal(f_pred, exp_f_pred)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(qda_spec, x = penguin_tr[, -1], y = penguin_tr$species),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(qda_spec, x = penguin_tr[, -1], y = penguin_tr$species)
   )
   xy_pred <- predict(xy_fit, penguin_te, type = "prob")
   # See bug note above
@@ -97,7 +89,7 @@ test_that("MASS::qda prob predictions", {
   expect_equal(xy_pred, exp_f_pred)
 
   # added argument
-  expect_error(prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr), NA)
+  expect_no_error(prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr))
   prior_pred <- predict(prior_fit, penguin_te, type = "prob")
   exp_prior_pred <- probs_to_tibble(predict(exp_prior_fit_qda, penguin_te)$posterior)
 
@@ -114,9 +106,9 @@ test_that("MASS::qda missing data", {
   # exp_* objects in helper-object.R
 
   exp_f_fit_miss <- MASS::qda(species ~ ., data = penguins_miss)
-  expect_error(f_fit <- fit(qda_spec, species ~ ., data = penguins_miss), NA)
+  expect_no_error(f_fit <- fit(qda_spec, species ~ ., data = penguins_miss))
   expect_snapshot(f_pred <- predict(f_fit, penguins_miss, type = "prob"))
-  expect_snapshot_warning(
+  expect_snapshot(
     # exp_f_pred <- probs_to_tibble(predict(exp_f_fit_miss, penguins_miss)$posterior)
     exp_f_pred <- predict(exp_f_fit_miss, penguins_miss)$posterior
   )

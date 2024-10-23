@@ -7,7 +7,7 @@
 # they are already in the parsnip model database. We'll exclude them from
 # coverage stats for this reason.
 
-# nocov
+# nocov start
 
 make_naive_Bayes_naivebayes <- function() {
   parsnip::set_model_engine("naive_Bayes", "classification", "naivebayes")

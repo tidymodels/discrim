@@ -4,14 +4,13 @@ test_that('MASS::lda model object', {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr))
   expect_equal(f_fit$fit$scaling, exp_f_fit_lda$scaling)
   expect_equal(f_fit$fit$means, exp_f_fit_lda$means)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(lda_spec, x = glass_tr[,-10], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(lda_spec, x = glass_tr[,-10], y = glass_tr$Type)
   )
   # `MASS::lda()` doesn't throw an error despite a factor predictor. It converts
   # the factor to integers. Reported to MASS@stats.ox.ac.uk on 2019-10-08. We
@@ -21,7 +20,7 @@ test_that('MASS::lda model object', {
 
   # pass an extra argument
 
-  expect_error(prior_fit <- fit(prior_spec_lda, Type ~ ., data = glass_tr), NA)
+  expect_no_error(prior_fit <- fit(prior_spec_lda, Type ~ ., data = glass_tr))
   expect_equal(prior_fit$fit$scaling, exp_prior_fit_lda$scaling)
   expect_equal(prior_fit$fit$means, exp_prior_fit_lda$means)
 })
@@ -35,7 +34,7 @@ test_that("MASS::lda class predictions", {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te)
   exp_f_pred <- predict(exp_f_fit_lda, glass_te)
 
@@ -44,9 +43,8 @@ test_that("MASS::lda class predictions", {
   expect_equal(f_pred$.pred_class, exp_f_pred$class)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(lda_spec, x = glass_tr[, -10], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(lda_spec, x = glass_tr[, -10], y = glass_tr$Type)
   )
   xy_pred <- predict(xy_fit, glass_te)
   # See bug note above
@@ -57,7 +55,7 @@ test_that("MASS::lda class predictions", {
   expect_equal(xy_pred$.pred_class, exp_f_pred$class)
 
   # added argument
-  expect_error(prior_fit <- fit(prior_spec_lda, Type ~ ., data = glass_tr), NA)
+  expect_no_error(prior_fit <- fit(prior_spec_lda, Type ~ ., data = glass_tr))
   prior_pred <- predict(prior_fit, glass_te)
   exp_prior_pred <- predict(exp_prior_fit_lda, glass_te)
 
@@ -75,7 +73,7 @@ test_that("MASS::lda prob predictions", {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te, type = "prob")
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit_lda, glass_te)$posterior)
 
@@ -84,9 +82,8 @@ test_that("MASS::lda prob predictions", {
   expect_equal(f_pred, exp_f_pred)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(lda_spec, x = glass_tr[, -10], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(lda_spec, x = glass_tr[, -10], y = glass_tr$Type)
   )
   xy_pred <- predict(xy_fit, glass_te, type = "prob")
   # See bug note above
@@ -97,7 +94,7 @@ test_that("MASS::lda prob predictions", {
   expect_equal(xy_pred, exp_f_pred)
 
   # added argument
-  expect_error(prior_fit <- fit(prior_spec_lda, Type ~ ., data = glass_tr), NA)
+  expect_no_error(prior_fit <- fit(prior_spec_lda, Type ~ ., data = glass_tr))
   prior_pred <- predict(prior_fit, glass_te, type = "prob")
   exp_prior_pred <- probs_to_tibble(predict(exp_prior_fit_lda, glass_te)$posterior)
 
@@ -114,7 +111,7 @@ test_that("MASS::lda missing data", {
   skip_if_not_installed("mlbench")
   # exp_* objects in helper-object.R
 
-  expect_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr))
   expect_snapshot(f_pred <- predict(f_fit, glass_na, type = "prob"))
   expect_snapshot(exp_f_pred <- probs_to_tibble(predict(exp_f_fit_lda, glass_na)$posterior))
 
@@ -141,26 +138,23 @@ test_that("sda fit and prediction", {
       glass_te %>% dplyr::select(-factor) %>% as.matrix(),
       verbose = FALSE
     )
-  expect_error(
+  expect_no_error(
     d_fit <-
       discrim_linear() %>%
       set_engine("sda") %>%
-      fit(Type ~ ., data = glass_tr %>% dplyr::select(-factor)),
-    NA
+      fit(Type ~ ., data = glass_tr %>% dplyr::select(-factor))
   )
-  expect_error(
+  expect_no_error(
     d_pred <- predict(
       d_fit, glass_te %>% dplyr::select(-factor),
       type = "class"
-    ),
-    NA
+    )
   )
-  expect_error(
+  expect_no_error(
     d_prob <- predict(
       d_fit, glass_te %>% dplyr::select(-factor),
       type = "prob"
-    ),
-    NA
+    )
   )
   expect_equal(
     sda_pred$class,

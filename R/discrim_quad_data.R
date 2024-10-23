@@ -7,7 +7,7 @@
 # they are already in the parsnip model database. We'll exclude them from
 # coverage stats for this reason.
 
-# nocov
+# nocov start
 
 make_discrim_quad_MASS <- function() {
   parsnip::set_model_engine("discrim_quad", "classification", "MASS")
@@ -125,7 +125,7 @@ make_discrim_quad_sparsediscrim <- function() {
     model = "discrim_quad",
     eng = "sparsediscrim",
     parsnip = "regularization_method",
-    original = "method",
+    original = "regularization_method",
     func = list(pkg = "dials", fun = "regularization_method"),
     has_submodel = FALSE
   )
