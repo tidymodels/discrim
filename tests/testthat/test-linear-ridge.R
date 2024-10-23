@@ -4,29 +4,26 @@ test_that('mda::fda/gen.ridge model object', {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr))
   expect_equal(f_fit$fit$theta.mod, exp_f_fit_lda_fda$theta.mod)
   expect_equal(f_fit$fit$fit$coefficients, exp_f_fit_lda_fda$fit$coefficients)
 
-  expect_error(
-    f_wts_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr, case_weights = wts),
-    NA
+  expect_no_error(
+    f_wts_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr, case_weights = wts)
   )
   expect_equal(f_wts_fit$fit$theta.mod, exp_f_wts_fit_lda_fda$theta.mod)
   expect_equal(f_wts_fit$fit$fit$coefficients, exp_f_wts_fit_lda_fda$fit$coefficients)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(lda_fda_spec, x = glass_tr[,-10], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(lda_fda_spec, x = glass_tr[,-10], y = glass_tr$Type)
   )
   expect_equal(xy_fit$fit$theta.mod, exp_f_fit_lda_fda$theta.mod)
   expect_equal(xy_fit$fit$fit$coefficients, exp_f_fit_lda_fda$fit$coefficients)
 
-  expect_error(
+  expect_no_error(
     xy_wts_fit <- fit_xy(lda_fda_spec, x = glass_tr[,-10], y = glass_tr$Type,
-                         case_weights = wts),
-    NA
+                         case_weights = wts)
   )
   expect_equal(xy_wts_fit$fit$theta.mod, exp_f_wts_fit_lda_fda$theta.mod)
   expect_equal(xy_wts_fit$fit$fit$coefficients, exp_f_wts_fit_lda_fda$fit$coefficients)
@@ -42,7 +39,7 @@ test_that('mda::fda/gen.ridge class predictions', {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te)
   exp_f_pred <- predict(exp_f_fit_lda_fda, glass_te)
 
@@ -51,9 +48,8 @@ test_that('mda::fda/gen.ridge class predictions', {
   expect_equal(f_pred$.pred_class, exp_f_pred)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(lda_fda_spec, x = glass_tr[, -10], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(lda_fda_spec, x = glass_tr[, -10], y = glass_tr$Type)
   )
   xy_pred <- predict(xy_fit, glass_te)
   # See bug note above
@@ -73,7 +69,7 @@ test_that("mda::fda/gen.ridge prob predictions", {
   # exp_* objects in helper-object.R
 
   # formula method
-  expect_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te, type = "prob")
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit_lda_fda, glass_te, type = "posterior"))
 
@@ -82,9 +78,8 @@ test_that("mda::fda/gen.ridge prob predictions", {
   expect_equal(f_pred, exp_f_pred)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(lda_fda_spec, x = glass_tr[, -10], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(lda_fda_spec, x = glass_tr[, -10], y = glass_tr$Type)
   )
   xy_pred <- predict(xy_fit, glass_te, type = "prob")
   expect_true(inherits(xy_pred, "tbl_df"))
@@ -100,7 +95,7 @@ test_that("mda::fda/gen.ridge missing data", {
   skip_if_not_installed("mlbench")
   # exp_* objects in helper-object.R
 
-  expect_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(lda_fda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_na, type = "prob")
 
   opt <- getOption("na.action")

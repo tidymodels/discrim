@@ -48,7 +48,7 @@ test_that("naivebayes::naive_bayes", {
   # ------------------------------------------------------------------------------
 
   # formula method
-  expect_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr))
   # The calls are embedded and different so check the numbers
   for (x in setdiff(names(f_fit$fit$tables), "factor")) {
     x_dat <- f_fit$fit$tables[[x]]
@@ -61,9 +61,8 @@ test_that("naivebayes::naive_bayes", {
   expect_equal(f_fit$fit$tables[["factor"]], exp_f_fit$tables[["factor"]])
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(nb_spec, x = glass_tr[, -7], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(nb_spec, x = glass_tr[, -7], y = glass_tr$Type)
   )
   for (x in setdiff(names(xy_fit$fit$tables), "factor")) {
     x_dat <- xy_fit$fit$tables[[x]]
@@ -80,7 +79,7 @@ test_that("naivebayes::naive_bayes", {
   expect_equal(xy_fit$fit$tables[["factor"]], exp_xy_fit$tables[["factor"]])
 
   # pass an extra argument
-  expect_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[, -7], y = glass_tr$Type), NA)
+  expect_no_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[, -7], y = glass_tr$Type))
   for (x in setdiff(names(prior_fit$fit$tables), "factor")) {
     x_dat <- prior_fit$fit$tables[[x]]
 
@@ -98,7 +97,7 @@ test_that("naivebayes::naive_bayes", {
   # ------------------------------------------------------------------------------
 
   # formula method
-  expect_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te)
   exp_f_pred <- predict(exp_f_fit, glass_te)
 
@@ -107,9 +106,8 @@ test_that("naivebayes::naive_bayes", {
   expect_equal(f_pred$.pred_class, exp_f_pred, ignore_attr = TRUE)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(nb_spec, x = glass_tr[, -7], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(nb_spec, x = glass_tr[, -7], y = glass_tr$Type)
   )
   xy_pred <- predict(xy_fit, glass_te)
   exp_xy_pred <- predict(exp_xy_fit, glass_te)
@@ -119,7 +117,7 @@ test_that("naivebayes::naive_bayes", {
   expect_equal(xy_pred$.pred_class, exp_xy_pred, ignore_attr = TRUE)
 
   # added argument
-  expect_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[, -7], y = glass_tr$Type), NA)
+  expect_no_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[, -7], y = glass_tr$Type))
   prior_pred <- predict(prior_fit, glass_te)
   exp_prior_pred <- predict(exp_prior_fit, glass_te)
 
@@ -131,7 +129,7 @@ test_that("naivebayes::naive_bayes", {
   # prob predictions
 
   # formula method
-  expect_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te, type = "prob")
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_te, type = "prob"))
 
@@ -140,9 +138,8 @@ test_that("naivebayes::naive_bayes", {
   expect_equal(f_pred, exp_f_pred)
 
   # x/y method
-  expect_error(
-    xy_fit <- fit_xy(nb_spec, x = glass_tr[, -7], y = glass_tr$Type),
-    NA
+  expect_no_error(
+    xy_fit <- fit_xy(nb_spec, x = glass_tr[, -7], y = glass_tr$Type)
   )
   xy_pred <- predict(xy_fit, glass_te, type = "prob")
   exp_xy_pred <- probs_to_tibble(predict(exp_xy_fit, glass_te, type = "prob"))
@@ -152,7 +149,7 @@ test_that("naivebayes::naive_bayes", {
   expect_equal(xy_pred, exp_xy_pred)
 
   # added argument
-  expect_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[, -7], y = glass_tr$Type), NA)
+  expect_no_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[, -7], y = glass_tr$Type))
   prior_pred <- predict(prior_fit, glass_te, type = "prob")
   exp_prior_pred <- probs_to_tibble(predict(exp_prior_fit, glass_te, type = "prob"))
 
@@ -163,7 +160,7 @@ test_that("naivebayes::naive_bayes", {
   # ------------------------------------------------------------------------------
   # missing data
 
-  expect_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr), NA)
+  expect_no_error(f_fit <- fit(nb_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_na, type = "prob")
   exp_f_pred <- probs_to_tibble(predict(exp_f_fit, glass_na, type = "prob"))
 

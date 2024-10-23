@@ -14,24 +14,21 @@ test_that("sda fit and prediction", {
       glass_te %>% dplyr::select(-factor) %>% as.matrix(),
       verbose = FALSE
     )
-  expect_error(
+  expect_no_error(
     d_fit <-
       discrim_linear() %>%
       set_engine("sda") %>%
-      fit(Type ~ ., data = glass_tr %>% dplyr::select(-factor)),
-    NA
+      fit(Type ~ ., data = glass_tr %>% dplyr::select(-factor))
   )
-  expect_error(
-    d_pred <- predict(d_fit, glass_te %>% dplyr::select(-factor), type = "class"),
-    NA
+  expect_no_error(
+    d_pred <- predict(d_fit, glass_te %>% dplyr::select(-factor), type = "class")
   )
-  expect_error(
+  expect_no_error(
     d_prob <- predict(
       d_fit,
       glass_te %>% dplyr::select(-factor),
       type = "prob"
-    ),
-    NA
+    )
   )
   expect_equal(
     sda_pred$class,
