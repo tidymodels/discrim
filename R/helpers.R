@@ -52,15 +52,11 @@ fit_regularized_linear <- function(x, y, regularization_method = "diagonal", ...
 
 #' @rdname fit_regularized_linear
 #' @export
-fit_regularized_quad <- function(x, y, regularization_method = "diagonal", ...) {
-  if (!(regularization_method %in% qda_regularization_method_vals)) {
-    rlang::abort(
-      paste0(
-        "'regularization_method' should be one of: ",
-        paste0("'", qda_regularization_method_vals, "'", collapse = ", ")
-      )
-    )
-  }
+fit_regularized_quad <- function(x, y, regularization_method = "diagonal", ...,
+                                 call = rlang::caller_env()) {
+  rlang::arg_match(regularization_method,
+                   qda_regularization_method_vals,
+                   error_call = call)
   cl <- discrim_regularized_call_quad(regularization_method, ...)
   rlang::eval_tidy(cl)
 }
