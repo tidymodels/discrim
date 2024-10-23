@@ -306,7 +306,7 @@ make_discrim_linear_sparsediscrim <- function() {
     model = "discrim_linear",
     eng = "sparsediscrim",
     parsnip = "regularization_method",
-    original = "method",
+    original = "regularization_method",
     func = list(pkg = "dials", fun = "regularization_method"),
     has_submodel = FALSE
   )
