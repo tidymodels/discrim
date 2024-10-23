@@ -12,6 +12,8 @@ coverage](https://codecov.io/gh/tidymodels/discrim/branch/main/graph/badge.svg)]
 [![R-CMD-check](https://github.com/tidymodels/discrim/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidymodels/discrim/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![Codecov test
+coverage](https://codecov.io/gh/tidymodels/discrim/graph/badge.svg)](https://app.codecov.io/gh/tidymodels/discrim)
 <!-- badges: end -->
 
 `discrim` contains simple bindings to enable the `parsnip` package to
