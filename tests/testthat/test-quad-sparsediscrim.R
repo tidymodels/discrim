@@ -26,13 +26,15 @@ test_that("sparsediscrim::qda_diag fit and prediction", {
   )
   expect_no_error(
     d_pred <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "class"
     )
   )
   expect_no_error(
     d_prob <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
     )
   )
@@ -79,13 +81,15 @@ test_that("sparsediscrim::qda_shrink_mean fit and prediction", {
   )
   expect_no_error(
     d_pred <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "class"
     )
   )
   expect_no_error(
     d_prob <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
     )
   )
@@ -131,13 +135,15 @@ test_that("sparsediscrim::qda_shrink_cov fit and prediction", {
   )
   expect_no_error(
     d_pred <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "class"
     )
   )
   expect_no_error(
     d_prob <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
     )
   )

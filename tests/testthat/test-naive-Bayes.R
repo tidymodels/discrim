@@ -1,4 +1,3 @@
-
 test_that("klaR::NaiveBayes", {
   skip_if_not_installed("mlbench")
   skip_if_not_installed("klaR")
@@ -27,15 +26,27 @@ test_that("klaR::NaiveBayes", {
   glass_lvl <- levels(Glass$Type)
   prob_names <- paste0(".pred_", glass_lvl)
 
-  nb_spec   <- naive_Bayes(smoothness = 1.2) %>% set_engine("klaR")
-  prior_spec <- naive_Bayes() %>% set_engine("klaR", prior = rep(1/6, 6))
+  nb_spec <- naive_Bayes(smoothness = 1.2) %>% set_engine("klaR")
+  prior_spec <- naive_Bayes() %>% set_engine("klaR", prior = rep(1 / 6, 6))
 
-  exp_f_fit     <- klaR::NaiveBayes(Type ~ ., data = glass_tr,
-                                    usekernel = TRUE, adjust = 1.2)
-  exp_xy_fit    <- klaR::NaiveBayes(x = glass_tr[,-10], grouping = glass_tr$Type,
-                                    usekernel = TRUE, adjust = 1.2)
-  exp_prior_fit <- klaR::NaiveBayes(x = glass_tr[,-10], grouping = glass_tr$Type,
-                                    prior = rep(1/6, 6), usekernel = TRUE)
+  exp_f_fit <- klaR::NaiveBayes(
+    Type ~ .,
+    data = glass_tr,
+    usekernel = TRUE,
+    adjust = 1.2
+  )
+  exp_xy_fit <- klaR::NaiveBayes(
+    x = glass_tr[, -10],
+    grouping = glass_tr$Type,
+    usekernel = TRUE,
+    adjust = 1.2
+  )
+  exp_prior_fit <- klaR::NaiveBayes(
+    x = glass_tr[, -10],
+    grouping = glass_tr$Type,
+    prior = rep(1 / 6, 6),
+    usekernel = TRUE
+  )
 
   # ------------------------------------------------------------------------------
   # formula method
@@ -71,7 +82,9 @@ test_that("klaR::NaiveBayes", {
   expect_equal(xy_fit$fit$tables[["factor"]], exp_xy_fit$tables[["factor"]])
 
   # pass an extra argument
-  expect_no_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[, -10], y = glass_tr$Type))
+  expect_no_error(
+    prior_fit <- fit_xy(prior_spec, x = glass_tr[, -10], y = glass_tr$Type)
+  )
   for (x in setdiff(names(f_fit$fit$tables), "factor")) {
     x_dat <- prior_fit$fit$tables[[x]]
 
@@ -85,8 +98,10 @@ test_that("klaR::NaiveBayes", {
     }
   }
 
-  expect_equal(prior_fit$fit$tables[["factor"]], exp_prior_fit$tables[["factor"]])
-
+  expect_equal(
+    prior_fit$fit$tables[["factor"]],
+    exp_prior_fit$tables[["factor"]]
+  )
 
   # ------------------------------------------------------------------------------
   # class predictions
@@ -112,7 +127,9 @@ test_that("klaR::NaiveBayes", {
   expect_equal(xy_pred$.pred_class, exp_xy_pred$class, ignore_attr = TRUE)
 
   # added argument
-  expect_no_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[, -10], y = glass_tr$Type))
+  expect_no_error(
+    prior_fit <- fit_xy(prior_spec, x = glass_tr[, -10], y = glass_tr$Type)
+  )
   prior_pred <- predict(prior_fit, glass_te)
   exp_prior_pred <- predict(exp_prior_fit, glass_te)
 
@@ -144,7 +161,9 @@ test_that("klaR::NaiveBayes", {
   expect_equal(xy_pred, exp_xy_pred)
 
   # added argument
-  expect_no_error(prior_fit <- fit_xy(prior_spec, x = glass_tr[, -10], y = glass_tr$Type))
+  expect_no_error(
+    prior_fit <- fit_xy(prior_spec, x = glass_tr[, -10], y = glass_tr$Type)
+  )
   prior_pred <- predict(prior_fit, glass_te, type = "prob")
   exp_prior_pred <- probs_to_tibble(predict(exp_prior_fit, glass_te)$posterior)
 
@@ -175,9 +194,9 @@ test_that("klaR::NaiveBayes", {
     set_engine("klaR", prior = rep(1 / 6, 6))
   prior_spec_3 <- update(prior_spec, smoothness = .1)
   expect_equal(
-    prior_spec_2, prior_spec_3,
+    prior_spec_2,
+    prior_spec_3,
     ignore_function_env = TRUE,
     ignore_formula_env = TRUE
   )
 })
-

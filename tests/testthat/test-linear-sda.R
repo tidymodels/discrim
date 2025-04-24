@@ -21,7 +21,11 @@ test_that("sda fit and prediction", {
       fit(Type ~ ., data = glass_tr %>% dplyr::select(-factor))
   )
   expect_no_error(
-    d_pred <- predict(d_fit, glass_te %>% dplyr::select(-factor), type = "class")
+    d_pred <- predict(
+      d_fit,
+      glass_te %>% dplyr::select(-factor),
+      type = "class"
+    )
   )
   expect_no_error(
     d_prob <- predict(

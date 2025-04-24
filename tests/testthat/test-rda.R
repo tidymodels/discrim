@@ -18,7 +18,6 @@ test_that("klaR::rda model object", {
 
 # ------------------------------------------------------------------------------
 
-
 test_that("klaR::rda class predictions", {
   skip_if_not_installed("klaR")
   skip_if_not_installed("mlbench")
@@ -48,7 +47,6 @@ test_that("klaR::rda class predictions", {
 
 # ------------------------------------------------------------------------------
 
-
 test_that("klaR::rda prob predictions", {
   skip_if_not_installed("klaR")
   skip_if_not_installed("mlbench")
@@ -57,7 +55,9 @@ test_that("klaR::rda prob predictions", {
   # formula method
   expect_no_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te, type = "prob")
-  exp_f_pred <- probs_to_tibble(predict(exp_f_fit_rda, glass_te, type = "posterior")$posterior)
+  exp_f_pred <- probs_to_tibble(
+    predict(exp_f_fit_rda, glass_te, type = "posterior")$posterior
+  )
 
   expect_s3_class(f_pred, "tbl_df")
   expect_equal(names(f_pred), glass_prob_names)
@@ -75,7 +75,6 @@ test_that("klaR::rda prob predictions", {
 
 # ------------------------------------------------------------------------------
 
-
 test_that("klaR::rda missing data", {
   skip_if_not_installed("klaR")
   skip_if_not_installed("mlbench")
@@ -84,7 +83,9 @@ test_that("klaR::rda missing data", {
   expect_no_error(f_fit <- fit(rda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_na, type = "prob")
 
-  exp_f_pred <- probs_to_tibble(predict(exp_f_fit_rda, glass_na, type = "posterior")$posterior)
+  exp_f_pred <- probs_to_tibble(
+    predict(exp_f_fit_rda, glass_na, type = "posterior")$posterior
+  )
 
   expect_s3_class(f_pred, "tbl_df")
   expect_true(nrow(f_pred) == nrow(glass_te))
@@ -118,7 +119,9 @@ test_that("klaR::rda updating", {
   prior_spec_2 <- discrim_regularized(frac_common_cov = 1) %>%
     set_engine("klaR", prior = rep(1 / 6, 6))
   prior_spec_3 <- update(prior_spec_rda, frac_common_cov = 1)
-  expect_equal(prior_spec_2, prior_spec_3,
+  expect_equal(
+    prior_spec_2,
+    prior_spec_3,
     ignore_function_env = TRUE,
     ignore_formula_env = TRUE
   )

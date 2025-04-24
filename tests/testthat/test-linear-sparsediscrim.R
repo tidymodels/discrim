@@ -26,13 +26,15 @@ test_that("sparsediscrim::lda_diag fit and prediction", {
   )
   expect_no_error(
     d_pred <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "class"
     )
   )
   expect_no_error(
     d_prob <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
     )
   )
@@ -79,13 +81,15 @@ test_that("sparsediscrim::lda_shrink_mean fit and prediction", {
   )
   expect_no_error(
     d_pred <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "class"
     )
   )
   expect_no_error(
     d_prob <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
     )
   )
@@ -131,13 +135,15 @@ test_that("sparsediscrim::lda_shrink_cov fit and prediction", {
   )
   expect_no_error(
     d_pred <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "class"
     )
   )
   expect_no_error(
     d_prob <- predict(
-      d_fit, glass_te %>% dplyr::select(RI, Na, Mg),
+      d_fit,
+      glass_te %>% dplyr::select(RI, Na, Mg),
       type = "prob"
     )
   )
@@ -161,17 +167,16 @@ test_that('sparsediscrim lda_emp_bayes_eigen fit and prediction', {
 
   data(cells, package = "modeldata")
   cell_tr <- cells %>% dplyr::filter(case == "Train") %>% dplyr::select(-case)
-  cell_te <- cells %>% dplyr::filter(case == "Test")  %>% dplyr::select(-case, -class)
-
+  cell_te <- cells %>%
+    dplyr::filter(case == "Test") %>%
+    dplyr::select(-case, -class)
 
   spd_fit <- sparsediscrim::lda_emp_bayes_eigen(
     cell_tr %>% dplyr::select(-class),
     cell_tr$class
   )
   spd_pred <-
-    predict(spd_fit,
-            cell_te,
-            type = "class")
+    predict(spd_fit, cell_te, type = "class")
   spd_prob <- predict(spd_fit, cell_te, type = "prob")
   expect_no_error(
     d_fit <-
