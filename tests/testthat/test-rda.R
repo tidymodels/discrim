@@ -111,12 +111,12 @@ test_that("klaR::rda updating", {
   # exp_* objects in helper-object.R
 
   rda_spec_2 <-
-    discrim_regularized(frac_common_cov = 1, frac_identity = 1) %>%
+    discrim_regularized(frac_common_cov = 1, frac_identity = 1) |>
     set_engine("klaR")
   rda_spec_3 <- update(rda_spec, frac_common_cov = 1, frac_identity = 1)
   expect_equal(rda_spec_2, rda_spec_3)
 
-  prior_spec_2 <- discrim_regularized(frac_common_cov = 1) %>%
+  prior_spec_2 <- discrim_regularized(frac_common_cov = 1) |>
     set_engine("klaR", prior = rep(1 / 6, 6))
   prior_spec_3 <- update(prior_spec_rda, frac_common_cov = 1)
   expect_equal(

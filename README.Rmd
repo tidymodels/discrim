@@ -54,20 +54,20 @@ The discrim package provides engines for the models in the following table.
 ```{r, echo=FALSE, message=FALSE}
 library(parsnip)
 
-parsnip_models <- get_from_env("models") %>%
-  setNames(., .) %>%
+parsnip_models <- get_from_env("models") |>
+  setNames(., .) |>
   purrr::map_dfr(get_from_env, .id = "model")
 
 library(discrim)
 
-discrim_models <- get_from_env("models") %>%
-  setNames(., .) %>%
+discrim_models <- get_from_env("models") |>
+  setNames(., .) |>
   purrr::map_dfr(get_from_env, .id = "model")
 
 dplyr::anti_join(
   discrim_models, parsnip_models, 
   by = c("model", "engine", "mode")
-) %>%
+) |>
   knitr::kable()
 ```
 
@@ -84,9 +84,9 @@ parabolic_grid <-
               X2 = seq(-5, 5, length = 100))
 
 fda_mod <-
-  discrim_flexible(num_terms = 3) %>%
+  discrim_flexible(num_terms = 3) |>
   # increase `num_terms` to find smoother boundaries
-  set_engine("earth") %>%
+  set_engine("earth") |>
   fit(class ~ ., data = parabolic)
 
 parabolic_grid$fda <-

@@ -73,9 +73,9 @@ parabolic_grid <-
               X2 = seq(-5, 5, length = 100))
 
 fda_mod <-
-  discrim_flexible(num_terms = 3) %>%
+  discrim_flexible(num_terms = 3) |>
   # increase `num_terms` to find smoother boundaries
-  set_engine("earth") %>%
+  set_engine("earth") |>
   fit(class ~ ., data = parabolic)
 
 parabolic_grid$fda <-

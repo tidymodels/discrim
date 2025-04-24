@@ -40,9 +40,9 @@ The \code{fit()} function estimates the model. \code{fit_xy()} can be used if on
 does not wish to use the formula method.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fda_mod <-
-  discrim_flexible(num_terms = 3) \%>\%
+  discrim_flexible(num_terms = 3) |>
   # increase `num_terms` to find smoother boundaries
-  set_engine("earth") \%>\%
+  set_engine("earth") |>
   fit(class ~ ., data = parabolic)
 fda_mod
 }\if{html}{\out{</div>}}
@@ -70,7 +70,7 @@ creating a contour plot for the 50\% probability cutoff.
               X2 = seq(-5, 5, length = 100))
 
 parabolic_grid <- 
-  parabolic_grid \%>\% 
+  parabolic_grid |> 
   bind_cols(
     predict(fda_mod, parabolic_grid, type = "prob")
   )

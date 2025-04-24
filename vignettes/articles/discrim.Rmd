@@ -22,9 +22,9 @@ The `fit()` function estimates the model. `fit_xy()` can be used if one does not
 
 ```{r}
 fda_mod <-
-  discrim_flexible(num_terms = 3) %>%
+  discrim_flexible(num_terms = 3) |>
   # increase `num_terms` to find smoother boundaries
-  set_engine("earth") %>%
+  set_engine("earth") |>
   fit(class ~ ., data = parabolic)
 fda_mod
 ```
@@ -38,7 +38,7 @@ parabolic_grid <-
               X2 = seq(-5, 5, length = 100))
 
 parabolic_grid <- 
-  parabolic_grid %>% 
+  parabolic_grid |> 
   bind_cols(
     predict(fda_mod, parabolic_grid, type = "prob")
   )

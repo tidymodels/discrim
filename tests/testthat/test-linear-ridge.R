@@ -135,11 +135,11 @@ test_that("mda::fda/gen.ridge updating", {
   skip_if_not_installed("mlbench")
   # exp_* objects in helper-object.R
 
-  lda_spec_2 <- discrim_linear(penalty = .1) %>% set_engine("mda")
+  lda_spec_2 <- discrim_linear(penalty = .1) |> set_engine("mda")
   lda_spec_3 <- update(lda_fda_spec, penalty = .1)
   expect_equal(lda_spec_2, lda_spec_3)
 
-  prior_spec_2 <- discrim_linear(penalty = .1) %>%
+  prior_spec_2 <- discrim_linear(penalty = .1) |>
     set_engine("mda", prior = rep(1 / 6, 6))
   prior_spec_3 <- update(prior_lda_fda_spec, penalty = .1)
   expect_equal(

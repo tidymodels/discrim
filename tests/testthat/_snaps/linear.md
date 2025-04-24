@@ -1,8 +1,8 @@
 # check_args() works
 
     Code
-      spec <- discrim_linear(penalty = -1) %>% set_engine("MASS") %>% set_mode(
-        "classification")
+      spec <- set_mode(set_engine(discrim_linear(penalty = -1), "MASS"),
+      "classification")
       fit(spec, factor ~ ., glass_tr)
     Condition
       Error in `fit()`:

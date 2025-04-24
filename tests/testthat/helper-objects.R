@@ -3,7 +3,7 @@
 
 if (rlang::is_installed("mlbench")) {
   library(mlbench)
-  data(Glass, package = "mlbench")
+  data(Glass, package = "mlbench", envir = environment())
 
   set.seed(55822)
   in_samp <- sample.int(nrow(Glass), 5)
@@ -28,7 +28,7 @@ if (rlang::is_installed("mlbench")) {
 # Penguin data
 
 if (rlang::is_installed("modeldata")) {
-  data(penguins, package = "modeldata")
+  data(penguins, package = "modeldata", envir = environment())
   penguins$island <- NULL
   penguins_miss <- penguins
   penguins <- na.omit(penguins)
@@ -43,8 +43,8 @@ if (rlang::is_installed("modeldata")) {
 # LDA/QDA fits
 
 if (rlang::is_installed(c("mlbench", "MASS"))) {
-  lda_spec <- discrim_linear() %>% set_engine("MASS")
-  prior_spec_lda <- discrim_linear() %>%
+  lda_spec <- discrim_linear() |> set_engine("MASS")
+  prior_spec_lda <- discrim_linear() |>
     set_engine("MASS", prior = rep(1 / 6, 6))
 
   exp_f_fit_lda <- MASS::lda(Type ~ ., data = glass_tr)
@@ -57,8 +57,8 @@ if (rlang::is_installed(c("mlbench", "MASS"))) {
 
   ###
 
-  qda_spec <- discrim_quad() %>% set_engine("MASS")
-  prior_spec_qda <- discrim_quad() %>% set_engine("MASS", prior = rep(1 / 3, 3))
+  qda_spec <- discrim_quad() |> set_engine("MASS")
+  prior_spec_qda <- discrim_quad() |> set_engine("MASS", prior = rep(1 / 3, 3))
 
   exp_f_fit_qda <- MASS::qda(species ~ ., data = penguin_tr)
   exp_xy_fit_qda <- MASS::qda(
@@ -77,10 +77,10 @@ if (rlang::is_installed(c("mlbench", "MASS"))) {
 
 if (rlang::is_installed(c("mlbench", "klaR"))) {
   rda_spec <-
-    discrim_regularized(frac_common_cov = .1, frac_identity = 1) %>%
+    discrim_regularized(frac_common_cov = .1, frac_identity = 1) |>
     set_engine("klaR")
 
-  prior_spec_rda <- discrim_regularized() %>%
+  prior_spec_rda <- discrim_regularized() |>
     set_engine("klaR", prior = rep(1 / 6, 6))
 
   exp_f_fit_rda <- klaR::rda(Type ~ ., data = glass_tr, lambda = .1, gamma = 1)
@@ -91,7 +91,7 @@ if (rlang::is_installed(c("mlbench", "klaR"))) {
 # FDA fits
 
 if (rlang::is_installed(c("mlbench", "mda", "earth"))) {
-  fda_spec <- discrim_flexible(num_terms = 7) %>% set_engine("earth")
+  fda_spec <- discrim_flexible(num_terms = 7) |> set_engine("earth")
 
   exp_f_fit_fda <- mda::fda(
     Type ~ .,
@@ -110,8 +110,8 @@ if (rlang::is_installed(c("mlbench", "mda", "earth"))) {
 }
 
 if (rlang::is_installed(c("mlbench", "mda"))) {
-  lda_fda_spec <- discrim_linear(penalty = 1) %>% set_engine("mda")
-  prior_lda_fda_spec <- discrim_linear() %>%
+  lda_fda_spec <- discrim_linear(penalty = 1) |> set_engine("mda")
+  prior_lda_fda_spec <- discrim_linear() |>
     set_engine("mda", prior = rep(1 / 6, 6))
 
   exp_f_fit_lda_fda <- mda::fda(

@@ -26,8 +26,8 @@ test_that("naivebayes::naive_bayes", {
 
   # ------------------------------------------------------------------------------
 
-  nb_spec <- naive_Bayes(smoothness = 1.2) %>% set_engine("naivebayes")
-  prior_spec <- naive_Bayes() %>%
+  nb_spec <- naive_Bayes(smoothness = 1.2) |> set_engine("naivebayes")
+  prior_spec <- naive_Bayes() |>
     set_engine("naivebayes", prior = rep(1 / 6, 6))
 
   exp_f_fit <- naivebayes::naive_bayes(

@@ -26,8 +26,8 @@ test_that("klaR::NaiveBayes", {
   glass_lvl <- levels(Glass$Type)
   prob_names <- paste0(".pred_", glass_lvl)
 
-  nb_spec <- naive_Bayes(smoothness = 1.2) %>% set_engine("klaR")
-  prior_spec <- naive_Bayes() %>% set_engine("klaR", prior = rep(1 / 6, 6))
+  nb_spec <- naive_Bayes(smoothness = 1.2) |> set_engine("klaR")
+  prior_spec <- naive_Bayes() |> set_engine("klaR", prior = rep(1 / 6, 6))
 
   exp_f_fit <- klaR::NaiveBayes(
     Type ~ .,
@@ -186,11 +186,11 @@ test_that("klaR::NaiveBayes", {
   # ------------------------------------------------------------------------------
   # updating
 
-  nb_spec_2 <- naive_Bayes(smoothness = .1) %>% set_engine("klaR")
+  nb_spec_2 <- naive_Bayes(smoothness = .1) |> set_engine("klaR")
   nb_spec_3 <- update(nb_spec, smoothness = .1)
   expect_equal(nb_spec_2, nb_spec_3)
 
-  prior_spec_2 <- naive_Bayes(smoothness = .1) %>%
+  prior_spec_2 <- naive_Bayes(smoothness = .1) |>
     set_engine("klaR", prior = rep(1 / 6, 6))
   prior_spec_3 <- update(prior_spec, smoothness = .1)
   expect_equal(
