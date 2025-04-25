@@ -4,7 +4,8 @@ As an example, we'll use a _flexible discriminant analysis_ model of Hastie, Tib
 
 The `parabolic` data from the modeldata package will be used to illustrate:
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 library(tidymodels)
 library(discrim)
 tidymodels_prefer()
@@ -29,7 +30,9 @@ fda_mod
 
 Now let's plot the class boundary by predicting on a grid of points then creating a contour plot for the 50% probability cutoff. 
 
-```{r boundary, eval = FALSE}
+```{r}
+#| label: boundary
+#| eval: false
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
               X2 = seq(-5, 5, length = 100))
