@@ -10,8 +10,7 @@ test_that("mda::fda/earth model object", {
   expect_equal(f_fit$fit$fit$cuts, exp_f_fit_fda$fit$cuts)
 
   expect_no_error(
-    f_wts_fit <- fit(fda_spec, Type ~ ., case_weights = wts,
-                     data = glass_tr)
+    f_wts_fit <- fit(fda_spec, Type ~ ., case_weights = wts, data = glass_tr)
   )
   expect_equal(f_wts_fit$fit$theta.mod, exp_f_wts_fit_fda$theta.mod)
   expect_equal(f_wts_fit$fit$fit$cuts, exp_f_wts_fit_fda$fit$cuts)
@@ -24,15 +23,18 @@ test_that("mda::fda/earth model object", {
   expect_equal(xy_fit$fit$fit$cuts, exp_f_fit_fda$fit$cuts)
 
   expect_no_error(
-    xy_wts_fit <- fit_xy(fda_spec, x = glass_tr[, -10], y = glass_tr$Type,
-                         case_weights = wts)
+    xy_wts_fit <- fit_xy(
+      fda_spec,
+      x = glass_tr[, -10],
+      y = glass_tr$Type,
+      case_weights = wts
+    )
   )
   expect_equal(xy_wts_fit$fit$theta.mod, exp_f_wts_fit_fda$theta.mod)
   expect_equal(xy_wts_fit$fit$fit$cuts, exp_f_wts_fit_fda$fit$cuts)
 })
 
 # ------------------------------------------------------------------------------
-
 
 test_that("mda::fda/earth class predictions", {
   skip_if_not_installed("mda")
@@ -64,7 +66,6 @@ test_that("mda::fda/earth class predictions", {
 
 # ------------------------------------------------------------------------------
 
-
 test_that("mda::fda/earth prob predictions", {
   skip_if_not_installed("mda")
   skip_if_not_installed("earth")
@@ -74,7 +75,11 @@ test_that("mda::fda/earth prob predictions", {
   # formula method
   expect_no_error(f_fit <- fit(fda_spec, Type ~ ., data = glass_tr))
   f_pred <- predict(f_fit, glass_te, type = "prob")
-  exp_f_pred <- probs_to_tibble(predict(exp_f_fit_fda, glass_te, type = "posterior"))
+  exp_f_pred <- probs_to_tibble(predict(
+    exp_f_fit_fda,
+    glass_te,
+    type = "posterior"
+  ))
 
   expect_true(inherits(f_pred, "tbl_df"))
   expect_equal(names(f_pred), glass_prob_names)
@@ -92,7 +97,6 @@ test_that("mda::fda/earth prob predictions", {
 
 # ------------------------------------------------------------------------------
 
-
 test_that("mda::fda/earth missing data", {
   skip_if_not_installed("mda")
   skip_if_not_installed("earth")
@@ -104,7 +108,11 @@ test_that("mda::fda/earth missing data", {
 
   opt <- getOption("na.action")
   options(na.action = "na.pass")
-  exp_f_pred <- probs_to_tibble(predict(exp_f_fit_fda, glass_na, type = "posterior"))
+  exp_f_pred <- probs_to_tibble(predict(
+    exp_f_fit_fda,
+    glass_na,
+    type = "posterior"
+  ))
   options(na.action = opt)
 
   expect_true(inherits(f_pred, "tbl_df"))
@@ -120,7 +128,7 @@ test_that("mda::fda/earth updating", {
   skip_if_not_installed("mda")
   skip_if_not_installed("mlbench")
 
-  fda_spec_2 <- discrim_flexible(num_terms = 6) %>% set_engine("earth")
+  fda_spec_2 <- discrim_flexible(num_terms = 6) |> set_engine("earth")
   fda_spec_3 <- update(fda_spec, num_terms = 6)
   expect_equal(fda_spec_2, fda_spec_3)
 })
@@ -134,8 +142,8 @@ test_that('mda::fda/earth check_args() works', {
   expect_snapshot(
     error = TRUE,
     {
-      spec <- discrim_flexible(prod_degree = 0) %>%
-        set_engine("earth") %>%
+      spec <- discrim_flexible(prod_degree = 0) |>
+        set_engine("earth") |>
         set_mode("classification")
       fit(spec, factor ~ ., glass_tr)
     }
@@ -143,8 +151,8 @@ test_that('mda::fda/earth check_args() works', {
   expect_snapshot(
     error = TRUE,
     {
-      spec <- discrim_flexible(num_terms = 0) %>%
-        set_engine("earth") %>%
+      spec <- discrim_flexible(num_terms = 0) |>
+        set_engine("earth") |>
         set_mode("classification")
       fit(spec, factor ~ ., glass_tr)
     }
@@ -153,8 +161,8 @@ test_that('mda::fda/earth check_args() works', {
   expect_snapshot(
     error = TRUE,
     {
-      spec <- discrim_flexible(prune_method = 2) %>%
-        set_engine("earth") %>%
+      spec <- discrim_flexible(prune_method = 2) |>
+        set_engine("earth") |>
         set_mode("classification")
       fit(spec, factor ~ ., glass_tr)
     }

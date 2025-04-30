@@ -65,11 +65,10 @@ make_naive_Bayes_naivebayes <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data)
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data)
+      )
     )
   )
 
@@ -82,12 +81,11 @@ make_naive_Bayes_naivebayes <- function() {
       pre = NULL,
       post = prob_matrix_to_tibble,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data),
-          type = "prob"
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data),
+        type = "prob"
+      )
     )
   )
 }
@@ -148,11 +146,10 @@ make_naive_Bayes_klaR <- function() {
       pre = NULL,
       post = get_class,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data)
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data)
+      )
     )
   )
 
@@ -165,11 +162,10 @@ make_naive_Bayes_klaR <- function() {
       pre = NULL,
       post = post_to_tibble,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data)
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data)
+      )
     )
   )
 
@@ -182,11 +178,10 @@ make_naive_Bayes_klaR <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data)
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data)
+      )
     )
   )
 }

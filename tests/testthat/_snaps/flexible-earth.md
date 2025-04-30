@@ -1,8 +1,8 @@
 # mda::fda/earth check_args() works
 
     Code
-      spec <- discrim_flexible(prod_degree = 0) %>% set_engine("earth") %>% set_mode(
-        "classification")
+      spec <- set_mode(set_engine(discrim_flexible(prod_degree = 0), "earth"),
+      "classification")
       fit(spec, factor ~ ., glass_tr)
     Condition
       Error in `fit()`:
@@ -11,8 +11,8 @@
 ---
 
     Code
-      spec <- discrim_flexible(num_terms = 0) %>% set_engine("earth") %>% set_mode(
-        "classification")
+      spec <- set_mode(set_engine(discrim_flexible(num_terms = 0), "earth"),
+      "classification")
       fit(spec, factor ~ ., glass_tr)
     Condition
       Error in `fit()`:
@@ -21,8 +21,8 @@
 ---
 
     Code
-      spec <- discrim_flexible(prune_method = 2) %>% set_engine("earth") %>% set_mode(
-        "classification")
+      spec <- set_mode(set_engine(discrim_flexible(prune_method = 2), "earth"),
+      "classification")
       fit(spec, factor ~ ., glass_tr)
     Condition
       Error in `fit()`:

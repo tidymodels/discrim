@@ -47,11 +47,10 @@ make_discrim_quad_MASS <- function() {
       pre = NULL,
       post = get_class,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data)
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data)
+      )
     )
   )
 
@@ -64,11 +63,10 @@ make_discrim_quad_MASS <- function() {
       pre = NULL,
       post = post_to_tibble,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data)
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data)
+      )
     )
   )
 
@@ -81,11 +79,10 @@ make_discrim_quad_MASS <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data)
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data)
+      )
     )
   )
 }
@@ -139,12 +136,11 @@ make_discrim_quad_sparsediscrim <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data),
-          type = "class"
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data),
+        type = "class"
+      )
     )
   )
 
@@ -157,12 +153,11 @@ make_discrim_quad_sparsediscrim <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(new_data),
-          type = "prob"
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(new_data),
+        type = "prob"
+      )
     )
   )
 
@@ -175,11 +170,10 @@ make_discrim_quad_sparsediscrim <- function() {
       pre = NULL,
       post = NULL,
       func = c(fun = "predict"),
-      args =
-        list(
-          object = quote(object$fit),
-          newdata = quote(as.matrix(new_data))
-        )
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(as.matrix(new_data))
+      )
     )
   )
 }

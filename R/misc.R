@@ -1,4 +1,3 @@
-
 # ------------------------------------------------------------------------------
 # post-processing helpers
 
@@ -39,5 +38,8 @@ klar_bayes_wrapper <- function(x, y, ...) {
 #' @rdname discrim_helpers
 #' @export
 pred_wrapper <- function(object, new_data, ...) {
-  withr::with_options(list(na.action = "na.pass"), predict(object, new_data, ...))
+  withr::with_options(
+    list(na.action = "na.pass"),
+    predict(object, new_data, ...)
+  )
 }

@@ -10,7 +10,7 @@ test_that('MASS::lda model object', {
 
   # x/y method
   expect_no_error(
-    xy_fit <- fit_xy(lda_spec, x = glass_tr[,-10], y = glass_tr$Type)
+    xy_fit <- fit_xy(lda_spec, x = glass_tr[, -10], y = glass_tr$Type)
   )
   # `MASS::lda()` doesn't throw an error despite a factor predictor. It converts
   # the factor to integers. Reported to MASS@stats.ox.ac.uk on 2019-10-08. We
@@ -26,7 +26,6 @@ test_that('MASS::lda model object', {
 })
 
 # ------------------------------------------------------------------------------
-
 
 test_that("MASS::lda class predictions", {
   skip_if_not_installed("MASS")
@@ -66,7 +65,6 @@ test_that("MASS::lda class predictions", {
 
 # ------------------------------------------------------------------------------
 
-
 test_that("MASS::lda prob predictions", {
   skip_if_not_installed("MASS")
   skip_if_not_installed("mlbench")
@@ -96,7 +94,9 @@ test_that("MASS::lda prob predictions", {
   # added argument
   expect_no_error(prior_fit <- fit(prior_spec_lda, Type ~ ., data = glass_tr))
   prior_pred <- predict(prior_fit, glass_te, type = "prob")
-  exp_prior_pred <- probs_to_tibble(predict(exp_prior_fit_lda, glass_te)$posterior)
+  exp_prior_pred <- probs_to_tibble(
+    predict(exp_prior_fit_lda, glass_te)$posterior
+  )
 
   expect_true(inherits(prior_pred, "tbl_df"))
   expect_equal(names(prior_pred), glass_prob_names)
@@ -105,7 +105,6 @@ test_that("MASS::lda prob predictions", {
 
 # ------------------------------------------------------------------------------
 
-
 test_that("MASS::lda missing data", {
   skip_if_not_installed("MASS")
   skip_if_not_installed("mlbench")
@@ -113,7 +112,9 @@ test_that("MASS::lda missing data", {
 
   expect_no_error(f_fit <- fit(lda_spec, Type ~ ., data = glass_tr))
   expect_snapshot(f_pred <- predict(f_fit, glass_na, type = "prob"))
-  expect_snapshot(exp_f_pred <- probs_to_tibble(predict(exp_f_fit_lda, glass_na)$posterior))
+  expect_snapshot(
+    exp_f_pred <- probs_to_tibble(predict(exp_f_fit_lda, glass_na)$posterior)
+  )
 
   expect_s3_class(f_pred, "tbl_df")
   expect_true(nrow(f_pred) == nrow(glass_te))
@@ -128,31 +129,33 @@ test_that("sda fit and prediction", {
   skip_if_not_installed("mlbench")
 
   sda_fit <- sda::sda(
-    glass_tr %>% dplyr::select(-factor, -Type) %>% as.matrix(),
+    glass_tr |> dplyr::select(-factor, -Type) |> as.matrix(),
     glass_tr$Type,
     verbose = FALSE
   )
   sda_pred <-
     predict(
       sda_fit,
-      glass_te %>% dplyr::select(-factor) %>% as.matrix(),
+      glass_te |> dplyr::select(-factor) |> as.matrix(),
       verbose = FALSE
     )
   expect_no_error(
     d_fit <-
-      discrim_linear() %>%
-      set_engine("sda") %>%
-      fit(Type ~ ., data = glass_tr %>% dplyr::select(-factor))
+      discrim_linear() |>
+      set_engine("sda") |>
+      fit(Type ~ ., data = glass_tr |> dplyr::select(-factor))
   )
   expect_no_error(
     d_pred <- predict(
-      d_fit, glass_te %>% dplyr::select(-factor),
+      d_fit,
+      glass_te |> dplyr::select(-factor),
       type = "class"
     )
   )
   expect_no_error(
     d_prob <- predict(
-      d_fit, glass_te %>% dplyr::select(-factor),
+      d_fit,
+      glass_te |> dplyr::select(-factor),
       type = "prob"
     )
   )
@@ -162,7 +165,7 @@ test_that("sda fit and prediction", {
   )
 
   expect_equal(
-    sda_pred$posterior %>% tibble::as_tibble(),
+    sda_pred$posterior |> tibble::as_tibble(),
     d_prob,
     ignore_attr = TRUE
   )

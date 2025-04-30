@@ -15,13 +15,14 @@ test_that("MASS::qda model object", {
 
   # pass an extra argument
 
-  expect_no_error(prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr))
+  expect_no_error(
+    prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr)
+  )
   expect_equal(prior_fit$fit$scaling, exp_prior_fit_qda$scaling)
   expect_equal(prior_fit$fit$means, exp_prior_fit_qda$means)
 })
 
 # ------------------------------------------------------------------------------
-
 
 test_that("MASS::qda class predictions", {
   skip_if_not_installed("MASS")
@@ -50,7 +51,9 @@ test_that("MASS::qda class predictions", {
   expect_equal(xy_pred$.pred_class, exp_f_pred$class)
 
   # added argument
-  expect_no_error(prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr))
+  expect_no_error(
+    prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr)
+  )
   prior_pred <- predict(prior_fit, penguin_te)
   exp_prior_pred <- predict(exp_prior_fit_qda, penguin_te)
 
@@ -60,7 +63,6 @@ test_that("MASS::qda class predictions", {
 })
 
 # ------------------------------------------------------------------------------
-
 
 test_that("MASS::qda prob predictions", {
   skip_if_not_installed("MASS")
@@ -89,9 +91,13 @@ test_that("MASS::qda prob predictions", {
   expect_equal(xy_pred, exp_f_pred)
 
   # added argument
-  expect_no_error(prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr))
+  expect_no_error(
+    prior_fit <- fit(prior_spec_qda, species ~ ., data = penguin_tr)
+  )
   prior_pred <- predict(prior_fit, penguin_te, type = "prob")
-  exp_prior_pred <- probs_to_tibble(predict(exp_prior_fit_qda, penguin_te)$posterior)
+  exp_prior_pred <- probs_to_tibble(
+    predict(exp_prior_fit_qda, penguin_te)$posterior
+  )
 
   expect_true(inherits(prior_pred, "tbl_df"))
   expect_equal(names(prior_pred), pen_prob_names)

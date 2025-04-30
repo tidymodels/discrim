@@ -1,8 +1,8 @@
 # check_args() works
 
     Code
-      spec <- discrim_regularized(frac_common_cov = -1) %>% set_engine("klaR") %>%
-        set_mode("classification")
+      spec <- set_mode(set_engine(discrim_regularized(frac_common_cov = -1), "klaR"),
+      "classification")
       fit(spec, factor ~ ., glass_tr)
     Condition
       Error in `fit()`:
@@ -11,8 +11,8 @@
 ---
 
     Code
-      spec <- discrim_regularized(frac_identity = -1) %>% set_engine("klaR") %>%
-        set_mode("classification")
+      spec <- set_mode(set_engine(discrim_regularized(frac_identity = -1), "klaR"),
+      "classification")
       fit(spec, factor ~ ., glass_tr)
     Condition
       Error in `fit()`:
