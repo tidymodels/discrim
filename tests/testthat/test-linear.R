@@ -1,5 +1,6 @@
 test_that('check_args() works', {
   skip_if_not_installed("parsnip", "1.2.1.9001")
+  skip_if_not_installed("mlbench")
 
   expect_snapshot(
     error = TRUE,
