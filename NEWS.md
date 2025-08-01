@@ -1,5 +1,7 @@
 # discrim (development version)
 
+* Updated document linking to stay on CRAN.
+
 # discrim 1.0.1
 
 * Updated Authors@R.
