@@ -31,10 +31,10 @@ theme_set(theme_bw())
 data(parabolic, package = "modeldata")
 }\if{html}{\out{</div>}}
 
-To create the model, the \code{\link[=discrim_flexible]{discrim_flexible()}}
-function is used along with an engine of \code{"earth"} (which contains the
-methods to use the MARS model). We’ll set the number of MARS terms to
-use but this can be tuned via the methods in the tune package.
+To create the model, the \code{discrim_flexible()} function is used along
+with an engine of \code{"earth"} (which contains the methods to use the MARS
+model). We’ll set the number of MARS terms to use but this can be tuned
+via the methods in the tune package.
 
 The \code{fit()} function estimates the model. \code{fit_xy()} can be used if one
 does not wish to use the formula method.
