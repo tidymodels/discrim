@@ -1,4 +1,4 @@
-# discrim (development version)
+# discrim 1.0.2
 
 * Updated document linking to stay on CRAN.
 
