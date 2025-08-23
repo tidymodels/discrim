@@ -8,3 +8,6 @@ revdep/library.noindex/
 revdep/checks.noindex/
 docs
 inst/doc
+revdep/data.sqlite
+.httr-oauth
+revdep/cloud.noindex/*
