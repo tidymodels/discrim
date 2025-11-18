@@ -16,7 +16,7 @@ make_discrim_flexible <- function() {
     parsnip = "num_terms",
     original = "nprune",
     func = list(pkg = "dials", fun = "num_terms"),
-    has_submodel = TRUE
+    has_submodel = FALSE
   )
   parsnip::set_model_arg(
     model = "discrim_flexible",
