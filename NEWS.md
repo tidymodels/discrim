@@ -1,5 +1,7 @@
 # discrim (development version)
 
+* Bug fixed where FDA models could fail at prediction time (#79).
+
 # discrim 1.0.2
 
 * Updated document linking to stay on CRAN.
