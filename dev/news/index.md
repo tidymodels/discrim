@@ -2,6 +2,9 @@
 
 ## discrim (development version)
 
+- Bug fixed where FDA models could fail at prediction time
+  ([\#79](https://github.com/tidymodels/discrim/issues/79)).
+
 ## discrim 1.0.2
 
 CRAN release: 2025-08-23
