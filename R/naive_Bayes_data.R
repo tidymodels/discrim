@@ -11,8 +11,18 @@
 
 make_naive_Bayes_naivebayes <- function() {
   parsnip::set_model_engine("naive_Bayes", "classification", "naivebayes")
-  parsnip::set_dependency("naive_Bayes", "naivebayes", "naivebayes")
-  parsnip::set_dependency("naive_Bayes", "naivebayes", "discrim")
+  parsnip::set_dependency(
+    "naive_Bayes",
+    "naivebayes",
+    "naivebayes",
+    mode = "classification"
+  )
+  parsnip::set_dependency(
+    "naive_Bayes",
+    "naivebayes",
+    "discrim",
+    mode = "classification"
+  )
 
   parsnip::set_model_arg(
     model = "naive_Bayes",
@@ -91,9 +101,23 @@ make_naive_Bayes_naivebayes <- function() {
 }
 
 make_naive_Bayes_klaR <- function() {
-  parsnip::set_model_engine("naive_Bayes", "classification", "klaR")
-  parsnip::set_dependency("naive_Bayes", "klaR", "klaR")
-  parsnip::set_dependency("naive_Bayes", "klaR", "discrim")
+  parsnip::set_model_engine(
+    model = "naive_Bayes",
+    mode = "classification",
+    eng = "klaR"
+  )
+  parsnip::set_dependency(
+    model = "naive_Bayes",
+    eng = "klaR",
+    pkg = "klaR",
+    mode = "classification"
+  )
+  parsnip::set_dependency(
+    model = "naive_Bayes",
+    eng = "klaR",
+    pkg = "discrim",
+    mode = "classification"
+  )
 
   parsnip::set_model_arg(
     model = "naive_Bayes",
