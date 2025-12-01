@@ -20,6 +20,9 @@ The `parabolic` data from the modeldata package will be used to
 illustrate:
 
     library(tidymodels)
+
+    ## Warning: package 'ggplot2' was built under R version 4.5.2
+
     library(discrim)
     tidymodels_prefer()
     theme_set(theme_bw())
@@ -98,4 +101,5 @@ Authors:
 
 Other contributors:
 
-- Posit Software, PBC (03wc8by49) \[copyright holder, funder\]
+- Posit Software, PBC ([ROR](https://ror.org/03wc8by49)) \[copyright
+  holder, funder\]
