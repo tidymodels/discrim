@@ -24,7 +24,12 @@ The \code{parabolic} data from the modeldata package will be used to
 illustrate:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(tidymodels)
-library(discrim)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Warning: package 'ggplot2' was built under R version 4.5.2
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(discrim)
 tidymodels_prefer()
 theme_set(theme_bw())
 
@@ -101,7 +106,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Posit Software, PBC (03wc8by49) [copyright holder, funder]
+  \item Posit Software, PBC (\href{https://ror.org/03wc8by49}{ROR}) [copyright holder, funder]
 }
 
 }
