@@ -100,15 +100,19 @@ make_discrim_linear_MASS <- function() {
 # ------------------------------------------------------------------------------
 
 make_discrim_linear_mda <- function() {
-  parsnip::set_model_engine("discrim_linear", "classification", "mda")
+  parsnip::set_model_engine(
+    model = "discrim_linear",
+    mode = "classification",
+    eng = "mda"
+  )
   parsnip::set_dependency(
-    "discrim_linear",
+    model = "discrim_linear",
     eng = "mda",
     pkg = "mda",
     mode = "classification"
   )
   parsnip::set_dependency(
-    "discrim_linear",
+    model = "discrim_linear",
     eng = "mda",
     pkg = "discrim",
     mode = "classification"
@@ -200,17 +204,21 @@ make_discrim_linear_mda <- function() {
 # ------------------------------------------------------------------------------
 
 make_discrim_linear_sda <- function() {
-  parsnip::set_model_engine("discrim_linear", "classification", "sda")
+  parsnip::set_model_engine(
+    model = "discrim_linear",
+    mode = "classification",
+    eng = "sda"
+  )
   parsnip::set_dependency(
-    "discrim_linear",
-    "sda",
-    "sda",
+    model = "discrim_linear",
+    eng = "sda",
+    pkg = "sda",
     mode = "classification"
   )
   parsnip::set_dependency(
-    "discrim_linear",
-    "sda",
-    "discrim",
+    model = "discrim_linear",
+    eng = "sda",
+    pkg = "discrim",
     mode = "classification"
   )
 
@@ -295,17 +303,21 @@ make_discrim_linear_sda <- function() {
 # ------------------------------------------------------------------------------
 
 make_discrim_linear_sparsediscrim <- function() {
-  parsnip::set_model_engine("discrim_linear", "classification", "sparsediscrim")
+  parsnip::set_model_engine(
+    model = "discrim_linear",
+    mode = "classification",
+    eng = "sparsediscrim"
+  )
   parsnip::set_dependency(
-    "discrim_linear",
-    "sparsediscrim",
-    "sparsediscrim",
+    model = "discrim_linear",
+    eng = "sparsediscrim",
+    pkg = "sparsediscrim",
     mode = "classification"
   )
   parsnip::set_dependency(
-    "discrim_linear",
-    "sparsediscrim",
-    "discrim",
+    model = "discrim_linear",
+    eng = "sparsediscrim",
+    pkg = "discrim",
     mode = "classification"
   )
 

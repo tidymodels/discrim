@@ -101,17 +101,21 @@ make_naive_Bayes_naivebayes <- function() {
 }
 
 make_naive_Bayes_klaR <- function() {
-  parsnip::set_model_engine("naive_Bayes", "classification", "klaR")
+  parsnip::set_model_engine(
+    model = "naive_Bayes",
+    mode = "classification",
+    eng = "klaR"
+  )
   parsnip::set_dependency(
-    "naive_Bayes",
-    "klaR",
-    "klaR",
+    model = "naive_Bayes",
+    eng = "klaR",
+    pkg = "klaR",
     mode = "classification"
   )
   parsnip::set_dependency(
-    "naive_Bayes",
-    "klaR",
-    "discrim",
+    model = "naive_Bayes",
+    eng = "klaR",
+    pkg = "discrim",
     mode = "classification"
   )
 

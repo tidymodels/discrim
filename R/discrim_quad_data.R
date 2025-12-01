@@ -100,17 +100,21 @@ make_discrim_quad_MASS <- function() {
 # ------------------------------------------------------------------------------
 
 make_discrim_quad_sparsediscrim <- function() {
-  parsnip::set_model_engine("discrim_quad", "classification", "sparsediscrim")
+  parsnip::set_model_engine(
+    model = "discrim_quad",
+    mode = "classification",
+    eng = "sparsediscrim"
+  )
   parsnip::set_dependency(
-    "discrim_quad",
-    "sparsediscrim",
-    "sparsediscrim",
+    model = "discrim_quad",
+    eng = "sparsediscrim",
+    pkg = "sparsediscrim",
     mode = "classification"
   )
   parsnip::set_dependency(
-    "discrim_quad",
-    "sparsediscrim",
-    "discrim",
+    model = "discrim_quad",
+    eng = "sparsediscrim",
+    pkg = "discrim",
     mode = "classification"
   )
 
