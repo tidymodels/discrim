@@ -1,3 +1,5 @@
+# discrim (development version)
+
 # discrim 1.1.0
 
 * Bug fixed where FDA models could fail at prediction time (#79).
