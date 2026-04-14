@@ -17,14 +17,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/tidymodels/discrim/blob/main/DESCRIPTION)
 
-Hvitfeldt E, Kuhn M (2025). *discrim: Model Wrappers for Discriminant
+Hvitfeldt E, Kuhn M (2026). *discrim: Model Wrappers for Discriminant
 Analysis*. R package version 1.1.0.9000,
 <https://github.com/tidymodels/discrim>.
 
     @Manual{,
       title = {discrim: Model Wrappers for Discriminant Analysis},
       author = {Emil Hvitfeldt and Max Kuhn},
-      year = {2025},
+      year = {2026},
       note = {R package version 1.1.0.9000},
       url = {https://github.com/tidymodels/discrim},
     }
