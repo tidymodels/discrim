@@ -1,5 +1,7 @@
 # discrim (development version)
 
+* Added `multinomial_naive_bayes` engine for `naive_Bayes()` (#59).
+
 # discrim 1.1.0
 
 * Bug fixed where FDA models could fail at prediction time (#79).

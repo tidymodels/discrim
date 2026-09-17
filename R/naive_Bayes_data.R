@@ -100,6 +100,93 @@ make_naive_Bayes_naivebayes <- function() {
   )
 }
 
+make_naive_Bayes_multinomial_naivebayes <- function() {
+  parsnip::set_model_engine(
+    model = "naive_Bayes",
+    mode = "classification",
+    eng = "multinomial_naive_bayes"
+  )
+  parsnip::set_dependency(
+    model = "naive_Bayes",
+    eng = "multinomial_naive_bayes",
+    pkg = "naivebayes",
+    mode = "classification"
+  )
+  parsnip::set_dependency(
+    model = "naive_Bayes",
+    eng = "multinomial_naive_bayes",
+    pkg = "discrim",
+    mode = "classification"
+  )
+
+  parsnip::set_model_arg(
+    model = "naive_Bayes",
+    eng = "multinomial_naive_bayes",
+    parsnip = "Laplace",
+    original = "laplace",
+    func = list(pkg = "dials", fun = "Laplace"),
+    has_submodel = FALSE
+  )
+
+  parsnip::set_fit(
+    model = "naive_Bayes",
+    eng = "multinomial_naive_bayes",
+    mode = "classification",
+    value = list(
+      interface = "matrix",
+      protect = c("x", "y"),
+      func = c(pkg = "naivebayes", fun = "multinomial_naive_bayes"),
+      defaults = list()
+    )
+  )
+
+  parsnip::set_encoding(
+    model = "naive_Bayes",
+    eng = "multinomial_naive_bayes",
+    mode = "classification",
+    options = list(
+      predictor_indicators = "traditional",
+      compute_intercept = TRUE,
+      remove_intercept = TRUE,
+      allow_sparse_x = TRUE
+    )
+  )
+
+  parsnip::set_pred(
+    model = "naive_Bayes",
+    eng = "multinomial_naive_bayes",
+    mode = "classification",
+    type = "class",
+    value = list(
+      pre = NULL,
+      post = NULL,
+      func = c(fun = "predict"),
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(parsnip::maybe_matrix(new_data)),
+        type = "class"
+      )
+    )
+  )
+
+  parsnip::set_pred(
+    model = "naive_Bayes",
+    eng = "multinomial_naive_bayes",
+    mode = "classification",
+    type = "prob",
+    value = list(
+      pre = NULL,
+      post = prob_matrix_to_tibble,
+      func = c(fun = "predict"),
+      args = list(
+        object = quote(object$fit),
+        newdata = quote(parsnip::maybe_matrix(new_data)),
+        type = "prob"
+      )
+    )
+  )
+}
+
 make_naive_Bayes_klaR <- function() {
   parsnip::set_model_engine(
     model = "naive_Bayes",

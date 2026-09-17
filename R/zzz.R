@@ -25,6 +25,7 @@
   # This defines naive_Bayes in the model database
   make_naive_Bayes_klaR()
   make_naive_Bayes_naivebayes()
+  make_naive_Bayes_multinomial_naivebayes()
 }
 
 # nocov end

@@ -39,6 +39,7 @@ Suggests:
     klaR,
     knitr,
     MASS,
+    Matrix,
     mda,
     mlbench,
     modeldata,

@@ -47,18 +47,19 @@ pak::pak("tidymodels/discrim")
 The discrim package provides engines for the models in the following
 table.
 
-| model               | engine        | mode           |
-|:--------------------|:--------------|:---------------|
-| discrim_flexible    | earth         | classification |
-| discrim_linear      | MASS          | classification |
-| discrim_linear      | mda           | classification |
-| discrim_linear      | sda           | classification |
-| discrim_linear      | sparsediscrim | classification |
-| discrim_quad        | MASS          | classification |
-| discrim_quad        | sparsediscrim | classification |
-| discrim_regularized | klaR          | classification |
-| naive_Bayes         | klaR          | classification |
-| naive_Bayes         | naivebayes    | classification |
+| model               | engine                  | mode           |
+|:--------------------|:------------------------|:---------------|
+| discrim_flexible    | earth                   | classification |
+| discrim_linear      | MASS                    | classification |
+| discrim_linear      | mda                     | classification |
+| discrim_linear      | sda                     | classification |
+| discrim_linear      | sparsediscrim           | classification |
+| discrim_quad        | MASS                    | classification |
+| discrim_quad        | sparsediscrim           | classification |
+| discrim_regularized | klaR                    | classification |
+| naive_Bayes         | klaR                    | classification |
+| naive_Bayes         | naivebayes              | classification |
+| naive_Bayes         | multinomial_naive_bayes | classification |
 
 ## Example
 
