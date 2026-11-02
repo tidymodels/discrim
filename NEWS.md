@@ -1,5 +1,7 @@
 # discrim (development version)
 
+* The `sda` engine for `discrim_linear()` now registers `lambda`, `lambda.var`, `lambda.freqs`, and `diagonal` as tunable engine arguments, and the `earth` engine for `discrim_flexible()` now registers `nk`, so that they map to their corresponding dials parameters.
+
 # discrim 1.1.0
 
 * Bug fixed where FDA models could fail at prediction time (#79).

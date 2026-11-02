@@ -133,6 +133,16 @@ test_that("mda::fda/earth updating", {
   expect_equal(fda_spec_2, fda_spec_3)
 })
 
+test_that("mda::fda/earth engine arguments are tunable", {
+  res <- discrim_flexible() |>
+    set_engine("earth") |>
+    generics::tunable()
+  res <- res[res$name == "nk", ]
+  expect_identical(nrow(res), 1L)
+  expect_identical(res$call_info[[1]]$pkg, "dials")
+  expect_identical(res$call_info[[1]]$fun, "max_num_terms")
+})
+
 test_that('mda::fda/earth check_args() works', {
   skip_if_not_installed("earth")
   skip_if_not_installed("parsnip", "1.2.1.9001")
