@@ -53,6 +53,14 @@ make_discrim_flexible <- function() {
     func = list(pkg = "dials", fun = "prune_method"),
     has_submodel = FALSE
   )
+  parsnip::set_model_arg(
+    model = "discrim_flexible",
+    eng = "earth",
+    parsnip = "nk",
+    original = "nk",
+    func = list(pkg = "dials", fun = "max_num_terms"),
+    has_submodel = FALSE
+  )
 
   parsnip::set_fit(
     model = "discrim_flexible",

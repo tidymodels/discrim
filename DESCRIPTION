@@ -25,7 +25,7 @@ Depends:
     parsnip (>= 0.2.0),
     R (>= 4.1)
 Imports:
-    dials,
+    dials (>= 0.0.10),
     rlang,
     stats,
     tibble,
@@ -34,6 +34,7 @@ Suggests:
     covr,
     dplyr,
     earth,
+    generics,
     ggplot2,
     hardhat,
     klaR,

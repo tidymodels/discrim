@@ -45,3 +45,25 @@ test_that("sda fit and prediction", {
     ignore_attr = TRUE
   )
 })
+
+test_that("sda engine arguments are tunable", {
+  res <- discrim_linear() |>
+    set_engine("sda") |>
+    generics::tunable()
+  eng_args <- c("lambda", "lambda.var", "lambda.freqs", "diagonal")
+  res <- res[res$name %in% eng_args, ]
+  expect_identical(res$name, eng_args)
+  expect_identical(
+    vapply(res$call_info, \(x) x$fun, character(1)),
+    c(
+      "shrinkage_correlation",
+      "shrinkage_variance",
+      "shrinkage_frequencies",
+      "diagonal_covariance"
+    )
+  )
+  expect_identical(
+    vapply(res$call_info, \(x) x$pkg, character(1)),
+    rep("dials", 4)
+  )
+})

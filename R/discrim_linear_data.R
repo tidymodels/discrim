@@ -249,6 +249,42 @@ make_discrim_linear_sda <- function() {
     )
   )
 
+  parsnip::set_model_arg(
+    model = "discrim_linear",
+    eng = "sda",
+    parsnip = "lambda",
+    original = "lambda",
+    func = list(pkg = "dials", fun = "shrinkage_correlation"),
+    has_submodel = FALSE
+  )
+
+  parsnip::set_model_arg(
+    model = "discrim_linear",
+    eng = "sda",
+    parsnip = "lambda.var",
+    original = "lambda.var",
+    func = list(pkg = "dials", fun = "shrinkage_variance"),
+    has_submodel = FALSE
+  )
+
+  parsnip::set_model_arg(
+    model = "discrim_linear",
+    eng = "sda",
+    parsnip = "lambda.freqs",
+    original = "lambda.freqs",
+    func = list(pkg = "dials", fun = "shrinkage_frequencies"),
+    has_submodel = FALSE
+  )
+
+  parsnip::set_model_arg(
+    model = "discrim_linear",
+    eng = "sda",
+    parsnip = "diagonal",
+    original = "diagonal",
+    func = list(pkg = "dials", fun = "diagonal_covariance"),
+    has_submodel = FALSE
+  )
+
   parsnip::set_pred(
     model = "discrim_linear",
     eng = "sda",
