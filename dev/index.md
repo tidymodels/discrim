@@ -16,12 +16,14 @@ You can install the released version of discrim from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+
 install.packages("discrim")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("tidymodels/discrim")
 ```
@@ -50,6 +52,7 @@ Here is a simple model using a simulated two-class data set contained in
 the package:
 
 ``` r
+
 library(discrim)
 
 parabolic_grid <-

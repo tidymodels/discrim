@@ -10,6 +10,7 @@ The `parabolic` data from the modeldata package will be used to
 illustrate:
 
 ``` r
+
 library(tidymodels)
 library(discrim)
 tidymodels_prefer()
@@ -29,6 +30,7 @@ estimates the model.
 used if one does not wish to use the formula method.
 
 ``` r
+
 fda_mod <-
   discrim_flexible(num_terms = 3) |>
   # increase `num_terms` to find smoother boundaries
@@ -41,7 +43,7 @@ fda_mod
     ## 
     ## Call:
     ## mda::fda(formula = class ~ ., data = data, method = earth::earth, 
-    ##     nprune = ~3)
+    ##     nprune = 3)
     ## 
     ## Dimension: 1 
     ## 
@@ -55,6 +57,7 @@ Now let’s plot the class boundary by predicting on a grid of points then
 creating a contour plot for the 50% probability cutoff.
 
 ``` r
+
 parabolic_grid <-
   expand.grid(X1 = seq(-5, 5, length = 100),
               X2 = seq(-5, 5, length = 100))

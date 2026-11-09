@@ -2,6 +2,14 @@
 
 ## discrim (development version)
 
+- The `sda` engine for
+  [`discrim_linear()`](https://parsnip.tidymodels.org/reference/discrim_linear.html)
+  now registers `lambda`, `lambda.var`, `lambda.freqs`, and `diagonal`
+  as tunable engine arguments, and the `earth` engine for
+  [`discrim_flexible()`](https://parsnip.tidymodels.org/reference/discrim_flexible.html)
+  now registers `nk`, so that they map to their corresponding dials
+  parameters.
+
 ## discrim 1.1.0
 
 CRAN release: 2025-12-02
